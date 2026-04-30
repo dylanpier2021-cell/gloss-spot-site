@@ -59,13 +59,52 @@ const FALLBACK_VALUE = "https://images.unsplash.com/photo-1607472586893-edb57bdc
 const FALLBACK_BIGCTA = "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=1800&q=80";
 const FALLBACK_OWNER = "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=900&q=80";
 
-// Resolved photo set (client.photos.* takes priority; falls back to Unsplash).
+// Auto-discover photos in output/img/ — zero config required.
+// Filename prefix decides where they go. Files are matched case-insensitively.
+//   hero*.{jpg,webp,png,jpeg}  → hero carousel
+//   gallery*.* OR work*.*       → gallery cards
+//   value*.*                    → "we come to you" section
+//   bigcta*.* OR cta*.*         → wide CTA background
+//   owner*.* OR dom*.*          → owner card
+//   blog*.*                     → blog post cards
+function discoverPhotos() {
+  const dir = "output/img";
+  if (!existsSync(dir)) return {};
+  let files;
+  try { files = readdirSync(dir); } catch { return {}; }
+  const usable = files
+    .filter((f) => /\.(jpe?g|png|webp|gif)$/i.test(f))
+    .sort((a, b) => a.localeCompare(b));
+  const pick = (rx) => usable.filter((f) => rx.test(f)).map((f) => `/img/${f}`);
+  return {
+    hero: pick(/^hero/i),
+    gallery: pick(/^(gallery|work)/i),
+    value: pick(/^value/i)[0],
+    bigCta: pick(/^(bigcta|cta)/i)[0],
+    owner: pick(/^(owner|dom)/i)[0],
+    blog: pick(/^blog/i),
+  };
+}
+
+// Resolved photo set: client.photos.* > auto-discovered files > Unsplash fallback.
 const cp = client.photos || {};
-const PHOTO_HERO = (cp.hero && cp.hero.length) ? cp.hero : FALLBACK_HERO;
-const PHOTO_GALLERY = (cp.gallery && cp.gallery.length) ? cp.gallery : FALLBACK_GALLERY;
-const PHOTO_VALUE = cp.value || FALLBACK_VALUE;
-const PHOTO_BIGCTA = cp.bigCta || FALLBACK_BIGCTA;
-const PHOTO_OWNER = cp.owner || FALLBACK_OWNER;
+const auto = discoverPhotos();
+const pickArr = (a, b, c) => (a && a.length) ? a : (b && b.length) ? b : c;
+const pickOne = (a, b, c) => a || b || c;
+const PHOTO_HERO = pickArr(cp.hero, auto.hero, FALLBACK_HERO);
+const PHOTO_GALLERY = pickArr(cp.gallery, auto.gallery, FALLBACK_GALLERY);
+const PHOTO_VALUE = pickOne(cp.value, auto.value, FALLBACK_VALUE);
+const PHOTO_BIGCTA = pickOne(cp.bigCta, auto.bigCta, FALLBACK_BIGCTA);
+const PHOTO_OWNER = pickOne(cp.owner, auto.owner, FALLBACK_OWNER);
+
+const _photoSummary = [
+  PHOTO_HERO !== FALLBACK_HERO ? `hero(${PHOTO_HERO.length})` : null,
+  PHOTO_GALLERY !== FALLBACK_GALLERY ? `gallery(${PHOTO_GALLERY.length})` : null,
+  PHOTO_VALUE !== FALLBACK_VALUE ? "value" : null,
+  PHOTO_BIGCTA !== FALLBACK_BIGCTA ? "bigCta" : null,
+  PHOTO_OWNER !== FALLBACK_OWNER ? "owner" : null,
+].filter(Boolean);
+if (_photoSummary.length > 0) console.log(`  ▸ Custom photos: ${_photoSummary.join(", ")}`);
 
 // ── Fonts + base CSS (shared by every page) ───────────────────────────────────
 function fontsLink() {
