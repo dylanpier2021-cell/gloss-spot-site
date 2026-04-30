@@ -4,17 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Reviews | The Gloss Spot Auto Detailing</title>
-<meta name="description" content="20+ verified five-star Google reviews for The Gloss Spot Auto Detailing — read what real Champaign-area customers say.">
+<meta name="description" content="90+ verified five-star Google reviews for The Gloss Spot Auto Detailing — read what real Champaign-area customers say.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://theglossspotil.com/reviews">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Reviews | The Gloss Spot Auto Detailing">
-<meta property="og:description" content="20+ verified five-star Google reviews for The Gloss Spot Auto Detailing — read what real Champaign-area customers say.">
+<meta property="og:description" content="90+ verified five-star Google reviews for The Gloss Spot Auto Detailing — read what real Champaign-area customers say.">
 <meta property="og:url" content="https://theglossspotil.com/reviews">
 <meta property="og:image" content="https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1800/IMG_5948_totw8k">
 <meta property="og:site_name" content="The Gloss Spot Auto Detailing">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#02888a">
+<link rel="icon" href="https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_64/Gloss_Spot_500_x_500_px_1_eviirr" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter+Tight:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -53,6 +54,7 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .nav-row{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
 .brand{display:flex;align-items:center;gap:11px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.5rem;color:var(--ink);letter-spacing:-.03em}
 .brand-mark{width:42px;height:42px;border-radius:50%;background:var(--primary);display:grid;place-items:center;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.15rem;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18);flex-shrink:0}
+.brand-mark-img{background:transparent;box-shadow:none;border-radius:0;object-fit:contain;width:46px;height:46px;padding:0}
 .brand small{display:block;font-family:'Inter Tight',sans-serif;font-size:.65rem;font-weight:600;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-top:2px}
 .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
 .nav-links a{color:var(--ink);font-weight:500;font-size:.96rem;position:relative}
@@ -137,23 +139,29 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .service-card .arrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:.85rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;transition:gap .3s}
 .service-card:hover .arrow{gap:14px}
 
-.reviews-section{padding:120px 0;background:#fff}
+.reviews-section{padding:120px 0;background:var(--soft)}
+.reviews-section.is-white{background:#fff}
 .reviews-head{text-align:center;margin-bottom:60px}
 .reviews-head .stars{color:#f5b301;font-size:1.2rem;letter-spacing:.15em;margin-bottom:1rem;display:block}
 .reviews-head p{color:var(--muted);max-width:46ch;margin:0 auto;font-size:1.04rem}
-.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 .reviews-grid-2{grid-template-columns:repeat(2,1fr)}
-.review{background:#fff;border:1px solid var(--line);padding:38px 32px;position:relative;transition:all .35s ease;border-radius:4px}
-.review:hover{border-color:var(--primary);box-shadow:0 18px 50px -22px rgba(2,136,138,.35);transform:translateY(-4px)}
-.review .quote{font-family:'Bricolage Grotesque',sans-serif;font-size:4rem;line-height:1;color:var(--primary);position:absolute;top:18px;right:24px;opacity:.15}
-.review .stars{color:#f5b301;letter-spacing:.1em;font-size:.95rem;margin-bottom:18px}
-.review p{color:var(--text);font-size:.97rem;line-height:1.65;margin-bottom:24px}
-.review .who{display:flex;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:18px}
-.review .avatar{width:42px;height:42px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.95rem;font-family:'Inter Tight',sans-serif;flex-shrink:0}
-.review .who-name{font-weight:600;color:var(--ink);font-size:.95rem}
-.review .who-city{font-size:.82rem;color:var(--muted);letter-spacing:.04em}
+.review{background:#fff;border:1px solid var(--line);padding:32px 30px 28px;position:relative;transition:all .35s ease;border-radius:8px;box-shadow:0 6px 24px -16px rgba(13,20,24,.18);display:flex;flex-direction:column}
+.review:hover{border-color:var(--primary);box-shadow:0 18px 50px -22px rgba(2,136,138,.3);transform:translateY(-3px)}
+.review .stars{color:#f5b301;letter-spacing:.1em;font-size:1rem;margin-bottom:16px;line-height:1}
+.review p{color:var(--text);font-size:.96rem;line-height:1.6;margin-bottom:22px;flex-grow:1}
+.review .who{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:16px;margin-top:auto}
+.review .who-name{font-weight:700;color:var(--ink);font-size:.98rem;font-family:'Inter Tight',sans-serif}
+.review .verified{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;color:var(--muted);font-weight:500;letter-spacing:.02em}
+.review .verified svg{flex-shrink:0;width:14px;height:14px}
+.review.is-hidden{display:none}
 .reviews-foot{text-align:center;margin-top:50px;padding-top:30px}
 .reviews-foot strong{color:var(--ink);font-weight:600}
+.reviews-load-more{margin-top:44px;text-align:center}
+.reviews-load-more button{background:var(--ink);color:#fff;border:none;padding:15px 32px;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:.97rem;letter-spacing:.02em;border-radius:6px;cursor:pointer;transition:all .25s ease;display:inline-flex;align-items:center;gap:10px}
+.reviews-load-more button:hover{background:var(--primary);transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(2,136,138,.5)}
+.reviews-load-more button[disabled]{opacity:.5;cursor:default;transform:none;box-shadow:none}
+.reviews-load-more .count{color:var(--muted);font-size:.85rem;margin-top:14px}
 
 .owner-section{background:var(--soft);padding:120px 0}
 .owner-grid{display:grid;grid-template-columns:.85fr 1fr;gap:80px;align-items:center;max-width:1100px;margin:0 auto}
@@ -342,7 +350,7 @@ footer ul a:hover{color:var(--accent)}
   "address":{"@type":"PostalAddress","addressLocality":"Champaign","addressRegion":"IL","postalCode":"61822","addressCountry":"US"},
   "areaServed":["Champaign","Urbana","Savoy","Mahomet","Rantoul","St. Joseph","Tolono","Danville","Decatur","Bloomington","Normal","Mattoon","Monticello","Kankakee","Springfield","Philo","Sidney","Ogden","Fisher","Thomasboro","Peoria","Charleston","Effingham"],
   "openingHours":"Mo-Sa 08:00-20:00, Su 13:00-20:00",
-  "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"20"},
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"90"},
   "sameAs":["https://www.facebook.com/theglossspot","https://www.instagram.com/theglossspotil","https://share.google/Wr0NTsR0CmFTlYRtk","https://www.yelp.com/biz/the-gloss-spot-auto-detailing-champaign-3"]
 }
 </script>
@@ -351,14 +359,14 @@ footer ul a:hover{color:var(--accent)}
 <body>
 <div class="topbar">
   <div class="container topbar-row">
-    <span>★ ★ ★ ★ ★ &nbsp;Rated 5.0 across 20+ Google reviews</span>
+    <span>★ ★ ★ ★ ★ &nbsp;Rated 5.0 across 90+ Google reviews</span>
     <span>Mon-Sat: 8am-8pm, Sun: 1pm-8pm &nbsp;|&nbsp; <a href="tel:+12176002108"><strong>217-600-2108</strong></a></span>
   </div>
 </div>
 <nav class="main" id="nav">
   <div class="container nav-row">
     <a href="/" class="brand">
-      <span class="brand-mark">T</span>
+      <img src="https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_200/Gloss_Spot_500_x_500_px_1_eviirr" alt="The Gloss Spot Auto Detailing logo" class="brand-mark brand-mark-img" loading="eager" width="42" height="42">
       <span>The Gloss Spot<small>Car Detailing · Champaign, IL</small></span>
     </a>
     <ul class="nav-links" id="navLinks">
@@ -380,7 +388,7 @@ footer ul a:hover{color:var(--accent)}
   <div class="hero-static" style="background-image:url('https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1800/IMG_5948_totw8k')"></div>
   <div class="container hero-inner">
     <div class="loc">Reviews</div>
-    <h1>20+ five-stars. <em>Zero asterisks.</em></h1>
+    <h1>90+ five-stars. <em>Zero asterisks.</em></h1>
     <p class="lede">Every review below is verified on Google. We don't pay for promotion, we don't run review-bait campaigns — we just do the work.</p>
     <div class="hero-ctas">
       <a href="/book-an-appointment-1696" class="btn btn-primary">Book a Detail →</a>
@@ -390,259 +398,520 @@ footer ul a:hover{color:var(--accent)}
   <div class="hero-trust">
     <div class="container hero-trust-row">
       <span>Mobile — We Come To You</span>
-      <span>20+ Five-Star Reviews</span>
+      <span>90+ Five-Star Reviews</span>
       <span>Licensed &amp; Insured</span>
       <span>Same-Day Available</span>
     </div>
   </div>
 </header>
-<section class="reviews-section">
+<section class="reviews-section" id="reviews">
   <div class="container">
-    <div class="reviews-grid">
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+    <div class="reviews-head">
+      <span class="stars">★ ★ ★ ★ ★</span>
+      <span class="eyebrow">What Our Customers Say</span>
+      <h2>90+ five-star reviews on Google.</h2>
+      <p>Every review below is from a real, verified Google review. Rated 5.0 across our entire history.</p>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid" data-batch="6" data-total="59" data-shown="6">
+      <div class="review" data-idx="0">
         <div class="stars">★★★★★</div>
-        <p>From knocking on my door to bringing my car back to life, Gloss Spot truly surprised me. Dom got all my dog's hair out of the carpets, conditioned the leather, and the ceramic coating makes it shine like no other. He came to me — best part of the whole experience.</p>
+        <p>SERVICE OF THE YEAR!!!!! I have taken my car to get detailed before but having them come to you and doing a 15/10 job! Couldn't have asked for anything better! Would highly recommend!</p>
         <div class="who">
-          <div class="avatar">KN</div>
-          <div>
-            <div class="who-name">Kenny Nguyen</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Shelbi Hynds</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review" data-idx="1">
         <div class="stars">★★★★★</div>
-        <p>Just got back from a 12-hour drive to Florida and my car was an absolute disaster. I thought it would never look the same. The Gloss Spot came out and I was completely blown away by the results. 10/10 customer service.</p>
+        <p>Dom was incredible!!! Our car belonged to friends before us, it's a 2008, so I never expected perfection. When I say this is the cleanest I've EVER seen this car… I'm FLOORED.</p>
         <div class="who">
-          <div class="avatar">RD</div>
-          <div>
-            <div class="who-name">Reese Donsbach</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Macy Ruple</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review" data-idx="2">
         <div class="stars">★★★★★</div>
-        <p>This is the cleanest I have EVER seen this car. Dom got years of use and grime to just disappear. Him coming to your own house is the icing on the cake — worth every penny and then some.</p>
+        <p>The quality of the work was excellent. I lost a ring seven years ago — a family heirloom that belonged to my mother who passed 20 years ago. They found the ring under my seat. Worth every penny.</p>
         <div class="who">
-          <div class="avatar">MR</div>
-          <div>
-            <div class="who-name">Macy Ruple</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Sheila T</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review" data-idx="3">
         <div class="stars">★★★★★</div>
-        <p>The quality was excellent. They found a ring I lost seven years ago — a family heirloom from my mother who passed 20 years ago. That was worth every dime I spent. This car is 9 years old and looks brand new.</p>
+        <p>I have 4 kids and spend a great deal of time in my van. Despite vacuuming once a week, it looks horrid. Dom, however, cleans it like brand new. He takes a lot of pride in his work and it shows.</p>
         <div class="who">
-          <div class="avatar">ST</div>
-          <div>
-            <div class="who-name">Sheila T</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Cassandra Beer</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review" data-idx="4">
         <div class="stars">★★★★★</div>
-        <p>I work a labor job and have a very messy dog and he got it all out. Looks amazing and smells great just like when I first bought it. Great service, reasonably priced, and super convenient since he came right to my home.</p>
+        <p>If I could rate 1 million stars, I would! Made me feel like I was driving a brand new car home! They came straight to my job so I didn't have to schedule around anything. WILL ABSOLUTELY BOOK AGAIN!</p>
         <div class="who">
-          <div class="avatar">BG</div>
-          <div>
-            <div class="who-name">Blake Goodman</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Samantha Gannon</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review" data-idx="5">
         <div class="stars">★★★★★</div>
-        <p>Had my 2024 black Suburban detailed by Gloss Spot. It looks better than when I brought it home from the dealership. Very detail oriented and professional. I will definitely have them keep my vehicle clean going forward.</p>
+        <p>I had my 2024 black Suburban detailed by Gloss Spot. They did an awesome job. It looks better than when I brought it home. Very detail oriented, professional service.</p>
         <div class="who">
-          <div class="avatar">KC</div>
-          <div>
-            <div class="who-name">Kevin Clark</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Kevin Clark</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="6">
         <div class="stars">★★★★★</div>
-        <p>Dom arrived on time, backed my car out onto my driveway and got to work with everything he needed in his vehicle. My trunk is spotless, the wheel covers shine, and friends have commented on how my car sparkles. Absolutely delighted.</p>
+        <p>From knocking on my door to bringing my car back to life, Gloss Spot has truly surprised me with how great their work is. Dominic takes a lot of pride in his work — the dog hair removal and leather conditioning made a huge difference.</p>
         <div class="who">
-          <div class="avatar">RW</div>
-          <div>
-            <div class="who-name">Robert Wengert</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Kenny Nguyen</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="7">
         <div class="stars">★★★★★</div>
-        <p>If I could rate 1 million stars I would! Made me feel like I was driving a brand new car home. They came straight to my job so I didn't have to schedule around anything. Will absolutely book again.</p>
+        <p>Dom did such an amazing job on my car! The outside is sparkling clean and shiny, and the inside looks super fresh and spotless. It honestly feels like I'm driving a brand-new car again.</p>
         <div class="who">
-          <div class="avatar">SG</div>
-          <div>
-            <div class="who-name">Samantha Gannon</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">TT Y</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="8">
         <div class="stars">★★★★★</div>
-        <p>We had the best experience having the interior detailed. Dom was extremely professional, friendly, and our car came out perfect. Would definitely come back again.</p>
+        <p>I work a labor job plus I have a very messy dog so it gets dirty very quickly and he got it all out! It looks amazing and smells great just like when I first bought it.</p>
         <div class="who">
-          <div class="avatar">PR</div>
-          <div>
-            <div class="who-name">Paige R</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Blake Goodman</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="9">
         <div class="stars">★★★★★</div>
-        <p>I've used this service twice now for interior cleaning. I'm always amazed at how good my car looks afterward. It's so convenient that he comes right to your house and the results are incredible — my car feels brand new every time.</p>
+        <p>Dom is the man!!! He did an amazing job with my Yukon. Very detail oriented and will make your car look amazing. Will come back again!</p>
         <div class="who">
-          <div class="avatar">JG</div>
-          <div>
-            <div class="who-name">Jordan Gebil Neal</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Raj Smith</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="10">
         <div class="stars">★★★★★</div>
-        <p>My truck looks showroom new, everything spotless inside and out. Externally professional operation from scheduling to final product. Will be scheduling my wife's car as soon as I can and using them on a regular basis.</p>
+        <p>We had the best experience when we brought our car here to have the interior detailed. Dom was extremely professional, friendly, and our car came out perfect.</p>
         <div class="who">
-          <div class="avatar">JK</div>
-          <div>
-            <div class="who-name">Jim Keiken</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Paige R</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="11">
         <div class="stars">★★★★★</div>
-        <p>SERVICE OF THE YEAR! I have taken my car to get detailed before but having them come to you and doing a 15/10 job — couldn't have asked for anything better. Would highly recommend.</p>
+        <p>The Gloss Spot Auto Detailing did a fantastic job on my F150. I'd recommend them highly!</p>
         <div class="who">
-          <div class="avatar">SH</div>
-          <div>
-            <div class="who-name">Shelbi Hynds</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Mark Howard</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="12">
         <div class="stars">★★★★★</div>
-        <p>Saved me hours of cleaning and did 20 times better than I ever could on my own. They came to my workplace so I drove off after my shift with it spotless and smelling great. Very convenient.</p>
+        <p>Just got back from vacation in Florida and my car was an absolute disaster after 12 hours of driving each way. I thought it would never look the same. They made it look new again.</p>
         <div class="who">
-          <div class="avatar">VT</div>
-          <div>
-            <div class="who-name">Victoria Todd</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Reese Donsbach</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="13">
         <div class="stars">★★★★★</div>
-        <p>I have 4 kids that I drive around all day. Despite vacuuming weekly it always looks horrid. Dom cleans it to perfection every single time. Grateful to have found a service I can count on.</p>
+        <p>They came to where my car was and had all their equipment with them. Very professional, accommodating, and thorough. When it was done I was blown away by how nice my car looked and smelled!</p>
         <div class="who">
-          <div class="avatar">CB</div>
-          <div>
-            <div class="who-name">Cassandra Beer</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Eric Fagerlin</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="14">
         <div class="stars">★★★★★</div>
-        <p>They came to where my car was with all their equipment. Very professional, accommodating, and thorough. When it was done I was blown away by how nice my car looked and smelled. Highly recommend.</p>
+        <p>I own a twelve year old Toyota Avalon. The headlight covers had become blurry and yellowish. Gloss Spot cleared them right up. Outstanding service.</p>
         <div class="who">
-          <div class="avatar">EF</div>
-          <div>
-            <div class="who-name">Eric Fagerlin</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Robert Wengert</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="15">
         <div class="stars">★★★★★</div>
-        <p>Dom is the man! He did an amazing job with my Yukon. Very detail oriented and will make your car look amazing. Will come back again — great service!</p>
+        <p>They went above and beyond to make sure every corner of my car was spotless inside and out. My car hasn't looked this good since the day I bought it. Definitely worth every penny!</p>
         <div class="who">
-          <div class="avatar">RS</div>
-          <div>
-            <div class="who-name">Raj Smith</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Kishan Patel</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="16">
         <div class="stars">★★★★★</div>
-        <p>5 stars ain't enough. Showed up the day after I called on a weekend. I wasn't expecting my car to look this good in its life. All around great customer service and a very well run business.</p>
+        <p>Impeccable service! Arrived promptly as scheduled and was extremely thorough with both interior and exterior detailing. Car was left extremely clean with a fresh but not overpowering scent.</p>
         <div class="who">
-          <div class="avatar">JD</div>
-          <div>
-            <div class="who-name">Jeffrey Davis</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Elizabeth Churchya</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="17">
         <div class="stars">★★★★★</div>
-        <p>The technician met me at a convenient location and did a great job detailing my car's interior. I don't remember the last time my car was this clean. Signed, a mom of 2.</p>
+        <p>The Gloss Spot did such an amazing job on my detail making my 2016 Jeep look brand new. The extra convenience of them coming to my house was amazing!</p>
         <div class="who">
-          <div class="avatar">IR</div>
-          <div>
-            <div class="who-name">Isis Rose</div>
-            <div class="who-city">Urbana, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Katie Pierson</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="18">
         <div class="stars">★★★★★</div>
-        <p>Dom did an excellent job detailing our vehicle. The full service detail was thorough and convenient as he came to our home in Mahomet. We definitely recommend The Gloss Spot.</p>
+        <p>Got my car done by Dominic. Really polite young man. Really happy with my squeaky clean car!</p>
         <div class="who">
-          <div class="avatar">DR</div>
-          <div>
-            <div class="who-name">Derek Rankin</div>
-            <div class="who-city">Mahomet, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Artem Pichshuk</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
+      <div class="review is-hidden" data-idx="19">
         <div class="stars">★★★★★</div>
-        <p>They did a great job. Loved that they came to my house and even brought their own water supply. Would highly recommend.</p>
+        <p>The technician met me at a convenient location and did a great job detailing my car's interior! I don't remember the last time my car was this clean! Signed, a mom of 2.</p>
         <div class="who">
-          <div class="avatar">KW</div>
-          <div>
-            <div class="who-name">Karen West</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Isis Rose</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="20">
+        <div class="stars">★★★★★</div>
+        <p>Great to see such hard working young men. They do an awesome job and will have your car looking as good as new. Best part is they come to you — very convenient!</p>
+        <div class="who">
+          <div class="who-name">Chad Detamore</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="21">
+        <div class="stars">★★★★★</div>
+        <p>I've used this service twice now for interior cleaning. Always amazed at how good my car looks afterward. So convenient that he comes right to your house, and he's super friendly and professional.</p>
+        <div class="who">
+          <div class="who-name">Jordan Gebil Neal</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="22">
+        <div class="stars">★★★★★</div>
+        <p>Customer service was professional, and he did an excellent job cleaning both the inside and outside of my car. Definitely recommend if you're looking for quality work and reliable service.</p>
+        <div class="who">
+          <div class="who-name">Stephanie Fonseca</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="23">
+        <div class="stars">★★★★★</div>
+        <p>Dom did an excellent job detailing our vehicle! The full service detail was thorough and convenient, as he came to our home in Mahomet.</p>
+        <div class="who">
+          <div class="who-name">Derek Rankin</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="24">
+        <div class="stars">★★★★★</div>
+        <p>Outstanding job. Made my wife's car look like new, and washed my truck that had road tar and diesel stains. His cleaner did a better job and faster than the solvent I normally use.</p>
+        <div class="who">
+          <div class="who-name">John Lawyer</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="25">
+        <div class="stars">★★★★★</div>
+        <p>I finally got it together and had Gloss Spot come over to detail my car top to bottom and I could not be happier! Excellent customer service, professional from start to finish.</p>
+        <div class="who">
+          <div class="who-name">Kerry Navarro</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="26">
+        <div class="stars">★★★★★</div>
+        <p>Dom has been taking care of mine and my mom's car for a while now, and every time, the results have been amazing. We keep coming back because of the quality and care he puts into every detail.</p>
+        <div class="who">
+          <div class="who-name">Genesis Gebil</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="27">
+        <div class="stars">★★★★★</div>
+        <p>10/10, perfect experience. They went above and beyond in all areas and it really is the best customer experience I've ever had at a car detailing.</p>
+        <div class="who">
+          <div class="who-name">Alien</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="28">
+        <div class="stars">★★★★★</div>
+        <p>Dom did terrific work. My truck looks showroom new, everything spotless inside and out. Professional operation from scheduling to final product.</p>
+        <div class="who">
+          <div class="who-name">Jim Keiken</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="29">
+        <div class="stars">★★★★★</div>
+        <p>Amazing work! 10 out of 10 full detail service inside and out. Came to my residence outskirts of Urbana. Will be booking again.</p>
+        <div class="who">
+          <div class="who-name">Angel Ybarra</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="30">
+        <div class="stars">★★★★★</div>
+        <p>The detailing was PERFECT. My 13yr old SUV looks brand new, from the exterior to the leather seats. I couldn't be happier with the results!</p>
+        <div class="who">
+          <div class="who-name">Katelynn Nguyen</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="31">
+        <div class="stars">★★★★★</div>
+        <p>5 stars ain't enough. Showed up the day after I called on the weekend to clean out my A-to-B car and I wasn't expecting it to look this good in its life. Great customer service and a well-run business.</p>
+        <div class="who">
+          <div class="who-name">Jeffrey Davis</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="32">
+        <div class="stars">★★★★★</div>
+        <p>They did a great job. Loved that they came to my house. They even brought their own water supply. Would highly recommend.</p>
+        <div class="who">
+          <div class="who-name">Karen West</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="33">
+        <div class="stars">★★★★★</div>
+        <p>Dom was super chill and professional and obviously takes pride in his work. My car looks and FEELS so clean — I could have never done a job that good myself. My car was filthy when I first bought it used.</p>
+        <div class="who">
+          <div class="who-name">Lina Abbadi</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="34">
+        <div class="stars">★★★★★</div>
+        <p>Great experience overall! He came to my home for car detailing and did an amazing job. Very professional, on time, and paid attention to every detail.</p>
+        <div class="who">
+          <div class="who-name">Saad Aqeel</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="35">
+        <div class="stars">★★★★★</div>
+        <p>Saved me hours of cleaning and did 20 times better than I ever could on my own. Very convenient coming to wherever you are. Got it done while at work so I drove off after my shift with it spotless and smelling great.</p>
+        <div class="who">
+          <div class="who-name">Victoria Todd</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="36">
+        <div class="stars">★★★★★</div>
+        <p>The young man who detailed my car inside and out did an amazing job! I only wish I wasn't driving it to NC, because it will be covered in yellow pollen!</p>
+        <div class="who">
+          <div class="who-name">Kim Pillischafske</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="37">
+        <div class="stars">★★★★★</div>
+        <p>Did a wonderful job cleaning our car! He was very flexible and accommodating to us.</p>
+        <div class="who">
+          <div class="who-name">Ravie Ezeoke</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="38">
+        <div class="stars">★★★★★</div>
+        <p>Dom is a cool guy. Super helpful and did a great job on my vehicle.</p>
+        <div class="who">
+          <div class="who-name">Nathan</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="39">
+        <div class="stars">★★★★★</div>
+        <p>I am really glad I decided to get my car detailed by The Gloss Spot! They did an amazing job cleaning up my car.</p>
+        <div class="who">
+          <div class="who-name">Olivia Schrader</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="40">
+        <div class="stars">★★★★★</div>
+        <p>Amazing work from these guys. Made my car look literally brand new!</p>
+        <div class="who">
+          <div class="who-name">Mason McCaffrey</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="41">
+        <div class="stars">★★★★★</div>
+        <p>Very great detail, these guys exceeded my expectations and I will definitely keep letting them detail my car.</p>
+        <div class="who">
+          <div class="who-name">Amere Brown</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="42">
+        <div class="stars">★★★★★</div>
+        <p>My car looks brand new. They did such a great job. I would totally recommend and use them again!</p>
+        <div class="who">
+          <div class="who-name">Ella Tangen</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="43">
+        <div class="stars">★★★★★</div>
+        <p>Very nice job! Great communication and easy to work with. Definitely recommend.</p>
+        <div class="who">
+          <div class="who-name">Doug Bartlett Jr</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="44">
+        <div class="stars">★★★★★</div>
+        <p>These guys do a great job! They come to you, my car gets cleaned while I'm at work.</p>
+        <div class="who">
+          <div class="who-name">Chris Ebisuya</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="45">
+        <div class="stars">★★★★★</div>
+        <p>100% recommend. They did my interior and exterior in Mahomet.</p>
+        <div class="who">
+          <div class="who-name">Landon Natschke</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="46">
+        <div class="stars">★★★★★</div>
+        <p>Full service detailing, straight to my home in Champaign. They did amazing!</p>
+        <div class="who">
+          <div class="who-name">Nico Micele</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="47">
+        <div class="stars">★★★★★</div>
+        <p>Had the full detail done and would definitely recommend to others.</p>
+        <div class="who">
+          <div class="who-name">Dayo Hunley</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="48">
+        <div class="stars">★★★★★</div>
+        <p>They did a great job on cleaning my car and it looked like a brand new one. Nice people with great service.</p>
+        <div class="who">
+          <div class="who-name">Guan Zhiyuan</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="49">
+        <div class="stars">★★★★★</div>
+        <p>Excellent job. My car looks like new.</p>
+        <div class="who">
+          <div class="who-name">Felix Alejandro</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="50">
+        <div class="stars">★★★★★</div>
+        <p>Very satisfied with the work done detailing the car's interior.</p>
+        <div class="who">
+          <div class="who-name">Ron Thiele</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="51">
+        <div class="stars">★★★★★</div>
+        <p>Great work in good time. Can't go wrong with the Gloss Spot.</p>
+        <div class="who">
+          <div class="who-name">Bross</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="52">
+        <div class="stars">★★★★★</div>
+        <p>Very efficient and know what they are doing. Money well spent!</p>
+        <div class="who">
+          <div class="who-name">Kylia Pierson</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="53">
+        <div class="stars">★★★★★</div>
+        <p>Fast! Convenient! And friendly service.</p>
+        <div class="who">
+          <div class="who-name">Gary Pierson</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="54">
+        <div class="stars">★★★★★</div>
+        <p>These young men did a wonderful job on my car!</p>
+        <div class="who">
+          <div class="who-name">Krystal Jackson</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="55">
+        <div class="stars">★★★★★</div>
+        <p>Service was really good!</p>
+        <div class="who">
+          <div class="who-name">Mary Kelly</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="56">
+        <div class="stars">★★★★★</div>
+        <p>Does a great job.</p>
+        <div class="who">
+          <div class="who-name">Jackson Biddle</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="57">
+        <div class="stars">★★★★★</div>
+        <p>10/10 would recommend to anyone.</p>
+        <div class="who">
+          <div class="who-name">Ace</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
+        </div>
+      </div>
+      <div class="review is-hidden" data-idx="58">
+        <div class="stars">★★★★★</div>
+        <p>Did a good job at a reasonable price. I recommend!</p>
+        <div class="who">
+          <div class="who-name">KillaKaw</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
     </div>
-    <div class="reviews-foot" style="margin-top:50px"><strong>Rated 5.0 across 20+ Google reviews.</strong> &nbsp;<a href="https://share.google/Wr0NTsR0CmFTlYRtk">See them all on Google →</a></div>
+    <div class="reviews-load-more">
+      <button id="loadMoreReviews" type="button">Load More Reviews</button>
+      <div class="count" id="reviewCount">Showing 6 of 59</div>
+    </div>
+    <div class="reviews-foot" style="margin-top:50px"><strong>Rated 5.0 across 90+ Google reviews.</strong> &nbsp;<a href="https://share.google/Wr0NTsR0CmFTlYRtk">See them all on Google →</a></div>
   </div>
 </section>
+<script>
+(function(){
+  const btn=document.getElementById('loadMoreReviews');
+  if(!btn)return;
+  const grid=document.getElementById('reviewsGrid');
+  const counter=document.getElementById('reviewCount');
+  const batch=parseInt(grid.dataset.batch,10);
+  const total=parseInt(grid.dataset.total,10);
+  btn.addEventListener('click',()=>{
+    const cards=grid.querySelectorAll('.review.is-hidden');
+    let revealed=0;
+    for(const c of cards){if(revealed>=batch)break;c.classList.remove('is-hidden');revealed++;}
+    const shown=grid.querySelectorAll('.review:not(.is-hidden)').length;
+    grid.dataset.shown=shown;
+    if(counter)counter.textContent='Showing '+shown+' of '+total;
+    if(shown>=total){btn.textContent='All Reviews Loaded';btn.disabled=true;}
+  });
+})();
+</script>
 <section class="bigcta">
   <div class="container bigcta-inner">
     <span class="eyebrow" style="color:var(--accent)">Bad Mess? Bring It On.</span>
@@ -672,7 +941,7 @@ footer ul a:hover{color:var(--accent)}
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="brand">
-          <span class="brand-mark">T</span>
+          <img src="https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_200/Gloss_Spot_500_x_500_px_1_eviirr" alt="The Gloss Spot Auto Detailing logo" class="brand-mark brand-mark-img" loading="eager" width="42" height="42">
           <span>The Gloss Spot<small>Car Detailing</small></span>
         </div>
         <p>Premium mobile detailing across Champaign-Urbana. We come to you. Owner-operated by Dominic Pierson and the Gloss crew.</p>

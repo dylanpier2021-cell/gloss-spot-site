@@ -153,6 +153,7 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .nav-row{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
 .brand{display:flex;align-items:center;gap:11px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.5rem;color:var(--ink);letter-spacing:-.03em}
 .brand-mark{width:42px;height:42px;border-radius:50%;background:var(--primary);display:grid;place-items:center;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.15rem;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18);flex-shrink:0}
+.brand-mark-img{background:transparent;box-shadow:none;border-radius:0;object-fit:contain;width:46px;height:46px;padding:0}
 .brand small{display:block;font-family:'Inter Tight',sans-serif;font-size:.65rem;font-weight:600;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-top:2px}
 .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
 .nav-links a{color:var(--ink);font-weight:500;font-size:.96rem;position:relative}
@@ -237,23 +238,29 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .service-card .arrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:.85rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;transition:gap .3s}
 .service-card:hover .arrow{gap:14px}
 
-.reviews-section{padding:120px 0;background:#fff}
+.reviews-section{padding:120px 0;background:var(--soft)}
+.reviews-section.is-white{background:#fff}
 .reviews-head{text-align:center;margin-bottom:60px}
 .reviews-head .stars{color:#f5b301;font-size:1.2rem;letter-spacing:.15em;margin-bottom:1rem;display:block}
 .reviews-head p{color:var(--muted);max-width:46ch;margin:0 auto;font-size:1.04rem}
-.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 .reviews-grid-2{grid-template-columns:repeat(2,1fr)}
-.review{background:#fff;border:1px solid var(--line);padding:38px 32px;position:relative;transition:all .35s ease;border-radius:4px}
-.review:hover{border-color:var(--primary);box-shadow:0 18px 50px -22px rgba(2,136,138,.35);transform:translateY(-4px)}
-.review .quote{font-family:'Bricolage Grotesque',sans-serif;font-size:4rem;line-height:1;color:var(--primary);position:absolute;top:18px;right:24px;opacity:.15}
-.review .stars{color:#f5b301;letter-spacing:.1em;font-size:.95rem;margin-bottom:18px}
-.review p{color:var(--text);font-size:.97rem;line-height:1.65;margin-bottom:24px}
-.review .who{display:flex;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:18px}
-.review .avatar{width:42px;height:42px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.95rem;font-family:'Inter Tight',sans-serif;flex-shrink:0}
-.review .who-name{font-weight:600;color:var(--ink);font-size:.95rem}
-.review .who-city{font-size:.82rem;color:var(--muted);letter-spacing:.04em}
+.review{background:#fff;border:1px solid var(--line);padding:32px 30px 28px;position:relative;transition:all .35s ease;border-radius:8px;box-shadow:0 6px 24px -16px rgba(13,20,24,.18);display:flex;flex-direction:column}
+.review:hover{border-color:var(--primary);box-shadow:0 18px 50px -22px rgba(2,136,138,.3);transform:translateY(-3px)}
+.review .stars{color:#f5b301;letter-spacing:.1em;font-size:1rem;margin-bottom:16px;line-height:1}
+.review p{color:var(--text);font-size:.96rem;line-height:1.6;margin-bottom:22px;flex-grow:1}
+.review .who{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:16px;margin-top:auto}
+.review .who-name{font-weight:700;color:var(--ink);font-size:.98rem;font-family:'Inter Tight',sans-serif}
+.review .verified{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;color:var(--muted);font-weight:500;letter-spacing:.02em}
+.review .verified svg{flex-shrink:0;width:14px;height:14px}
+.review.is-hidden{display:none}
 .reviews-foot{text-align:center;margin-top:50px;padding-top:30px}
 .reviews-foot strong{color:var(--ink);font-weight:600}
+.reviews-load-more{margin-top:44px;text-align:center}
+.reviews-load-more button{background:var(--ink);color:#fff;border:none;padding:15px 32px;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:.97rem;letter-spacing:.02em;border-radius:6px;cursor:pointer;transition:all .25s ease;display:inline-flex;align-items:center;gap:10px}
+.reviews-load-more button:hover{background:var(--primary);transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(2,136,138,.5)}
+.reviews-load-more button[disabled]{opacity:.5;cursor:default;transform:none;box-shadow:none}
+.reviews-load-more .count{color:var(--muted);font-size:.85rem;margin-top:14px}
 
 .owner-section{background:var(--soft);padding:120px 0}
 .owner-grid{display:grid;grid-template-columns:.85fr 1fr;gap:80px;align-items:center;max-width:1100px;margin:0 auto}
@@ -451,6 +458,7 @@ function pageHead(opts) {
 <meta property="og:site_name" content="${htmlEscape(client.businessName)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="${client.primaryColor}">
+${client.favicon ? `<link rel="icon" href="${client.favicon}" type="image/png">` : ""}
 ${fontsLink()}
 <style>${baseStyles()}${extraStyles}</style>
 ${jsonLdBusiness()}
@@ -472,7 +480,7 @@ function jsonLdBusiness() {
   "address":{"@type":"PostalAddress","addressLocality":${JSON.stringify(client.city)},"addressRegion":${JSON.stringify(client.state)},"postalCode":${JSON.stringify(client.zip || "")},"addressCountry":"US"},
   "areaServed":${JSON.stringify(client.cities)},
   "openingHours":"Mo-Sa 08:00-20:00, Su 13:00-20:00",
-  "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":${JSON.stringify(String((client.reviews || []).length || 60))}},
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":${JSON.stringify(String(client.reviewCount))}},
   "sameAs":${JSON.stringify([client.facebook, client.instagram, client.google, client.yelp].filter(Boolean))}
 }
 </script>`;
@@ -492,10 +500,17 @@ function jsonLdFaq(faqs) {
 function topbar() {
   return `<div class="topbar">
   <div class="container topbar-row">
-    <span>★ ★ ★ ★ ★ &nbsp;Rated 5.0 across ${(client.reviews || []).length || 60}+ Google reviews</span>
+    <span>★ ★ ★ ★ ★ &nbsp;Rated 5.0 across ${client.reviewCount}+ Google reviews</span>
     <span>${client.hours || "Mon–Sat 8a–8p · Sun 1p–8p"} &nbsp;|&nbsp; <a href="${PHONE_TEL}"><strong>${PHONE}</strong></a></span>
   </div>
 </div>`;
+}
+
+function brandMark() {
+  if (client.logo) {
+    return `<img src="${client.logo}" alt="${htmlEscape(client.businessName)} logo" class="brand-mark brand-mark-img" loading="eager" width="42" height="42">`;
+  }
+  return `<span class="brand-mark">${(client.businessName.match(/[A-Z]/) || ["G"])[0]}</span>`;
 }
 
 function navbar(currentPath) {
@@ -506,7 +521,7 @@ function navbar(currentPath) {
   return `<nav class="main" id="nav">
   <div class="container nav-row">
     <a href="/" class="brand">
-      <span class="brand-mark">${(client.businessName.match(/[A-Z]/) || ["G"])[0]}</span>
+      ${brandMark()}
       <span>${htmlEscape(client.businessName.replace(/\s+Auto\s+Detailing/i, ""))}<small>${htmlEscape(client.niche)} · ${htmlEscape(client.city)}, ${htmlEscape(client.state)}</small></span>
     </a>
     <ul class="nav-links" id="navLinks">
@@ -529,7 +544,7 @@ function navbar(currentPath) {
 function heroSection(opts) {
   const {
     eyebrow, headline, lede, ctaPrimary, ctaSecondary, slides = PHOTO_HERO, showSlides = true,
-    trust = ["Mobile — We Come To You", `${(client.reviews || []).length || 60}+ Five-Star Reviews`, "Licensed & Insured", "Same-Day Available"],
+    trust = ["Mobile — We Come To You", `${client.reviewCount}+ Five-Star Reviews`, "Licensed & Insured", "Same-Day Available"],
     tall = false,
   } = opts;
   const cta1 = ctaPrimary || { label: "Book a Detail →", href: "/book-an-appointment-1696" };
@@ -706,41 +721,98 @@ ${list.map((s, i) => {
 </section>`;
 }
 
-function reviewsSection(opts) {
-  const { city = null, max = 3, twoCol = false } = opts || {};
-  let reviews = client.reviews || [];
-  if (city) {
-    const matching = reviews.filter((r) => r.city === city);
-    if (matching.length >= max) reviews = matching;
-  }
-  reviews = reviews.slice(0, max);
-  if (reviews.length === 0) return "";
-  const cls = twoCol ? " reviews-grid-2" : "";
-  return `<section class="reviews-section" id="reviews">
-  <div class="container">
-    <div class="reviews-head">
-      <span class="stars">★ ★ ★ ★ ★</span>
-      <span class="eyebrow">What Customers Say</span>
-      <h2>${(client.reviews || []).length}+ five-star reviews from ${htmlEscape(city || client.city)} &amp; beyond.</h2>
-      <p>Every review below is verified on Google. We don't pay for promotion — we just show up and get it right.</p>
-    </div>
-    <div class="reviews-grid${cls}">
-${reviews.map((r) => `      <div class="review">
-        <span class="quote">&ldquo;</span>
+// Google "G" icon SVG — multi-color, used in the "Verified Google Review" badge.
+const GOOGLE_G_SVG = `<svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg>`;
+
+function reviewCard(r) {
+  return `      <div class="review">
         <div class="stars">${"★".repeat(r.rating || 5)}</div>
         <p>${htmlEscape(r.text)}</p>
         <div class="who">
-          <div class="avatar">${initials(r.name)}</div>
-          <div>
-            <div class="who-name">${htmlEscape(r.name)}</div>
-            <div class="who-city">${htmlEscape(r.city || client.city)}, ${htmlEscape(client.state)} · Verified Google Review</div>
-          </div>
+          <div class="who-name">${htmlEscape(r.name)}</div>
+          <span class="verified">${GOOGLE_G_SVG} Verified Google Review</span>
+        </div>
+      </div>`;
+}
+
+function reviewsSection(opts) {
+  const { city = null, max = 3, twoCol = false, expandable = false, batch = 6, whiteBg = false } = opts || {};
+  let reviews = (client.reviews || []).filter((r) => r.text && r.text.trim().length > 0);
+  if (city) {
+    const matching = reviews.filter((r) => r.city === city);
+    if (matching.length >= (expandable ? batch : max)) reviews = matching;
+  }
+  if (reviews.length === 0) return "";
+
+  const sectionCls = whiteBg ? " is-white" : "";
+
+  // Compact mode (service pages, blog, etc.) — fixed slice, no load more.
+  if (!expandable) {
+    const sliced = reviews.slice(0, max);
+    const cls = twoCol ? " reviews-grid-2" : "";
+    return `<section class="reviews-section${sectionCls}" id="reviews">
+  <div class="container">
+    <div class="reviews-head">
+      <span class="stars">★ ★ ★ ★ ★</span>
+      <span class="eyebrow">What Our Customers Say</span>
+      <h2>${client.reviewCount}+ five-star reviews on Google.</h2>
+      <p>Every review below is verified on Google. We don't pay for promotion — we just show up and get it right.</p>
+    </div>
+    <div class="reviews-grid${cls}">
+${sliced.map(reviewCard).join("\n")}
+    </div>
+    <div class="reviews-foot"><strong>Rated 5.0 across ${client.reviewCount}+ Google reviews.</strong> &nbsp;${client.google ? `<a href="${client.google}">See them all on Google →</a>` : ""}</div>
+  </div>
+</section>`;
+  }
+
+  // Expandable mode (homepage + /reviews page) — 6 default + Load More batches of 6.
+  const initialVisible = batch;
+  const total = reviews.length;
+  return `<section class="reviews-section${sectionCls}" id="reviews">
+  <div class="container">
+    <div class="reviews-head">
+      <span class="stars">★ ★ ★ ★ ★</span>
+      <span class="eyebrow">What Our Customers Say</span>
+      <h2>${client.reviewCount}+ five-star reviews on Google.</h2>
+      <p>Every review below is from a real, verified Google review. Rated 5.0 across our entire history.</p>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid" data-batch="${batch}" data-total="${total}" data-shown="${initialVisible}">
+${reviews.map((r, i) => `      <div class="review${i >= initialVisible ? " is-hidden" : ""}" data-idx="${i}">
+        <div class="stars">${"★".repeat(r.rating || 5)}</div>
+        <p>${htmlEscape(r.text)}</p>
+        <div class="who">
+          <div class="who-name">${htmlEscape(r.name)}</div>
+          <span class="verified">${GOOGLE_G_SVG} Verified Google Review</span>
         </div>
       </div>`).join("\n")}
     </div>
-    <div class="reviews-foot"><strong>Rated 5.0 across ${(client.reviews || []).length}+ Google reviews.</strong> &nbsp;${client.google ? `<a href="${client.google}">See them all on Google →</a>` : ""}</div>
+    ${total > initialVisible ? `<div class="reviews-load-more">
+      <button id="loadMoreReviews" type="button">Load More Reviews</button>
+      <div class="count" id="reviewCount">Showing ${initialVisible} of ${total}</div>
+    </div>` : ""}
+    <div class="reviews-foot" style="margin-top:50px"><strong>Rated 5.0 across ${client.reviewCount}+ Google reviews.</strong> &nbsp;${client.google ? `<a href="${client.google}">See them all on Google →</a>` : ""}</div>
   </div>
-</section>`;
+</section>
+<script>
+(function(){
+  const btn=document.getElementById('loadMoreReviews');
+  if(!btn)return;
+  const grid=document.getElementById('reviewsGrid');
+  const counter=document.getElementById('reviewCount');
+  const batch=parseInt(grid.dataset.batch,10);
+  const total=parseInt(grid.dataset.total,10);
+  btn.addEventListener('click',()=>{
+    const cards=grid.querySelectorAll('.review.is-hidden');
+    let revealed=0;
+    for(const c of cards){if(revealed>=batch)break;c.classList.remove('is-hidden');revealed++;}
+    const shown=grid.querySelectorAll('.review:not(.is-hidden)').length;
+    grid.dataset.shown=shown;
+    if(counter)counter.textContent='Showing '+shown+' of '+total;
+    if(shown>=total){btn.textContent='All Reviews Loaded';btn.disabled=true;}
+  });
+})();
+</script>`;
 }
 
 function ownerSection(opts) {
@@ -759,7 +831,7 @@ function ownerSection(opts) {
       <h2>${htmlEscape(client.ownerName)}</h2>
       <div class="accent-rule"></div>
       <p>${htmlEscape(client.businessName)} is brother-run and built around one rule: the person who books the job is the person doing the work. When you call ${htmlEscape(PHONE)}, that's ${htmlEscape(firstName)}. When the van pulls into your driveway in ${htmlEscape(city)}, that's ${htmlEscape(firstName)}. When you walk back out and see the car, that's still ${htmlEscape(firstName)} — looking just as proud as you are.</p>
-      <p>That obsession is why we have ${(client.reviews || []).length}+ five-star reviews and almost zero turnover in repeat customers. We treat every car in ${htmlEscape(city)} like it's our own.</p>
+      <p>That obsession is why we have ${client.reviewCount}+ five-star reviews and almost zero turnover in repeat customers. We treat every car in ${htmlEscape(city)} like it's our own.</p>
       <ul class="owner-bullets">
         <li>Owner-operated, every job</li>
         <li>Licensed &amp; fully insured</li>
@@ -873,7 +945,7 @@ function footerSection() {
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="brand">
-          <span class="brand-mark">${(client.businessName.match(/[A-Z]/) || ["G"])[0]}</span>
+          ${brandMark()}
           <span>${htmlEscape(client.businessName.replace(/\s+Auto\s+Detailing/i, ""))}<small>${htmlEscape(client.niche)}</small></span>
         </div>
         <p>${htmlEscape(client.footerTagline || `Premium mobile detailing across ${client.city}.`)} Owner-operated by ${htmlEscape(client.ownerName)} and the ${htmlEscape(client.businessName.split(" ")[1] || "Gloss Spot")} crew.</p>
@@ -1014,14 +1086,14 @@ export async function generateHomePage() {
   const body = `${heroSection({
     eyebrow: `${city} County · ${client.state}`,
     headline,
-    lede: `Premium interior, exterior, and ceramic coating service brought directly to your driveway. Owner-operated, fully insured, and trusted by ${(client.reviews || []).length}+ five-star reviewers across ${city}.`,
+    lede: `Premium interior, exterior, and ceramic coating service brought directly to your driveway. Owner-operated, fully insured, and trusted by ${client.reviewCount}+ five-star reviewers across ${city}.`,
     showSlides: true, tall: true, video: PHOTO_HERO_VIDEO,
   })}
 ${introPillars({ city })}
 ${valueProp({ city })}
 ${gallerySection({ city, count: 3 })}
 ${servicesGrid({ city, count: 8 })}
-${reviewsSection({ max: 3 })}
+${reviewsSection({ expandable: true, batch: 6 })}
 ${ownerSection({ city })}
 ${bigCtaSection({ city })}
 ${processSection({ city })}
@@ -1048,7 +1120,7 @@ function buildCityLanding(city, isPrimary) {
   const body = `${heroSection({
     eyebrow: `${city} · ${client.state}`,
     headline,
-    lede: `${client.businessName} brings premium mobile ${client.nicheKeyword} to ${city}. Owner-operated, ${(client.reviews || []).length}+ five-star reviews, fully insured.`,
+    lede: `${client.businessName} brings premium mobile ${client.nicheKeyword} to ${city}. Owner-operated, ${client.reviewCount}+ five-star reviews, fully insured.`,
     showSlides: true, tall: false,
   })}
 ${introPillars({ city })}
@@ -1120,7 +1192,7 @@ function buildServicePage({ slug, service, city, titleOverride, fileOverride }) 
       </ul>
 
       <h2>Why customers choose ${htmlEscape(client.businessName)}</h2>
-      <p>We're owner-operated. ${htmlEscape(client.ownerName.split(" ")[0])} is on every job — there's no swapped crew, no third-party detailer running it for us. That's how we keep our review average at 5.0 across ${(client.reviews || []).length}+ verified Google reviews. People keep booking us because the result they got the first time is the result they get every time.</p>
+      <p>We're owner-operated. ${htmlEscape(client.ownerName.split(" ")[0])} is on every job — there's no swapped crew, no third-party detailer running it for us. That's how we keep our review average at 5.0 across ${client.reviewCount}+ verified Google reviews. People keep booking us because the result they got the first time is the result they get every time.</p>
       <p>Looking for service in another city? Browse our full <a href="/service-area">service area</a> or jump to ${otherCities.slice(0, 3).map((c) => `<a href="/${citySlug(c)}">${htmlEscape(c)}</a>`).join(", ")}.</p>
 
       <blockquote>"${htmlEscape((client.reviews || [])[0]?.text || "Best detailer I've ever used.").slice(0, 220)}" — ${htmlEscape((client.reviews || [])[0]?.name || "customer")}</blockquote>
@@ -1291,7 +1363,7 @@ export async function generateAboutPage() {
         <li><strong>No subcontractors.</strong> The owner is on every job. The person who books the work does the work.</li>
         <li><strong>Honest quotes.</strong> Real pricing up front. No "well actually it's more" once we're in the driveway.</li>
       </ul>
-      <p>Those three rules are still our entire business model. We've now done hundreds of details across ${client.cities.slice(0, 4).join(", ")}, and the reviews speak for themselves — ${(client.reviews || []).length}+ verified five-stars on Google.</p>
+      <p>Those three rules are still our entire business model. We've now done hundreds of details across ${client.cities.slice(0, 4).join(", ")}, and the reviews speak for themselves — ${client.reviewCount}+ verified five-stars on Google.</p>
 
       <h2>What we believe about a good detail</h2>
       <p>A good detail isn't about the cheapest products — it's about the right ones, used carefully. We use professional foams, ceramic coatings, hot-water extractors, and steam tools. We also use time. Most "fast detailers" cut corners on prep. We don't.</p>
@@ -1416,7 +1488,7 @@ ${finalCtaSection({ city: client.city })}`;
 // WHY CHOOSE US
 // ═════════════════════════════════════════════════════════════════════════════
 export async function generateWhyUsPage() {
-  const description = `Why choose ${client.businessName}? Owner-operated, mobile-only, ${(client.reviews || []).length}+ five-star reviews across central Illinois.`;
+  const description = `Why choose ${client.businessName}? Owner-operated, mobile-only, ${client.reviewCount}+ five-star reviews across central Illinois.`;
   const head = pageHead({
     title: `Why Choose Us | ${client.businessName}`,
     description, canonical: `${client.domain}/why-choose-us`,
@@ -1425,13 +1497,13 @@ export async function generateWhyUsPage() {
     { num: "01", h: "Owner is on every job", p: `${client.ownerName.split(" ")[0]} personally handles every appointment. There's no swapped crew, no third-party detailer running it for us.` },
     { num: "02", h: "Mobile-only, water + power included", p: "We arrive at your home, work, or wherever your car lives. We bring our own water tank, generator, and full pro kit. You just need a parking spot." },
     { num: "03", h: "Honest quotes, no surprise upsells", p: "We give you a real price up front — based on your vehicle and the package. You won't hear 'oh actually it's more' once we get on-site." },
-    { num: "04", h: `${(client.reviews || []).length}+ verified five-star reviews`, p: "5.0 average rating on Google, with verified reviews going back years. We don't pay for reviews — we earn them." },
+    { num: "04", h: `${client.reviewCount}+ verified five-star reviews`, p: "5.0 average rating on Google, with verified reviews going back years. We don't pay for reviews — we earn them." },
     { num: "05", h: "Premium products, real time per car", p: "Professional foams, ceramic coatings, steam, extraction. We don't speed-run a clean. The car gets the time it actually needs." },
     { num: "06", h: "Licensed, insured, local", p: `${client.businessName} is fully insured for damage and liability. We're based in ${client.city}, ${client.state} and we live where we work.` },
   ];
   const body = `${heroSection({
     eyebrow: `Why Us`,
-    headline: `Six reasons we have <em>${(client.reviews || []).length}+ five-stars.</em>`,
+    headline: `Six reasons we have <em>${client.reviewCount}+ five-stars.</em>`,
     lede: `Owner-operated, mobile-only, premium products. Here's what sets ${client.businessName} apart from anyone else you'd hire.`,
     showSlides: false,
   })}
@@ -1523,7 +1595,7 @@ ${finalCtaSection({})}`;
 // REVIEWS
 // ═════════════════════════════════════════════════════════════════════════════
 export async function generateReviewsPage() {
-  const description = `${(client.reviews || []).length}+ verified five-star Google reviews for ${client.businessName} — read what real ${client.city}-area customers say.`;
+  const description = `${client.reviewCount}+ verified five-star Google reviews for ${client.businessName} — read what real ${client.city}-area customers say.`;
   const reviews = client.reviews || [];
   const head = pageHead({
     title: `Reviews | ${client.businessName}`,
@@ -1531,29 +1603,11 @@ export async function generateReviewsPage() {
   });
   const body = `${heroSection({
     eyebrow: `Reviews`,
-    headline: `${reviews.length}+ five-stars. <em>Zero asterisks.</em>`,
+    headline: `${client.reviewCount}+ five-stars. <em>Zero asterisks.</em>`,
     lede: `Every review below is verified on Google. We don't pay for promotion, we don't run review-bait campaigns — we just do the work.`,
     showSlides: false,
   })}
-<section class="reviews-section">
-  <div class="container">
-    <div class="reviews-grid">
-${reviews.map((r) => `      <div class="review">
-        <span class="quote">&ldquo;</span>
-        <div class="stars">${"★".repeat(r.rating || 5)}</div>
-        <p>${htmlEscape(r.text)}</p>
-        <div class="who">
-          <div class="avatar">${initials(r.name)}</div>
-          <div>
-            <div class="who-name">${htmlEscape(r.name)}</div>
-            <div class="who-city">${htmlEscape(r.city || client.city)}, ${htmlEscape(client.state)} · Verified Google Review</div>
-          </div>
-        </div>
-      </div>`).join("\n")}
-    </div>
-    <div class="reviews-foot" style="margin-top:50px"><strong>Rated 5.0 across ${reviews.length}+ Google reviews.</strong> &nbsp;${client.google ? `<a href="${client.google}">See them all on Google →</a>` : ""}</div>
-  </div>
-</section>
+${reviewsSection({ expandable: true, batch: 6 })}
 ${bigCtaSection({})}
 ${finalCtaSection({})}`;
   writeHtml("reviews.html", buildPage({ head, currentPath: "/reviews", body }));

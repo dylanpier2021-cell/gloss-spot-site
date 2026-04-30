@@ -15,6 +15,7 @@
 <meta property="og:site_name" content="The Gloss Spot Auto Detailing">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#02888a">
+<link rel="icon" href="https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_64/Gloss_Spot_500_x_500_px_1_eviirr" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter+Tight:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -53,6 +54,7 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .nav-row{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
 .brand{display:flex;align-items:center;gap:11px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.5rem;color:var(--ink);letter-spacing:-.03em}
 .brand-mark{width:42px;height:42px;border-radius:50%;background:var(--primary);display:grid;place-items:center;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.15rem;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18);flex-shrink:0}
+.brand-mark-img{background:transparent;box-shadow:none;border-radius:0;object-fit:contain;width:46px;height:46px;padding:0}
 .brand small{display:block;font-family:'Inter Tight',sans-serif;font-size:.65rem;font-weight:600;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-top:2px}
 .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
 .nav-links a{color:var(--ink);font-weight:500;font-size:.96rem;position:relative}
@@ -137,23 +139,29 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .service-card .arrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:.85rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;transition:gap .3s}
 .service-card:hover .arrow{gap:14px}
 
-.reviews-section{padding:120px 0;background:#fff}
+.reviews-section{padding:120px 0;background:var(--soft)}
+.reviews-section.is-white{background:#fff}
 .reviews-head{text-align:center;margin-bottom:60px}
 .reviews-head .stars{color:#f5b301;font-size:1.2rem;letter-spacing:.15em;margin-bottom:1rem;display:block}
 .reviews-head p{color:var(--muted);max-width:46ch;margin:0 auto;font-size:1.04rem}
-.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 .reviews-grid-2{grid-template-columns:repeat(2,1fr)}
-.review{background:#fff;border:1px solid var(--line);padding:38px 32px;position:relative;transition:all .35s ease;border-radius:4px}
-.review:hover{border-color:var(--primary);box-shadow:0 18px 50px -22px rgba(2,136,138,.35);transform:translateY(-4px)}
-.review .quote{font-family:'Bricolage Grotesque',sans-serif;font-size:4rem;line-height:1;color:var(--primary);position:absolute;top:18px;right:24px;opacity:.15}
-.review .stars{color:#f5b301;letter-spacing:.1em;font-size:.95rem;margin-bottom:18px}
-.review p{color:var(--text);font-size:.97rem;line-height:1.65;margin-bottom:24px}
-.review .who{display:flex;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:18px}
-.review .avatar{width:42px;height:42px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.95rem;font-family:'Inter Tight',sans-serif;flex-shrink:0}
-.review .who-name{font-weight:600;color:var(--ink);font-size:.95rem}
-.review .who-city{font-size:.82rem;color:var(--muted);letter-spacing:.04em}
+.review{background:#fff;border:1px solid var(--line);padding:32px 30px 28px;position:relative;transition:all .35s ease;border-radius:8px;box-shadow:0 6px 24px -16px rgba(13,20,24,.18);display:flex;flex-direction:column}
+.review:hover{border-color:var(--primary);box-shadow:0 18px 50px -22px rgba(2,136,138,.3);transform:translateY(-3px)}
+.review .stars{color:#f5b301;letter-spacing:.1em;font-size:1rem;margin-bottom:16px;line-height:1}
+.review p{color:var(--text);font-size:.96rem;line-height:1.6;margin-bottom:22px;flex-grow:1}
+.review .who{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:16px;margin-top:auto}
+.review .who-name{font-weight:700;color:var(--ink);font-size:.98rem;font-family:'Inter Tight',sans-serif}
+.review .verified{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;color:var(--muted);font-weight:500;letter-spacing:.02em}
+.review .verified svg{flex-shrink:0;width:14px;height:14px}
+.review.is-hidden{display:none}
 .reviews-foot{text-align:center;margin-top:50px;padding-top:30px}
 .reviews-foot strong{color:var(--ink);font-weight:600}
+.reviews-load-more{margin-top:44px;text-align:center}
+.reviews-load-more button{background:var(--ink);color:#fff;border:none;padding:15px 32px;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:.97rem;letter-spacing:.02em;border-radius:6px;cursor:pointer;transition:all .25s ease;display:inline-flex;align-items:center;gap:10px}
+.reviews-load-more button:hover{background:var(--primary);transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(2,136,138,.5)}
+.reviews-load-more button[disabled]{opacity:.5;cursor:default;transform:none;box-shadow:none}
+.reviews-load-more .count{color:var(--muted);font-size:.85rem;margin-top:14px}
 
 .owner-section{background:var(--soft);padding:120px 0}
 .owner-grid{display:grid;grid-template-columns:.85fr 1fr;gap:80px;align-items:center;max-width:1100px;margin:0 auto}
@@ -423,7 +431,7 @@ footer ul a:hover{color:var(--accent)}
   "address":{"@type":"PostalAddress","addressLocality":"Champaign","addressRegion":"IL","postalCode":"61822","addressCountry":"US"},
   "areaServed":["Champaign","Urbana","Savoy","Mahomet","Rantoul","St. Joseph","Tolono","Danville","Decatur","Bloomington","Normal","Mattoon","Monticello","Kankakee","Springfield","Philo","Sidney","Ogden","Fisher","Thomasboro","Peoria","Charleston","Effingham"],
   "openingHours":"Mo-Sa 08:00-20:00, Su 13:00-20:00",
-  "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"20"},
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"90"},
   "sameAs":["https://www.facebook.com/theglossspot","https://www.instagram.com/theglossspotil","https://share.google/Wr0NTsR0CmFTlYRtk","https://www.yelp.com/biz/the-gloss-spot-auto-detailing-champaign-3"]
 }
 </script>
@@ -432,14 +440,14 @@ footer ul a:hover{color:var(--accent)}
 <body>
 <div class="topbar">
   <div class="container topbar-row">
-    <span>★ ★ ★ ★ ★ &nbsp;Rated 5.0 across 20+ Google reviews</span>
+    <span>★ ★ ★ ★ ★ &nbsp;Rated 5.0 across 90+ Google reviews</span>
     <span>Mon-Sat: 8am-8pm, Sun: 1pm-8pm &nbsp;|&nbsp; <a href="tel:+12176002108"><strong>217-600-2108</strong></a></span>
   </div>
 </div>
 <nav class="main" id="nav">
   <div class="container nav-row">
     <a href="/" class="brand">
-      <span class="brand-mark">T</span>
+      <img src="https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_200/Gloss_Spot_500_x_500_px_1_eviirr" alt="The Gloss Spot Auto Detailing logo" class="brand-mark brand-mark-img" loading="eager" width="42" height="42">
       <span>The Gloss Spot<small>Car Detailing · Champaign, IL</small></span>
     </a>
     <ul class="nav-links" id="navLinks">
@@ -910,7 +918,7 @@ $("submitBtn").addEventListener("click", async () => {
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="brand">
-          <span class="brand-mark">T</span>
+          <img src="https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_200/Gloss_Spot_500_x_500_px_1_eviirr" alt="The Gloss Spot Auto Detailing logo" class="brand-mark brand-mark-img" loading="eager" width="42" height="42">
           <span>The Gloss Spot<small>Car Detailing</small></span>
         </div>
         <p>Premium mobile detailing across Champaign-Urbana. We come to you. Owner-operated by Dominic Pierson and the Gloss crew.</p>

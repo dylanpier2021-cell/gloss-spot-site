@@ -15,6 +15,7 @@
 <meta property="og:site_name" content="The Gloss Spot Auto Detailing">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#02888a">
+<link rel="icon" href="https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_64/Gloss_Spot_500_x_500_px_1_eviirr" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter+Tight:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -53,6 +54,7 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .nav-row{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
 .brand{display:flex;align-items:center;gap:11px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.5rem;color:var(--ink);letter-spacing:-.03em}
 .brand-mark{width:42px;height:42px;border-radius:50%;background:var(--primary);display:grid;place-items:center;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.15rem;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18);flex-shrink:0}
+.brand-mark-img{background:transparent;box-shadow:none;border-radius:0;object-fit:contain;width:46px;height:46px;padding:0}
 .brand small{display:block;font-family:'Inter Tight',sans-serif;font-size:.65rem;font-weight:600;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-top:2px}
 .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
 .nav-links a{color:var(--ink);font-weight:500;font-size:.96rem;position:relative}
@@ -137,23 +139,29 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .service-card .arrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:.85rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;transition:gap .3s}
 .service-card:hover .arrow{gap:14px}
 
-.reviews-section{padding:120px 0;background:#fff}
+.reviews-section{padding:120px 0;background:var(--soft)}
+.reviews-section.is-white{background:#fff}
 .reviews-head{text-align:center;margin-bottom:60px}
 .reviews-head .stars{color:#f5b301;font-size:1.2rem;letter-spacing:.15em;margin-bottom:1rem;display:block}
 .reviews-head p{color:var(--muted);max-width:46ch;margin:0 auto;font-size:1.04rem}
-.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 .reviews-grid-2{grid-template-columns:repeat(2,1fr)}
-.review{background:#fff;border:1px solid var(--line);padding:38px 32px;position:relative;transition:all .35s ease;border-radius:4px}
-.review:hover{border-color:var(--primary);box-shadow:0 18px 50px -22px rgba(2,136,138,.35);transform:translateY(-4px)}
-.review .quote{font-family:'Bricolage Grotesque',sans-serif;font-size:4rem;line-height:1;color:var(--primary);position:absolute;top:18px;right:24px;opacity:.15}
-.review .stars{color:#f5b301;letter-spacing:.1em;font-size:.95rem;margin-bottom:18px}
-.review p{color:var(--text);font-size:.97rem;line-height:1.65;margin-bottom:24px}
-.review .who{display:flex;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:18px}
-.review .avatar{width:42px;height:42px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.95rem;font-family:'Inter Tight',sans-serif;flex-shrink:0}
-.review .who-name{font-weight:600;color:var(--ink);font-size:.95rem}
-.review .who-city{font-size:.82rem;color:var(--muted);letter-spacing:.04em}
+.review{background:#fff;border:1px solid var(--line);padding:32px 30px 28px;position:relative;transition:all .35s ease;border-radius:8px;box-shadow:0 6px 24px -16px rgba(13,20,24,.18);display:flex;flex-direction:column}
+.review:hover{border-color:var(--primary);box-shadow:0 18px 50px -22px rgba(2,136,138,.3);transform:translateY(-3px)}
+.review .stars{color:#f5b301;letter-spacing:.1em;font-size:1rem;margin-bottom:16px;line-height:1}
+.review p{color:var(--text);font-size:.96rem;line-height:1.6;margin-bottom:22px;flex-grow:1}
+.review .who{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:16px;margin-top:auto}
+.review .who-name{font-weight:700;color:var(--ink);font-size:.98rem;font-family:'Inter Tight',sans-serif}
+.review .verified{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;color:var(--muted);font-weight:500;letter-spacing:.02em}
+.review .verified svg{flex-shrink:0;width:14px;height:14px}
+.review.is-hidden{display:none}
 .reviews-foot{text-align:center;margin-top:50px;padding-top:30px}
 .reviews-foot strong{color:var(--ink);font-weight:600}
+.reviews-load-more{margin-top:44px;text-align:center}
+.reviews-load-more button{background:var(--ink);color:#fff;border:none;padding:15px 32px;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:.97rem;letter-spacing:.02em;border-radius:6px;cursor:pointer;transition:all .25s ease;display:inline-flex;align-items:center;gap:10px}
+.reviews-load-more button:hover{background:var(--primary);transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(2,136,138,.5)}
+.reviews-load-more button[disabled]{opacity:.5;cursor:default;transform:none;box-shadow:none}
+.reviews-load-more .count{color:var(--muted);font-size:.85rem;margin-top:14px}
 
 .owner-section{background:var(--soft);padding:120px 0}
 .owner-grid{display:grid;grid-template-columns:.85fr 1fr;gap:80px;align-items:center;max-width:1100px;margin:0 auto}
@@ -342,7 +350,7 @@ footer ul a:hover{color:var(--accent)}
   "address":{"@type":"PostalAddress","addressLocality":"Champaign","addressRegion":"IL","postalCode":"61822","addressCountry":"US"},
   "areaServed":["Champaign","Urbana","Savoy","Mahomet","Rantoul","St. Joseph","Tolono","Danville","Decatur","Bloomington","Normal","Mattoon","Monticello","Kankakee","Springfield","Philo","Sidney","Ogden","Fisher","Thomasboro","Peoria","Charleston","Effingham"],
   "openingHours":"Mo-Sa 08:00-20:00, Su 13:00-20:00",
-  "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"20"},
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"90"},
   "sameAs":["https://www.facebook.com/theglossspot","https://www.instagram.com/theglossspotil","https://share.google/Wr0NTsR0CmFTlYRtk","https://www.yelp.com/biz/the-gloss-spot-auto-detailing-champaign-3"]
 }
 </script>
@@ -351,14 +359,14 @@ footer ul a:hover{color:var(--accent)}
 <body>
 <div class="topbar">
   <div class="container topbar-row">
-    <span>★ ★ ★ ★ ★ &nbsp;Rated 5.0 across 20+ Google reviews</span>
+    <span>★ ★ ★ ★ ★ &nbsp;Rated 5.0 across 90+ Google reviews</span>
     <span>Mon-Sat: 8am-8pm, Sun: 1pm-8pm &nbsp;|&nbsp; <a href="tel:+12176002108"><strong>217-600-2108</strong></a></span>
   </div>
 </div>
 <nav class="main" id="nav">
   <div class="container nav-row">
     <a href="/" class="brand">
-      <span class="brand-mark">T</span>
+      <img src="https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_200/Gloss_Spot_500_x_500_px_1_eviirr" alt="The Gloss Spot Auto Detailing logo" class="brand-mark brand-mark-img" loading="eager" width="42" height="42">
       <span>The Gloss Spot<small>Car Detailing · Champaign, IL</small></span>
     </a>
     <ul class="nav-links" id="navLinks">
@@ -394,7 +402,7 @@ footer ul a:hover{color:var(--accent)}
   <div class="container hero-inner">
     <div class="loc">Rantoul · IL</div>
     <h1>Car Detailing in <em>Rantoul,</em> IL</h1>
-    <p class="lede">The Gloss Spot Auto Detailing brings premium mobile car detailing to Rantoul. Owner-operated, 20+ five-star reviews, fully insured.</p>
+    <p class="lede">The Gloss Spot Auto Detailing brings premium mobile car detailing to Rantoul. Owner-operated, 90+ five-star reviews, fully insured.</p>
     <div class="hero-ctas">
       <a href="/book-an-appointment-1696" class="btn btn-primary">Book a Detail →</a>
       <a href="/reviews" class="btn btn-outline">Read Reviews</a>
@@ -403,7 +411,7 @@ footer ul a:hover{color:var(--accent)}
   <div class="hero-trust">
     <div class="container hero-trust-row">
       <span>Mobile — We Come To You</span>
-      <span>20+ Five-Star Reviews</span>
+      <span>90+ Five-Star Reviews</span>
       <span>Licensed &amp; Insured</span>
       <span>Same-Day Available</span>
     </div>
@@ -516,49 +524,37 @@ footer ul a:hover{color:var(--accent)}
   <div class="container">
     <div class="reviews-head">
       <span class="stars">★ ★ ★ ★ ★</span>
-      <span class="eyebrow">What Customers Say</span>
-      <h2>20+ five-star reviews from Rantoul &amp; beyond.</h2>
+      <span class="eyebrow">What Our Customers Say</span>
+      <h2>90+ five-star reviews on Google.</h2>
       <p>Every review below is verified on Google. We don't pay for promotion — we just show up and get it right.</p>
     </div>
     <div class="reviews-grid">
       <div class="review">
-        <span class="quote">&ldquo;</span>
         <div class="stars">★★★★★</div>
-        <p>From knocking on my door to bringing my car back to life, Gloss Spot truly surprised me. Dom got all my dog's hair out of the carpets, conditioned the leather, and the ceramic coating makes it shine like no other. He came to me — best part of the whole experience.</p>
+        <p>SERVICE OF THE YEAR!!!!! I have taken my car to get detailed before but having them come to you and doing a 15/10 job! Couldn't have asked for anything better! Would highly recommend!</p>
         <div class="who">
-          <div class="avatar">KN</div>
-          <div>
-            <div class="who-name">Kenny Nguyen</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Shelbi Hynds</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
       <div class="review">
-        <span class="quote">&ldquo;</span>
         <div class="stars">★★★★★</div>
-        <p>Just got back from a 12-hour drive to Florida and my car was an absolute disaster. I thought it would never look the same. The Gloss Spot came out and I was completely blown away by the results. 10/10 customer service.</p>
+        <p>Dom was incredible!!! Our car belonged to friends before us, it's a 2008, so I never expected perfection. When I say this is the cleanest I've EVER seen this car… I'm FLOORED.</p>
         <div class="who">
-          <div class="avatar">RD</div>
-          <div>
-            <div class="who-name">Reese Donsbach</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Macy Ruple</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
       <div class="review">
-        <span class="quote">&ldquo;</span>
         <div class="stars">★★★★★</div>
-        <p>This is the cleanest I have EVER seen this car. Dom got years of use and grime to just disappear. Him coming to your own house is the icing on the cake — worth every penny and then some.</p>
+        <p>The quality of the work was excellent. I lost a ring seven years ago — a family heirloom that belonged to my mother who passed 20 years ago. They found the ring under my seat. Worth every penny.</p>
         <div class="who">
-          <div class="avatar">MR</div>
-          <div>
-            <div class="who-name">Macy Ruple</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
+          <div class="who-name">Sheila T</div>
+          <span class="verified"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.79 2.72v2.26h2.9c1.7-1.57 2.69-3.88 2.69-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.46-.8 5.95-2.18l-2.9-2.26c-.8.54-1.83.86-3.05.86-2.34 0-4.32-1.58-5.03-3.7H.97v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.97A9 9 0 0 0 0 9c0 1.45.35 2.83.97 4.04l3-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 9 0 9 9 0 0 0 .97 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg> Verified Google Review</span>
         </div>
       </div>
     </div>
-    <div class="reviews-foot"><strong>Rated 5.0 across 20+ Google reviews.</strong> &nbsp;<a href="https://share.google/Wr0NTsR0CmFTlYRtk">See them all on Google →</a></div>
+    <div class="reviews-foot"><strong>Rated 5.0 across 90+ Google reviews.</strong> &nbsp;<a href="https://share.google/Wr0NTsR0CmFTlYRtk">See them all on Google →</a></div>
   </div>
 </section>
 <section class="owner-section" id="owner">
@@ -574,7 +570,7 @@ footer ul a:hover{color:var(--accent)}
       <h2>Dominic Pierson</h2>
       <div class="accent-rule"></div>
       <p>The Gloss Spot Auto Detailing is brother-run and built around one rule: the person who books the job is the person doing the work. When you call 217-600-2108, that's Dominic. When the van pulls into your driveway in Rantoul, that's Dominic. When you walk back out and see the car, that's still Dominic — looking just as proud as you are.</p>
-      <p>That obsession is why we have 20+ five-star reviews and almost zero turnover in repeat customers. We treat every car in Rantoul like it's our own.</p>
+      <p>That obsession is why we have 90+ five-star reviews and almost zero turnover in repeat customers. We treat every car in Rantoul like it's our own.</p>
       <ul class="owner-bullets">
         <li>Owner-operated, every job</li>
         <li>Licensed &amp; fully insured</li>
@@ -709,7 +705,7 @@ footer ul a:hover{color:var(--accent)}
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="brand">
-          <span class="brand-mark">T</span>
+          <img src="https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_200/Gloss_Spot_500_x_500_px_1_eviirr" alt="The Gloss Spot Auto Detailing logo" class="brand-mark brand-mark-img" loading="eager" width="42" height="42">
           <span>The Gloss Spot<small>Car Detailing</small></span>
         </div>
         <p>Premium mobile detailing across Champaign-Urbana. We come to you. Owner-operated by Dominic Pierson and the Gloss crew.</p>
