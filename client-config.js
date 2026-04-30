@@ -44,25 +44,36 @@ export const client = {
   favicon: "",
 
   // ── Photos ──────────────────────────────────────────────────────────────
-  // Drop converted JPG/WebP files into `output/img/` and paste filenames here.
-  // Reference like "/img/hero1.jpg" — Vercel serves them at that exact path.
-  // HEIC files from iPhone need converting first (use https://heictojpg.com/
-  // or run `heif-convert *.HEIC` if you have libheif installed).
-  // Empty values fall back to the curated Unsplash photos.
+  // Real Gloss Spot photos hosted on Cloudinary. f_auto/q_auto in the URL
+  // tells Cloudinary to auto-pick WebP/AVIF + optimal quality per browser.
+  // To swap any of these: paste a new Cloudinary URL (full URL, not just ID).
+  // To go back to placeholders: empty out the value.
   photos: {
     hero: [
-      // "/img/hero1.jpg",
-      // "/img/hero2.jpg",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1800/IMG_5948_totw8k",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1800/IMG_6007_huulif",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1800/IMG_6010_bgc6ll",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1800/IMG_6011_xle1gg",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1800/IMG_6240_n97i25",
     ],
+    heroVideo: "https://res.cloudinary.com/djp1yfsj5/video/upload/09e0136d1e1a49dea649dcc5c012cde3_u6qrks_e3j2v4",
     gallery: [
-      // "/img/gallery1.jpg",
-      // "/img/gallery2.jpg",
-      // "/img/gallery3.jpg",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_900/IMG_5310_xepias",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_900/IMG_5403_sy036b",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_900/IMG_5605_gw8kiq",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_900/IMG_5876_d9uiq0",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_900/IMG_5970_gc28l5",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_900/IMG_6231_zxhqub",
     ],
-    value: "",      // big "we come to you" section photo
-    bigCta: "",     // wide "got a disaster?" section background
-    owner: "",      // photo of Dominic for the owner card
-    blog: [],       // blog post hero photos
+    value: "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1100/IMG_5969_pmvndg",
+    bigCta: "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1800/IMG_6283_oxnzvf",
+    owner: "",  // placeholder — paste Dom's photo URL when ready
+    blog: [
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_900/IMG_5605_gw8kiq",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_900/IMG_5853_cxrrpb",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_900/IMG_5644_zeces6",
+      "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_900/IMG_5582_d2eijo",
+    ],
   },
 
   headlineFont: "Bebas Neue",

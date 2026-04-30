@@ -96,6 +96,8 @@ const PHOTO_GALLERY = pickArr(cp.gallery, auto.gallery, FALLBACK_GALLERY);
 const PHOTO_VALUE = pickOne(cp.value, auto.value, FALLBACK_VALUE);
 const PHOTO_BIGCTA = pickOne(cp.bigCta, auto.bigCta, FALLBACK_BIGCTA);
 const PHOTO_OWNER = pickOne(cp.owner, auto.owner, FALLBACK_OWNER);
+// Optional MP4 URL — when set, the homepage hero plays it as a muted autoplay loop.
+const PHOTO_HERO_VIDEO = cp.heroVideo || "";
 
 const _photoSummary = [
   PHOTO_HERO !== FALLBACK_HERO ? `hero(${PHOTO_HERO.length})` : null,
@@ -170,6 +172,8 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .hero-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(1,61,62,.85) 0%,rgba(13,20,24,.62) 55%,rgba(13,20,24,.4) 100%)}
 .hero-static{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
 .hero-static::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(1,61,62,.88) 0%,rgba(13,20,24,.65) 55%,rgba(13,20,24,.45) 100%)}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:#000}
+.hero-video-overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(1,61,62,.78) 0%,rgba(13,20,24,.58) 55%,rgba(13,20,24,.4) 100%);z-index:1;pointer-events:none}
 .hero-inner{position:relative;z-index:2;padding:120px 0 100px;width:100%}
 .hero-tall .hero-inner{padding:140px 0 120px}
 .hero h1{color:#fff;max-width:18ch;margin-bottom:.4em}
@@ -530,7 +534,10 @@ function heroSection(opts) {
   } = opts;
   const cta1 = ctaPrimary || { label: "Book a Detail →", href: "/book-an-appointment-1696" };
   const cta2 = ctaSecondary || { label: "Read Reviews", href: "/reviews" };
-  const slidesHtml = showSlides
+  const video = opts.video || "";
+  const slidesHtml = video
+    ? `<video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="${slides[0] || ""}"><source src="${video}" type="video/mp4"></video><div class="hero-video-overlay"></div>`
+    : showSlides
     ? `<div class="hero-slides" id="slides">
 ${slides.map((u, i) => `      <div class="hero-slide${i === 0 ? " active" : ""}" style="background-image:url('${u}')"></div>`).join("\n")}
     </div>
@@ -1008,7 +1015,7 @@ export async function generateHomePage() {
     eyebrow: `${city} County · ${client.state}`,
     headline,
     lede: `Premium interior, exterior, and ceramic coating service brought directly to your driveway. Owner-operated, fully insured, and trusted by ${(client.reviews || []).length}+ five-star reviewers across ${city}.`,
-    showSlides: true, tall: true,
+    showSlides: true, tall: true, video: PHOTO_HERO_VIDEO,
   })}
 ${introPillars({ city })}
 ${valueProp({ city })}
