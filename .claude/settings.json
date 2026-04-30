@@ -8,7 +8,10 @@
       "Bash(start \"c:\\\\Users\\\\PC\\\\Claude\\\\output\\\\blog\\\\drain-cleaning-cost-guide-austin.html\")",
       "Bash(rm -f output/blog/drain-cleaning-cost-guide-austin.html output/blog/drain-cleaning-how-to-choose-austin.html output/blog/drain-cleaning-vs-diy-austin.html)",
       "Bash(start output/blog/drain-cleaning-cost-guide-austin.html)",
-      "Bash(start \"c:\\\\Users\\\\PC\\\\Claude\\\\output\\\\Champaign-landing-page.html\")"
+      "Bash(start \"c:\\\\Users\\\\PC\\\\Claude\\\\output\\\\Champaign-landing-page.html\")",
+      "Bash(gh --version)",
+      "Bash(grep -E \"\\(\\\\.env$|settings\\\\.local\\)\")",
+      "PowerShell(winget install --id GitHub.cli --silent --accept-source-agreements --accept-package-agreements)"
     ]
   }
 }

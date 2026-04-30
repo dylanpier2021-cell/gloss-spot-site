@@ -5,5 +5,26 @@
   "outputDirectory": "output",
   "framework": null,
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/book-an-appointment", "destination": "/book-an-appointment-1696", "permanent": true },
+    { "source": "/book", "destination": "/book-an-appointment-1696", "permanent": true },
+    { "source": "/booking", "destination": "/book-an-appointment-1696", "permanent": true },
+    { "source": "/champaign-il", "destination": "/Champaign-il", "permanent": true },
+    { "source": "/champaign", "destination": "/Champaign-il", "permanent": true },
+    { "source": "/Champaign", "destination": "/Champaign-il", "permanent": true },
+    { "source": "/about", "destination": "/about-us", "permanent": true },
+    { "source": "/services", "destination": "/packages", "permanent": true },
+    { "source": "/areas", "destination": "/service-area", "permanent": true },
+    { "source": "/area", "destination": "/service-area", "permanent": true },
+    { "source": "/calculator", "destination": "/cost-calculator", "permanent": true },
+    { "source": "/pricing", "destination": "/cost-calculator", "permanent": true },
+    { "source": "/privacy", "destination": "/privacy-policy", "permanent": true },
+    { "source": "/terms", "destination": "/terms-and-conditions", "permanent": true },
+    { "source": "/why-us", "destination": "/why-choose-us", "permanent": true },
+    { "source": "/process", "destination": "/our-process", "permanent": true },
+    { "source": "/tint", "destination": "/window-tint", "permanent": true },
+    { "source": "/coating", "destination": "/ceramic", "permanent": true },
+    { "source": "/correction", "destination": "/paint-correction", "permanent": true }
+  ]
 }

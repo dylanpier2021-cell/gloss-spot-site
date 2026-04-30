@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "ceramic-vs-wax",
+    "title": "Ceramic Coating vs Wax: Which One Is Actually Worth It?",
+    "city": "Champaign",
+    "service": "ceramic coating",
+    "intent": "comparison",
+    "excerpt": "Wax buys you weeks. Ceramic buys you years. Here's the honest tradeoff between the two — and how to know which is right for your car.",
+    "publishedAt": "2026-04-12T10:00:00Z",
+    "url": "/blog/ceramic-vs-wax"
+  },
+  {
+    "slug": "detailing-cost",
+    "title": "How Much Does Auto Detailing Actually Cost in 2026?",
+    "city": "Champaign",
+    "service": "full service detailing",
+    "intent": "cost-guide",
+    "excerpt": "Real pricing breakdowns by vehicle size and package — from a $110 express interior to a $1,500 ceramic coating job. No vague 'starting at' numbers.",
+    "publishedAt": "2026-04-08T10:00:00Z",
+    "url": "/blog/detailing-cost"
+  },
+  {
+    "slug": "how-often",
+    "title": "How Often Should You Detail Your Car?",
+    "city": "Champaign",
+    "service": "full service detailing",
+    "intent": "guide",
+    "excerpt": "Once a year? Quarterly? Every six months? Honest guidance on detailing frequency based on how you actually use your car — and the salt-belt reality of central Illinois.",
+    "publishedAt": "2026-04-04T10:00:00Z",
+    "url": "/blog/how-often"
+  },
+  {
+    "slug": "mobile-vs-shop",
+    "title": "Mobile Detailing vs Shop Detailing: Which Is Actually Better?",
+    "city": "Champaign",
+    "service": "mobile detailing",
+    "intent": "comparison",
+    "excerpt": "Drop-off detailers want you to think their concrete bay is superior. Here's why we run a 100% mobile operation — and when a shop genuinely makes more sense.",
+    "publishedAt": "2026-04-02T10:00:00Z",
+    "url": "/blog/mobile-vs-shop"
+  }
+]

@@ -14,7 +14,7 @@ export const client = {
   nicheKeyword: "car detailing",
   nicheSlug: "car-detailing",
 
-  cities: ["Champaign", "Urbana", "Savoy", "Mahomet", "Rantoul", "St. Joseph", "Tolono", "Danville", "Decatur", "Bloomington", "Normal", "Mattoon", "Monticello", "Kankakee", "Springfield"],
+  cities: ["Champaign", "Urbana", "Savoy", "Mahomet", "Rantoul", "St. Joseph", "Tolono", "Danville", "Decatur", "Bloomington", "Normal", "Mattoon", "Monticello", "Kankakee", "Springfield", "Philo", "Sidney", "Ogden", "Fisher", "Thomasboro", "Peoria", "Charleston", "Effingham"],
 
   services: [
     "mobile detailing",

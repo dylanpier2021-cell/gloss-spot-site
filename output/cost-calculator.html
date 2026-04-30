@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mobile Detailing in Champaign, IL | The Gloss Spot Auto Detailing</title>
-<meta name="description" content="Mobile Detailing in Champaign, IL. Our flagship service. We bring the entire detail bay to your driveway — water, power, and pro-grade  Call 217-600-2108 for a free quote.">
+<title>Cost Calculator | The Gloss Spot Auto Detailing</title>
+<meta name="description" content="Cost calculator for The Gloss Spot Auto Detailing — pick service, package, and vehicle for an instant detailing estimate.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://theglossspotil.com/mobile-detailing-champaign-il">
+<link rel="canonical" href="https://theglossspotil.com/cost-calculator">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Mobile Detailing in Champaign, IL | The Gloss Spot Auto Detailing">
-<meta property="og:description" content="Mobile Detailing in Champaign, IL. Our flagship service. We bring the entire detail bay to your driveway — water, power, and pro-grade  Call 217-600-2108 for a free quote.">
-<meta property="og:url" content="https://theglossspotil.com/mobile-detailing-champaign-il">
+<meta property="og:title" content="Cost Calculator | The Gloss Spot Auto Detailing">
+<meta property="og:description" content="Cost calculator for The Gloss Spot Auto Detailing — pick service, package, and vehicle for an instant detailing estimate.">
+<meta property="og:url" content="https://theglossspotil.com/cost-calculator">
 <meta property="og:image" content="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=1800&q=80">
 <meta property="og:site_name" content="The Gloss Spot Auto Detailing">
 <meta name="twitter:card" content="summary_large_image">
@@ -326,7 +326,81 @@ footer ul a:hover{color:var(--accent)}
   .process-step{grid-template-columns:60px 1fr;gap:20px}
   .process-num{width:58px;height:58px;font-size:1.3rem}
   .process-list::before{left:28px}
-}</style>
+}
+.book-wrap{background:var(--soft);padding:60px 0 110px;min-height:60vh}
+.book-shell{max-width:1100px;margin:0 auto;padding:0 28px}
+.book-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;margin-bottom:34px}
+.book-head h1{font-size:clamp(2rem,3.6vw,2.6rem);margin:0}
+.book-steps{display:flex;gap:12px;align-items:center;font-size:.86rem;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.book-steps span{display:inline-flex;align-items:center;gap:8px}
+.book-steps b{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--line);color:var(--muted);font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.85rem}
+.book-steps b.done{background:var(--primary);color:#fff}
+.book-steps b.current{background:var(--ink);color:#fff}
+.book-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:36px 36px 30px;box-shadow:0 18px 40px -22px rgba(0,0,0,.12)}
+.book-grid{display:grid;grid-template-columns:1fr 360px;gap:36px;align-items:start}
+.book-summary{position:sticky;top:120px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:28px 28px 32px}
+.book-summary h4{font-family:'Inter Tight',sans-serif;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--primary);margin-bottom:16px;font-weight:700}
+.book-summary .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.book-summary .row:last-of-type{border-bottom:none}
+.book-summary .row span:first-child{color:var(--muted)}
+.book-summary .row span:last-child{font-weight:600;color:var(--ink);text-align:right;max-width:60%}
+.book-total{display:flex;justify-content:space-between;align-items:baseline;margin-top:18px;padding-top:18px;border-top:2px solid var(--ink)}
+.book-total .lbl{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.book-total .amt{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:2.2rem;color:var(--primary);font-variation-settings:"opsz" 96}
+.book-total .amt small{font-size:.85rem;color:var(--muted);font-weight:500;display:block;margin-top:2px}
+
+.opt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+.opt-grid-3{grid-template-columns:repeat(3,1fr)}
+.opt{display:block;padding:18px 20px;border:1.5px solid var(--line);border-radius:6px;cursor:pointer;background:#fff;transition:all .2s ease}
+.opt:hover{border-color:var(--primary)}
+.opt.active{border-color:var(--primary);background:rgba(2,136,138,.06);box-shadow:0 8px 20px -10px rgba(2,136,138,.3)}
+.opt input{display:none}
+.opt .opt-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.05rem;color:var(--ink);margin-bottom:4px;letter-spacing:-.005em}
+.opt .opt-desc{font-size:.85rem;color:var(--muted);line-height:1.45}
+.opt .opt-price{margin-top:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:var(--primary);font-size:1.15rem}
+.opt .opt-price small{color:var(--muted);font-weight:500;font-size:.78rem;margin-left:6px}
+
+.field{display:block;margin-bottom:18px}
+.field label{display:block;font-size:.85rem;color:var(--muted);font-weight:600;margin-bottom:6px;letter-spacing:.04em}
+.field input,.field select,.field textarea{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:6px;font-family:'Inter Tight',sans-serif;font-size:1rem;color:var(--ink);background:#fff;transition:border-color .2s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--primary)}
+.field textarea{min-height:90px;resize:vertical}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+.slot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.slot{padding:13px 8px;border:1.5px solid var(--line);border-radius:6px;background:#fff;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:.95rem;cursor:pointer;text-align:center;transition:all .2s}
+.slot:hover{border-color:var(--primary)}
+.slot.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.slot-loading{padding:30px;text-align:center;color:var(--muted);font-style:italic}
+.slot-empty{padding:30px;text-align:center;color:var(--muted);background:var(--soft);border-radius:6px;margin-top:18px}
+
+.book-actions{display:flex;justify-content:space-between;gap:14px;margin-top:36px;padding-top:24px;border-top:1px solid var(--line)}
+.book-back{background:transparent;color:var(--muted);border:1.5px solid var(--line)}
+.book-back:hover{color:var(--ink);border-color:var(--ink)}
+
+.book-step-title{margin-bottom:10px;font-size:1.6rem}
+.book-step-desc{color:var(--muted);font-size:.97rem;margin-bottom:0}
+
+.book-success{text-align:center;padding:40px 20px}
+.book-success .icon{width:80px;height:80px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;margin:0 auto 24px;font-size:2.4rem}
+.book-success h2{font-size:2rem;margin-bottom:.5em}
+.book-success p{color:var(--muted);max-width:46ch;margin:0 auto 24px;line-height:1.6}
+
+.book-error{padding:14px 18px;background:#fee;border:1px solid #fcc;border-radius:6px;color:#900;font-size:.92rem;margin-top:14px}
+
+@media (max-width:980px){
+  .book-grid{grid-template-columns:1fr}
+  .book-summary{position:static;margin-top:24px}
+  .opt-grid,.opt-grid-3{grid-template-columns:1fr}
+  .field-row{grid-template-columns:1fr}
+  .slot-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:580px){
+  .book-card{padding:24px 22px}
+  .slot-grid{grid-template-columns:repeat(2,1fr)}
+  .book-summary{padding:22px}
+}
+</style>
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -344,7 +418,7 @@ footer ul a:hover{color:var(--accent)}
   "sameAs":["https://www.facebook.com/theglossspot","https://www.instagram.com/theglossspotil","https://share.google/Wr0NTsR0CmFTlYRtk","https://www.yelp.com/biz/the-gloss-spot-auto-detailing-champaign-3"]
 }
 </script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does mobile detailing cost in Champaign?","acceptedAnswer":{"@type":"Answer","text":"Pricing for mobile detailing in Champaign depends on the size and condition of the vehicle. Most mobile detailing packages start around $150 and we'll send you an exact written quote before any work starts."}},{"@type":"Question","name":"How long does mobile detailing take in Champaign?","acceptedAnswer":{"@type":"Answer","text":"Most mobile detailing appointments in Champaign take 2 to 5 hours depending on the package and the condition of the car. We give you a realistic time estimate when we quote."}},{"@type":"Question","name":"Do you bring water and power for mobile detailing in Champaign?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Gloss Spot Auto Detailing brings everything needed for mobile detailing in Champaign — water tank, generator if needed, vacuum, polishers, and all products. You just need a parking spot."}},{"@type":"Question","name":"Can I get same-day mobile detailing in Champaign?","acceptedAnswer":{"@type":"Answer","text":"Often, yes. Same-day mobile detailing appointments in Champaign are common, especially in the morning. Call or text us at 217-600-2108 to check today's availability."}},{"@type":"Question","name":"Are you insured for mobile detailing work in Champaign?","acceptedAnswer":{"@type":"Answer","text":"Yes — The Gloss Spot Auto Detailing carries full general liability insurance for all mobile detailing and detailing work performed in Champaign and across IL."}}]}</script>
+
 </head>
 <body>
 <div class="topbar">
@@ -374,180 +448,177 @@ footer ul a:hover{color:var(--accent)}
     </div>
   </div>
 </nav>
-<header class="hero" id="top">
-  <div class="hero-static" style="background-image:url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1800&q=80')"></div>
-  <div class="container hero-inner">
-    <div class="loc">Champaign · Mobile Detailing</div>
-    <h1>Mobile Detailing in <em>Champaign</em></h1>
-    <p class="lede">Our flagship service. We bring the entire detail bay to your driveway — water, power, and pro-grade products included.</p>
-    <div class="hero-ctas">
-      <a href="/book-an-appointment-1696" class="btn btn-primary">Book a Detail →</a>
-      <a href="/reviews" class="btn btn-outline">Read Reviews</a>
-    </div>
-  </div>
-  <div class="hero-trust">
-    <div class="container hero-trust-row">
-      <span>Mobile — We Come To You</span>
-      <span>20+ Five-Star Reviews</span>
-      <span>Licensed &amp; Insured</span>
-      <span>Same-Day Available</span>
-    </div>
-  </div>
-</header>
-<section class="page-content">
-  <div class="container page-content-grid">
-    <div class="page-content-body">
-      <h2>Mobile Detailing brought to your driveway in Champaign.</h2>
-      <p>Our flagship service. We bring the entire detail bay to your driveway — water, power, and pro-grade products included. The Gloss Spot Auto Detailing performs every mobile detailing appointment in Champaign on-site — your driveway, your office parking lot, your apartment garage. We bring water, power, and the same person who picked up the phone, every time.</p>
-      <p>Whether it's a single car or a fleet, our mobile detailing packages include a written quote up front, no upsells once we're on-site, and a final walkaround so you see the result before you pay. Same-day appointments are available, and we book quickly via call or text — <a href="tel:+12176002108">217-600-2108</a>.</p>
-
-      <h2>What's included with Mobile Detailing in Champaign</h2>
-      <p>Every mobile detailing package in Champaign is built around three things: prep, premium products, and time. We don't speed-run a clean. The car gets the time it actually needs, and we use the products that justify our reviews — not whatever is on the cheapest pallet.</p>
-      <ul>
-        <li><strong>Pre-inspection.</strong> We document the car's condition before we start, so you know exactly what we're working with.</li>
-        <li><strong>Decontamination.</strong> Iron remover, clay, foam — depending on the package — to safely strip what's bonded to the paint.</li>
-        <li><strong>The actual mobile detailing work.</strong> Whatever the package calls for, done with measured, careful technique.</li>
-        <li><strong>Final walkaround.</strong> We show you what we did, in good light, before we accept payment.</li>
-      </ul>
-
-      <h2>Why customers choose The Gloss Spot Auto Detailing</h2>
-      <p>We're owner-operated. Dominic is on every job — there's no swapped crew, no third-party detailer running it for us. That's how we keep our review average at 5.0 across 20+ verified Google reviews. People keep booking us because the result they got the first time is the result they get every time.</p>
-      <p>Looking for service in another city? Browse our full <a href="/service-area">service area</a> or jump to <a href="/urbana">Urbana</a>, <a href="/savoy">Savoy</a>, <a href="/mahomet">Mahomet</a>.</p>
-
-      <blockquote>"From knocking on my door to bringing my car back to life, Gloss Spot truly surprised me. Dom got all my dog's hair out of the carpets, conditioned the leather, and the ceramic coating makes it shine like no other. He cam" — Kenny Nguyen</blockquote>
-
-      <h2>Booking Mobile Detailing in Champaign</h2>
-      <p>Booking is fast on purpose. <a href="/book-an-appointment-1696">Book online</a>, <a href="tel:+12176002108">call</a>, or <a href="sms:+12176002108">text us a photo</a> of the car. We'll send you a written quote within minutes. If the price works, we lock in a time and place anywhere in Champaign — most appointments confirm same-day.</p>
-      <p>Prefer to see real pricing first? Try our <a href="/cost-calculator">cost calculator</a> — pick your service, package, and vehicle size for an instant estimate.</p>
-    </div>
-    <aside class="page-content-aside">
-      <h4>Get a Free Quote</h4>
-      <div class="ph"><a href="tel:+12176002108">217-600-2108</a></div>
-      <div class="small">Mon-Sat: 8am-8pm, Sun: 1pm-8pm</div>
-      <a href="/book-an-appointment-1696" class="btn btn-primary" style="width:100%;justify-content:center;margin-bottom:14px">Book Online</a>
-      <a href="sms:+12176002108" class="btn btn-light" style="width:100%;justify-content:center;margin-bottom:24px">Text a Photo</a>
-      <h4>Other Services</h4>
-      <ul>
-        <li><a href="/interior">Interior Detailing</a></li>
-        <li><a href="/exterior">Exterior Detailing</a></li>
-        <li><a href="/full-service">Full Service Detailing</a></li>
-        <li><a href="/ceramic">Ceramic Coating</a></li>
-        <li><a href="/paint-correction">Paint Correction</a></li>
-        <li><a href="/headlight">Headlight Restoration</a></li>
-      </ul>
-      <h4 style="margin-top:18px">Mobile Detailing Nearby</h4>
-      <ul>
-        <li><a href="/urbana">Mobile Detailing in Urbana</a></li>
-        <li><a href="/savoy">Mobile Detailing in Savoy</a></li>
-        <li><a href="/mahomet">Mobile Detailing in Mahomet</a></li>
-        <li><a href="/rantoul">Mobile Detailing in Rantoul</a></li>
-      </ul>
-    </aside>
-  </div>
-</section>
-<section class="reviews-section" id="reviews">
-  <div class="container">
-    <div class="reviews-head">
-      <span class="stars">★ ★ ★ ★ ★</span>
-      <span class="eyebrow">What Customers Say</span>
-      <h2>20+ five-star reviews from Champaign &amp; beyond.</h2>
-      <p>Every review below is verified on Google. We don't pay for promotion — we just show up and get it right.</p>
-    </div>
-    <div class="reviews-grid">
-      <div class="review">
-        <span class="quote">&ldquo;</span>
-        <div class="stars">★★★★★</div>
-        <p>From knocking on my door to bringing my car back to life, Gloss Spot truly surprised me. Dom got all my dog's hair out of the carpets, conditioned the leather, and the ceramic coating makes it shine like no other. He came to me — best part of the whole experience.</p>
-        <div class="who">
-          <div class="avatar">KN</div>
-          <div>
-            <div class="who-name">Kenny Nguyen</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
-        </div>
-      </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
-        <div class="stars">★★★★★</div>
-        <p>Just got back from a 12-hour drive to Florida and my car was an absolute disaster. I thought it would never look the same. The Gloss Spot came out and I was completely blown away by the results. 10/10 customer service.</p>
-        <div class="who">
-          <div class="avatar">RD</div>
-          <div>
-            <div class="who-name">Reese Donsbach</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
-        </div>
-      </div>
-      <div class="review">
-        <span class="quote">&ldquo;</span>
-        <div class="stars">★★★★★</div>
-        <p>This is the cleanest I have EVER seen this car. Dom got years of use and grime to just disappear. Him coming to your own house is the icing on the cake — worth every penny and then some.</p>
-        <div class="who">
-          <div class="avatar">MR</div>
-          <div>
-            <div class="who-name">Macy Ruple</div>
-            <div class="who-city">Champaign, IL · Verified Google Review</div>
-          </div>
-        </div>
+<section class="book-wrap">
+  <div class="book-shell">
+    <div class="book-head">
+      <div>
+        <h1>Cost Calculator</h1>
+        <p style="color:var(--muted);margin-top:6px;max-width:50ch">Pick a service, package, and vehicle. Instant estimate. No email required.</p>
       </div>
     </div>
-    <div class="reviews-foot"><strong>Rated 5.0 across 20+ Google reviews.</strong> &nbsp;<a href="https://share.google/Wr0NTsR0CmFTlYRtk">See them all on Google →</a></div>
+
+    <div class="book-grid">
+      <div class="book-card">
+        <h2 class="book-step-title">Service</h2>
+        <div class="opt-grid opt-grid-3" id="serviceGrid">
+          <label class="opt" data-svc="detail"><div class="opt-name">Car Detailing</div><div class="opt-price">From $110</div></label>
+          <label class="opt" data-svc="ceramic"><div class="opt-name">Ceramic Coating</div><div class="opt-price">From $200</div></label>
+          <label class="opt" data-svc="tint"><div class="opt-name">Window Tinting</div><div class="opt-price">From $350</div></label>
+          <label class="opt" data-svc="ppf"><div class="opt-name">PPF</div><div class="opt-price">From $300</div></label>
+          <label class="opt" data-svc="wrap"><div class="opt-name">Car Wrap</div><div class="opt-price">From $500</div></label>
+          <label class="opt" data-svc="paintCorrection"><div class="opt-name">Paint Correction</div><div class="opt-price">From $500</div></label>
+        </div>
+
+        <div id="packageBlock" style="margin-top:28px"></div>
+
+        <div style="margin-top:28px">
+          <label style="font-size:.85rem;color:var(--muted);font-weight:600;margin-bottom:10px;display:block;letter-spacing:.04em">Vehicle size</label>
+          <div class="opt-grid" id="vehicleGrid">
+            <label class="opt" data-veh="Coupe"><div class="opt-name">Coupe / Compact</div></label>
+            <label class="opt" data-veh="Sedan"><div class="opt-name">Sedan</div></label>
+            <label class="opt" data-veh="Mid SUV"><div class="opt-name">Mid SUV</div></label>
+            <label class="opt" data-veh="Large SUV"><div class="opt-name">Large SUV / Truck</div></label>
+            <label class="opt" data-veh="Minivan"><div class="opt-name">Minivan</div></label>
+          </div>
+        </div>
+
+        <div id="addonBlock" style="margin-top:28px"></div>
+
+        <div style="margin-top:28px">
+          <label class="opt" id="germanToggle" style="cursor:pointer;display:flex;align-items:center;gap:14px">
+            <input type="checkbox" id="germanCheck" style="display:inline-block;width:auto;margin:0">
+            <div>
+              <div class="opt-name">German vehicle (+$100)</div>
+              <div class="opt-desc">Audi, BMW, Mercedes, Porsche, VW. Applies to ceramic, PPF, wrap, paint correction only.</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="book-actions">
+          <a href="/packages" class="btn book-back">View packages</a>
+          <a href="/book-an-appointment-1696" class="btn btn-primary" id="bookCta">Book This →</a>
+        </div>
+      </div>
+
+      <aside class="book-summary">
+        <h4>Estimate</h4>
+        <div class="row"><span>Service</span><span id="sumService">—</span></div>
+        <div class="row"><span>Package</span><span id="sumPackage">—</span></div>
+        <div class="row"><span>Vehicle</span><span id="sumVehicle">—</span></div>
+        <div class="row"><span>Add-ons</span><span id="sumAddons">—</span></div>
+        <div class="row"><span>Duration</span><span id="sumDuration">—</span></div>
+        <div class="book-total">
+          <div><div class="lbl">Estimate</div><div style="font-size:.78rem;color:var(--muted);margin-top:4px">Free quote · final price confirmed before service</div></div>
+          <div class="amt" id="sumTotal">$0<small>0 hr</small></div>
+        </div>
+        <p style="margin-top:18px;font-size:.82rem;color:var(--muted);line-height:1.5">Want to lock this in? <a href="/book-an-appointment-1696">Book online</a> or <a href="tel:+12176002108">call 217-600-2108</a>.</p>
+      </aside>
+    </div>
   </div>
 </section>
-<section class="faq-section">
-  <div class="container">
-    <div class="faq-head">
-      <span class="eyebrow">FAQ</span>
-      <h2>Common questions, answered.</h2>
-    </div>
-    <div class="faq-list">
-      <details class="faq-item" open>
-        <summary>How much does mobile detailing cost in Champaign?</summary>
-        <div class="ans">Pricing for mobile detailing in Champaign depends on the size and condition of the vehicle. Most mobile detailing packages start around $150 and we'll send you an exact written quote before any work starts.</div>
-      </details>
-      <details class="faq-item">
-        <summary>How long does mobile detailing take in Champaign?</summary>
-        <div class="ans">Most mobile detailing appointments in Champaign take 2 to 5 hours depending on the package and the condition of the car. We give you a realistic time estimate when we quote.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Do you bring water and power for mobile detailing in Champaign?</summary>
-        <div class="ans">Yes. The Gloss Spot Auto Detailing brings everything needed for mobile detailing in Champaign — water tank, generator if needed, vacuum, polishers, and all products. You just need a parking spot.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Can I get same-day mobile detailing in Champaign?</summary>
-        <div class="ans">Often, yes. Same-day mobile detailing appointments in Champaign are common, especially in the morning. Call or text us at 217-600-2108 to check today's availability.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Are you insured for mobile detailing work in Champaign?</summary>
-        <div class="ans">Yes — The Gloss Spot Auto Detailing carries full general liability insurance for all mobile detailing and detailing work performed in Champaign and across IL.</div>
-      </details>
-    </div>
-  </div>
-</section>
-<section class="bigcta">
-  <div class="container bigcta-inner">
-    <span class="eyebrow" style="color:var(--accent)">Bad Mess? Bring It On.</span>
-    <h2>Got a disaster of a car? <em>We've seen worse.</em></h2>
-    <div class="accent-rule"></div>
-    <p>Pet hair, kids, road salt, fast-food spills, festival mud — there isn't much we haven't pulled out of a Champaign car. Send us a few photos for a free quote, and we'll tell you straight whether it's a refresh, a reset, or a full restoration.</p>
-    <a href="/book-an-appointment-1696" class="btn btn-primary">Book a Free Quote →</a>
-  </div>
-</section>
-<section class="final-section" id="contact">
-  <div class="container">
-    <span class="eyebrow">Get Started</span>
-    <h2>Get your <em>free</em> detailing quote.</h2>
-    <p>Five-minute booking by phone or text. Honest read on your car, real pricing, no surprises. Same-day appointments available across Champaign.</p>
-    <div class="final-ctas">
-      <a href="/book-an-appointment-1696" class="btn btn-primary">Book Online →</a>
-      <a href="tel:+12176002108" class="btn btn-dark">Call 217-600-2108</a>
-    </div>
-    <div class="final-phone">
-      <a href="tel:+12176002108">217-600-2108</a>
-      <small>Mon-Sat: 8am-8pm, Sun: 1pm-8pm</small>
-    </div>
-  </div>
-</section>
+
+<script>
+window.PRICING = {"detail":{"label":"Car Detailing","packages":{"Express Interior":{"Coupe":[110,1],"Sedan":[135,1.5],"Mid SUV":[165,2],"Large SUV":[210,2.5],"Minivan":[250,3]},"Interior Refresh":{"Coupe":[150,1.5],"Sedan":[175,2],"Mid SUV":[225,2.5],"Large SUV":[275,3],"Minivan":[285,3.5]},"Express In & Out":{"Coupe":[200,2.25],"Sedan":[235,2.75],"Mid SUV":[285,3.25],"Large SUV":[335,3.75],"Minivan":[350,4]},"Full Interior Detail":{"Coupe":[220,2.5],"Sedan":[250,3],"Mid SUV":[300,3.5],"Large SUV":[340,4],"Minivan":[400,4.75]},"Full Detail":{"Coupe":[300,3.5],"Sedan":[350,4],"Mid SUV":[400,4.5],"Large SUV":[450,5],"Minivan":[500,6]}}},"ceramic":{"label":"Ceramic Coating","durations":6,"packages":{"1 Year":{"base":200},"3 Year":{"base":700},"5 Year":{"base":1000}},"vehicleAdd":{"Coupe":0,"Sedan":50,"Mid SUV":100,"Large SUV":150,"Minivan":200}},"tint":{"label":"Window Tint","duration":3,"sizes":{"Coupe":"Small","Sedan":"Med","Mid SUV":"Large","Large SUV":"XL","Minivan":"XL"},"packages":{"Obsidian":{"Small":350,"Med":450,"Large":550,"XL":650},"Ceramic IR":{"Small":475,"Med":575,"Large":675,"XL":775},"Crystalline":{"Small":890,"Med":990,"Large":1090,"XL":1190}},"addons":{"Windshield":250,"Brow":75}},"ppf":{"label":"Paint Protection Film","duration":6,"packages":{"City":300,"Rural":700,"Highway":850,"Autobahn":1800,"Track Pack":3000,"Pro Street":6500}},"wrap":{"label":"Car Wrap","duration":24,"packages":{"Misc Color":500,"Black":750,"White":950}},"paintCorrection":{"label":"Paint Correction","duration":5,"packages":{"Misc Color":500,"Black":750,"White":950},"vehicleAdd":{"Coupe":0,"Sedan":150,"Mid SUV":300,"Large SUV":450,"Minivan":600}}};
+window.GERMAN = {"upcharge":100,"applies":["ceramic","ppf","wrap","paintCorrection"]};
+const S = { service: null, packageName: null, vehicle: null, addons: {}, isGerman: false, price: 0, duration: 0 };
+const $ = (id) => document.getElementById(id);
+const fmt = (n) => "$" + Number(n).toLocaleString();
+
+function renderPackages() {
+  const cfg = window.PRICING[S.service];
+  if (!cfg) return;
+  const block = $("packageBlock");
+  let html = '<label style="font-size:.85rem;color:var(--muted);font-weight:600;margin-bottom:10px;display:block;letter-spacing:.04em">' + cfg.label + ' Package</label><div class="opt-grid" id="packageGrid">';
+  Object.keys(cfg.packages).forEach((pkg) => {
+    let priceHint = "";
+    if (S.service === "detail") {
+      const v = cfg.packages[pkg].Coupe;
+      priceHint = '<div class="opt-price">From ' + fmt(v[0]) + '<small>· ' + v[1] + ' hr</small></div>';
+    } else if (S.service === "ceramic" || S.service === "ppf" || S.service === "wrap" || S.service === "paintCorrection") {
+      const base = typeof cfg.packages[pkg] === "object" ? cfg.packages[pkg].base : cfg.packages[pkg];
+      priceHint = '<div class="opt-price">From ' + fmt(base) + '</div>';
+    } else if (S.service === "tint") {
+      const v = Object.values(cfg.packages[pkg])[0];
+      priceHint = '<div class="opt-price">From ' + fmt(v) + '</div>';
+    }
+    html += '<label class="opt" data-pkg="' + pkg + '"><div class="opt-name">' + pkg + '</div>' + priceHint + '</label>';
+  });
+  html += "</div>";
+  block.innerHTML = html;
+  block.querySelectorAll(".opt").forEach((el) => {
+    el.addEventListener("click", () => {
+      block.querySelectorAll(".opt").forEach((o) => o.classList.remove("active"));
+      el.classList.add("active");
+      S.packageName = el.dataset.pkg;
+      calc();
+    });
+  });
+
+  const addonBlock = $("addonBlock");
+  if (S.service === "tint") {
+    addonBlock.innerHTML = '<label style="font-size:.85rem;color:var(--muted);font-weight:600;margin-bottom:10px;display:block;letter-spacing:.04em">Add-ons</label><div class="opt-grid"><label class="opt" id="addOnW"><input type="checkbox" id="addOnWindshield"><div class="opt-name">Windshield Tint</div><div class="opt-price">+$250</div></label><label class="opt" id="addOnB"><input type="checkbox" id="addOnBrow"><div class="opt-name">Brow Strip</div><div class="opt-price">+$75</div></label></div>';
+    $("addOnWindshield").addEventListener("change", (e) => { S.addons.Windshield = e.target.checked; document.getElementById("addOnW").classList.toggle("active", e.target.checked); calc(); });
+    $("addOnBrow").addEventListener("change", (e) => { S.addons.Brow = e.target.checked; document.getElementById("addOnB").classList.toggle("active", e.target.checked); calc(); });
+  } else { addonBlock.innerHTML = ""; }
+}
+
+document.querySelectorAll("#serviceGrid .opt").forEach((el) => {
+  el.addEventListener("click", () => {
+    document.querySelectorAll("#serviceGrid .opt").forEach((o) => o.classList.remove("active"));
+    el.classList.add("active");
+    S.service = el.dataset.svc;
+    S.packageName = null; S.addons = {};
+    renderPackages();
+    calc();
+  });
+});
+document.querySelectorAll("#vehicleGrid .opt").forEach((el) => {
+  el.addEventListener("click", () => {
+    document.querySelectorAll("#vehicleGrid .opt").forEach((o) => o.classList.remove("active"));
+    el.classList.add("active");
+    S.vehicle = el.dataset.veh;
+    calc();
+  });
+});
+$("germanCheck").addEventListener("change", (e) => {
+  S.isGerman = e.target.checked;
+  $("germanToggle").classList.toggle("active", e.target.checked);
+  calc();
+});
+
+function calc() {
+  if (!S.service || !S.packageName || !S.vehicle) { update(); return; }
+  const cfg = window.PRICING[S.service];
+  let price = 0, hours = 0;
+  if (S.service === "detail") {
+    const arr = cfg.packages[S.packageName][S.vehicle];
+    price = arr[0]; hours = arr[1];
+  } else if (S.service === "ceramic") { price = cfg.packages[S.packageName].base + cfg.vehicleAdd[S.vehicle]; hours = cfg.durations; }
+  else if (S.service === "tint") {
+    const size = cfg.sizes[S.vehicle]; price = cfg.packages[S.packageName][size];
+    if (S.addons.Windshield) price += cfg.addons.Windshield;
+    if (S.addons.Brow) price += cfg.addons.Brow;
+    hours = cfg.duration;
+  }
+  else if (S.service === "ppf") { price = cfg.packages[S.packageName]; hours = cfg.duration; }
+  else if (S.service === "wrap") { price = cfg.packages[S.packageName]; hours = cfg.duration; }
+  else if (S.service === "paintCorrection") { price = cfg.packages[S.packageName] + cfg.vehicleAdd[S.vehicle]; hours = cfg.duration; }
+  if (S.isGerman && window.GERMAN.applies.includes(S.service)) price += window.GERMAN.upcharge;
+  S.price = price; S.duration = hours;
+  update();
+}
+
+function update() {
+  const cfg = window.PRICING[S.service];
+  $("sumService").textContent = cfg ? cfg.label : "—";
+  $("sumPackage").textContent = S.packageName || "—";
+  $("sumVehicle").textContent = S.vehicle || "—";
+  const ad = Object.entries(S.addons).filter(([, v]) => v).map(([k]) => k).join(", ");
+  $("sumAddons").textContent = (ad || (S.isGerman ? "German +$100" : "—"));
+  $("sumDuration").textContent = S.duration ? S.duration + " hr" : "—";
+  $("sumTotal").innerHTML = fmt(S.price) + (S.duration ? "<small>" + S.duration + " hr</small>" : "<small>0 hr</small>");
+}
+</script>
 <footer>
   <div class="container">
     <div class="footer-grid">

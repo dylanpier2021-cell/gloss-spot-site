@@ -1,14 +1,28 @@
 import { client } from "./client-config.js";
 import {
-  generateAllLandingPages, generateAllServicePages,
-  generateAboutPage, generateBlogIndex,
+  generateHomePage,
+  generateAllLandingPages,
+  generateServiceAliasPages,
+  generateChampaignCombos,
+  generateB2BPages,
+  generateAboutPage,
+  generateContactPage,
+  generateFAQPage,
+  generateWhyUsPage,
+  generateProcessPage,
+  generateGalleryPage,
+  generateReviewsPage,
+  generateServiceAreaPage,
+  generatePackagesPage,
+  generatePrivacyPage,
+  generateTermsPage,
+  generate404Page,
+  generateBlogIndex,
 } from "./generate-landing-page.js";
-import { generateTopicMatrix, generateAllPosts } from "./blog-generator.js";
+import { generateBookingPage, generateCostCalculator } from "./generate-booking.js";
+import { generateAllPosts } from "./blog-generator.js";
 import { generateSitemap } from "./sitemap-generator.js";
-import { pingIndexNow } from "./indexnow-ping.js";
-import { setupGHL } from "./ghl-setup.js";
 
-// ── Config validation ─────────────────────────────────────────────────────────
 function validateConfig() {
   const required = {
     businessName: client.businessName,
@@ -21,128 +35,88 @@ function validateConfig() {
     primaryColor: client.primaryColor,
     domain: client.domain,
   };
-
-  const missing = Object.entries(required)
-    .filter(([, v]) => !v)
-    .map(([k]) => k);
-
+  const missing = Object.entries(required).filter(([, v]) => !v).map(([k]) => k);
   if (missing.length > 0) {
     console.error(`\n✗ Missing required fields in client-config.js: ${missing.join(", ")}`);
     process.exit(1);
   }
-
   if (!client.cities || client.cities.length === 0) {
-    console.error("\n✗ client-config.js: cities array is empty");
-    process.exit(1);
-  }
-
-  if (!client.services || client.services.length === 0) {
-    console.error("\n✗ client-config.js: services array is empty");
-    process.exit(1);
-  }
-
-  if (!client.anthropicApiKey) {
-    console.error("\n✗ ANTHROPIC_API_KEY not set in .env");
-    process.exit(1);
+    console.error("\n✗ client-config.js: cities array is empty"); process.exit(1);
   }
 }
 
-// ── Token + cost tracker ──────────────────────────────────────────────────────
-function summarizeUsage(results) {
-  let totalIn = 0;
-  let totalOut = 0;
-  for (const r of results) {
-    if (r.usage) {
-      totalIn += r.usage.input_tokens;
-      totalOut += r.usage.output_tokens;
-    }
-  }
-  const costIn = totalIn * 0.000003;
-  const costOut = totalOut * 0.000015;
-  return { totalIn, totalOut, cost: costIn + costOut };
-}
-
-// ── Main runner ───────────────────────────────────────────────────────────────
 async function run() {
   const startTime = Date.now();
 
   console.log("╔══════════════════════════════════════════════════════════════╗");
-  console.log(`║  Deploying: ${client.businessName.padEnd(47)}║`);
+  console.log(`║  Building: ${client.businessName.padEnd(48)}║`);
   console.log(`║  Niche: ${client.niche.padEnd(51)}║`);
-  console.log(`║  Cities: ${client.cities.length.toString().padEnd(50)}║`);
-  console.log(`║  Services: ${client.services.length.toString().padEnd(48)}║`);
+  console.log(`║  Cities: ${String(client.cities.length).padEnd(50)}║`);
   console.log(`║  Domain: ${client.domain.padEnd(50)}║`);
   console.log("╚══════════════════════════════════════════════════════════════╝");
 
-  // 1. Validate
-  console.log("\n[1/9] Validating client config...");
+  console.log("\n[1/14] Validating client config…");
   validateConfig();
   console.log("  ✓ Config valid\n");
 
-  const allResults = [];
+  console.log("[2/14] Home page");
+  await generateHomePage();
 
-  // 2. City landing pages
-  console.log("[2/9] City landing pages");
-  const pageResults = await generateAllLandingPages();
-  allResults.push(...pageResults);
+  console.log("\n[3/14] City landing pages");
+  await generateAllLandingPages();
 
-  // 3. Service pages
-  console.log("[3/9] Service pages");
-  const serviceResults = await generateAllServicePages();
-  allResults.push(...serviceResults);
+  console.log("\n[4/14] Service alias pages (/interior, /exterior, …)");
+  await generateServiceAliasPages();
 
-  // 4. About page
-  console.log("[4/9] About page");
-  const aboutResult = await generateAboutPage(client.city);
-  allResults.push(aboutResult);
+  console.log("\n[5/14] Champaign-IL high-intent service combos");
+  await generateChampaignCombos();
 
-  // 5. Topic matrix + blog posts
-  console.log("[5/9] Topic matrix");
-  const topics = generateTopicMatrix();
-  console.log(`  ✓ ${topics.length} topics generated across ${client.cities.length} cities\n`);
+  console.log("\n[6/14] B2B / Commercial pages");
+  await generateB2BPages();
 
-  console.log("[6/9] Blog posts");
-  const blogResults = await generateAllPosts(topics);
-  allResults.push(...blogResults);
+  console.log("\n[7/14] About / Contact / FAQ / Why Us / Our Process");
+  await generateAboutPage();
+  await generateContactPage();
+  await generateFAQPage();
+  await generateWhyUsPage();
+  await generateProcessPage();
 
-  // 7. Blog index
-  console.log("[7/9] Blog index");
-  const blogIndexResult = await generateBlogIndex();
-  allResults.push(blogIndexResult);
+  console.log("\n[8/14] Gallery / Reviews / Service Area / Packages");
+  await generateGalleryPage();
+  await generateReviewsPage();
+  await generateServiceAreaPage();
+  await generatePackagesPage();
 
-  // 8. Sitemap
-  console.log("[8/9] Sitemap");
-  const sitemapUrls = generateSitemap();
+  console.log("\n[9/14] Privacy / Terms / 404");
+  await generatePrivacyPage();
+  await generateTermsPage();
+  await generate404Page();
 
-  // 9. GHL + IndexNow
-  console.log("\n[9/9] GHL + IndexNow");
-  const ghlResult = await setupGHL();
-  const indexResult = await pingIndexNow();
+  console.log("\n[10/14] Booking page (/book-an-appointment-1696)");
+  await generateBookingPage();
 
-  // ── Summary ─────────────────────────────────────────────────────────────
-  const usage = summarizeUsage(allResults);
+  console.log("\n[11/14] Cost calculator");
+  await generateCostCalculator();
+
+  console.log("\n[12/14] Blog posts");
+  await generateAllPosts();
+
+  console.log("\n[13/14] Blog index");
+  await generateBlogIndex();
+
+  console.log("\n[14/14] Sitemap + robots.txt");
+  generateSitemap();
+
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-
   console.log("\n╔══════════════════════════════════════════════════════════════╗");
-  console.log("║                    DEPLOYMENT SUMMARY                       ║");
-  console.log("╠══════════════════════════════════════════════════════════════╣");
-  console.log(`║  Landing pages:    ${pageResults.length.toString().padEnd(40)}║`);
-  console.log(`║  Service pages:    ${serviceResults.length.toString().padEnd(40)}║`);
-  console.log(`║  About page:       ${"1".padEnd(40)}║`);
-  console.log(`║  Blog posts:       ${blogResults.length.toString().padEnd(40)}║`);
-  console.log(`║  Blog index:       ${"1".padEnd(40)}║`);
-  console.log(`║  Sitemap URLs:     ${sitemapUrls.length.toString().padEnd(40)}║`);
-  console.log(`║  GHL setup:        ${(ghlResult.setup ? "Complete" : "Skipped (no key)").padEnd(40)}║`);
-  console.log(`║  IndexNow:         ${(indexResult.submitted ? `${indexResult.count} URLs submitted` : "Skipped (no key)").padEnd(40)}║`);
-  console.log("╠══════════════════════════════════════════════════════════════╣");
-  console.log(`║  Input tokens:     ${usage.totalIn.toLocaleString().padEnd(40)}║`);
-  console.log(`║  Output tokens:    ${usage.totalOut.toLocaleString().padEnd(40)}║`);
-  console.log(`║  Estimated cost:   $${usage.cost.toFixed(2).padEnd(39)}║`);
-  console.log(`║  Time elapsed:     ${elapsed}s${" ".repeat(39 - elapsed.length)}║`);
+  console.log(`║  ✓ Build complete in ${elapsed}s${" ".repeat(40 - String(elapsed).length)}║`);
+  console.log("║                                                              ║");
+  console.log("║  Output: ./output/                                           ║");
+  console.log("║  Push to GitHub → Vercel auto-deploys                        ║");
   console.log("╚══════════════════════════════════════════════════════════════╝\n");
 }
 
 run().catch((err) => {
-  console.error("\n✗ Deployment failed:", err.message);
+  console.error("\n✗ Build failed:", err.stack || err.message);
   process.exit(1);
 });

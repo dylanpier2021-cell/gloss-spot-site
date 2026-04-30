@@ -1,108 +1,92 @@
-import { readdirSync, writeFileSync, existsSync } from "fs";
+import { readdirSync, writeFileSync, existsSync, statSync } from "fs";
 import { join } from "path";
 import { client } from "./client-config.js";
 
 const TODAY = new Date().toISOString().split("T")[0];
 
-function scanOutputDir() {
-  const { domain, nicheSlug } = client;
+// Map slugs to suggested priority/changefreq.
+function meta(slug) {
+  if (slug === "" || slug === "index") return { priority: "1.0", changefreq: "weekly" };
+  if (slug === "Champaign-il") return { priority: "0.95", changefreq: "weekly" };
+  if (slug === "book-an-appointment-1696") return { priority: "0.95", changefreq: "monthly" };
+  if (slug === "cost-calculator") return { priority: "0.9", changefreq: "monthly" };
+  if (slug.startsWith("interior-detailing-") || slug.startsWith("exterior-detailing-") ||
+      slug.startsWith("full-service-detailing-") || slug.startsWith("mobile-detailing-")) {
+    return { priority: "0.9", changefreq: "monthly" };
+  }
+  if (["packages", "about-us", "contact", "service-area", "gallery", "reviews", "faq",
+       "why-choose-us", "our-process", "blog"].includes(slug)) {
+    return { priority: "0.85", changefreq: "weekly" };
+  }
+  if (["privacy-policy", "terms-and-conditions"].includes(slug)) {
+    return { priority: "0.3", changefreq: "yearly" };
+  }
+  return { priority: "0.75", changefreq: "monthly" };
+}
+
+function scanOutput() {
   const urls = [];
+  if (!existsSync("output")) return urls;
 
-  // Homepage
-  urls.push({ loc: `${domain}/`, priority: "1.0", changefreq: "weekly" });
-
-  const outputFiles = existsSync("output") ? readdirSync("output") : [];
-
-  // City landing pages: {City}-landing-page.html
-  for (const file of outputFiles) {
-    if (!file.endsWith("-landing-page.html")) continue;
-    const city = file.replace("-landing-page.html", "").toLowerCase().replace(/\s+/g, "-");
-    urls.push({
-      loc: `${domain}/${nicheSlug}-${city}/`,
-      priority: "0.9",
-      changefreq: "monthly",
-    });
+  // Top-level .html files
+  for (const file of readdirSync("output")) {
+    const fp = join("output", file);
+    if (!file.endsWith(".html") || file === "404.html") continue;
+    const slug = file === "index.html" ? "" : file.replace(/\.html$/, "");
+    const m = meta(slug);
+    urls.push({ loc: `${client.domain}/${slug}`, ...m });
   }
 
-  // Service pages: {service-slug}-{city-slug}.html (not landing pages, not about pages)
-  for (const file of outputFiles) {
-    if (file.endsWith("-landing-page.html")) continue;
-    if (file.startsWith("about-")) continue;
-    if (!file.endsWith(".html")) continue;
-    const slug = file.replace(".html", "");
-    urls.push({
-      loc: `${domain}/${slug}/`,
-      priority: "0.85",
-      changefreq: "monthly",
-    });
-  }
-
-  // About pages: about-{city-slug}.html
-  for (const file of outputFiles) {
-    if (!file.startsWith("about-") || !file.endsWith(".html")) continue;
-    const slug = file.replace(".html", "");
-    urls.push({
-      loc: `${domain}/${slug}/`,
-      priority: "0.7",
-      changefreq: "monthly",
-    });
-  }
-
-  // Blog posts
+  // Blog
   const blogDir = join("output", "blog");
-  const blogFiles = existsSync(blogDir) ? readdirSync(blogDir) : [];
-  for (const file of blogFiles) {
-    if (!file.endsWith(".html") || file === "index.html") continue;
-    const slug = file.replace(".html", "");
-    urls.push({
-      loc: `${domain}/blog/${slug}/`,
-      priority: "0.7",
-      changefreq: "monthly",
-    });
-  }
-
-  // Blog index
-  if (blogFiles.includes("index.html")) {
-    urls.push({
-      loc: `${domain}/blog/`,
-      priority: "0.8",
-      changefreq: "daily",
-    });
+  if (existsSync(blogDir) && statSync(blogDir).isDirectory()) {
+    for (const file of readdirSync(blogDir)) {
+      if (!file.endsWith(".html")) continue;
+      if (file === "index.html") {
+        urls.push({ loc: `${client.domain}/blog`, priority: "0.85", changefreq: "weekly" });
+      } else {
+        const slug = file.replace(/\.html$/, "");
+        urls.push({ loc: `${client.domain}/blog/${slug}`, priority: "0.7", changefreq: "monthly" });
+      }
+    }
   }
 
   return urls;
 }
 
-function buildSitemap(urls) {
-  const entries = urls
-    .map(
-      ({ loc, priority, changefreq }) => `  <url>
+function buildSitemapXml(urls) {
+  const entries = urls.map(({ loc, priority, changefreq }) => `  <url>
     <loc>${loc}</loc>
     <lastmod>${TODAY}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
-  </url>`
-    )
-    .join("\n");
-
+  </url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${entries}
 </urlset>`;
 }
 
+function buildRobotsTxt() {
+  return `User-agent: *
+Allow: /
+
+# Block crawl of internal API endpoints
+Disallow: /api/
+
+Sitemap: ${client.domain}/sitemap.xml
+`;
+}
+
 export function generateSitemap() {
-  const urls = scanOutputDir();
-  const xml = buildSitemap(urls);
-
-  writeFileSync(join("output", "sitemap.xml"), xml, "utf8");
-
-  console.log(`\n▸ Sitemap generated — ${urls.length} URLs → output/sitemap.xml`);
+  const urls = scanOutput();
+  writeFileSync(join("output", "sitemap.xml"), buildSitemapXml(urls), "utf8");
+  writeFileSync(join("output", "robots.txt"), buildRobotsTxt(), "utf8");
+  console.log(`  ✓ sitemap (${urls.length} URLs) → output/sitemap.xml`);
+  console.log(`  ✓ robots.txt → output/robots.txt`);
   return urls;
 }
 
-// CLI entry
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, "/"))) {
-  const urls = generateSitemap();
-  urls.forEach((u) => console.log(`  ${u.loc}`));
+  generateSitemap();
 }

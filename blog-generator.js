@@ -1,593 +1,223 @@
-import Anthropic from "@anthropic-ai/sdk";
-import { writeFileSync, mkdirSync, readFileSync, existsSync } from "fs";
+import { writeFileSync, mkdirSync, existsSync } from "fs";
 import { join } from "path";
 import { client } from "./client-config.js";
+import { blogPostHTML } from "./generate-landing-page.js";
 
-const anthropic = new Anthropic({ apiKey: client.anthropicApiKey });
+// ── Required posts (slugs that must exist per indexed URL list) ──────────────
+const POSTS = [
+  {
+    slug: "ceramic-vs-wax",
+    title: "Ceramic Coating vs Wax: Which One Is Actually Worth It?",
+    excerpt: "Wax buys you weeks. Ceramic buys you years. Here's the honest tradeoff between the two — and how to know which is right for your car.",
+    city: "Champaign",
+    service: "ceramic coating",
+    intent: "comparison",
+    publishedAt: "2026-04-12T10:00:00Z",
+    contentHtml: `<p>Almost every detailing customer eventually asks the same question: <em>"What's the actual difference between a wax and a ceramic coating, and which one do I really need?"</em></p>
+<p>The short answer: wax is a temporary boost. Ceramic coating is a years-long protective shell. Both make your car look great. They just last very different amounts of time and protect very different things.</p>
+<p>Here's the honest comparison from a detail crew that does both — and which one actually makes sense to spend money on.</p>
 
-// ── Slug helper ───────────────────────────────────────────────────────────────
-function slugify(str) {
-  return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-}
+<h2>What wax actually does</h2>
+<p>Carnauba wax (the kind most car wash combos use) is a soft, plant-based polish that fills in light surface imperfections and adds a warm, glossy shine. It bonds loosely to your clearcoat. It feels great. It looks great <em>that day</em>.</p>
+<p>The catch: wax dies fast. In Illinois winter conditions — road salt, freeze-thaw cycles, frequent washes — most carnauba waxes are gone within 6 to 12 weeks. Even synthetic sealants (a step up from carnauba) usually tap out at 4–6 months. After that, you're back to bare clearcoat.</p>
+<p>Wax is a maintenance product. It's something you reapply quarterly if you really love how it looks. It's not protection in any meaningful sense.</p>
 
-// ── Niche photo map (mirrors generate-landing-page.js) ───────────────────────
-const nichePhotos = {
-  Plumbing: {
-    hero: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1600",
-    services: [
-      "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
-      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800",
-      "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=800",
-    ],
+<h2>What ceramic coating actually does</h2>
+<p>Ceramic coating is a liquid polymer that bonds <em>chemically</em> to your clearcoat. Once cured, it forms a hardened layer measured in nanometers. It's not a wax. It's a fundamentally different product.</p>
+<p>That hardened layer does three things wax can't:</p>
+<ul>
+  <li><strong>Hydrophobic.</strong> Water beads up and rolls off, taking dirt with it. Washes go from 40 minutes to 15.</li>
+  <li><strong>UV protection.</strong> Real protection against fade and oxidation, especially on dark colors that bake in summer sun.</li>
+  <li><strong>Chemical resistance.</strong> Bird droppings, road salt, brake dust, tree sap — they sit on top of the coating instead of etching the paint underneath.</li>
+</ul>
+<p>A 1-year coating lasts a year. A 3-year coating lasts about 3 years. A 5-year coating, properly maintained, lasts 5+ years. We won't quote ceramic without a paint correction or at least a thorough decon — there's no point coating dirty paint, because the coating just locks in the swirls.</p>
+
+<h2>Which one should you actually buy?</h2>
+<p>If you trade or sell your car every 1–2 years, wax is fine. You'll never see the long-term tax of skipping ceramic.</p>
+<p>If you keep cars 3+ years, plan to drive a lot of Illinois winter miles, or just want washing to take less time and the car to actually look the same year three as year one — ceramic is the better spend. The math works out almost every time.</p>
+<p>Want a real-life cost breakdown? See our <a href="/blog/detailing-cost">detailing cost guide</a> or run our <a href="/cost-calculator">cost calculator</a> for an instant estimate on your specific vehicle.</p>
+
+<blockquote>"The ceramic coating makes it shine like no other." — Kenny Nguyen, ${client.city} customer</blockquote>
+
+<h2>How we'd quote it</h2>
+<p>For most ${client.city}-area cars in good condition: a 3-year ceramic with a light polish prep is the sweet spot. Around $700-$900 depending on size, and you're fully protected for 36+ months.</p>
+<p>If your paint has visible swirls or scratches under the lights, we'd recommend a multi-stage <a href="/paint-correction">paint correction</a> first — otherwise you're locking in those imperfections under the coating.</p>`,
   },
-  default: {
-    hero: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1600",
-    services: [
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
-      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800",
-      "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=800",
-      "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800",
-    ],
+  {
+    slug: "detailing-cost",
+    title: "How Much Does Auto Detailing Actually Cost in 2026?",
+    excerpt: "Real pricing breakdowns by vehicle size and package — from a $110 express interior to a $1,500 ceramic coating job. No vague 'starting at' numbers.",
+    city: "Champaign",
+    service: "full service detailing",
+    intent: "cost-guide",
+    publishedAt: "2026-04-08T10:00:00Z",
+    contentHtml: `<p>Detailing pricing is famously confusing. Every shop quotes "from $99" or "starting at $149" — but nobody ever actually pays the starting price. Vehicle size, condition, and add-ons can double or triple the bill before you blink.</p>
+<p>Here's how ${client.businessName} actually prices our work in ${client.city}, broken down honestly. No "starting at." Real prices for real cars.</p>
+
+<h2>Interior-only details ($110-$400)</h2>
+<p>This is what most people actually book. The interior is where 90% of "my car feels gross" comes from — pet hair, fast-food crumbs, water stains on the carpet, the smell.</p>
+<table>
+  <tr><th>Package</th><th>Coupe</th><th>Sedan</th><th>Mid SUV</th><th>Large SUV</th><th>Minivan</th></tr>
+  <tr><td>Express Interior</td><td>$110</td><td>$135</td><td>$165</td><td>$210</td><td>$250</td></tr>
+  <tr><td>Interior Refresh</td><td>$150</td><td>$175</td><td>$225</td><td>$275</td><td>$285</td></tr>
+  <tr><td>Full Interior Detail</td><td>$220</td><td>$250</td><td>$300</td><td>$340</td><td>$400</td></tr>
+</table>
+<p>Express is a vacuum + wipe-down. Refresh adds spot shampoo and UV protectant. Full Interior is the complete reset — steam, extraction, leather conditioning, headliner. If your car has pet hair or a smell, you want Full Interior.</p>
+
+<h2>Full details — inside and out ($300-$500)</h2>
+<p>Most retail customers in ${client.city} land here. Decon foam wash on the outside, full interior reset, sealant on the paint, tire dressing.</p>
+<table>
+  <tr><th>Package</th><th>Coupe</th><th>Sedan</th><th>Mid SUV</th><th>Large SUV</th><th>Minivan</th></tr>
+  <tr><td>Express In &amp; Out</td><td>$200</td><td>$235</td><td>$285</td><td>$335</td><td>$350</td></tr>
+  <tr><td>Full Detail</td><td>$300</td><td>$350</td><td>$400</td><td>$450</td><td>$500</td></tr>
+</table>
+<p>Express In &amp; Out is the budget combo. Full Detail is what we'd actually book a friend for — the complete reset, takes 3.5–6 hours depending on size.</p>
+
+<h2>Ceramic coatings, PPF, and tint (it scales)</h2>
+<p>Protection products price by vehicle size <em>and</em> tier. Here are the starting numbers in ${client.city}:</p>
+<ul>
+  <li><strong>Ceramic Coating:</strong> 1yr from $200, 3yr from $700, 5yr from $1,000. Add $0–$200 for vehicle size.</li>
+  <li><strong>Window Tint:</strong> Obsidian from $350, Ceramic IR from $475, Crystalline from $890. Add $250 for windshield, $75 for brow.</li>
+  <li><strong>Paint Protection Film:</strong> City coverage from $300; Track Pack from $3,000.</li>
+  <li><strong>Car Wraps:</strong> $500 (misc), $750 (black), $950 (white).</li>
+  <li><strong>Paint Correction:</strong> From $500. Pairs with ceramic.</li>
+</ul>
+
+<h2>Why ${client.city} pricing varies</h2>
+<p>Three honest factors push prices up:</p>
+<ol>
+  <li><strong>Vehicle size.</strong> A Tahoe takes 50% more product and time than a Civic.</li>
+  <li><strong>Condition.</strong> A daily driver with two kids and a dog takes longer than a garage-queen.</li>
+  <li><strong>German vehicles.</strong> Audi/BMW/Mercedes/Porsche/VW add $100 on ceramic, PPF, wrap, and paint correction work because the prep and trim handling are more involved.</li>
+</ol>
+
+<h2>Get an exact quote in 60 seconds</h2>
+<p>Tired of starting-at numbers? Use our <a href="/cost-calculator">cost calculator</a> — pick your service, package, and vehicle size for the exact price. Or <a href="/book-an-appointment-1696">book online</a> and the price is shown before you confirm.</p>
+<p>Still unsure which package fits your car? <a href="${client.phone ? `tel:+1${client.phone.replace(/[^0-9]/g, "")}` : "/contact"}">Call ${client.phone}</a> or <a href="/contact">text us a few photos</a>. We'll tell you straight.</p>`,
   },
-};
+  {
+    slug: "how-often",
+    title: "How Often Should You Detail Your Car?",
+    excerpt: "Once a year? Quarterly? Every six months? Honest guidance on detailing frequency based on how you actually use your car — and the salt-belt reality of central Illinois.",
+    city: "Champaign",
+    service: "full service detailing",
+    intent: "guide",
+    publishedAt: "2026-04-04T10:00:00Z",
+    contentHtml: `<p>Most ${client.city}-area drivers ask the same question: <em>"How often should I actually be getting my car detailed?"</em> The honest answer depends on three things — how you use the car, where you park it, and what you want it to look like five years from now.</p>
+<p>Here's a real frequency guide from a detail crew that runs ${client.city}'s salt-belt winters every year.</p>
 
-function getBlogPhotos(service, services) {
-  const pool = nichePhotos[client.niche] || nichePhotos.default;
-  const idx = services.indexOf(service);
-  const heroPhoto = idx >= 0 ? pool.services[idx % pool.services.length] : pool.hero;
-  const inlinePhoto = pool.services[(idx + 1) % pool.services.length];
-  return { heroPhoto, inlinePhoto };
-}
+<h2>Daily drivers — twice a year minimum</h2>
+<p>If your car is your main daily — kids in the back, occasional fast food, gym bag in the trunk — you should plan on a full detail at least <strong>twice a year</strong>. Spring and fall are the natural windows.</p>
+<p>A spring detail strips off the salt, sand, and grime that accumulated over Illinois winter. The fall detail sets you up for that next round — clean carpet, sealed paint, fresh leather conditioning. Twice a year keeps the car ahead of decay instead of constantly playing catch-up.</p>
 
-// ── Intents (ordered by priority — highest value first) ──────────────────────
-const INTENTS = [
-  { slug: "cost-guide",       priority: 1, template: (s, c) => `How Much Does ${s} Cost in ${c}?` },
-  { slug: "how-to-choose",    priority: 2, template: (s, c) => `How to Choose the Best ${s} Company in ${c}` },
-  { slug: "vs-diy",           priority: 3, template: (s, c) => `Professional ${s} vs DIY in ${c}: What You Need to Know` },
-  { slug: "benefits",         priority: 4, template: (s, c) => `5 Benefits of Professional ${s} in ${c}` },
-  { slug: "what-to-expect",   priority: 5, template: (s, c) => `What to Expect During ${s} in ${c}` },
-  { slug: "best-time",        priority: 6, template: (s, c) => `Best Time to Schedule ${s} in ${c}` },
-  { slug: "maintenance-tips", priority: 7, template: (s, c) => `${s} Maintenance Tips for ${c} Homeowners` },
-  { slug: "common-mistakes",  priority: 8, template: (s, c) => `Common ${s} Mistakes ${c} Homeowners Make` },
+<h2>Pet owners and family cars — every 3 months</h2>
+<p>Pet hair is the unsung killer of car interiors. So is dropped milk. So are car-seat crumbs. If you have any of those — pets, kids, or both — you'll see real benefit from a quarterly interior detail.</p>
+<p>You don't need a full detail every time. The Interior Refresh package is enough between bigger jobs. Save the full reset (extraction + steam + leather conditioning) for once or twice a year.</p>
+
+<h2>Garage queens and weekend cars — once a year</h2>
+<p>If your car lives in a garage and only sees Saturday road-trip miles, you can stretch to <strong>annual</strong>. The car isn't accumulating much, so a comprehensive once-a-year detail keeps it pristine.</p>
+<p>The exception: if you've got <a href="/ceramic">ceramic coating</a>, you should still book an annual maintenance polish. The coating is doing 90% of the work but a refresh keeps it performing at full strength.</p>
+
+<h2>The salt-belt reality</h2>
+<p>One thing nobody tells you when you buy a car in central Illinois: salt is brutal. By February, road salt has worked its way into door jambs, undercarriage seams, and any rubber gasket it can find. It eats clearcoat. It rusts metal. It gets into carpet and stays there.</p>
+<p>This is the single biggest reason we recommend a spring detail in ${client.city} no matter what. Even if you're stretching budget, a $200 Express In &amp; Out in late March is the most valuable detail of the year here — full decon foam, jambs, full interior vacuum, salt remediation on the carpet.</p>
+
+<blockquote>"This is the cleanest I have EVER seen this car. Dom got years of use and grime to just disappear." — Macy Ruple, ${client.city} customer</blockquote>
+
+<h2>What we recommend most ${client.city} customers</h2>
+<p>Here's our actual default recommendation when someone asks us point-blank:</p>
+<ul>
+  <li>Daily driver, no pets/kids: <strong>Full Detail</strong> in March/April, then again in October.</li>
+  <li>Daily driver, pets or kids: <strong>Interior Refresh</strong> every 3 months, <strong>Full Detail</strong> in March.</li>
+  <li>Coated car: <strong>Maintenance polish</strong> annually.</li>
+  <li>Show car: book what you need; just keep up with the bug splatter.</li>
+</ul>
+<p>Need help picking? <a href="/cost-calculator">Run the cost calculator</a> for your car or <a href="/book-an-appointment-1696">book online</a> in 4 quick steps.</p>`,
+  },
+  {
+    slug: "mobile-vs-shop",
+    title: "Mobile Detailing vs Shop Detailing: Which Is Actually Better?",
+    excerpt: "Drop-off detailers want you to think their concrete bay is superior. Here's why we run a 100% mobile operation — and when a shop genuinely makes more sense.",
+    city: "Champaign",
+    service: "mobile detailing",
+    intent: "comparison",
+    publishedAt: "2026-04-02T10:00:00Z",
+    contentHtml: `<p>Half of every detailing decision is logistics. You can have the best detailer in ${client.city}, but if booking with them means a full Saturday of dropping off, ubering home, ubering back, and waiting in a lobby — most people just won't bother.</p>
+<p>That's the problem mobile detailing solves. We started ${client.businessName} as a 100% mobile operation for one reason: it's how the customer actually wants the work done.</p>
+<p>Here's the honest comparison.</p>
+
+<h2>What mobile detailing actually means</h2>
+<p>"Mobile" doesn't mean we show up with a bucket and a sponge. We arrive in a fully-kitted truck with our own water tank, generator, vacuum, polishers, steam machines, hot water extractor, and pro-grade products. The detail bay comes to your driveway.</p>
+<p>You don't have to drop off, leave the car all day, or arrange a ride home. You hand off the keys (or you don't even need to be there) — we work, we walk you through the result, you pay easy.</p>
+
+<h2>Three real benefits over shop detailing</h2>
+<ol>
+  <li><strong>Time.</strong> A shop detail takes a full day of your time even if the actual work is 4 hours — you're factoring in transport, waiting, picking up. Mobile is just 4 hours, none of which is your problem.</li>
+  <li><strong>Privacy.</strong> Some people want the detail done while they're at work, while they're sleeping, or while they're at brunch. We can do all three.</li>
+  <li><strong>Owner-operator.</strong> Most ${client.city} mobile detailers are the owner. Shop detailers are usually the cheapest employee in the back. The skill gap is real.</li>
+</ol>
+
+<h2>When a shop is actually better</h2>
+<p>We'll be honest. Shops have one real advantage: dust-free environments for ceramic coating cure. Coatings need 12-24 hours of clean cure time. In a controlled bay with filtered air, that's perfect. In a windy ${client.city} driveway, it's harder to guarantee.</p>
+<p>This is why for premium ceramic jobs we'll occasionally bring the car indoors after application — typically a partner space or your own garage. For everything else, mobile is just better.</p>
+
+<h2>What "mobile" doesn't fix</h2>
+<p>Mobile doesn't make pet hair magically easier. Doesn't shorten the time it takes to do a real correction. Doesn't make a 6-hour PPF install into a 2-hour one. It just changes <em>where</em> the work happens.</p>
+<p>If a mobile detailer quotes you 90 minutes for a full detail, that's not a "mobile efficiency" — that's a corner-cut. Real work takes real time, mobile or not.</p>
+
+<blockquote>"Him coming to your own house is the icing on the cake — worth every penny and then some." — Macy Ruple, ${client.city} customer</blockquote>
+
+<h2>What we recommend</h2>
+<p>For 90% of ${client.city}-area customers, mobile is straight better. The only times we'd nudge you toward a shop are:</p>
+<ul>
+  <li>You need an enclosed space for ceramic cure on a multi-day forecast of rain.</li>
+  <li>You're getting full-vehicle PPF and want a guaranteed dust-free install (we can usually arrange this).</li>
+  <li>You don't have any reasonable parking space at home or work.</li>
+</ul>
+<p>For everything else — interior detail, full detail, paint correction, single-panel PPF, window tint, ceramic on a clear-weather day — book mobile and skip the shuttle ride. <a href="/book-an-appointment-1696">Book online here</a> or <a href="/cost-calculator">run the cost calculator</a> for your car.</p>`,
+  },
 ];
 
-// ── Topic matrix — prioritized by intent → city (primary first) → service ────
+// ── Topic matrix (kept for compatibility with run.js) ────────────────────────
 export function generateTopicMatrix() {
-  const { services, cities, city: primaryCity } = client;
-  // Cities ordered: primary first, then the rest in config order
-  const orderedCities = [primaryCity, ...cities.filter((c) => c !== primaryCity)];
+  return POSTS.map((p) => ({
+    slug: p.slug, title: p.title,
+    city: p.city, service: p.service,
+    intent: p.intent,
+    priority: 1,
+    focusKeyword: `${p.service} ${p.city.toLowerCase()}`,
+  }));
+}
 
-  const topics = [];
-  const seenSlugs = new Set();
+// ── Build all blog posts + posts.json ────────────────────────────────────────
+export async function generateAllPosts() {
+  const dir = join("output", "blog");
+  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
 
-  // Outer loop: intent priority (cost-guide first → common-mistakes last)
-  // This way highest-value keywords publish first
-  for (const intent of INTENTS) {
-    for (const city of orderedCities) {
-      for (const service of services) {
-        const titleService = service.split(" ").map((w) => w[0].toUpperCase() + w.slice(1)).join(" ");
-        const title = intent.template(titleService, city);
-        const slug = `${slugify(service)}-${intent.slug}-${slugify(city)}`;
+  const meta = POSTS.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    city: p.city,
+    service: p.service,
+    intent: p.intent,
+    excerpt: p.excerpt,
+    publishedAt: p.publishedAt,
+    url: `/blog/${p.slug}`,
+  }));
 
-        if (seenSlugs.has(slug)) continue;
-        seenSlugs.add(slug);
-
-        topics.push({
-          slug,
-          title,
-          city,
-          service,
-          intent: intent.slug,
-          priority: intent.priority,
-          focusKeyword: `${service} ${city.toLowerCase()}`,
-        });
-      }
-    }
+  for (const p of POSTS) {
+    const html = blogPostHTML(p, meta);
+    writeFileSync(join(dir, `${p.slug}.html`), html, "utf8");
+    console.log(`  ✓ blog post → output/blog/${p.slug}.html`);
   }
 
-  return topics;
+  writeFileSync(join(dir, "posts.json"), JSON.stringify(meta, null, 2), "utf8");
+  console.log(`  ✓ posts.json with ${meta.length} entries`);
+
+  return POSTS.map((p) => ({ file: `blog/${p.slug}.html` }));
 }
 
-// ── Internal link builder ────────────────────────────────────────────────────
-function buildInternalLinks(city, currentSlug) {
-  const { cities, nicheSlug, services, niche } = client;
-  const links = [];
-
-  // Priority 1: main city page + 2 service×city pages
-  links.push(`<a href="/${nicheSlug}-${slugify(city)}/">${niche} services in ${city}</a>`);
-  links.push(`<a href="/${nicheSlug}-${slugify(city)}/">${niche} company in ${city}</a>`);
-  for (const service of services.slice(0, 2)) {
-    const titleService = service.split(" ").map((w) => w[0].toUpperCase() + w.slice(1)).join(" ");
-    links.push(`<a href="/${slugify(service)}-${slugify(city)}/">${titleService} in ${city}</a>`);
-  }
-
-  // Priority 2: other city pages (2)
-  for (const otherCity of cities.filter((c) => c !== city).slice(0, 2)) {
-    links.push(`<a href="/${nicheSlug}-${slugify(otherCity)}/">${niche} in ${otherCity}</a>`);
-  }
-
-  // Priority 3: related blog posts (2 from same city, different intent)
-  const matrix = generateTopicMatrix();
-  const related = matrix.filter((t) => t.city === city && t.slug !== currentSlug).slice(0, 2);
-  for (const post of related) {
-    links.push(`<a href="/blog/${post.slug}/">${post.title}</a>`);
-  }
-
-  return links.slice(0, 10);
-}
-
-// ── Local specifics by city (neighborhoods + regional factors) ───────────────
-const cityLocalDetails = {
-  Austin: {
-    neighborhoods: ["Hyde Park", "South Congress", "East Austin", "Mueller", "Zilker", "Tarrytown", "Barton Hills"],
-    factors: "Central Texas heat, hard water, expansive clay soil that shifts with drought",
-  },
-  "Round Rock": {
-    neighborhoods: ["Old Town Round Rock", "Teravista", "Brushy Creek", "Forest Creek"],
-    factors: "fast-growing suburbs with aging infrastructure and heavy hard-water mineral buildup",
-  },
-  "Cedar Park": {
-    neighborhoods: ["Buttercup Creek", "Twin Creeks", "Avery Ranch", "Cedar Park Town Center"],
-    factors: "suburban expansion, newer construction with builder-grade plumbing reaching end of life",
-  },
-  Pflugerville: {
-    neighborhoods: ["Blackhawk", "Falcon Pointe", "Heatherwilde", "Windermere"],
-    factors: "limestone-heavy water supply causing scale buildup, seasonal freeze events",
-  },
-  Chicago: {
-    neighborhoods: ["Lincoln Park", "Wicker Park", "River North", "Wrigleyville", "Logan Square", "Pilsen"],
-    factors: "brutal winter freezes, century-old cast iron pipes, lake-effect humidity",
-  },
-};
-
-function getLocalDetails(city) {
-  return cityLocalDetails[city] || {
-    neighborhoods: [`Downtown ${city}`, `North ${city}`, `South ${city}`, `West ${city}`],
-    factors: "local climate and soil conditions",
-  };
-}
-
-// ── Blog prompt builder ──────────────────────────────────────────────────────
-function buildBlogPrompt(topic) {
-  const {
-    businessName, phone, niche, nicheKeyword, nicheSlug, services, cities,
-    state, primaryColor, accentColor, footerColor, domain,
-    headlineFont, bodyFont, blogAuthorName, blogAuthorTitle, blogAuthorBio,
-    trustPoints,
-  } = client;
-
-  const { title, city, slug, focusKeyword, service } = topic;
-  const titleService = service.split(" ").map((w) => w[0].toUpperCase() + w.slice(1)).join(" ");
-  const serviceList = services.join(", ");
-  const internalLinks = buildInternalLinks(city, slug);
-  const local = getLocalDetails(city);
-  const year = new Date().getFullYear();
-  const today = new Date().toISOString().split("T")[0];
-
-  const authorBio = blogAuthorBio ||
-    `${blogAuthorName} brings years of professional ${niche.toLowerCase()} experience to ${city} and surrounding areas.`;
-
-  const matrix = generateTopicMatrix();
-  const relatedPosts = matrix.filter((t) => t.city === city && t.slug !== slug).slice(0, 3);
-  const relatedPostsHtml = relatedPosts
-    .map((p) => `<a href="/blog/${p.slug}/">${p.title}</a>`)
-    .join("\n    ");
-
-  const { heroPhoto, inlinePhoto } = getBlogPhotos(service, services);
-  const category = topic.intent.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-
-  // LSI keywords specific to niche
-  const lsiKeywords = niche === "Plumbing"
-    ? ["pipes", "plumber", "plumbing company", "licensed plumber", "emergency plumber", "local plumber", "plumbing repair"]
-    : [niche.toLowerCase(), `${nicheKeyword}s`, `${nicheKeyword} company`, `licensed ${nicheKeyword}`, `local ${nicheKeyword}`];
-
-  return `You are a senior SEO content writer who has written for actual local home service businesses for 10+ years. You write content that ranks on page 1 of Google AND converts browsers into paying customers. Write a premium blog post as a production-ready HTML page.
-
-═══════════════════════════════════════════════════════════════════════
-POST DATA
-═══════════════════════════════════════════════════════════════════════
-Title: ${title}
-City: ${city}, ${state}
-Primary keyword: "${focusKeyword}"
-Service: ${titleService}
-Niche: ${niche}
-Slug: /blog/${slug}/
-Business: ${businessName}
-Phone: ${phone}
-Domain: ${domain}
-Year: ${year}
-Publish date: ${today}
-
-LSI / semantic keywords to weave in naturally: ${lsiKeywords.join(", ")}
-
-LOCAL CONTEXT — must reference these specifics:
-- Real ${city} neighborhoods: ${local.neighborhoods.join(", ")}
-- Regional factors affecting ${niche.toLowerCase()}: ${local.factors}
-
-═══════════════════════════════════════════════════════════════════════
-WORD COUNT & KEYWORD DENSITY (strict requirements)
-═══════════════════════════════════════════════════════════════════════
-- 1,000-1,400 words of actual body content (NOT counting HTML tags, nav, footer, schema)
-- Primary keyword "${focusKeyword}" appears naturally 8-12 times
-- City name "${city}" appears minimum 10 times
-- LSI keywords woven in naturally (at least 5 of these: ${lsiKeywords.join(", ")})
-- Bold the MOST important 1-2 phrases per H2 section
-- NEVER keyword stuff — must read naturally
-
-═══════════════════════════════════════════════════════════════════════
-CONTENT QUALITY RULES (ENFORCED)
-═══════════════════════════════════════════════════════════════════════
-1. Opening paragraph: hook with a specific scenario or problem the reader is facing RIGHT NOW. Example: "It's 7am and your kitchen drain is completely backed up. You've got work in an hour and..." — make it visceral and specific. No generic openers.
-2. Every H2 answers a real Google query (see structure below)
-3. Include specific numbers: real price ranges ($150-$400), real timelines (2-4 hours), real statistics
-4. Include local specifics: actual ${city} neighborhoods (${local.neighborhoods.slice(0, 3).join(", ")}), regional conditions (${local.factors})
-5. Voice: an expert plumber who does this work daily — conversational, direct, authoritative
-6. FORBIDDEN phrases: "In conclusion", "As you can see", "It's important to note", "In today's world", "At the end of the day", "Look no further", "Trust us"
-7. Short paragraphs: max 3 sentences each
-8. Bullet lists for any set of 3+ items
-9. Bold key phrases using <strong>
-
-═══════════════════════════════════════════════════════════════════════
-ARTICLE STRUCTURE (1,000-1,400 words)
-═══════════════════════════════════════════════════════════════════════
-
-1. <h1>${title}</h1>
-   Below H1: publish date "${today}", author "${blogAuthorName}", reading time estimate (calculate: wordCount / 200 rounded up)
-
-2. Opening 2 paragraphs (150-180 words):
-   - Hook with specific scenario
-   - Naturally include 2 internal links to city pages in the first 2 paragraphs:
-     ${internalLinks.slice(0, 2).join("\n     ")}
-
-3. H2: "How Much Does ${titleService} Cost in ${city}?" (or similar question-based heading appropriate to the topic)
-   200-250 words, include specific dollar ranges, factors that affect price
-   Include 1 internal link to a service page:
-     ${internalLinks.slice(2, 3).join("")}
-
-4. H2: "How Long Does ${titleService} Take in ${city}?" (or topic-appropriate question)
-   200-250 words with real timelines, what happens during each stage
-   Include 1 internal link:
-     ${internalLinks.slice(3, 4).join("")}
-
-5. H2: "What to Look for in a ${city} ${titleService} Company" (or topic-appropriate)
-   200-250 words — licensing, insurance, warranty, local reputation, response time
-   Use a bulleted list for the "what to look for" items
-   Include 1 internal link to another city page:
-     ${internalLinks.slice(4, 5).join("")}
-
-6. H2: "Why ${city} Homeowners Need ${titleService}"
-   150-200 words specific to ${city}: neighborhoods (mention 2-3: ${local.neighborhoods.slice(0, 3).join(", ")}), regional conditions (${local.factors})
-   Include 1 internal link to related blog post:
-     ${internalLinks.slice(6, 7).join("")}
-
-7. H2: "How to Prepare for ${titleService} in ${city}"
-   150-200 words of practical prep tips
-   Include 1 more internal link:
-     ${internalLinks.slice(7, 8).join("")}
-
-8. H2: "Frequently Asked Questions About ${focusKeyword}"
-   5 FAQ items using <details>/<summary> accordion
-   Questions must mirror actual Google "People Also Ask" format (conversational, specific):
-   - "How much does ${service} cost in ${city}?"
-   - "How long does ${service} take in ${city}?"
-   - "Is DIY ${service} worth it in ${city}?"
-   - "How do I find the best ${service} company in ${city}?"
-   - "What's included in professional ${service} in ${city}?"
-   Each answer: 40-80 words, specific, helpful. Feature-snippet optimized.
-   "${city}" MUST appear in every question.
-
-9. Closing paragraph (60-100 words): specific CTA with phone link
-   <a href="tel:+1${phone.replace(/[^0-9]/g, "")}">${phone}</a>
-   No "In conclusion" — just specific actionable next step.
-
-═══════════════════════════════════════════════════════════════════════
-PAGE LAYOUT & DESIGN — PREMIUM, MATCHES LANDING PAGES
-═══════════════════════════════════════════════════════════════════════
-
-NOTHING VISIBLE ABOVE THE HEADER. Schema markup and meta tags live ONLY inside <head> — never rendered as visible text. NEVER output raw JSON, raw code, or schema text visibly on the page.
-
-FONTS — CRITICAL PLACEMENT RULE:
-The @import line MUST be the VERY FIRST line INSIDE the opening <style> tag. Never place it outside any tag, never place it before <style>, never put it in <body>, never let it appear as visible text on the page.
-CORRECT structure (exactly this — the @import is INSIDE <style>):
-<style>
-@import url('https://fonts.googleapis.com/css2?family=${headlineFont.replace(/\s+/g, "+")}&family=${bodyFont.replace(/\s+/g, "+")}:wght@400;500;600;700&display=swap');
-/* all other CSS below */
-</style>
-If the @import appears as visible text on the rendered page, the HTML is broken. Verify it is wrapped in <style></style>.
-- ${headlineFont}: h1, h2, h3, logo
-- ${bodyFont}: body text, 1.1rem, line-height 1.8
-
-COLORS: primary ${primaryColor}, accent ${accentColor}, footer ${footerColor}, text #222, light bg #f8f9fa
-
-─────────────────────────────────────────────────────────────────────
-1. HEADER (sticky, identical to landing pages)
-─────────────────────────────────────────────────────────────────────
-- position: fixed, top: 0, z-index: 1000, ${primaryColor} bg, padding 1rem 0
-- Left: "${businessName}" logo in ${headlineFont}, white, 2rem
-- Right: phone <a href="tel:+1${phone.replace(/[^0-9]/g, "")}">${phone}</a> in ${accentColor} with pulse animation
-- Mobile: hamburger toggles nav
-
-─────────────────────────────────────────────────────────────────────
-2. READING PROGRESS BAR
-─────────────────────────────────────────────────────────────────────
-Fixed at very top, 3px tall, ${accentColor}, width grows 0% → 100% with scroll
-
-─────────────────────────────────────────────────────────────────────
-3. HERO BANNER (full width, 400px tall — at top of every post, below header)
-─────────────────────────────────────────────────────────────────────
-- <section class="blog-hero"> height: 400px, width: 100%, position: relative, overflow: hidden
-- Background: <img src="${heroPhoto}" loading="eager" alt="${title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
-- Dark overlay: ::after pseudo, position absolute, inset 0, background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 100%), z-index: 1
-- Content wrapper: position relative, z-index: 2, max-width 1200px, margin 0 auto, padding: 6rem 2rem 3rem, color: white
-  - Breadcrumb at top: small, letter-spacing 2px, opacity 0.8: <a href="/">Home</a> › <a href="/blog/">Blog</a> › <span>${category}</span>
-  - H1 title: ${headlineFont}, 3.5rem desktop / 2rem mobile, text-transform: uppercase, letter-spacing: 2px, text-shadow: 2px 4px 8px rgba(0,0,0,0.4), margin-top: 1rem
-  - Meta row below title: "📅 ${today}  ·  ⏱️ [reading time] min read  ·  ✍️ ${blogAuthorName}" — font-size 0.95rem, opacity 0.9
-
-─────────────────────────────────────────────────────────────────────
-4. BLOG LAYOUT — TWO COLUMNS ON DESKTOP
-─────────────────────────────────────────────────────────────────────
-<div class="blog-container"> max-width: 1200px, margin: 0 auto, padding: 3rem 2rem
-Grid CSS (CRITICAL — prevents content disappearing):
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 3rem;
-  align-items: start; /* CRITICAL: prevents column collapse from hiding text */
-Below 1024px: grid-template-columns: 1fr (sidebar stacks below article)
-
-RENDERING SAFETY RULES (enforce these — text disappearance prevention):
-- .blog-container, .blog-content, .blog-sidebar, article, and any content wrapper: NO overflow: hidden. Only image containers and the hero banner may use overflow: hidden.
-- NO clip-path on .blog-content, article, .post-body, or any content wrapper. clip-path is ONLY allowed on the hero banner and CTA banner.
-- Inline image figures: add position: relative; z-index: 0; to prevent painting over surrounding text.
-- Sticky sidebar z-index stays LOW (z-index: 1), NEVER above 10.
-- Force explicit visible text color on all article text:
-    .blog-content p, .blog-content li, .blog-content h2, .blog-content h3, .blog-content h4, .blog-content strong, .blog-content a { color: #222; }
-    .blog-content h2, .blog-content h3, .blog-content strong { color: ${primaryColor}; }
-  This prevents any inherited color:transparent or color:white from bleeding into article text.
-
-LEFT COLUMN — <article class="blog-content">:
-- Background: white, border-radius: 16px, padding: 3rem, box-shadow: 0 4px 30px rgba(0,0,0,0.06)
-- Drop cap on first letter of the opening paragraph:
-    article > p:first-of-type::first-letter { float: left; font-family: ${headlineFont}; font-size: 5rem; line-height: 0.9; color: ${accentColor}; padding-right: 0.75rem; padding-top: 0.5rem; }
-- H2 styling (every H2 in the article):
-    font-family: ${headlineFont}; font-size: 2rem; color: ${primaryColor}; border-left: 4px solid ${accentColor}; padding-left: 1rem; margin: 3rem 0 1.5rem; scroll-margin-top: 100px;
-- H3 styling: ${headlineFont}, 1.4rem, color ${primaryColor}
-- Paragraphs: max 3 sentences each, margin-bottom 1.5rem, color #333
-- <strong> elements: color ${primaryColor} (navy), not just bold black
-- Bullet lists: custom styled — ul { list-style: none; padding-left: 0; } li { position: relative; padding-left: 2rem; margin-bottom: 0.75rem; } li::before { content: '●'; color: ${accentColor}; position: absolute; left: 0; font-size: 1.2rem; }
-- INLINE IMAGES: include 1-2 inline photos between H2 sections using this template:
-    <figure style="margin: 2.5rem 0;"><img src="${inlinePhoto}" loading="lazy" alt="[descriptive alt text]" style="width:100%; border-radius:12px; display:block;"><figcaption style="text-align:center; color:#888; font-size:0.9rem; margin-top:0.75rem; font-style:italic;">[caption describing the image]</figcaption></figure>
-- BLOCKQUOTE style for key stats or callouts (use at least ONE in the article):
-    blockquote { border-left: 4px solid ${accentColor}; background: #f8f9fa; padding: 1.5rem 2rem; margin: 2rem 0; font-size: 1.2rem; font-style: italic; color: ${primaryColor}; border-radius: 0 8px 8px 0; }
-    Example usage: put a key dollar-range stat or notable fact in a blockquote.
-
-RIGHT COLUMN — <aside class="blog-sidebar">:
-- position: sticky, top: 120px, align-self: start, z-index: 1 (LOW — never above content)
-- On mobile (max-width 1024px): position: static (no sticky, no z-index)
-- Contains 3 boxes stacked vertically with 1.5rem gap:
-
-  BOX 1 — Table of Contents:
-  - Background: white, border: 1px solid #e5e7eb, border-radius: 12px, padding: 1.5rem
-  - H4 "In This Article" — ${headlineFont}, color ${primaryColor}
-  - Ordered list of H2s — smooth-scroll anchor links. Each link: color #555, hover color ${accentColor}, padding 0.5rem 0, display block, font-size 0.95rem
-  - Generate TOC links dynamically via JavaScript on page load (query all h2 elements, build list)
-
-  BOX 2 — STICKY CTA:
-  - Background: ${primaryColor}, border: 2px solid ${accentColor}, border-radius: 12px, padding: 2rem, color: white
-  - H4 "${businessName}" in ${headlineFont}, ${accentColor} color, 1.5rem
-  - Phone: <a href="tel:+1${phone.replace(/[^0-9]/g, "")}"> ${phone}</a> in white, 1.5rem, display block, margin 1rem 0, font-weight 700
-  - Full-width button "Get Free Estimate" → #contact: ${accentColor} bg, #111 text, padding 0.875rem, border-radius 8px, font-weight 700
-
-  BOX 3 — Related Posts:
-  - Background: white, border: 1px solid #e5e7eb, border-radius: 12px, padding: 1.5rem
-  - H4 "Related Articles" — ${headlineFont}, color ${primaryColor}
-  - 3 post link items: ${relatedPostsHtml}
-  - Each: display block, padding 0.75rem 0, border-bottom 1px solid #eee, color #333, hover ${accentColor}, font-size 0.95rem
-
-─────────────────────────────────────────────────────────────────────
-5. AFTER ARTICLE (full width, below the two-column layout)
-─────────────────────────────────────────────────────────────────────
-
-AUTHOR BIO BOX — directly after article:
-<div class="author-box" style="max-width:1200px; margin:3rem auto; padding:2rem; background:#f8f9fa; border-radius:16px; display:flex; gap:1.5rem; align-items:center;">
-  Left: circular icon 70px, ${primaryColor} bg, white first letter of businessName in ${headlineFont} 2rem
-  Right: <strong>Written by ${businessName} Team</strong> + 2-sentence description of the company's ${niche.toLowerCase()} expertise in ${city}
-</div>
-
-SOCIAL SHARE ROW:
-- max-width 1200px, margin: 0 auto, padding: 0 2rem, display: flex, gap: 1rem, align-items: center
-- Label "Share this article:" in #666
-- 3 buttons (Facebook, X/Twitter, Copy link): each 40px square, border-radius 8px, border 1px solid #e5e7eb, background white, hover: ${accentColor} bg white text, transition 0.3s
-- Use inline SVG icons (not text):
-  Facebook: share URL https://www.facebook.com/sharer/sharer.php?u=${domain}/blog/${slug}/
-  X/Twitter: https://twitter.com/intent/tweet?url=${domain}/blog/${slug}/&text=${title.replace(/"/g, "")}
-  Copy link: JavaScript navigator.clipboard.writeText(window.location.href) + toast "Link copied"
-
-RELATED POSTS GRID (3 cards, full width below author bio):
-<section style="max-width:1200px; margin:3rem auto; padding:0 2rem;">
-  <h3 style="font-family:${headlineFont}; color:${primaryColor}; margin-bottom:1.5rem;">Related Articles</h3>
-  3 cards in grid: each card has thumbnail photo (use ${inlinePhoto}), title in ${headlineFont}, 2-line excerpt, "Read More →" link in ${accentColor}
-  Cards: white bg, border-radius 12px, box-shadow, padding 0, overflow hidden, hover translateY(-8px)
-  Grid: grid-template-columns: repeat(3, 1fr), gap 2rem (1fr on mobile)
-</section>
-
-CTA BANNER (matches landing page style):
-- ${primaryColor} bg, full width, padding 5rem 2rem, text-align center
-- H2 "Ready to Hire a ${nicheKeyword} in ${city}?" — white, ${headlineFont}
-- Phone: ${phone} in ${accentColor}, ${headlineFont}, 3.5rem, text-shadow glow animation
-- Button "Get Free Estimate" → tel: link
-
-─────────────────────────────────────────────────────────────────────
-6. FOOTER (identical to landing pages)
-─────────────────────────────────────────────────────────────────────
-${footerColor} bg, 3 columns: About | Services (${services.join(", ")}) | Service Area (${cities.join(", ")})
-City links woven: ${cities.filter((c) => c !== city).map((c) => `<a href="/${nicheSlug}-${slugify(c)}/">${c}</a>`).join(" | ")}
-Copyright: © ${year} ${businessName}. All rights reserved.
-
-BODY padding-top: 80px so content doesn't hide under fixed header.
-
-═══════════════════════════════════════════════════════════════════════
-SEO & SCHEMA
-═══════════════════════════════════════════════════════════════════════
-<title>${title} | ${businessName} — ${year}</title>
-<meta name="description" content="..."> — 150-155 chars. Primary keyword "${focusKeyword}" appears in FIRST 10 words. Include a CTA like "Call today" or "Get a free estimate".
-<link rel="canonical" href="${domain}/blog/${slug}/">
-Open Graph: og:title, og:description, og:type="article", og:url
-<meta name="robots" content="index, follow">
-
-BlogPosting JSON-LD (valid JSON):
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "${title}",
-  "author": { "@type": "Organization", "name": "${businessName}" },
-  "publisher": { "@type": "Organization", "name": "${businessName}", "logo": { "@type": "ImageObject", "url": "${domain}/logo.png" } },
-  "datePublished": "${today}",
-  "dateModified": "${today}",
-  "description": "[meta description]",
-  "mainEntityOfPage": "${domain}/blog/${slug}/",
-  "wordCount": [actual word count],
-  "keywords": "${focusKeyword}, ${lsiKeywords.slice(0, 5).join(", ")}"
-}
-
-FAQPage JSON-LD for the 5 FAQ questions (valid JSON).
-
-═══════════════════════════════════════════════════════════════════════
-JAVASCRIPT (single <script> before </body>)
-═══════════════════════════════════════════════════════════════════════
-1. Reading progress bar (window scroll → bar width %)
-2. Hamburger nav toggle (mobile)
-3. FAQ accordion smooth max-height transition
-4. TOC builder on page load: query all h2 inside .blog-content, give each an id (slugify text), and inject a list of smooth-scroll anchor links into the TOC sidebar box
-5. TOC smooth-scroll: clicking a TOC link smoothly scrolls to the h2
-6. Fade-in-on-scroll (IntersectionObserver)
-7. Copy link button: navigator.clipboard.writeText(window.location.href) + alert "Link copied!"
-
-═══════════════════════════════════════════════════════════════════════
-OUTPUT RULES
-═══════════════════════════════════════════════════════════════════════
-- RAW HTML only — start <!DOCTYPE html>, end </html>
-- NO markdown, NO code fences, NO explanation text before or after
-- NO placeholder text, NO [Insert X], NO Lorem ipsum
-- 1,000-1,400 words of real content
-- "${city}" 10+ times
-- "${focusKeyword}" 8-12 times
-- 6-10 internal links woven into SENTENCES (not listed)
-- All CSS in one <style>, all JS in one <script>
-- Premium design matching the landing pages`;
-}
-
-// ── posts.json manifest ──────────────────────────────────────────────────────
-function loadPostsManifest() {
-  const path = join("output", "posts.json");
-  if (existsSync(path)) {
-    return JSON.parse(readFileSync(path, "utf8"));
-  }
-  return [];
-}
-
-function savePostsManifest(posts) {
-  writeFileSync(join("output", "posts.json"), JSON.stringify(posts, null, 2), "utf8");
-}
-
-// ── Word-count + keyword density helpers ─────────────────────────────────────
-function stripHtmlForAnalysis(html) {
-  // Remove <script> and <style> blocks, then strip tags
-  const noScript = html.replace(/<script[\s\S]*?<\/script>/gi, "")
-                       .replace(/<style[\s\S]*?<\/style>/gi, "");
-  const text = noScript.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-  return text;
-}
-
-function analyzePost(html, topic) {
-  const text = stripHtmlForAnalysis(html);
-  const words = text.split(/\s+/).filter(Boolean);
-  const wordCount = words.length;
-  const cityMatches = (text.match(new RegExp(`\\b${topic.city}\\b`, "gi")) || []).length;
-  const kwRegex = new RegExp(topic.focusKeyword.replace(/\s+/g, "\\s+"), "gi");
-  const keywordMatches = (text.match(kwRegex) || []).length;
-  const internalLinkCount = (html.match(/<a[^>]+href=["']\/[^"']+["']/gi) || []).length;
-  return { wordCount, cityMatches, keywordMatches, internalLinkCount };
-}
-
-// ── Generate one post ────────────────────────────────────────────────────────
-export async function generatePost(topic) {
-  console.log(`  Writing: "${topic.title}" (${topic.city})...`);
-
-  const prompt = buildBlogPrompt(topic);
-
-  const stream = anthropic.messages.stream({
-    model: "claude-sonnet-4-20250514",
-    max_tokens: 16000,
-    messages: [{ role: "user", content: prompt }],
-  });
-  const message = await stream.finalMessage();
-
-  let html = message.content[0].text
-    .replace(/^```html\s*/i, "")
-    .replace(/^```\s*/i, "")
-    .replace(/\s*```$/i, "")
-    .trim();
-
-  // SAFETY: if @import leaked outside <style>, relocate it to the first line inside <style>
-  const strayImport = html.match(/^(\s*@import\s+url\([^)]+\)\s*;?)/m);
-  if (strayImport && !/<style[^>]*>[\s\S]{0,50}@import/i.test(html)) {
-    html = html.replace(strayImport[0], "");
-    html = html.replace(/<style([^>]*)>/i, `<style$1>\n${strayImport[1].trim()}`);
-  }
-
-  mkdirSync(join("output", "blog"), { recursive: true });
-  const outputPath = join("output", "blog", `${topic.slug}.html`);
-  writeFileSync(outputPath, html, "utf8");
-
-  // Append to posts.json manifest
-  const posts = loadPostsManifest();
-  const exists = posts.find((p) => p.slug === topic.slug);
-  if (!exists) {
-    posts.push({
-      slug: topic.slug,
-      title: topic.title,
-      city: topic.city,
-      service: topic.service,
-      intent: topic.intent,
-      url: `/blog/${topic.slug}/`,
-      publishedAt: new Date().toISOString(),
-    });
-    savePostsManifest(posts);
-  }
-
-  const stats = analyzePost(html, topic);
-  console.log(`  ✓ ${outputPath}`);
-  console.log(`    Words: ${stats.wordCount} | "${topic.focusKeyword}" × ${stats.keywordMatches} | "${topic.city}" × ${stats.cityMatches} | internal links: ${stats.internalLinkCount} | tokens: ${message.usage.input_tokens} in / ${message.usage.output_tokens} out`);
-
-  return { path: outputPath, usage: message.usage, stats };
-}
-
-export async function generateAllPosts(topics) {
-  const allTopics = topics || generateTopicMatrix();
-  console.log(`\n▸ Generating ${allTopics.length} blog posts for ${client.businessName}...`);
-  const results = [];
-  for (const topic of allTopics) {
-    results.push(await generatePost(topic));
-  }
-  console.log(`  Done — ${results.length} blog posts generated.\n`);
-  return results;
-}
-
-// ── CLI entry ────────────────────────────────────────────────────────────────
-if (process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, "/"))) {
-  const limitArg = process.argv.indexOf("--limit");
-  const limit = limitArg !== -1 ? parseInt(process.argv[limitArg + 1], 10) : undefined;
-
-  const topics = generateTopicMatrix();
-  const subset = limit ? topics.slice(0, limit) : topics;
-
-  console.log(`Topic matrix: ${topics.length} total (priority-ordered, generating ${subset.length})`);
-  console.log(`First 5 topics:`);
-  subset.slice(0, 5).forEach((t, i) => console.log(`  ${i + 1}. ${t.title} [${t.intent}]`));
-
-  generateAllPosts(subset).catch((err) => {
-    console.error("Error:", err.message);
-    process.exit(1);
-  });
+// CLI entry
+if (import.meta.url.endsWith(process.argv[1]?.replace(/\\/g, "/") || "")) {
+  generateAllPosts();
 }
