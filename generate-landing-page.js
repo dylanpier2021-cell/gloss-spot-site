@@ -36,14 +36,15 @@ const PHONE_SMS = `sms:+1${phoneDigits(PHONE)}`;
 // GHL chat widget snippet — uses location ID per docs.
 const GHL_CHAT_WIDGET = `<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="CLJQbljlapECB2Aiq27f"></script>`;
 
-const PHOTO_HERO = [
+// Curated Unsplash fallbacks — used when client.photos.* is empty.
+const FALLBACK_HERO = [
   "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=1800&q=80",
   "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=1800&q=80",
   "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=80",
   "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=1800&q=80",
   "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1800&q=80",
 ];
-const PHOTO_GALLERY = [
+const FALLBACK_GALLERY = [
   "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=900&q=80",
   "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=900&q=80",
   "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=900&q=80",
@@ -54,9 +55,17 @@ const PHOTO_GALLERY = [
   "https://images.unsplash.com/photo-1600661653561-629509216228?w=900&q=80",
   "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=900&q=80",
 ];
-const PHOTO_VALUE = "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=1100&q=80";
-const PHOTO_BIGCTA = "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=1800&q=80";
-const PHOTO_OWNER = "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=900&q=80";
+const FALLBACK_VALUE = "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=1100&q=80";
+const FALLBACK_BIGCTA = "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=1800&q=80";
+const FALLBACK_OWNER = "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=900&q=80";
+
+// Resolved photo set (client.photos.* takes priority; falls back to Unsplash).
+const cp = client.photos || {};
+const PHOTO_HERO = (cp.hero && cp.hero.length) ? cp.hero : FALLBACK_HERO;
+const PHOTO_GALLERY = (cp.gallery && cp.gallery.length) ? cp.gallery : FALLBACK_GALLERY;
+const PHOTO_VALUE = cp.value || FALLBACK_VALUE;
+const PHOTO_BIGCTA = cp.bigCta || FALLBACK_BIGCTA;
+const PHOTO_OWNER = cp.owner || FALLBACK_OWNER;
 
 // ── Fonts + base CSS (shared by every page) ───────────────────────────────────
 function fontsLink() {

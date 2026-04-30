@@ -43,6 +43,28 @@ export const client = {
   logo: "",
   favicon: "",
 
+  // ── Photos ──────────────────────────────────────────────────────────────
+  // Drop converted JPG/WebP files into `output/img/` and paste filenames here.
+  // Reference like "/img/hero1.jpg" — Vercel serves them at that exact path.
+  // HEIC files from iPhone need converting first (use https://heictojpg.com/
+  // or run `heif-convert *.HEIC` if you have libheif installed).
+  // Empty values fall back to the curated Unsplash photos.
+  photos: {
+    hero: [
+      // "/img/hero1.jpg",
+      // "/img/hero2.jpg",
+    ],
+    gallery: [
+      // "/img/gallery1.jpg",
+      // "/img/gallery2.jpg",
+      // "/img/gallery3.jpg",
+    ],
+    value: "",      // big "we come to you" section photo
+    bigCta: "",     // wide "got a disaster?" section background
+    owner: "",      // photo of Dominic for the owner card
+    blog: [],       // blog post hero photos
+  },
+
   headlineFont: "Bebas Neue",
   bodyFont: "Inter",
   headlineSize: "64px",
