@@ -1,0 +1,19 @@
+{
+  "name": "pierson-digital-agent",
+  "version": "2.0.0",
+  "description": "AI-powered website and SEO content system for home service businesses",
+  "type": "module",
+  "scripts": {
+    "deploy": "node run.js",
+    "generate": "node generate-landing-page.js",
+    "blog": "node blog-generator.js",
+    "sitemap": "node sitemap-generator.js",
+    "ping": "node indexnow-ping.js",
+    "ghl": "node ghl-setup.js",
+    "cron": "node daily-cron.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.4.5"
+  }
+}

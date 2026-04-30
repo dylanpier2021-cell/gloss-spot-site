@@ -1,0 +1,17 @@
+# Environment variables — never commit secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Generated output (deployed to Vercel — keep tracked)
+# output/
+
+# Local Claude settings (per-user, not for sharing)
+.claude/settings.local.json
+
+# Cron state files
+daily-log.txt
+published-slugs.json

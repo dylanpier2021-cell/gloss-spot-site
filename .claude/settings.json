@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node generate-landing-page.js)",
+      "Bash(node sitemap-generator.js)",
+      "Bash(node -e ':*)",
+      "Bash(node -e ' *)",
+      "Bash(start \"c:\\\\Users\\\\PC\\\\Claude\\\\output\\\\blog\\\\drain-cleaning-cost-guide-austin.html\")",
+      "Bash(rm -f output/blog/drain-cleaning-cost-guide-austin.html output/blog/drain-cleaning-how-to-choose-austin.html output/blog/drain-cleaning-vs-diy-austin.html)",
+      "Bash(start output/blog/drain-cleaning-cost-guide-austin.html)",
+      "Bash(start \"c:\\\\Users\\\\PC\\\\Claude\\\\output\\\\Champaign-landing-page.html\")"
+    ]
+  }
+}
