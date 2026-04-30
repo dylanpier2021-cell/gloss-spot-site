@@ -53,9 +53,11 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Window: full day +/- a buffer in ms (GHL accepts millisecond timestamps).
+  // 14-day window starting from the picked date — GHL calendars often have a
+  // minimum advance buffer, so a single-day query frequently returns nothing.
+  // The wrapper returns all days; the frontend decides which to show.
   const start = new Date(`${dateISO}T00:00:00Z`).getTime();
-  const end = start + 24 * 60 * 60 * 1000 - 1;
+  const end = start + 14 * 24 * 60 * 60 * 1000 - 1;
 
   const url = `${GHL_BASE}/calendars/${encodeURIComponent(calendarId)}/free-slots?startDate=${start}&endDate=${end}&timezone=America/Chicago`;
 

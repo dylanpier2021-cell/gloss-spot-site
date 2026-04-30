@@ -373,6 +373,13 @@ footer ul a:hover{color:var(--accent)}
 .slot.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 .slot-loading{padding:30px;text-align:center;color:var(--muted);font-style:italic}
 .slot-empty{padding:30px;text-align:center;color:var(--muted);background:var(--soft);border-radius:6px;margin-top:18px}
+.slot-alt-head{margin-top:18px;color:var(--text);font-size:1rem;line-height:1.5;padding:18px;background:var(--soft);border-radius:6px;border-left:3px solid var(--primary)}
+.slot-alt-head strong{color:var(--ink)}
+.slot-alt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.slot-alt{padding:14px 12px;border:1.5px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;text-align:left;transition:all .2s;font-family:'Inter Tight',sans-serif}
+.slot-alt:hover{border-color:var(--primary);background:#fff;transform:translateY(-1px);box-shadow:0 8px 18px -10px rgba(2,136,138,.3)}
+.slot-alt-day{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:var(--ink);font-size:.98rem;display:block}
+.slot-alt-meta{font-size:.78rem;color:var(--muted);margin-top:4px;display:block;letter-spacing:.04em}
 
 .book-actions{display:flex;justify-content:space-between;gap:14px;margin-top:36px;padding-top:24px;border-top:1px solid var(--line)}
 .book-back{background:transparent;color:var(--muted);border:1.5px solid var(--line)}
@@ -768,6 +775,11 @@ $("next2").addEventListener("click", () => {
 // Step 3: load slots
 $("dateInput").addEventListener("change", (e) => loadSlots(e.target.value));
 
+function fmtDateLong(dateStr) {
+  const d = new Date(dateStr + "T12:00:00");
+  return d.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+}
+
 async function loadSlots(dateStr) {
   S.date = dateStr; S.slot = null; S.slotISO = null;
   $("next3").disabled = true;
@@ -780,30 +792,57 @@ async function loadSlots(dateStr) {
       body: JSON.stringify({ calendarId: CALENDAR_ID, dateISO: dateStr, durationHours: S.duration }),
     });
     const data = await r.json();
-    const dayKey = Object.keys(data).find((k) => /^\d{4}-\d{2}-\d{2}$/.test(k));
-    let slots = (dayKey && data[dayKey] && data[dayKey].slots) || [];
-    // Same-day-finish guard for long jobs (≥4hr): only first slot per day
-    if (S.duration >= 4 && slots.length > 0) slots = [slots[0]];
-    if (slots.length === 0) {
-      block.innerHTML = '<div class="slot-empty">No times available on this date. Try another day, or <a href="' + "tel:+12176002108" + '">call us</a>.</div>';
+    // Pull every available day from the 14-day window response.
+    const allDays = Object.keys(data)
+      .filter((k) => /^\d{4}-\d{2}-\d{2}$/.test(k))
+      .filter((k) => Array.isArray(data[k]?.slots) && data[k].slots.length > 0)
+      .sort();
+
+    let pickedSlots = (data[dateStr] && data[dateStr].slots) || [];
+    if (S.duration >= 4 && pickedSlots.length > 0) pickedSlots = [pickedSlots[0]];
+
+    if (pickedSlots.length > 0) {
+      // Picked day has slots — render them as the main grid.
+      let html = '<div class="slot-grid">';
+      pickedSlots.forEach((iso) => {
+        const t = new Date(iso);
+        const label = t.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: TZ });
+        html += '<button type="button" class="slot" data-iso="' + iso + '" data-label="' + label + '">' + label + '</button>';
+      });
+      html += '</div>';
+      block.innerHTML = html;
+      block.querySelectorAll(".slot").forEach((b) => {
+        b.addEventListener("click", () => {
+          block.querySelectorAll(".slot").forEach((s) => s.classList.remove("active"));
+          b.classList.add("active");
+          S.slot = b.dataset.label;
+          S.slotISO = b.dataset.iso;
+          $("next3").disabled = false;
+          updateSummary();
+        });
+      });
       return;
     }
-    let html = '<div class="slot-grid">';
-    slots.forEach((iso, i) => {
-      const t = new Date(iso);
-      const label = t.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: TZ });
-      html += '<button type="button" class="slot" data-iso="' + iso + '" data-label="' + label + '">' + label + '</button>';
+
+    // No slots on the picked day — show alternate days from the 14-day window.
+    if (allDays.length === 0) {
+      block.innerHTML = '<div class="slot-empty">No times available in the next 14 days. Please <a href="' + "tel:+12176002108" + '">call 217-600-2108</a> to book by phone.</div>';
+      return;
+    }
+    const next = allDays.slice(0, 6);
+    let html = '<div class="slot-alt-head"><strong>No openings on ' + fmtDateLong(dateStr) + '.</strong> Closest available days below — click one to load times.</div>';
+    html += '<div class="slot-alt-grid">';
+    next.forEach((day) => {
+      const count = (data[day].slots || []).length;
+      html += '<button type="button" class="slot-alt" data-day="' + day + '"><span class="slot-alt-day">' + fmtDateLong(day) + '</span><span class="slot-alt-meta">' + count + ' time' + (count === 1 ? '' : 's') + ' open</span></button>';
     });
     html += '</div>';
     block.innerHTML = html;
-    block.querySelectorAll(".slot").forEach((b) => {
+    block.querySelectorAll(".slot-alt").forEach((b) => {
       b.addEventListener("click", () => {
-        block.querySelectorAll(".slot").forEach((s) => s.classList.remove("active"));
-        b.classList.add("active");
-        S.slot = b.dataset.label;
-        S.slotISO = b.dataset.iso;
-        $("next3").disabled = false;
-        updateSummary();
+        const d = b.dataset.day;
+        $("dateInput").value = d;
+        loadSlots(d);
       });
     });
   } catch (e) {
