@@ -57,7 +57,7 @@ export const client = {
       "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1800/IMG_6011_xle1gg",
       "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1800/IMG_6240_n97i25",
     ],
-    heroVideo: "https://res.cloudinary.com/djp1yfsj5/video/upload/snaptik_7606341937959816461_hd_zo0wjl.mp4",
+    heroVideo: "https://res.cloudinary.com/djp1yfsj5/video/upload/a_270/snaptik_7606341937959816461_hd_zo0wjl.mp4",
     gallery: [
       "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_900/IMG_5310_xepias",
       "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_900/IMG_5403_sy036b",
