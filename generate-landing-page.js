@@ -153,7 +153,7 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .nav-row{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
 .brand{display:flex;align-items:center;gap:11px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.5rem;color:var(--ink);letter-spacing:-.03em}
 .brand-mark{width:42px;height:42px;border-radius:50%;background:var(--primary);display:grid;place-items:center;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.15rem;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18);flex-shrink:0}
-.brand-mark-img{background:transparent;box-shadow:none;border-radius:0;object-fit:contain;width:auto;height:46px;max-width:160px;padding:0}
+.brand-mark-img{background:transparent;box-shadow:none;border-radius:0;object-fit:contain;width:auto;height:56px;max-width:200px;padding:0}
 .brand small{display:block;font-family:'Inter Tight',sans-serif;font-size:.65rem;font-weight:600;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-top:2px}
 .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
 .nav-links a{color:var(--ink);font-weight:500;font-size:.96rem;position:relative}
@@ -508,7 +508,7 @@ function topbar() {
 
 function brandMark() {
   if (client.logo) {
-    return `<img src="${client.logo}" alt="${htmlEscape(client.businessName)} logo" class="brand-mark brand-mark-img" loading="eager" width="115" height="46">`;
+    return `<img src="${client.logo}" alt="${htmlEscape(client.businessName)} logo" class="brand-mark brand-mark-img" loading="eager" width="140" height="56">`;
   }
   return `<span class="brand-mark">${(client.businessName.match(/[A-Z]/) || ["G"])[0]}</span>`;
 }
@@ -522,7 +522,6 @@ function navbar(currentPath) {
   <div class="container nav-row">
     <a href="/" class="brand">
       ${brandMark()}
-      <span>${htmlEscape(client.businessName.replace(/\s+Auto\s+Detailing/i, ""))}<small>${htmlEscape(client.niche)} · ${htmlEscape(client.city)}, ${htmlEscape(client.state)}</small></span>
     </a>
     <ul class="nav-links" id="navLinks">
       ${link("/", "Home")}
@@ -946,7 +945,6 @@ function footerSection() {
       <div class="footer-brand">
         <div class="brand">
           ${brandMark()}
-          <span>${htmlEscape(client.businessName.replace(/\s+Auto\s+Detailing/i, ""))}<small>${htmlEscape(client.niche)}</small></span>
         </div>
         <p>${htmlEscape(client.footerTagline || `Premium mobile detailing across ${client.city}.`)} Owner-operated by ${htmlEscape(client.ownerName)} and the ${htmlEscape(client.businessName.split(" ")[1] || "Gloss Spot")} crew.</p>
         <div class="footer-social">
