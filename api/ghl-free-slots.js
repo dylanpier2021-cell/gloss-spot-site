@@ -83,29 +83,9 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Filter slots: must end before 8pm + 15 min buffer, must start after business open.
-  const filtered = {};
-  Object.entries(data).forEach(([key, val]) => {
-    if (key === "traceId") {
-      filtered.traceId = val;
-      return;
-    }
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(key)) {
-      filtered[key] = val;
-      return;
-    }
-    const slots = (val && val.slots) || [];
-    const kept = slots.filter((iso) => {
-      try {
-        const startHr = chicagoHourOf(iso);
-        const day = chicagoDayOf(iso);
-        const minStart = day === 0 ? 13 : 8;   // Sun starts at 1pm
-        const endHr = startHr + Number(durationHours) + 0.25;  // +15min buffer
-        return startHr >= minStart && endHr <= 20;
-      } catch { return false; }
-    });
-    filtered[key] = { slots: kept };
-  });
-
-  res.status(200).json(filtered);
+  // Pass GHL's response through unchanged. GHL is the source of truth for
+  // availability (Availability tab on the calendar). The previous version
+  // double-filtered against business hours + duration here, which dropped
+  // valid slots — especially for long-duration services like 24hr ceramic.
+  res.status(200).json(data);
 }

@@ -492,7 +492,7 @@ async function loadSlots(dateStr) {
   try {
     const r = await fetch("/api/ghl-free-slots", {
       method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ calendarId: CALENDAR_ID, dateISO: dateStr, durationHours: S.duration }),
+      body: JSON.stringify({ calendarId: CALENDAR_ID, dateISO: dateStr, durationHours: 1 }),
     });
     const data = await r.json();
     // Pull every available day from the 14-day window response.
