@@ -34,7 +34,8 @@ const PHONE_TEL = `tel:+1${phoneDigits(PHONE)}`;
 const PHONE_SMS = `sms:+1${phoneDigits(PHONE)}`;
 
 // GHL chat widget snippet — uses location ID per docs.
-const GHL_CHAT_WIDGET = `<script src="https://beta.leadconnectorhq.com/loader.js" data-resources-url="https://beta.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="685d898ba8069128b9ba306b"></script>`;
+const GHL_CHAT_WIDGET = `<div data-chat-widget data-widget-id="685d898ba8069128b9ba306b"></div>
+<script src="https://beta.leadconnectorhq.com/loader.js" data-resources-url="https://beta.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="685d898ba8069128b9ba306b"></script>`;
 
 // Curated Unsplash fallbacks — used when client.photos.* is empty.
 const FALLBACK_HERO = [
