@@ -83,9 +83,30 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Pass GHL's response through unchanged. GHL is the source of truth for
-  // availability (Availability tab on the calendar). The previous version
-  // double-filtered against business hours + duration here, which dropped
-  // valid slots — especially for long-duration services like 24hr ceramic.
-  res.status(200).json(data);
+  // Filter only against the close-of-day (8pm) — anything starting too late
+  // for the requested duration to finish before close gets dropped. GHL's
+  // Availability tab handles open-of-day; we don't re-check that here. The
+  // 30-min slot interval comes from GHL, but each slot is a START time, so a
+  // 6-hour job starting at 5pm would end at 11pm and shouldn't be offered.
+  const dur = Math.max(0.5, Number(durationHours) || 0.5);
+  const closeHr = 20;            // 8pm hard close
+  const buffer = 0.25;           // +15 min wrap-up
+
+  const filtered = {};
+  Object.entries(data).forEach(([key, val]) => {
+    if (key === "traceId" || !/^\d{4}-\d{2}-\d{2}$/.test(key)) {
+      filtered[key] = val;
+      return;
+    }
+    const slots = (val && val.slots) || [];
+    const kept = slots.filter((iso) => {
+      try {
+        const startHr = chicagoHourOf(iso);
+        return startHr + dur + buffer <= closeHr;
+      } catch { return false; }
+    });
+    filtered[key] = { slots: kept };
+  });
+
+  res.status(200).json(filtered);
 }
