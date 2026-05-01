@@ -40,7 +40,7 @@ export const client = {
   secondaryColor: "",
   textColor: "#222222",
   footerColor: "#0a0a0a",
-  logo: "https://res.cloudinary.com/djp1yfsj5/image/upload/v1777581203/Gloss_Spot_4_h1brcd.png",
+  logo: "https://res.cloudinary.com/djp1yfsj5/image/upload/v1777607518/Gloss_Spot_5_ranrsj.png",
   logoWide: "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_400/Gloss_Spot_4_h1brcd",
   favicon: "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_64/Gloss_Spot_500_x_500_px_1_eviirr",
 
