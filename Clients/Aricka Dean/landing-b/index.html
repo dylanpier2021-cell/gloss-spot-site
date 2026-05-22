@@ -12,7 +12,6 @@
 
   <link rel="canonical" href="https://keievent.com/">
 
-  <!-- Open Graph -->
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://keievent.com/">
   <meta property="og:title"       content="Event Planning in Champaign County, IL | KEI Events">
@@ -20,32 +19,27 @@
   <meta property="og:image"       content="https://keievent.com/assets/img/og-image.jpg">
   <meta property="og:site_name"   content="KEI Events">
 
-  <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:title"       content="Event Planning in Champaign County, IL | KEI Events">
   <meta name="twitter:description" content="KEI Events delivers polished event planning in Champaign County, IL.">
   <meta name="twitter:image"       content="https://keievent.com/assets/img/og-image.jpg">
 
-  <!-- Fraunces serif for h1/h2 (Variation B only) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style"
         href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600&display=swap"
         onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600&display=swap">
   </noscript>
 
-  <!-- Compiled Tailwind -->
   <link rel="stylesheet" href="../assets/css/styles.css">
 
-  <!-- Variation B inline overrides: serif headings -->
+  <!-- Variation B: serif h1/h2 only -->
   <style>
     h1, h2 { font-family: 'Fraunces', ui-serif, Georgia, serif; }
   </style>
 
-  <!-- Schema: LocalBusiness + Services + FAQ + Breadcrumb -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -147,58 +141,42 @@
 </head>
 <body class="bg-white text-gray-900">
 
-  <!-- ============================================================
-       NAV
-  ============================================================ -->
+  <!-- NAV -->
   <header class="site-nav shadow-sm" role="banner">
     <div class="container-x">
-      <nav class="flex items-center justify-between h-16 md:h-18" aria-label="Main navigation">
-
-        <!-- Wordmark -->
+      <nav class="flex items-center justify-between h-16" aria-label="Main navigation">
         <a href="/" class="flex items-center gap-1 shrink-0" aria-label="KEI Events home">
           <span class="text-2xl font-bold italic text-kei-red leading-none">Kei</span>
-          <span class="text-2xl font-bold text-kei-blue leading-none tracking-tight">Events</span>
+          <span class="text-2xl font-bold text-kei-blue leading-none tracking-tight font-sans">Events</span>
         </a>
-
-        <!-- Desktop links -->
-        <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600" role="list">
-          <li><a href="#services"  class="hover:text-kei-blue transition-colors">Services</a></li>
-          <li><a href="#we-plan"   class="hover:text-kei-blue transition-colors">Events We Plan</a></li>
-          <li><a href="#about"     class="hover:text-kei-blue transition-colors">About</a></li>
-          <li><a href="#contact"   class="hover:text-kei-blue transition-colors">Contact</a></li>
+        <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600 font-sans" role="list">
+          <li><a href="#services" class="hover:text-kei-blue transition-colors">Services</a></li>
+          <li><a href="#gallery"  class="hover:text-kei-blue transition-colors">Events We Plan</a></li>
+          <li><a href="#about"    class="hover:text-kei-blue transition-colors">About</a></li>
+          <li><a href="#contact"  class="hover:text-kei-blue transition-colors">Contact</a></li>
         </ul>
-
-        <!-- CTA + hamburger -->
         <div class="flex items-center gap-3">
           <a href="#contact"
-             class="hidden md:inline-flex items-center justify-center tap-target px-5 py-2.5 bg-kei-blue text-white text-sm font-semibold rounded-full hover:bg-kei-blue-dark transition-colors shadow-sm">
+             class="hidden md:inline-flex items-center justify-center tap-target px-5 py-2.5 bg-kei-blue text-white text-sm font-semibold rounded-full hover:bg-kei-blue-dark btn-scale font-sans">
             Request a quote
           </a>
-          <button id="nav-toggle"
-                  type="button"
+          <button id="nav-toggle" type="button"
                   class="md:hidden tap-target flex items-center justify-center text-gray-600 hover:text-kei-blue transition-colors"
-                  aria-expanded="false"
-                  aria-controls="mobile-menu"
-                  aria-label="Open navigation menu">
+                  aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-              <line x1="3" y1="6"  x2="21" y2="6"/>
-              <line x1="3" y1="12" x2="21" y2="12"/>
-              <line x1="3" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
             </svg>
           </button>
         </div>
       </nav>
-
-      <!-- Mobile menu -->
       <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-gray-100" role="navigation" aria-label="Mobile navigation">
-        <ul class="flex flex-col gap-1 pt-3" role="list">
+        <ul class="flex flex-col gap-1 pt-3 font-sans" role="list">
           <li><a href="#services" class="block py-2.5 px-2 text-sm font-medium text-gray-600 hover:text-kei-blue transition-colors">Services</a></li>
-          <li><a href="#we-plan"  class="block py-2.5 px-2 text-sm font-medium text-gray-600 hover:text-kei-blue transition-colors">Events We Plan</a></li>
+          <li><a href="#gallery"  class="block py-2.5 px-2 text-sm font-medium text-gray-600 hover:text-kei-blue transition-colors">Events We Plan</a></li>
           <li><a href="#about"    class="block py-2.5 px-2 text-sm font-medium text-gray-600 hover:text-kei-blue transition-colors">About</a></li>
           <li><a href="#contact"  class="block py-2.5 px-2 text-sm font-medium text-gray-600 hover:text-kei-blue transition-colors">Contact</a></li>
           <li class="pt-2">
-            <a href="#contact"
-               class="inline-flex items-center justify-center w-full tap-target px-5 py-3 bg-kei-blue text-white text-sm font-semibold rounded-full hover:bg-kei-blue-dark transition-colors">
+            <a href="#contact" class="inline-flex items-center justify-center w-full tap-target px-5 py-3 bg-kei-blue text-white text-sm font-semibold rounded-full hover:bg-kei-blue-dark btn-scale">
               Request a quote
             </a>
           </li>
@@ -209,18 +187,14 @@
 
   <main id="main-content">
 
-    <!-- ============================================================
-         HERO
-    ============================================================ -->
+    <!-- HERO -->
     <section class="bg-white section-pad" aria-labelledby="hero-heading">
       <div class="container-x">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           <!-- Text -->
           <div>
-            <p class="text-kei-blue text-sm font-semibold uppercase tracking-widest mb-5 font-sans">
-              Champaign County, IL
-            </p>
+            <p class="text-kei-blue text-sm font-semibold uppercase tracking-widest mb-5 font-sans">Champaign County, IL</p>
             <h1 id="hero-heading" class="text-gray-900 mb-6"
                 style="font-size: clamp(2.25rem, 5vw, 4rem); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600;">
               Corporate events and milestone birthdays, planned end to end
@@ -230,47 +204,69 @@
             </p>
             <div class="flex flex-wrap gap-4">
               <a href="#contact"
-                 class="inline-flex items-center justify-center tap-target px-8 py-4 bg-kei-blue text-white text-base font-semibold rounded-full hover:bg-kei-blue-dark transition-colors shadow-card-blue">
+                 class="inline-flex items-center justify-center tap-target px-8 py-4 bg-kei-blue text-white text-base font-semibold rounded-full hover:bg-kei-blue-dark btn-scale shadow-card-blue font-sans">
                 Request a quote
               </a>
-              <a href="#we-plan"
-                 class="inline-flex items-center justify-center tap-target px-8 py-4 border border-gray-300 text-gray-700 text-base font-semibold rounded-full hover:border-kei-blue hover:text-kei-blue transition-colors">
+              <a href="#gallery"
+                 class="inline-flex items-center justify-center tap-target px-8 py-4 border border-gray-300 text-gray-700 text-base font-semibold rounded-full hover:border-kei-blue hover:text-kei-blue btn-scale font-sans">
                 See what we plan
               </a>
             </div>
           </div>
 
-          <!-- Hero image placeholder (1200x800, dominant blue) -->
-          <div class="rounded-2xl overflow-hidden shadow-lift aspect-[4/3] bg-kei-blue-light flex items-center justify-center" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 800" aria-label="Event planning illustration placeholder">
-              <rect width="1200" height="800" fill="#dbeafe"/>
-              <rect x="0" y="0" width="600" height="400" fill="#bfdbfe" opacity=".5"/>
-              <rect x="600" y="400" width="600" height="400" fill="#93c5fd" opacity=".4"/>
-              <circle cx="600" cy="400" r="200" fill="#1D4ED8" opacity=".08"/>
-            </svg>
-            <!-- NEED FROM CLIENT: Replace with real event photo (WebP, 1200x800, max 500KB) -->
+          <!-- Hero composition: soft circles + dotted grid + Champaign badge -->
+          <!-- NEED FROM CLIENT: Replace with real event photo (WebP, 1200x800, max 500KB) -->
+          <div class="relative">
+            <figure class="rounded-2xl overflow-hidden shadow-lift aspect-[4/3] relative" aria-hidden="true">
+              <svg viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg" class="w-full h-full" preserveAspectRatio="xMidYMid slice" aria-label="Elegant placeholder composition">
+                <!-- Base -->
+                <rect width="600" height="450" fill="#eff6ff"/>
+                <!-- Dotted grid -->
+                <pattern id="b-dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+                  <circle cx="12" cy="12" r="1.5" fill="#93c5fd" opacity=".5"/>
+                </pattern>
+                <rect width="600" height="450" fill="url(#b-dots)"/>
+                <!-- Soft overlapping circles -->
+                <circle cx="180" cy="180" r="160" fill="#bfdbfe" opacity=".5"/>
+                <circle cx="360" cy="260" r="140" fill="#1D4ED8" opacity=".15"/>
+                <circle cx="440" cy="120" r="100" fill="#93c5fd" opacity=".4"/>
+                <circle cx="100" cy="340" r="90"  fill="#dbeafe" opacity=".7"/>
+                <!-- Accent circle ring -->
+                <circle cx="300" cy="225" r="120" fill="none" stroke="#1D4ED8" stroke-width="1" opacity=".12"/>
+                <circle cx="300" cy="225" r="80"  fill="#1D4ED8" opacity=".07"/>
+                <!-- Red accent dot -->
+                <circle cx="480" cy="360" r="40" fill="#E63946" opacity=".12"/>
+                <!-- Yellow accent dot -->
+                <circle cx="60"  cy="80"  r="30" fill="#FACC15" opacity=".4"/>
+              </svg>
+              <figcaption class="absolute bottom-3 left-3 text-xs text-blue-300 font-medium font-sans">Photo coming soon</figcaption>
+            </figure>
+
+            <!-- Floating Champaign County badge -->
+            <div class="absolute -bottom-4 -right-4 md:bottom-6 md:-right-6 bg-white rounded-full shadow-lift px-4 py-3 flex items-center gap-2 border border-gray-100" aria-label="Service area: Champaign County, IL">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span class="text-kei-blue text-xs font-semibold font-sans whitespace-nowrap">Champaign County, IL</span>
+            </div>
           </div>
 
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         SERVICES ROW
-    ============================================================ -->
+    <!-- SERVICES -->
     <section id="services" class="section-pad bg-gray-50" aria-labelledby="services-heading">
       <div class="container-x">
         <div class="max-w-xl mb-14">
           <p class="text-kei-blue text-sm font-semibold uppercase tracking-widest mb-4 font-sans">Services</p>
-          <h2 id="services-heading" class="text-gray-900"
-              style="font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600;">
+          <h2 id="services-heading" class="text-gray-900 text-kei-blue heading-line"
+              style="font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; color: #1D4ED8;">
             Full-service planning for your most important events
           </h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
 
           <!-- Birthdays -->
-          <article class="bg-white rounded-2xl p-8 shadow-card border border-gray-100" aria-labelledby="svc-birthday-heading">
+          <article class="svc-card bg-white rounded-2xl p-8 shadow-card border border-gray-100" aria-labelledby="svc-birthday-heading">
             <div class="w-12 h-12 rounded-full bg-kei-red/10 mb-6 flex items-center justify-center" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E63946" stroke-width="2" stroke-linecap="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -278,16 +274,16 @@
               </svg>
             </div>
             <h3 id="svc-birthday-heading" class="text-lg font-bold text-gray-900 mb-3 font-sans">Birthdays</h3>
-            <p class="text-gray-600 leading-relaxed text-sm mb-6">
+            <p class="text-gray-600 leading-relaxed text-sm mb-6 font-sans">
               From intimate dinner parties to large milestone celebrations, we plan every element. Venue, decor, catering coordination, entertainment; nothing overlooked.
             </p>
-            <a href="#contact" class="text-kei-blue font-semibold text-sm hover:underline underline-offset-4">
+            <a href="#contact" class="text-kei-blue font-semibold text-sm hover:underline underline-offset-4 font-sans">
               See birthday packages
             </a>
           </article>
 
-          <!-- Corporate -->
-          <article class="bg-kei-blue rounded-2xl p-8 shadow-lift" aria-labelledby="svc-corporate-heading">
+          <!-- Corporate: featured card -->
+          <article class="svc-card bg-kei-blue rounded-2xl p-8 shadow-lift" aria-labelledby="svc-corporate-heading">
             <div class="w-12 h-12 rounded-full bg-white/20 mb-6 flex items-center justify-center" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
                 <rect x="2" y="7" width="20" height="14" rx="2"/>
@@ -295,34 +291,41 @@
               </svg>
             </div>
             <h3 id="svc-corporate-heading" class="text-lg font-bold text-white mb-3 font-sans">Corporate Events</h3>
-            <p class="text-white/80 leading-relaxed text-sm mb-6">
+            <p class="text-white/80 leading-relaxed text-sm mb-6 font-sans">
               Company meetings, team events, product launches, and brand activations. We coordinate the details so your team can stay focused on the work that matters.
             </p>
-            <a href="#contact" class="text-kei-yellow font-semibold text-sm hover:underline underline-offset-4">
+            <a href="#contact" class="text-kei-yellow font-semibold text-sm hover:underline underline-offset-4 font-sans">
               Request a corporate quote
             </a>
           </article>
 
-          <!-- Any Event -->
-          <article id="we-plan" class="bg-white rounded-2xl p-8 shadow-card border border-gray-100" aria-labelledby="svc-any-heading">
+          <!-- Any Event: brought up to parity -->
+          <article id="we-plan" class="svc-card bg-white rounded-2xl p-8 shadow-card border border-gray-100" aria-labelledby="svc-any-heading">
             <div class="w-12 h-12 rounded-full bg-kei-yellow/20 mb-6 flex items-center justify-center" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ca8a04" stroke-width="2" stroke-linecap="round">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
               </svg>
             </div>
             <h3 id="svc-any-heading" class="text-lg font-bold text-gray-900 mb-3 font-sans">Any Event</h3>
-            <p class="text-gray-600 leading-relaxed text-sm">
-              We plan any event you can throw at us. Weddings, baby showers, retirements, holiday parties, brand activations, and more.
+            <p class="text-gray-600 leading-relaxed text-sm mb-5 font-sans">
+              We plan any event you can throw at us. If it is worth celebrating, it is worth planning right.
             </p>
+            <div class="flex flex-wrap gap-2 mb-6" aria-label="Event types we handle">
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 text-xs font-medium rounded-full font-sans">Weddings</span>
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 text-xs font-medium rounded-full font-sans">Baby showers</span>
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 text-xs font-medium rounded-full font-sans">Retirements</span>
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 text-xs font-medium rounded-full font-sans">Holiday parties</span>
+            </div>
+            <a href="#contact" class="text-kei-blue font-semibold text-sm hover:underline underline-offset-4 font-sans">
+              Tell us about your event
+            </a>
           </article>
 
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         TRUST STRIP
-    ============================================================ -->
+    <!-- TRUST STRIP -->
     <section class="bg-kei-blue section-pad" aria-label="Service area">
       <div class="container-x">
         <div class="max-w-3xl mx-auto text-center">
@@ -333,7 +336,7 @@
           </p>
           <div class="mt-10">
             <a href="#contact"
-               class="inline-flex items-center justify-center tap-target px-8 py-4 bg-white text-kei-blue text-base font-semibold rounded-full hover:bg-kei-yellow hover:text-gray-900 transition-colors shadow-card">
+               class="inline-flex items-center justify-center tap-target px-8 py-4 bg-white text-kei-blue text-base font-semibold rounded-full hover:bg-kei-yellow hover:text-gray-900 btn-scale shadow-card font-sans">
               Start planning your event
             </a>
           </div>
@@ -341,56 +344,165 @@
       </div>
     </section>
 
-    <!-- ============================================================
-         PROCESS
-    ============================================================ -->
-    <section class="section-pad bg-white" aria-labelledby="process-heading">
+    <!-- GALLERY -->
+    <!-- NEED FROM CLIENT: 6 event photos, WebP, 800x800, max 300KB each -->
+    <section id="gallery" class="section-pad bg-white" aria-labelledby="gallery-heading">
+      <div class="container-x">
+        <div class="max-w-xl mb-14">
+          <p class="text-kei-blue text-sm font-semibold uppercase tracking-widest mb-4 font-sans">Our work</p>
+          <h2 id="gallery-heading" class="text-kei-blue heading-line"
+              style="font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; color: #1D4ED8;">
+            Events we have planned
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+          <!-- Tile 1 -->
+          <figure class="relative overflow-hidden rounded-2xl aspect-square group shadow-card">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="400" fill="#eff6ff"/>
+              <pattern id="b-g1-dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <circle cx="10" cy="10" r="1" fill="#93c5fd" opacity=".6"/>
+              </pattern>
+              <rect width="400" height="400" fill="url(#b-g1-dots)"/>
+              <circle cx="200" cy="180" r="130" fill="#bfdbfe" opacity=".7"/>
+              <circle cx="280" cy="260" r="100" fill="#1D4ED8" opacity=".2"/>
+              <circle cx="120" cy="280" r="80"  fill="#93c5fd" opacity=".4"/>
+            </svg>
+            <figcaption class="absolute bottom-0 left-0 right-0 bg-kei-blue/85 px-4 py-3 backdrop-blur-sm rounded-b-2xl">
+              <span class="text-white text-sm font-semibold font-sans">Birthday &bull; 50 guests</span>
+            </figcaption>
+          </figure>
+
+          <!-- Tile 2 -->
+          <figure class="relative overflow-hidden rounded-2xl aspect-square group shadow-card">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="400" fill="#dbeafe"/>
+              <circle cx="300" cy="150" r="180" fill="#1D4ED8" opacity=".15"/>
+              <circle cx="100" cy="300" r="140" fill="#bfdbfe" opacity=".7"/>
+              <circle cx="320" cy="320" r="80"  fill="#93c5fd" opacity=".5"/>
+              <circle cx="200" cy="200" r="60"  fill="#1D4ED8" opacity=".2"/>
+            </svg>
+            <figcaption class="absolute bottom-0 left-0 right-0 bg-kei-blue/85 px-4 py-3 backdrop-blur-sm rounded-b-2xl">
+              <span class="text-white text-sm font-semibold font-sans">Corporate launch</span>
+            </figcaption>
+          </figure>
+
+          <!-- Tile 3 -->
+          <figure class="relative overflow-hidden rounded-2xl aspect-square group shadow-card">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="400" fill="#f0f9ff"/>
+              <circle cx="150" cy="150" r="120" fill="#bae6fd" opacity=".6"/>
+              <circle cx="280" cy="220" r="110" fill="#1D4ED8" opacity=".12"/>
+              <circle cx="200" cy="320" r="90"  fill="#93c5fd" opacity=".5"/>
+              <circle cx="340" cy="80"  r="60"  fill="#fde68a" opacity=".5"/>
+            </svg>
+            <figcaption class="absolute bottom-0 left-0 right-0 bg-kei-blue/85 px-4 py-3 backdrop-blur-sm rounded-b-2xl">
+              <span class="text-white text-sm font-semibold font-sans">Retirement party</span>
+            </figcaption>
+          </figure>
+
+          <!-- Tile 4 -->
+          <figure class="relative overflow-hidden rounded-2xl aspect-square group shadow-card">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="400" fill="#eff6ff"/>
+              <circle cx="100" cy="200" r="150" fill="#93c5fd" opacity=".4"/>
+              <circle cx="320" cy="180" r="130" fill="#1D4ED8" opacity=".14"/>
+              <circle cx="200" cy="340" r="100" fill="#bfdbfe" opacity=".6"/>
+            </svg>
+            <figcaption class="absolute bottom-0 left-0 right-0 bg-kei-blue/85 px-4 py-3 backdrop-blur-sm rounded-b-2xl">
+              <span class="text-white text-sm font-semibold font-sans">Baby shower</span>
+            </figcaption>
+          </figure>
+
+          <!-- Tile 5 -->
+          <figure class="relative overflow-hidden rounded-2xl aspect-square group shadow-card">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="400" fill="#dbeafe"/>
+              <circle cx="200" cy="200" r="170" fill="#1D4ED8" opacity=".1"/>
+              <circle cx="80"  cy="100" r="100" fill="#bfdbfe" opacity=".7"/>
+              <circle cx="340" cy="300" r="110" fill="#93c5fd" opacity=".5"/>
+              <circle cx="250" cy="100" r="60"  fill="#E63946" opacity=".08"/>
+            </svg>
+            <figcaption class="absolute bottom-0 left-0 right-0 bg-kei-blue/85 px-4 py-3 backdrop-blur-sm rounded-b-2xl">
+              <span class="text-white text-sm font-semibold font-sans">Holiday party</span>
+            </figcaption>
+          </figure>
+
+          <!-- Tile 6 -->
+          <figure class="relative overflow-hidden rounded-2xl aspect-square group shadow-card">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="400" fill="#eff6ff"/>
+              <pattern id="b-g6-dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+                <circle cx="12" cy="12" r="1.5" fill="#93c5fd" opacity=".4"/>
+              </pattern>
+              <rect width="400" height="400" fill="url(#b-g6-dots)"/>
+              <circle cx="200" cy="200" r="140" fill="#bfdbfe" opacity=".5"/>
+              <circle cx="200" cy="200" r="90"  fill="#1D4ED8" opacity=".18"/>
+              <circle cx="200" cy="200" r="50"  fill="#1D4ED8" opacity=".25"/>
+            </svg>
+            <figcaption class="absolute bottom-0 left-0 right-0 bg-kei-blue/85 px-4 py-3 backdrop-blur-sm rounded-b-2xl">
+              <span class="text-white text-sm font-semibold font-sans">Wedding reception</span>
+            </figcaption>
+          </figure>
+
+        </div>
+        <p class="mt-6 text-gray-400 text-xs text-center font-sans">Photo coming soon</p>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section-pad bg-gray-50" aria-labelledby="process-heading">
       <div class="container-x">
         <div class="max-w-xl mb-14">
           <p class="text-kei-blue text-sm font-semibold uppercase tracking-widest mb-4 font-sans">Our process</p>
-          <h2 id="process-heading" class="text-gray-900"
-              style="font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600;">
+          <h2 id="process-heading" class="text-kei-blue heading-line"
+              style="font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; color: #1D4ED8;">
             From first call to final hour
           </h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
-
           <div class="relative">
             <div class="w-10 h-10 rounded-full bg-kei-blue text-white flex items-center justify-center text-sm font-bold mb-6 font-sans" aria-hidden="true">1</div>
             <h3 class="text-lg font-bold text-gray-900 mb-3 font-sans">Tell us about your event</h3>
-            <p class="text-gray-600 leading-relaxed text-sm">Share the date, the size, and the vision. We listen before we plan.</p>
+            <p class="text-gray-600 leading-relaxed text-sm font-sans">Share the date, the size, and the vision. We listen before we plan.</p>
           </div>
-
           <div class="relative">
             <div class="w-10 h-10 rounded-full bg-kei-blue text-white flex items-center justify-center text-sm font-bold mb-6 font-sans" aria-hidden="true">2</div>
             <h3 class="text-lg font-bold text-gray-900 mb-3 font-sans">We build the plan</h3>
-            <p class="text-gray-600 leading-relaxed text-sm">Budget, vendors, timeline, logistics. Every element organized so nothing falls through.</p>
+            <p class="text-gray-600 leading-relaxed text-sm font-sans">Budget, vendors, timeline, logistics. Every element organized so nothing falls through.</p>
           </div>
-
           <div class="relative">
             <div class="w-10 h-10 rounded-full bg-kei-blue text-white flex items-center justify-center text-sm font-bold mb-6 font-sans" aria-hidden="true">3</div>
             <h3 class="text-lg font-bold text-gray-900 mb-3 font-sans">You show up and enjoy it</h3>
-            <p class="text-gray-600 leading-relaxed text-sm">On the day of, you are a guest at your own event. We run the floor.</p>
+            <p class="text-gray-600 leading-relaxed text-sm font-sans">On the day of, you are a guest at your own event. We run the floor.</p>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         ABOUT
-    ============================================================ -->
-    <section id="about" class="section-pad bg-gray-50" aria-labelledby="about-heading">
+    <!-- ABOUT -->
+    <section id="about" class="section-pad bg-white" aria-labelledby="about-heading">
       <div class="container-x">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <!-- Photo placeholder -->
-          <div class="rounded-2xl overflow-hidden shadow-lift aspect-[4/3] bg-kei-blue-light flex items-center justify-center" aria-hidden="true">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1" opacity=".3">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
+          <!-- Photo placeholder: soft circles + dotted grid -->
+          <!-- NEED FROM CLIENT: Photo of Aricka Dean (replace this block) -->
+          <figure class="rounded-2xl overflow-hidden shadow-lift aspect-[4/3] relative" aria-hidden="true">
+            <svg viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg" class="w-full h-full" preserveAspectRatio="xMidYMid slice" aria-label="Placeholder composition">
+              <rect width="600" height="450" fill="#eff6ff"/>
+              <pattern id="b-about-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+                <circle cx="14" cy="14" r="1.5" fill="#93c5fd" opacity=".4"/>
+              </pattern>
+              <rect width="600" height="450" fill="url(#b-about-dots)"/>
+              <circle cx="220" cy="200" r="180" fill="#bfdbfe" opacity=".55"/>
+              <circle cx="420" cy="280" r="150" fill="#1D4ED8" opacity=".13"/>
+              <circle cx="500" cy="100" r="100" fill="#93c5fd" opacity=".4"/>
+              <circle cx="80"  cy="360" r="90"  fill="#dbeafe" opacity=".65"/>
+              <circle cx="300" cy="225" r="80"  fill="#1D4ED8" opacity=".1"/>
+              <circle cx="420" cy="80"  r="40"  fill="#fde68a" opacity=".5"/>
             </svg>
-            <!-- NEED FROM CLIENT: Photo of Aricka Dean (WebP, max 500KB) -->
-          </div>
+            <figcaption class="absolute bottom-3 left-3 text-xs text-blue-300 font-medium font-sans">Photo coming soon</figcaption>
+          </figure>
           <!-- Text -->
           <div>
             <p class="text-kei-blue text-sm font-semibold uppercase tracking-widest mb-4 font-sans">About</p>
@@ -410,78 +522,132 @@
       </div>
     </section>
 
-    <!-- ============================================================
-         FAQ
-    ============================================================ -->
+    <!-- TESTIMONIALS SCAFFOLD -->
+    <!-- NEED FROM CLIENT: 3 real testimonials with names and event types. Do not fabricate. -->
+    <section class="section-pad bg-gray-50" aria-labelledby="testimonials-heading">
+      <div class="container-x">
+        <div class="mb-12">
+          <p class="text-kei-blue text-sm font-semibold uppercase tracking-widest mb-4 font-sans">What clients say</p>
+          <h2 id="testimonials-heading"
+              style="font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; color: #1D4ED8;">
+            Real events, real people
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <div class="bg-white rounded-2xl p-8 shadow-card border border-gray-100">
+            <svg width="32" height="24" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-6" aria-hidden="true">
+              <path d="M0 24V14.4C0 6.4 4.8 1.6 14.4 0L16 2.4C10.4 3.6 7.2 6.8 6.4 12H12V24H0ZM18 24V14.4C18 6.4 22.8 1.6 32.4 0L34 2.4C28.4 3.6 25.2 6.8 24.4 12H30V24H18Z" fill="#1D4ED8" opacity=".2"/>
+            </svg>
+            <div class="space-y-2 mb-8" aria-hidden="true">
+              <div class="h-2.5 bg-gray-100 rounded-full w-full"></div>
+              <div class="h-2.5 bg-gray-100 rounded-full w-5/6"></div>
+              <div class="h-2.5 bg-gray-100 rounded-full w-4/5"></div>
+              <div class="h-2.5 bg-gray-100 rounded-full w-full"></div>
+              <div class="h-2.5 bg-gray-100 rounded-full w-3/4"></div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-kei-blue-light shrink-0"></div>
+              <div class="space-y-1.5">
+                <div class="h-2.5 bg-gray-100 rounded-full w-24"></div>
+                <div class="h-2 bg-gray-100 rounded-full w-16"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-8 shadow-card border border-gray-100">
+            <svg width="32" height="24" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-6" aria-hidden="true">
+              <path d="M0 24V14.4C0 6.4 4.8 1.6 14.4 0L16 2.4C10.4 3.6 7.2 6.8 6.4 12H12V24H0ZM18 24V14.4C18 6.4 22.8 1.6 32.4 0L34 2.4C28.4 3.6 25.2 6.8 24.4 12H30V24H18Z" fill="#1D4ED8" opacity=".2"/>
+            </svg>
+            <div class="space-y-2 mb-8" aria-hidden="true">
+              <div class="h-2.5 bg-gray-100 rounded-full w-full"></div>
+              <div class="h-2.5 bg-gray-100 rounded-full w-11/12"></div>
+              <div class="h-2.5 bg-gray-100 rounded-full w-4/5"></div>
+              <div class="h-2.5 bg-gray-100 rounded-full w-full"></div>
+              <div class="h-2.5 bg-gray-100 rounded-full w-2/3"></div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-kei-blue-light shrink-0"></div>
+              <div class="space-y-1.5">
+                <div class="h-2.5 bg-gray-100 rounded-full w-28"></div>
+                <div class="h-2 bg-gray-100 rounded-full w-20"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-8 shadow-card border border-gray-100">
+            <svg width="32" height="24" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-6" aria-hidden="true">
+              <path d="M0 24V14.4C0 6.4 4.8 1.6 14.4 0L16 2.4C10.4 3.6 7.2 6.8 6.4 12H12V24H0ZM18 24V14.4C18 6.4 22.8 1.6 32.4 0L34 2.4C28.4 3.6 25.2 6.8 24.4 12H30V24H18Z" fill="#1D4ED8" opacity=".2"/>
+            </svg>
+            <div class="space-y-2 mb-8" aria-hidden="true">
+              <div class="h-2.5 bg-gray-100 rounded-full w-full"></div>
+              <div class="h-2.5 bg-gray-100 rounded-full w-5/6"></div>
+              <div class="h-2.5 bg-gray-100 rounded-full w-full"></div>
+              <div class="h-2.5 bg-gray-100 rounded-full w-3/4"></div>
+              <div class="h-2.5 bg-gray-100 rounded-full w-4/5"></div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-kei-blue-light shrink-0"></div>
+              <div class="space-y-1.5">
+                <div class="h-2.5 bg-gray-100 rounded-full w-20"></div>
+                <div class="h-2 bg-gray-100 rounded-full w-24"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
     <section class="section-pad bg-white" aria-labelledby="faq-heading">
       <div class="container-x">
         <div class="max-w-3xl mx-auto">
           <p class="text-kei-blue text-sm font-semibold uppercase tracking-widest mb-4 font-sans">FAQ</p>
-          <h2 id="faq-heading" class="text-gray-900 mb-12"
-              style="font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600;">
+          <h2 id="faq-heading" class="text-kei-blue heading-line mb-12"
+              style="font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; color: #1D4ED8;">
             Common questions
           </h2>
-
           <div class="space-y-4">
 
             <details class="border border-gray-200 rounded-2xl overflow-hidden group shadow-card">
               <summary class="flex items-center justify-between p-6 cursor-pointer list-none tap-target font-semibold text-gray-900 hover:text-kei-blue transition-colors font-sans">
                 What events do you plan?
-                <svg class="w-5 h-5 shrink-0 ml-4 text-kei-blue transition-transform group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                </svg>
+                <svg class="w-5 h-5 shrink-0 ml-4 text-kei-blue transition-transform group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               </summary>
-              <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm font-sans">
-                We plan birthdays, corporate events, weddings, baby showers, retirements, holiday parties, brand activations, and more. If you are planning a gathering of any size, contact us and we will tell you whether we are the right fit.
-              </p>
+              <div class="faq-body"><p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm font-sans">We plan birthdays, corporate events, weddings, baby showers, retirements, holiday parties, brand activations, and more. If you are planning a gathering of any size, contact us and we will tell you whether we are the right fit.</p></div>
             </details>
 
             <details class="border border-gray-200 rounded-2xl overflow-hidden group shadow-card">
               <summary class="flex items-center justify-between p-6 cursor-pointer list-none tap-target font-semibold text-gray-900 hover:text-kei-blue transition-colors font-sans">
                 Do you serve outside Champaign County?
-                <svg class="w-5 h-5 shrink-0 ml-4 text-kei-blue transition-transform group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                </svg>
+                <svg class="w-5 h-5 shrink-0 ml-4 text-kei-blue transition-transform group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               </summary>
-              <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm font-sans">
-                Our primary focus is Champaign County, IL. Reach out and describe your event location; we are happy to discuss options.
-              </p>
+              <div class="faq-body"><p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm font-sans">Our primary focus is Champaign County, IL. Reach out and describe your event location; we are happy to discuss options.</p></div>
             </details>
 
             <details class="border border-gray-200 rounded-2xl overflow-hidden group shadow-card">
               <summary class="flex items-center justify-between p-6 cursor-pointer list-none tap-target font-semibold text-gray-900 hover:text-kei-blue transition-colors font-sans">
                 How far in advance should I book?
-                <svg class="w-5 h-5 shrink-0 ml-4 text-kei-blue transition-transform group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                </svg>
+                <svg class="w-5 h-5 shrink-0 ml-4 text-kei-blue transition-transform group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               </summary>
-              <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm font-sans">
-                For corporate events and milestone birthdays, six to eight weeks gives us the best window to secure vendors and build a solid plan. Smaller gatherings can often be arranged in two to four weeks.
-              </p>
+              <div class="faq-body"><p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm font-sans">For corporate events and milestone birthdays, six to eight weeks gives us the best window to secure vendors and build a solid plan. Smaller gatherings can often be arranged in two to four weeks.</p></div>
             </details>
 
             <details class="border border-gray-200 rounded-2xl overflow-hidden group shadow-card">
               <summary class="flex items-center justify-between p-6 cursor-pointer list-none tap-target font-semibold text-gray-900 hover:text-kei-blue transition-colors font-sans">
                 What is your pricing model?
-                <svg class="w-5 h-5 shrink-0 ml-4 text-kei-blue transition-transform group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                </svg>
+                <svg class="w-5 h-5 shrink-0 ml-4 text-kei-blue transition-transform group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               </summary>
-              <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm font-sans">
-                Pricing depends on the size and scope of your event. Contact us for a custom quote and we will walk you through what is included.
-              </p>
+              <div class="faq-body"><p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm font-sans">Pricing depends on the size and scope of your event. Contact us for a custom quote and we will walk you through what is included.</p></div>
             </details>
 
             <details class="border border-gray-200 rounded-2xl overflow-hidden group shadow-card">
               <summary class="flex items-center justify-between p-6 cursor-pointer list-none tap-target font-semibold text-gray-900 hover:text-kei-blue transition-colors font-sans">
                 Do you handle vendors?
-                <svg class="w-5 h-5 shrink-0 ml-4 text-kei-blue transition-transform group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                </svg>
+                <svg class="w-5 h-5 shrink-0 ml-4 text-kei-blue transition-transform group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               </summary>
-              <p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm font-sans">
-                Yes. Vendor research, coordination, and communication are part of the planning service. You will not need to chase anyone down on our watch.
-              </p>
+              <div class="faq-body"><p class="px-6 pb-6 text-gray-600 leading-relaxed text-sm font-sans">Yes. Vendor research, coordination, and communication are part of the planning service. You will not need to chase anyone down on our watch.</p></div>
             </details>
 
           </div>
@@ -489,10 +655,8 @@
       </div>
     </section>
 
-    <!-- ============================================================
-         CONTACT
-    ============================================================ -->
-    <section id="contact" class="section-pad bg-kei-blue-light" aria-labelledby="contact-heading">
+    <!-- CONTACT (white section, form on kei-blue-light) -->
+    <section id="contact" class="section-pad bg-white" aria-labelledby="contact-heading">
       <div class="container-x">
         <div class="max-w-2xl mx-auto">
           <p class="text-kei-blue text-sm font-semibold uppercase tracking-widest mb-4 font-sans">Get in touch</p>
@@ -503,24 +667,17 @@
           <p class="text-gray-600 leading-relaxed mb-10 font-sans">
             Fill out the form below and we will get back to you within one business day to talk through your event.
           </p>
-
-          <!-- GHL form embed -->
-          <div class="bg-white rounded-2xl p-6 md:p-10 shadow-lift">
+          <!-- GHL form embed on kei-blue-light background -->
+          <div class="bg-kei-blue-light rounded-2xl p-6 md:p-10 shadow-lift">
             <!-- NEED FROM CLIENT: GHL form embed snippet -->
-            <!-- Replace this placeholder with the GHL iframe/script embed -->
             <div class="text-center py-12 text-gray-400">
               <p class="font-medium text-gray-500 mb-2 font-sans">Contact form loading</p>
               <p class="text-sm font-sans">GHL form embed goes here</p>
             </div>
           </div>
-
-          <!-- Direct contact -->
           <div class="mt-8 flex flex-wrap gap-6">
-            <a href="tel:+14472209267"
-               class="inline-flex items-center gap-2 text-kei-blue font-semibold hover:text-kei-blue-dark transition-colors tap-target font-sans">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.62 4.38 2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
+            <a href="tel:+14472209267" class="inline-flex items-center gap-2 text-kei-blue font-semibold hover:text-kei-blue-dark transition-colors tap-target font-sans">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.62 4.38 2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               (447) 220-9267
             </a>
             <!-- NEED FROM CLIENT: Email address -->
@@ -531,33 +688,86 @@
 
   </main>
 
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
+  <!-- TRUST SIGNALS ROW: pill-shaped with soft shadow -->
+  <section class="bg-gray-50 border-t border-gray-100 py-10" aria-label="Service commitments">
+    <div class="container-x">
+      <div class="flex flex-wrap justify-center gap-4">
+        <div class="flex items-center gap-2.5 px-5 py-3 rounded-full bg-white shadow-card border border-gray-100">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="text-sm font-medium text-gray-700 font-sans">Champaign County, IL</span>
+        </div>
+        <div class="flex items-center gap-2.5 px-5 py-3 rounded-full bg-white shadow-card border border-gray-100">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="text-sm font-medium text-gray-700 font-sans">Birthdays and corporate events</span>
+        </div>
+        <div class="flex items-center gap-2.5 px-5 py-3 rounded-full bg-white shadow-card border border-gray-100">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span class="text-sm font-medium text-gray-700 font-sans">Vendor coordination handled</span>
+        </div>
+        <div class="flex items-center gap-2.5 px-5 py-3 rounded-full bg-white shadow-card border border-gray-100">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="text-sm font-medium text-gray-700 font-sans">One business day response</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="bg-kei-blue-dark text-blue-200" role="contentinfo">
-    <div class="container-x py-12">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+    <div class="container-x py-14">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+
+        <!-- Col 1: Brand -->
         <div>
-          <div class="flex items-center gap-1 mb-2">
+          <div class="flex items-center gap-1 mb-3">
             <span class="text-xl font-bold italic text-kei-red">Kei</span>
             <span class="text-xl font-bold text-white font-sans">Events</span>
           </div>
-          <p class="text-sm font-sans">Event Planning &amp; Management &bull; Champaign County, IL</p>
+          <p class="text-sm leading-relaxed mb-4 font-sans">Event Planning and Management, Bounce House Rental, Champaign County IL</p>
+          <a href="tel:+14472209267" class="inline-flex items-center gap-2 text-blue-200 hover:text-white transition-colors text-sm font-medium tap-target font-sans">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.62 4.38 2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            (447) 220-9267
+          </a>
         </div>
-        <div class="flex flex-wrap gap-6 text-sm font-sans">
-          <a href="/privacy-policy" class="hover:text-white transition-colors">Privacy policy</a>
+
+        <!-- Col 2: Quick links -->
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-4 font-sans">Quick links</p>
+          <ul class="space-y-2.5 text-sm font-sans" role="list">
+            <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
+            <li><a href="#gallery"  class="hover:text-white transition-colors">Events We Plan</a></li>
+            <li><a href="#about"    class="hover:text-white transition-colors">About</a></li>
+            <li><a href="#contact"  class="hover:text-white transition-colors">Contact</a></li>
+            <li><a href="/privacy-policy" class="hover:text-white transition-colors">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Get in touch -->
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-4 font-sans">Get in touch</p>
+          <!-- NEED FROM CLIENT: Email address -->
+          <p class="text-sm mb-4 text-blue-300 italic font-sans">Email coming soon</p>
           <!-- NEED FROM CLIENT: Social media URLs -->
+          <div class="flex items-center gap-3" aria-label="Social media">
+            <a href="#" class="w-9 h-9 rounded-full border border-blue-700 flex items-center justify-center hover:border-kei-yellow hover:text-white transition-colors tap-target" aria-label="Facebook">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full border border-blue-700 flex items-center justify-center hover:border-kei-yellow hover:text-white transition-colors tap-target" aria-label="Instagram">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full border border-blue-700 flex items-center justify-center hover:border-kei-yellow hover:text-white transition-colors tap-target" aria-label="TikTok">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.17 8.17 0 0 0 4.77 1.52V6.76a4.85 4.85 0 0 1-1-.07z"/></svg>
+            </a>
+          </div>
         </div>
+
       </div>
-      <div class="mt-8 pt-6 border-t border-white/10 text-xs text-blue-300 font-sans">
+      <div class="mt-10 pt-6 border-t border-white/10 text-xs text-blue-300 font-sans">
         &copy; <span id="footer-year">2025</span> KEI Events. All rights reserved. Serving Champaign County, IL.
       </div>
     </div>
   </footer>
 
-  <!-- ============================================================
-       SCRIPTS
-  ============================================================ -->
   <!-- NEED FROM CLIENT: GHL script snippet -->
   <!-- <script src="..." defer></script> -->
 
@@ -577,7 +787,21 @@
         });
       });
     })();
+
     document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    (function() {
+      if (!window.IntersectionObserver) return;
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      document.querySelectorAll('.heading-line').forEach(function(el) { io.observe(el); });
+    })();
   </script>
 
 </body>

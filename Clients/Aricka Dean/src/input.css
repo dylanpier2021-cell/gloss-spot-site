@@ -46,14 +46,71 @@
   .tap-target {
     @apply min-h-[44px] min-w-[44px];
   }
+
+  /* ── Micro-interaction: service card lift ──────────────────────── */
+  .svc-card {
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+
+  /* ── Micro-interaction: CTA button scale ──────────────────────── */
+  .btn-scale {
+    transition: transform 0.15s ease, background-color 0.18s ease,
+                color 0.18s ease, border-color 0.18s ease;
+  }
+
+  /* ── Section heading underline accent ─────────────────────────── */
+  .heading-line {
+    display: inline-block;
+    position: relative;
+  }
+  .heading-line::after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 0;
+    margin-top: 10px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .heading-line.is-visible::after {
+    width: 3rem;
+  }
 }
 
 @layer utilities {
-  /* Reduced motion — honour system preference */
+  /* ── FAQ slide-open animation ──────────────────────────────────── */
+  .faq-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s ease;
+  }
+  details[open] .faq-body {
+    grid-template-rows: 1fr;
+  }
+  .faq-body > * {
+    overflow: hidden;
+  }
+
+  /* ── Hover states — skip on touch / reduced-motion devices ──── */
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .svc-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px -16px rgba(15, 20, 25, 0.2);
+    }
+    .btn-scale:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  /* ── Reduced motion overrides ──────────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
+    .svc-card    { transition: box-shadow 0.18s ease; }
+    .btn-scale   { transition: background-color 0.18s ease, color 0.18s ease; }
+    .faq-body    { transition: none; }
+    .heading-line::after { width: 3rem; transition: none; }
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
     }
   }
 }
