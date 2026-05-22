@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* DM Sans — shared body font for all three variations */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply font-sans antialiased text-gray-900;
+    font-size: 16px;
+  }
+  ::selection {
+    @apply bg-kei-blue text-white;
+  }
+  *:focus-visible {
+    @apply outline-2 outline-kei-blue outline-offset-2;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-container px-5 md:px-8 lg:px-12;
+  }
+
+  /* Sticky nav */
+  .site-nav {
+    @apply sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-gray-100;
+  }
+
+  /* Generic section spacing */
+  .section-pad {
+    @apply py-16 md:py-24;
+  }
+
+  /* Card base */
+  .card {
+    @apply rounded-2xl p-6 md:p-8;
+  }
+
+  /* Accessible tap target minimum */
+  .tap-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+}
+
+@layer utilities {
+  /* Reduced motion — honour system preference */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
