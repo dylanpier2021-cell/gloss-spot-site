@@ -4,9 +4,9 @@
 
 ## Pages
 
-- [Landing A — Bold](/landing-a): High-energy, red-forward landing page variation
-- [Landing B — Elegant](/landing-b): Polished, blue-forward landing page variation
-- [Landing C — Playful](/landing-c): Warm, yellow-forward landing page variation
+- [Landing A - Bold](/landing-a): High-energy, red-forward landing page variation
+- [Landing B - Elegant](/landing-b): Polished, blue-forward landing page variation
+- [Landing C - Playful](/landing-c): Warm, yellow-forward landing page variation
 
 ## Services
 
@@ -14,6 +14,11 @@
 - Corporate event planning
 - Bounce house rental
 - Any event: weddings, baby showers, retirements, holiday parties, brand activations
+
+## Legal
+
+- [Privacy Policy](/privacy-policy/): SMS opt-out, data collection, and privacy practices
+- [Terms and Conditions](/terms/): SMS messaging terms, opt-out instructions, compliance
 
 ## Contact
 
