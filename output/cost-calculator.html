@@ -471,6 +471,7 @@ footer ul a:hover{color:var(--accent)}
       <div>
         <h1>Cost Calculator</h1>
         <p style="color:var(--muted);margin-top:6px;max-width:50ch">Pick a service, package, and vehicle. Instant estimate. No email required.</p>
+        <p style="color:var(--ink);margin-top:14px;max-width:60ch;padding:12px 16px;background:var(--soft);border-radius:6px;border-left:3px solid var(--primary);font-size:.92rem"><strong>Seasonal note:</strong> Mobile detailing is available spring through fall. Ceramic coating, window tint, PPF, wraps, and paint correction run year-round at our shop.</p>
       </div>
     </div>
 
@@ -493,7 +494,7 @@ footer ul a:hover{color:var(--accent)}
           <div class="opt-grid" id="vehicleGrid">
             <label class="opt" data-veh="Coupe"><div class="opt-name">Coupe / Compact</div></label>
             <label class="opt" data-veh="Sedan"><div class="opt-name">Sedan</div></label>
-            <label class="opt" data-veh="SUV"><div class="opt-name">SUV</div></label>
+            <label class="opt" data-veh="Mid SUV"><div class="opt-name">Mid SUV</div></label>
             <label class="opt" data-veh="Large SUV"><div class="opt-name">Large SUV / Truck</div></label>
             <label class="opt" data-veh="Minivan"><div class="opt-name">Minivan</div></label>
           </div>
@@ -535,7 +536,7 @@ footer ul a:hover{color:var(--accent)}
 </section>
 
 <script>
-window.PRICING = {"detail":{"label":"Car Detailing","packages":{"Mobile Full Detail Package":{"Coupe":[225,2.25],"Sedan":[250,2.5],"SUV":[285,2.75],"Large SUV":[315,3],"Minivan":[375,4]},"Mobile Interior Package":{"Coupe":[150,1.75],"Sedan":[175,2],"SUV":[200,2.25],"Large SUV":[225,2.5],"Minivan":[265,3.25]},"Mobile Exterior Package":{"Coupe":[100,1],"Sedan":[110,1],"SUV":[120,1.25],"Large SUV":[130,1.25],"Minivan":[140,1.5]}}},"ceramic":{"label":"Ceramic Coating","durations":6,"packages":{"1 Year":{"base":200},"3 Year":{"base":700},"5 Year":{"base":1000}},"vehicleAdd":{"Coupe":0,"Sedan":50,"SUV":100,"Large SUV":150,"Minivan":200}},"tint":{"label":"Window Tint","duration":3,"sizes":{"Coupe":"Small","Sedan":"Med","SUV":"Large","Large SUV":"XL","Minivan":"XL"},"packages":{"Obsidian":{"Small":350,"Med":450,"Large":550,"XL":650},"Ceramic IR":{"Small":475,"Med":575,"Large":675,"XL":775},"Crystalline":{"Small":890,"Med":990,"Large":1090,"XL":1190}},"addons":{"Windshield":250,"Brow":75}},"ppf":{"label":"Paint Protection Film","duration":6,"packages":{"City":300,"Rural":700,"Highway":850,"Autobahn":1800,"Track Pack":3000,"Pro Street":6500}},"wrap":{"label":"Car Wrap","duration":24,"packages":{"Misc Color":500,"Black":750,"White":950}},"paintCorrection":{"label":"Paint Correction","duration":5,"packages":{"Misc Color":500,"Black":750,"White":950},"vehicleAdd":{"Coupe":0,"Sedan":150,"SUV":300,"Large SUV":450,"Minivan":600}}};
+window.PRICING = {"detail":{"label":"Car Detailing","packages":{"Mobile Exterior Package":{"Coupe":[100,1],"Sedan":[110,1],"Mid SUV":[120,1.25],"Large SUV":[130,1.25],"Minivan":[140,1.5]},"Mobile Interior Package":{"Coupe":[150,1.75],"Sedan":[175,2],"Mid SUV":[200,2.25],"Large SUV":[225,2.5],"Minivan":[265,3.25]},"Mobile Full Detail Package":{"Coupe":[225,2.25],"Sedan":[250,2.5],"Mid SUV":[285,2.75],"Large SUV":[315,3],"Minivan":[375,4]}}},"ceramic":{"label":"Ceramic Coating","durations":6,"packages":{"1 Year":{"base":200},"3 Year":{"base":700},"5 Year":{"base":1000}},"vehicleAdd":{"Coupe":0,"Sedan":50,"Mid SUV":100,"Large SUV":150,"Minivan":200}},"tint":{"label":"Window Tint","duration":3,"sizes":{"Coupe":"Small","Sedan":"Med","Mid SUV":"Large","Large SUV":"XL","Minivan":"XL"},"packages":{"Obsidian":{"Small":350,"Med":450,"Large":550,"XL":650},"Ceramic IR":{"Small":475,"Med":575,"Large":675,"XL":775},"Crystalline":{"Small":890,"Med":990,"Large":1090,"XL":1190}},"addons":{"Windshield":250,"Brow":75}},"ppf":{"label":"Paint Protection Film","duration":6,"packages":{"City":300,"Rural":700,"Highway":850,"Autobahn":1800,"Track Pack":3000,"Pro Street":6500}},"wrap":{"label":"Car Wrap","duration":24,"packages":{"Misc Color":500,"Black":750,"White":950}},"paintCorrection":{"label":"Paint Correction","duration":5,"packages":{"Misc Color":500,"Black":750,"White":950},"vehicleAdd":{"Coupe":0,"Sedan":150,"Mid SUV":300,"Large SUV":450,"Minivan":600}}};
 window.GERMAN = {"upcharge":100,"applies":["ceramic","ppf","wrap","paintCorrection"]};
 const S = { service: null, packageName: null, vehicle: null, addons: {}, isGerman: false, price: 0, duration: 0 };
 const $ = (id) => document.getElementById(id);
@@ -644,7 +645,7 @@ function update() {
           <img src="https://res.cloudinary.com/djp1yfsj5/image/upload/v1777607518/Gloss_Spot_5_ranrsj.png" alt="The Gloss Spot Auto Detailing logo" class="brand-mark brand-mark-img" loading="eager" width="140" height="56">
           
         </div>
-        <p>Premium mobile detailing across Champaign-Urbana. We come to you. Owner-operated by Dominic Pierson and the Gloss crew.</p>
+        <p>Premium mobile detailing across Champaign-Urbana. We come to you. Owner-operated by Dominic Pierson and the Gloss crew. Mobile detailing is available spring through fall. In winter, our ceramic coating, window tint, paint protection film, wraps, and paint correction continue year-round at the shop.</p>
         <div class="footer-social">
           <a href="https://www.facebook.com/theglossspot" aria-label="f">f</a>
           <a href="https://www.instagram.com/theglossspotil" aria-label="IG">IG</a>
