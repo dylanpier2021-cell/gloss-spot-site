@@ -9,7 +9,10 @@ function lowerSlug(s) {
 // City slug for the city's own landing page.
 // Champaign keeps capital C and -il suffix per indexed URLs.
 function citySlug(city) {
-  if (city === "Champaign") return "Champaign-il";
+  // The homepage IS the Champaign page — it carries the same <title> and <h1>.
+  // A separate /Champaign-il duplicate only cannibalised the primary keyword,
+  // so Champaign links resolve to "/" and the old URL 301s there (vercel.json).
+  if (city === client.city) return "";
   return lowerSlug(city);
 }
 // City slug used inside service+city combo URLs (always lowercase).
@@ -1139,7 +1142,8 @@ ${finalCtaSection({ city })}`;
 export async function generateAllLandingPages() {
   const results = [];
   for (const city of client.cities) {
-    const r = buildCityLanding(city, city === client.city);
+    if (city === client.city) continue; // homepage already covers the primary city
+    const r = buildCityLanding(city, false);
     results.push(r);
   }
   console.log(`  ✓ ${results.length} city landing pages`);
