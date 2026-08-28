@@ -162,7 +162,7 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .nav-links a.active{color:var(--primary)}
 .nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--primary)}
 .nav-cta{display:flex;align-items:center;gap:14px}
-.nav-phone{color:var(--ink);font-weight:600;font-size:.95rem}
+.nav-phone{color:var(--ink);font-weight:600;font-size:.95rem;white-space:nowrap;text-decoration:none}
 .nav-phone strong{color:var(--primary)}
 .menu-btn{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink);padding:6px}
 
@@ -176,8 +176,8 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .hero-static::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(1,61,62,.88) 0%,rgba(13,20,24,.65) 55%,rgba(13,20,24,.45) 100%)}
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:#000}
 .hero-video-overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(1,61,62,.78) 0%,rgba(13,20,24,.58) 55%,rgba(13,20,24,.4) 100%);z-index:1;pointer-events:none}
-.hero-inner{position:relative;z-index:2;padding:120px 0 100px;width:100%}
-.hero-tall .hero-inner{padding:140px 0 120px}
+.hero-inner{position:relative;z-index:2;padding:120px 28px 100px;width:100%}
+.hero-tall .hero-inner{padding:140px 28px 120px}
 .hero h1{color:#fff;max-width:18ch;margin-bottom:.4em}
 .hero h1 em{font-style:normal;color:var(--accent);font-family:inherit}
 .hero .loc{display:inline-flex;align-items:center;gap:10px;font-size:.92rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:1.6em;color:rgba(255,255,255,.85)}
@@ -416,14 +416,14 @@ footer ul a:hover{color:var(--accent)}
   .area-cities{grid-template-columns:1fr 1fr}
   .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
   .value-list,.owner-bullets{grid-template-columns:1fr}
+  .hero,.hero-tall{flex-direction:column;align-items:stretch;min-height:auto}
   .hero-trust{position:relative;background:var(--ink)}
-  .hero,.hero-tall{min-height:auto}
   .slide-dots{display:none}
   .mobile-call{display:block}
   body{padding-bottom:60px}
   .intro-strip,.value-section,.gallery-section,.services-section,.reviews-section,.owner-section,.bigcta,.process-section,.area-section,.final-section,.page-content,.faq-section,.blog-section{padding:70px 0}
   .topbar{display:none}
-  .nav-phone span{display:none}
+  .nav-phone{display:none}
   .page-content-aside{position:static;top:auto}
 }
 @media (max-width:580px){
@@ -432,7 +432,7 @@ footer ul a:hover{color:var(--accent)}
   .footer-grid{grid-template-columns:1fr}
   .area-cities{grid-template-columns:1fr 1fr}
   .container{padding:0 22px}
-  .hero-inner{padding:90px 0 110px}
+  .hero-inner{padding:90px 22px 110px}
   .process-step{grid-template-columns:60px 1fr;gap:20px}
   .process-num{width:58px;height:58px;font-size:1.3rem}
   .process-list::before{left:28px}
@@ -533,7 +533,7 @@ function navbar(currentPath) {
       ${link("/contact", "Contact")}
     </ul>
     <div class="nav-cta">
-      <span class="nav-phone"><span>Call &nbsp;</span><strong>${PHONE}</strong></span>
+      <a class="nav-phone" href="tel:${PHONE_TEL}"><span>Call &nbsp;</span><strong>${PHONE}</strong></a>
       <a href="/book-an-appointment-1696" class="btn btn-primary" style="padding:12px 22px;font-size:.9rem">Book Now</a>
       <button class="menu-btn" id="menuBtn" aria-label="menu">☰</button>
     </div>
@@ -1273,20 +1273,33 @@ export async function generateChampaignCombos() {
   return results;
 }
 
+// Truncate to at most `max` chars without cutting a word in half. Keeps the
+// meta description under Google's ~155-char snippet cutoff instead of ending
+// mid-word the way a bare .slice() did.
+function clipWords(text, max) {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max + 1);
+  const sp = cut.lastIndexOf(" ");
+  return (sp > 0 ? cut.slice(0, sp) : text.slice(0, max)).replace(/[\s,;:—-]+$/, "") + "…";
+}
+
 // B2B pages
+// [slug, name, on-page blurb, meta-description sentence]
+// The 4th entry is the search-snippet sentence — keep it a complete thought
+// under ~70 chars so the full description lands inside Google's cutoff.
 const B2B_SERVICES = [
-  ["b2b-detailing", "B2B Detailing", "Volume detailing for businesses — auto dealerships, rental fleets, body shops, and corporate fleets across central Illinois."],
-  ["fleet-detailing", "Fleet Detailing", "Recurring on-site detailing for company fleets, ride-share drivers, and rental car companies. Volume pricing, scheduled cleans."],
-  ["commercial-detailing", "Commercial Detailing", "Heavy-duty interior and exterior detailing for commercial vehicles, vans, trucks, and equipment."],
-  ["dealership-detailing", "Dealership Detailing", "Lot-ready vehicle prep, pre-delivery inspection details, and trade-in reconditioning for area dealers."],
-  ["body-shop-detailing", "Body Shop Detailing", "Final-stage post-paint detail to remove buffer trails, overspray, and prep the car for handoff to the customer."],
-  ["rental-car-detailing", "Rental Car Detailing", "Quick-turn interior and exterior resets for rental fleets. Smoke, pet, and stain remediation."],
+  ["b2b-detailing", "B2B Detailing", "Volume detailing for businesses — auto dealerships, rental fleets, body shops, and corporate fleets across central Illinois.", "Volume detailing for dealerships, fleets, and body shops."],
+  ["fleet-detailing", "Fleet Detailing", "Recurring on-site detailing for company fleets, ride-share drivers, and rental car companies. Volume pricing, scheduled cleans.", "Recurring on-site cleans for company fleets. Volume pricing."],
+  ["commercial-detailing", "Commercial Detailing", "Heavy-duty interior and exterior detailing for commercial vehicles, vans, trucks, and equipment.", "Heavy-duty detailing for vans, trucks, and equipment."],
+  ["dealership-detailing", "Dealership Detailing", "Lot-ready vehicle prep, pre-delivery inspection details, and trade-in reconditioning for area dealers.", "Lot-ready prep, PDI details, and trade-in reconditioning."],
+  ["body-shop-detailing", "Body Shop Detailing", "Final-stage post-paint detail to remove buffer trails, overspray, and prep the car for handoff to the customer.", "Post-paint detail: buffer trails, overspray, customer handoff."],
+  ["rental-car-detailing", "Rental Car Detailing", "Quick-turn interior and exterior resets for rental fleets. Smoke, pet, and stain remediation.", "Quick-turn resets for rental fleets. Smoke, pet, stain removal."],
 ];
 
 export async function generateB2BPages() {
   const results = [];
-  for (const [slug, name, blurb] of B2B_SERVICES) {
-    const description = `${name} from ${client.businessName} — mobile, owner-operated, central Illinois. ${blurb.slice(0, 80)} Call ${PHONE}.`;
+  for (const [slug, name, blurb, metaLine] of B2B_SERVICES) {
+    const description = `${name} — mobile, owner-operated, central Illinois. ${metaLine || clipWords(blurb, 62)} Call ${PHONE}.`;
     const head = pageHead({
       title: `${name} | ${client.businessName}`,
       description, canonical: `${client.domain}/${slug}`,

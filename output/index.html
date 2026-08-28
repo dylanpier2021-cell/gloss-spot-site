@@ -6,11 +6,11 @@
 <title>Car Detailing in Champaign, IL | The Gloss Spot Auto Detailing</title>
 <meta name="description" content="Premium car detailing in Champaign, IL. The Gloss Spot Auto Detailing brings showroom results to your driveway — interior, exterior, ceramic coating. Call 217-600-2108.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://theglossspotil.com/">
+<link rel="canonical" href="https://www.theglossspotil.com/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Car Detailing in Champaign, IL | The Gloss Spot Auto Detailing">
 <meta property="og:description" content="Premium car detailing in Champaign, IL. The Gloss Spot Auto Detailing brings showroom results to your driveway — interior, exterior, ceramic coating. Call 217-600-2108.">
-<meta property="og:url" content="https://theglossspotil.com/">
+<meta property="og:url" content="https://www.theglossspotil.com/">
 <meta property="og:image" content="https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1800/IMG_5948_totw8k">
 <meta property="og:site_name" content="The Gloss Spot Auto Detailing">
 <meta name="twitter:card" content="summary_large_image">
@@ -62,7 +62,7 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .nav-links a.active{color:var(--primary)}
 .nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--primary)}
 .nav-cta{display:flex;align-items:center;gap:14px}
-.nav-phone{color:var(--ink);font-weight:600;font-size:.95rem}
+.nav-phone{color:var(--ink);font-weight:600;font-size:.95rem;white-space:nowrap;text-decoration:none}
 .nav-phone strong{color:var(--primary)}
 .menu-btn{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink);padding:6px}
 
@@ -76,8 +76,8 @@ nav.main.scrolled{box-shadow:0 8px 30px -12px rgba(0,0,0,.12)}
 .hero-static::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(1,61,62,.88) 0%,rgba(13,20,24,.65) 55%,rgba(13,20,24,.45) 100%)}
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:#000}
 .hero-video-overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(1,61,62,.78) 0%,rgba(13,20,24,.58) 55%,rgba(13,20,24,.4) 100%);z-index:1;pointer-events:none}
-.hero-inner{position:relative;z-index:2;padding:120px 0 100px;width:100%}
-.hero-tall .hero-inner{padding:140px 0 120px}
+.hero-inner{position:relative;z-index:2;padding:120px 28px 100px;width:100%}
+.hero-tall .hero-inner{padding:140px 28px 120px}
 .hero h1{color:#fff;max-width:18ch;margin-bottom:.4em}
 .hero h1 em{font-style:normal;color:var(--accent);font-family:inherit}
 .hero .loc{display:inline-flex;align-items:center;gap:10px;font-size:.92rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:1.6em;color:rgba(255,255,255,.85)}
@@ -316,14 +316,14 @@ footer ul a:hover{color:var(--accent)}
   .area-cities{grid-template-columns:1fr 1fr}
   .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
   .value-list,.owner-bullets{grid-template-columns:1fr}
+  .hero,.hero-tall{flex-direction:column;align-items:stretch;min-height:auto}
   .hero-trust{position:relative;background:var(--ink)}
-  .hero,.hero-tall{min-height:auto}
   .slide-dots{display:none}
   .mobile-call{display:block}
   body{padding-bottom:60px}
   .intro-strip,.value-section,.gallery-section,.services-section,.reviews-section,.owner-section,.bigcta,.process-section,.area-section,.final-section,.page-content,.faq-section,.blog-section{padding:70px 0}
   .topbar{display:none}
-  .nav-phone span{display:none}
+  .nav-phone{display:none}
   .page-content-aside{position:static;top:auto}
 }
 @media (max-width:580px){
@@ -332,7 +332,7 @@ footer ul a:hover{color:var(--accent)}
   .footer-grid{grid-template-columns:1fr}
   .area-cities{grid-template-columns:1fr 1fr}
   .container{padding:0 22px}
-  .hero-inner{padding:90px 0 110px}
+  .hero-inner{padding:90px 22px 110px}
   .process-step{grid-template-columns:60px 1fr;gap:20px}
   .process-num{width:58px;height:58px;font-size:1.3rem}
   .process-list::before{left:28px}
@@ -343,7 +343,7 @@ footer ul a:hover{color:var(--accent)}
   "@type":"AutoDetailing",
   "name":"The Gloss Spot Auto Detailing",
   "image":"https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1800/IMG_5948_totw8k",
-  "url":"https://theglossspotil.com/",
+  "url":"https://www.theglossspotil.com/",
   "telephone":"+12176002108",
   "email":"theglossspotil@gmail.com",
   "priceRange":"$$",
@@ -378,7 +378,7 @@ footer ul a:hover{color:var(--accent)}
       <li><a href="/contact" class="">Contact</a></li>
     </ul>
     <div class="nav-cta">
-      <span class="nav-phone"><span>Call &nbsp;</span><strong>217-600-2108</strong></span>
+      <a class="nav-phone" href="tel:+12176002108"><span>Call &nbsp;</span><strong>217-600-2108</strong></a>
       <a href="/book-an-appointment-1696" class="btn btn-primary" style="padding:12px 22px;font-size:.9rem">Book Now</a>
       <button class="menu-btn" id="menuBtn" aria-label="menu">☰</button>
     </div>

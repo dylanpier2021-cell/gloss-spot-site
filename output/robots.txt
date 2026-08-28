@@ -4,4 +4,4 @@ Allow: /
 # Block crawl of internal API endpoints
 Disallow: /api/
 
-Sitemap: https://theglossspotil.com/sitemap.xml
+Sitemap: https://www.theglossspotil.com/sitemap.xml

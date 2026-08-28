@@ -194,7 +194,7 @@ export const client = {
   includeCityPages: true,
   includeBlogPage: true,
 
-  domain: "https://theglossspotil.com",
+  domain: "https://www.theglossspotil.com",
 
   anthropicApiKey: process.env.ANTHROPIC_API_KEY,
   ghlApiKey:       process.env.GHL_API_KEY       || "",

@@ -21,6 +21,11 @@ GHL_LOCATION_ID=your-location-id     # optional
 INDEXNOW_KEY=your-indexnow-key       # optional
 ```
 
+**Separately**, the serverless functions in `api/` read `GHL_PIT_TOKEN` (a GHL
+Private Integration Token) from the **Vercel** environment, not from `.env`.
+Booking and feedback submissions fail with a 500 if it is unset. See
+`.env.example` for the full list.
+
 Get your Anthropic API key at: https://console.anthropic.com
 
 ### 3. Fill out client-config.js
