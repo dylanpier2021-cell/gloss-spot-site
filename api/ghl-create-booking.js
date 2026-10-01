@@ -3,6 +3,7 @@
 
 const GHL_BASE = "https://services.leadconnectorhq.com";
 const LOCATION_ID = "CLJQbljlapECB2Aiq27f";
+const SHOP_ADDRESS = "606 N. Country Fair Dr, Champaign, IL";
 
 async function readJsonBody(req) {
   if (req.body && typeof req.body === "object") return req.body;
@@ -35,12 +36,20 @@ export default async function handler(req, res) {
 
   const {
     calendarId, startISO, durationHours,
-    firstName, lastName, email, phone, address,
+    name, email, phone,
     service, packageName, vehicle, vehicleInfo,
-    notes, price, isGerman, addons,
+    notes, price, isGerman, addons, textMe, page,
   } = body || {};
 
-  if (!calendarId || !startISO || !durationHours || !firstName || !lastName || !email || !phone || !address) {
+  // The site's booking form only requires name + phone. `firstName`/`lastName`
+  // and `address` are still accepted for older clients; the address defaults
+  // to the shop now that every job is a drop-off.
+  const parts = String(name || "").trim().split(/\s+/).filter(Boolean);
+  const firstName = body?.firstName || parts[0] || "";
+  const lastName = body?.lastName || parts.slice(1).join(" ") || "-";
+  const address = body?.address || SHOP_ADDRESS;
+
+  if (!calendarId || !startISO || !durationHours || !firstName || !phone) {
     res.status(400).json({ error: "Missing required fields" });
     return;
   }
@@ -60,10 +69,11 @@ export default async function handler(req, res) {
       headers,
       body: JSON.stringify({
         locationId: LOCATION_ID,
-        firstName, lastName, email, phone,
-        address1: address,
+        firstName, lastName, phone,
+        ...(email ? { email } : {}),
+        ...(body?.address ? { address1: body.address } : {}),
         source: "Website Booking",
-        tags: ["website-booking", service].filter(Boolean),
+        tags: ["website-booking", service, textMe ? "prefers-text" : null].filter(Boolean),
       }),
     });
     contactJson = await contactRes.json();
@@ -96,7 +106,9 @@ export default async function handler(req, res) {
     isGerman ? "German vehicle upcharge applied (+$100)" : null,
     addonStr ? `Add-ons: ${addonStr}` : null,
     `Estimated total: $${price || 0}`,
-    `Address: ${address}`,
+    `Drop-off: ${address}`,
+    textMe ? "Prefers text messages" : null,
+    page ? `Booked from: ${page}` : null,
     notes ? `\nNotes from customer:\n${notes}` : null,
   ].filter(Boolean).join("\n");
 
