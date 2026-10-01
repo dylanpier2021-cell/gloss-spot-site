@@ -1,6 +1,8 @@
 // Vercel serverless function — upserts a contact, then creates an appointment
 // in the GHL calendar. PIT token + location ID stored as env vars.
 
+import { DOM_USER_ID, taskForDom } from "./_lib/notify-dom.js";
+
 const GHL_BASE = "https://services.leadconnectorhq.com";
 const LOCATION_ID = "CLJQbljlapECB2Aiq27f";
 const SHOP_ADDRESS = "606 N. Country Fair Dr, Champaign, IL";
@@ -73,7 +75,8 @@ export default async function handler(req, res) {
         ...(email ? { email } : {}),
         ...(body?.address ? { address1: body.address } : {}),
         source: "Website Booking",
-        tags: ["website-booking", service, textMe ? "prefers-text" : null].filter(Boolean),
+        assignedTo: DOM_USER_ID,
+        tags: ["website-lead", "website-booking", service, textMe ? "prefers-text" : null].filter(Boolean),
       }),
     });
     contactJson = await contactRes.json();
@@ -138,6 +141,10 @@ export default async function handler(req, res) {
     res.status(502).json({ error: "GHL appointment error", details: String(e.message || e) });
     return;
   }
+
+  // Make sure Dom sees it (task assigned to him; GHL notifies him).
+  const when = new Date(startTime).toLocaleString("en-US", { timeZone: "America/Chicago", weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+  await taskForDom(token, contactId, `New website booking: ${firstName} ${lastName === "-" ? "" : lastName} – ${packageName || service || "Detail"} – ${when}`.replace(/\s+/g, " "), fullNotes);
 
   res.status(200).json({
     ok: true,

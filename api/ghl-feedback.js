@@ -2,6 +2,8 @@
 // 1-3 star branch of the /review funnel), upserts the contact in GHL and
 // attaches the message as a note. PIT token stored as an env var.
 
+import { DOM_USER_ID, taskForDom } from "./_lib/notify-dom.js";
+
 const GHL_BASE = "https://services.leadconnectorhq.com";
 const LOCATION_ID = "CLJQbljlapECB2Aiq27f";
 
@@ -65,7 +67,8 @@ export default async function handler(req, res) {
         ...(email ? { email } : {}),
         ...(phone ? { phone } : {}),
         source: "Website Feedback",
-        tags: ["website-feedback", "needs-follow-up", stars ? `rating-${stars}` : null].filter(Boolean),
+        assignedTo: DOM_USER_ID,
+        tags: ["website-lead", "website-feedback", "needs-follow-up", stars ? `rating-${stars}` : null].filter(Boolean),
       }),
     });
     contactJson = await contactRes.json();
@@ -110,6 +113,9 @@ export default async function handler(req, res) {
     res.status(502).json({ error: "GHL note error", details: String(e.message || e), contactId });
     return;
   }
+
+  // Make sure Dom sees it (task assigned to him; GHL notifies him).
+  await taskForDom(token, contactId, `Website feedback${stars ? ` (${stars}★)` : ""} from ${name}: follow up`, noteBody);
 
   res.status(200).json({ ok: true, contactId });
 }
