@@ -26,9 +26,16 @@
     { "source": "/process", "destination": "/our-process", "permanent": true },
     { "source": "/tint", "destination": "/window-tint", "permanent": true },
     { "source": "/coating", "destination": "/ceramic", "permanent": true },
-    { "source": "/correction", "destination": "/paint-correction", "permanent": true }
+    { "source": "/correction", "destination": "/paint-correction", "permanent": true },
+    { "source": "/members", "destination": "/membership", "permanent": true }
   ],
   "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
