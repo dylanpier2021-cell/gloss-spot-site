@@ -145,6 +145,13 @@ export const wraps = {
   ],
 };
 
+// Exterior-only weekly plan.
+export const maintenance = {
+  name: "Exterior Maintenance",
+  price: 149,
+  includes: ["4 exterior details a month, one every week", "Hand wash, wheels, tires and glass", "A regular weekly time, set with Dom"],
+};
+
 export const membership = {
   price: 299,
   includes: ["Weekly exterior wash and wax", "4 interior maintenance cleans a month", "A regular weekly time, set with Dom"],
@@ -277,7 +284,8 @@ export const faqs = {
     ["Does a vinyl wrap protect my paint?", "While it's on, the wrap shields your paint from sun and light scratches."],
   ],
   membership: [
-    ["What's included in the car wash membership?", "A weekly exterior wash and wax plus 4 interior maintenance cleans a month, for $299 a month."],
+    ["How much is a car wash membership in Champaign?", "Exterior Maintenance is $149 a month for 4 exterior details, one every week. The full Gloss Membership is $299 a month and adds 4 interior cleans."],
+    ["What's the difference between the two plans?", "Exterior Maintenance covers the outside only. The Gloss Membership adds weekly wax and an interior clean every week."],
     ["How do I start a membership?", "Tap Start Membership or call 217-600-2108. Dom will set up your weekly day and time."],
     ["Do I have to book every visit?", "No. We set a regular weekly time with you, so it just happens."],
     ["Who is the membership for?", "Commuters, families and anyone who wants a clean car every week without thinking about it."],
@@ -350,7 +358,7 @@ export const posts = [
       ["h2", "Protection"],
       ["ul", ["Ceramic coating: from $1,100 (paint correction included)", "Paint protection film: from $800 for a sedan", "Vehicle wraps: from $2,400, partial wraps from $800"]],
       ["h2", "Membership"],
-      ["p", "$299 a month covers a weekly exterior wash and wax plus 4 interior cleans. Details on the <a href=\"/membership\">membership page</a>."],
+      ["p", "Exterior Maintenance is $149 a month for a weekly exterior detail. The $299 Gloss Membership adds weekly wax and 4 interior cleans. Details on the <a href=\"/membership\">membership page</a>."],
       ["h2", "Why prices vary by size"],
       ["p", "A 3-row SUV has more seats, more carpet and more paint. You'll always see your exact price before you book."],
     ],
@@ -371,7 +379,7 @@ export const posts = [
       ["h2", "Time it with the seasons"],
       ["p", "In Champaign County, a Full Detail in late fall preps your car for salt. Another in spring washes winter off for good."],
       ["h2", "Want it handled?"],
-      ["p", "The <a href=\"/membership\">$299/month membership</a> keeps your car clean every week. Or <a href=\"/packages\">book a detail</a> when you need one."],
+      ["p", "A <a href=\"/membership\">membership from $149/month</a> keeps your car clean every week. Or <a href=\"/packages\">book a detail</a> when you need one."],
     ],
   },
   {

@@ -9,7 +9,7 @@ import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import {
   biz, photos, beforeAfter, media, sizes, ceramicSizes, detailPackages,
-  ceramic, ppf, wraps, membership, reviews, story, howItWorks, areaLine,
+  ceramic, ppf, wraps, membership, maintenance, reviews, story, howItWorks, areaLine,
   faqs, cities, posts,
 } from "./content.js";
 import { pages, redirectsAdded } from "./pages.js";
@@ -186,6 +186,9 @@ function priceCard(kind, page) {
       return card("Vehicle Wraps", "Full color change or partial accents.", money(800),
         rows(wraps.rows.map((r) => r.name), wraps.rows.map((r) => (r.custom ? "Custom quote" : range(r.range)))) +
         `<table class="pt pt-extra"><tbody>${wraps.extras.map(([a, b]) => `<tr><th scope="row">${a}</th><td>${b}</td></tr>`).join("")}</tbody></table>` + quoteBtn("Vehicle Wrap"), true);
+    case "maintenance":
+      return card(maintenance.name, "4 exterior details a month, one every week.", `${money(maintenance.price)}<small>/mo</small>`,
+        incl(maintenance.includes) + `<a class="btn btn-p btn-s" href="#quote" data-quote="Exterior Maintenance">${icon("sparkle")}<span>Start Exterior Plan</span></a>`, true);
     case "membership":
       return card("Gloss Membership", "Weekly wash and wax + 4 interior cleans a month.", `${money(membership.price)}<small>/mo</small>`,
         incl(membership.includes) + `<a class="btn btn-p btn-s" href="#quote" data-quote="Membership">${icon("sparkle")}<span>Start Membership</span></a>`, true);
@@ -222,9 +225,9 @@ function reviewsBlock(n = 6, heading = `${biz.reviewCount} five-star Google revi
 
 function membershipBanner() {
   return `<section class="sec sec-mem">${bgVideo(media.memberCar ? "memberCar" : "beading")}<div class="wrap mem reveal">
-    <div><p class="eyebrow">Membership</p><h2>Clean every week. <span class="cy">${money(membership.price)}/mo.</span></h2>
-    <ul class="incl incl-row">${membership.includes.slice(0, 2).map((x) => `<li>${icon("check")}${x}</li>`).join("")}</ul></div>
-    <div class="ctas"><a class="btn btn-p" href="/membership">${icon("sparkle")}<span>See Membership</span></a></div>
+    <div><p class="eyebrow">Membership</p><h2>Clean every week. <span class="cy">From ${money(maintenance.price)}/mo.</span></h2>
+    <ul class="incl incl-row"><li>${icon("check")}${maintenance.name}: weekly exterior detail, ${money(maintenance.price)}/mo</li><li>${icon("check")}Gloss Membership: + wax and interior cleans, ${money(membership.price)}/mo</li></ul></div>
+    <div class="ctas"><a class="btn btn-p" href="/membership">${icon("sparkle")}<span>See Plans</span></a></div>
   </div></section>`;
 }
 
@@ -310,7 +313,7 @@ function legalBlock(html) { return sec("sec-text", `<div class="txt legal">${htm
 
 // ── quote form + booking widget ─────────────────────────────────────────────
 function quoteForm(defaultSvc) {
-  const opts = ["Ceramic Coating", "Paint Protection Film", "Vehicle Wrap", "Membership", "Window Tint", "Headlight Restoration", "Engine Bay Detail", "Motorcycle Detail", "Fleet / Business", "Something else"];
+  const opts = ["Ceramic Coating", "Paint Protection Film", "Vehicle Wrap", "Exterior Maintenance", "Membership", "Window Tint", "Headlight Restoration", "Engine Bay Detail", "Motorcycle Detail", "Fleet / Business", "Something else"];
   return sec("sec-quote", `${head("Get a quote", "Get a price by text", "Send a photo. We'll text you back.")}
   <form class="qf reveal" data-quote-form novalidate>
     <label>Service<select name="service">${opts.map((o) => `<option${o === defaultSvc ? " selected" : ""}>${o}</option>`).join("")}</select></label>
@@ -410,6 +413,7 @@ export const SERVICES_SCHEMA = [
   { name: "Ceramic Coating", low: 1100, high: 2550, url: "ceramic" },
   { name: "Paint Protection Film (PPF)", low: 800, high: 5500, url: "ppf" },
   { name: "Vehicle Wraps", low: 800, high: 3600, url: "car-wraps" },
+  { name: "Exterior Maintenance (4 exterior details/month)", low: 149, high: 149, url: "membership", unit: "MON" },
   { name: "Gloss Membership", low: 299, high: 299, url: "membership", unit: "MON" },
 ];
 function businessSchema() {
