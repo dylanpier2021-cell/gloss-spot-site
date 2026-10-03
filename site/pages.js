@@ -402,7 +402,7 @@ const info = [
     h1: "Car Detailing Photos from <em>Champaign, IL</em>",
     lead: "Real customer cars. No stock photos, ever.",
     hero: { photo: "vCorvette" },
-    blocks: [["gallery", ["hero", "hero2", "hero3", "hero4", "hero5", "value", "bigCta", "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g9"]], ["shopPhotos"]],
+    blocks: [["beforeAfter"], ["insta"], ["gallery", ["hero", "hero2", "hero3", "hero4", "hero5", "value", "bigCta", "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g9"]], ["shopPhotos"]],
   },
   {
     path: "reviews", crumb: "Reviews",

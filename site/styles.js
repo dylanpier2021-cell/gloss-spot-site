@@ -255,6 +255,14 @@ ul,ol{margin:0;padding:0;list-style:none}
 .shop li{border-radius:var(--r);overflow:hidden;aspect-ratio:4/5;scroll-snap-align:start}
 .shop img{width:100%;height:100%;object-fit:cover}
 
+/* instagram embeds: IG sets each player's own aspect ratio */
+.ig-grid{columns:1;column-gap:16px;margin-bottom:24px}
+.ig-item{break-inside:avoid;margin:0 0 16px;display:flex;justify-content:center}
+.ig-item .instagram-media{margin:0!important;min-width:0!important;width:100%!important;max-width:540px!important;border-radius:14px!important;background:var(--card)!important;border:1px solid var(--line)!important}
+.ig-item blockquote>a{display:grid;place-items:center;min-height:420px;color:var(--cy)}
+@media(min-width:700px){.ig-grid{columns:2}}
+@media(min-width:1050px){.ig-grid{columns:3}}
+
 /* calculator */
 .calc{display:grid;gap:14px;max-width:560px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px}
 .calc-out{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:14px}

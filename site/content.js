@@ -83,6 +83,15 @@ export const photos = {
   brothers: null,
 };
 
+// Instagram reels shown on /gallery with Instagram's own embed player, so
+// each keeps its real shape (vertical stays vertical, wide stays wide).
+// Newest first. Add more by pasting the code from the post's URL.
+export const instagram = {
+  handle: "theglossspotil",
+  url: "https://www.instagram.com/theglossspotil/",
+  reels: ["DZaVpQOjIJ6", "DZQCX4AjWAu", "DZIUPOojQfw", "DZITyvzDgSN", "DZITrMID4Dy", "DY2ShZzAmwA", "DYr_Tb2DFYv", "DYkQ2amk1Yd", "DYZ9zprDqgT", "DYSPKGCksK9"],
+};
+
 // Before/after pairs for the slider. Add pairs as { before, after, alt } using
 // Cloudinary IDs. Empty → the slider section shows recent work instead.
 export const beforeAfter = [];

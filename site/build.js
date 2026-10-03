@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 import {
   biz, photos, beforeAfter, media, sizes, ceramicSizes, detailPackages,
   ceramic, ppf, wraps, membership, maintenance, reviews, story, howItWorks, areaLine,
-  faqs, cities, posts,
+  faqs, cities, posts, instagram,
 } from "./content.js";
 import { pages, redirectsAdded } from "./pages.js";
 import { CSS } from "./styles.js";
@@ -271,6 +271,12 @@ function galleryBlock(keys) {
   return sec("sec-gal", `${head("Gallery", "Real cars. Real work.", "Every photo is a customer car from our shop.")}<ul class="gal">${html}</ul>`);
 }
 
+// Instagram reels, embedded with Instagram's player (loaded only when scrolled near).
+function instaBlock() {
+  const items = instagram.reels.map((id) => `<li class="ig-item"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/${id}/?utm_source=ig_embed" data-instgrm-version="14"><a href="https://www.instagram.com/reel/${id}/" target="_blank" rel="noopener">Watch on Instagram</a></blockquote></li>`).join("");
+  return sec("sec-ig", `${head("On Instagram", "Watch us work", `Real reels from <a href="${instagram.url}" target="_blank" rel="noopener">@${instagram.handle}</a>.`)}<ul class="ig-grid" data-ig>${items}</ul><p class="center"><a class="btn btn-o btn-s" href="${instagram.url}" target="_blank" rel="noopener">Follow @${instagram.handle}</a></p>`, "instagram");
+}
+
 function shopPhotos() {
   const keys = ["shopDoor", "shopFloor", "shopOffice"].filter((k) => photos[k]);
   const html = keys.map((k) => `<li class="reveal">${img(k)}</li>`).join("");
@@ -483,7 +489,7 @@ function pageSchema(page) {
 const RENDER = {
   benefits, serviceCards, beforeAfter: beforeAfterBlock, prices, faq: faqBlock, related, steps,
   reviews: reviewsBlock, membershipBanner, story: storyBlock, text: textBlock, compare: compareBlock,
-  cities: citiesBlock, gallery: galleryBlock, shopPhotos, calculator: calculatorBlock, post: postBlock,
+  cities: citiesBlock, gallery: galleryBlock, shopPhotos, insta: instaBlock, calculator: calculatorBlock, post: postBlock,
   postList, contact: contactBlock, legal: legalBlock, quote: quoteForm,
   allReviews: () => sec("sec-rev", `<ul class="rvs rvs-all">${reviewCards(reviews)}</ul><p class="center"><a class="btn btn-o btn-s" href="${biz.googleReviews}" target="_blank" rel="noopener">See every review on Google</a></p>`),
 };
