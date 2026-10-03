@@ -72,6 +72,12 @@ export const photos = {
   shopDoor: { src: OA + "01-bay-garage-door_1790847090678_c1d907c1.jpg", w: 2060, h: 2724, alt: "Garage bay at The Gloss Spot detail shop in Champaign IL" },
   shopFloor:{ src: OA + "03-main-floor_1790847101157_3e8e2d15.jpg", w: 2036, h: 2592, alt: "Main detailing floor inside The Gloss Spot shop, Champaign IL" },
   shopOffice:{ src: OA + "07-front-office_1790847120292_507ec405.jpg", w: 1948, h: 2448, alt: "Front office at The Gloss Spot, 606 N. Country Fair Dr, Champaign IL" },
+  // Real customer cars, short zoom clips (self-hosted in output/media/).
+  // `src` is the poster frame; `video` plays over it once the page loads.
+  vCorvette: { src: "/media/blue-corvette.jpg", video: "/media/blue-corvette.mp4", w: 960, h: 946, alt: "Blue C8 Corvette with fresh gloss in The Gloss Spot shop, Champaign IL" },
+  vWhiteYukon: { src: "/media/white-yukon.jpg", video: "/media/white-yukon.mp4", w: 960, h: 946, alt: "White GMC Yukon after a full detail, Champaign IL" },
+  vMatteBmw: { src: "/media/matte-bmw.jpg", video: "/media/matte-bmw.mp4", w: 960, h: 946, alt: "Matte black BMW sedan detailed by The Gloss Spot, Champaign IL" },
+  vBlackYukon: { src: "/media/black-yukon.jpg", video: "/media/black-yukon.mp4", w: 960, h: 946, alt: "Black GMC Yukon after detailing, Champaign IL" },
   // Photo of Dom & Dylan together. Paste a Cloudinary ID here when ready;
   // until then the story block shows a branded card instead.
   brothers: null,
@@ -143,6 +149,13 @@ export const wraps = {
     ["Old wrap removal", "$500 – $800"],
     ["Prep and edge resealing", "$150 – $350, if needed"],
   ],
+};
+
+// Exterior-only weekly plan.
+export const maintenance = {
+  name: "Exterior Maintenance",
+  price: 149,
+  includes: ["4 exterior details a month, one every week", "Hand wash, wheels, tires and glass", "A regular weekly time, set with Dom"],
 };
 
 export const membership = {
@@ -277,7 +290,8 @@ export const faqs = {
     ["Does a vinyl wrap protect my paint?", "While it's on, the wrap shields your paint from sun and light scratches."],
   ],
   membership: [
-    ["What's included in the car wash membership?", "A weekly exterior wash and wax plus 4 interior maintenance cleans a month, for $299 a month."],
+    ["How much is a car wash membership in Champaign?", "Exterior Maintenance is $149 a month for 4 exterior details, one every week. The full Gloss Membership is $299 a month and adds 4 interior cleans."],
+    ["What's the difference between the two plans?", "Exterior Maintenance covers the outside only. The Gloss Membership adds weekly wax and an interior clean every week."],
     ["How do I start a membership?", "Tap Start Membership or call 217-600-2108. Dom will set up your weekly day and time."],
     ["Do I have to book every visit?", "No. We set a regular weekly time with you, so it just happens."],
     ["Who is the membership for?", "Commuters, families and anyone who wants a clean car every week without thinking about it."],
@@ -350,7 +364,7 @@ export const posts = [
       ["h2", "Protection"],
       ["ul", ["Ceramic coating: from $1,100 (paint correction included)", "Paint protection film: from $800 for a sedan", "Vehicle wraps: from $2,400, partial wraps from $800"]],
       ["h2", "Membership"],
-      ["p", "$299 a month covers a weekly exterior wash and wax plus 4 interior cleans. Details on the <a href=\"/membership\">membership page</a>."],
+      ["p", "Exterior Maintenance is $149 a month for a weekly exterior detail. The $299 Gloss Membership adds weekly wax and 4 interior cleans. Details on the <a href=\"/membership\">membership page</a>."],
       ["h2", "Why prices vary by size"],
       ["p", "A 3-row SUV has more seats, more carpet and more paint. You'll always see your exact price before you book."],
     ],
@@ -371,7 +385,7 @@ export const posts = [
       ["h2", "Time it with the seasons"],
       ["p", "In Champaign County, a Full Detail in late fall preps your car for salt. Another in spring washes winter off for good."],
       ["h2", "Want it handled?"],
-      ["p", "The <a href=\"/membership\">$299/month membership</a> keeps your car clean every week. Or <a href=\"/packages\">book a detail</a> when you need one."],
+      ["p", "A <a href=\"/membership\">membership from $149/month</a> keeps your car clean every week. Or <a href=\"/packages\">book a detail</a> when you need one."],
     ],
   },
   {

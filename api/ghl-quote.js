@@ -3,6 +3,8 @@
 // GHL media library, then attaches everything as a note on the contact.
 // Photos arrive as JPEG data URLs already shrunk in the browser (~1600px).
 
+import { DOM_USER_ID, taskForDom } from "./_lib/notify-dom.js";
+
 const GHL_BASE = "https://services.leadconnectorhq.com";
 const LOCATION_ID = "CLJQbljlapECB2Aiq27f";
 const MAX_PHOTOS = 3;
@@ -88,7 +90,8 @@ export default async function handler(req, res) {
         locationId: LOCATION_ID,
         firstName, lastName, phone,
         source: "Website Quote",
-        tags: ["website-quote", service ? `quote-${slug(service)}` : null, textMe ? "prefers-text" : "prefers-call"].filter(Boolean),
+        assignedTo: DOM_USER_ID,
+        tags: ["website-lead", "website-quote", service ? `quote-${slug(service)}` : null, textMe ? "prefers-text" : "prefers-call"].filter(Boolean),
       }),
     });
     contactJson = await contactRes.json();
@@ -141,6 +144,9 @@ export default async function handler(req, res) {
     res.status(502).json({ error: "GHL note error", details: String(e.message || e), contactId });
     return;
   }
+
+  // Make sure Dom sees it (task assigned to him; GHL notifies him).
+  await taskForDom(token, contactId, `New website quote: ${name} – ${service || "General"} – ${textMe ? "TEXT back" : "CALL back"} ${phone}`, noteBody);
 
   res.status(200).json({ ok: true, contactId, photos: uploaded.length });
 }

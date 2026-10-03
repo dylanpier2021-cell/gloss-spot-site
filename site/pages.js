@@ -16,7 +16,7 @@ const R = {
   correction: ["paint-correction", "Paint correction", "Swirls out, depth back. From $325."],
   ppf: ["ppf", "Paint protection film", "Clear film that takes the rock chips."],
   wraps: ["car-wraps", "Vehicle wraps", "A new color, fully reversible. From $2,400."],
-  membership: ["membership", "Membership", "Weekly wash and wax + 4 interior cleans. $299/mo."],
+  membership: ["membership", "Weekly plans", "Exterior $149/mo, or full membership $299/mo."],
   protection: ["vehicle-protection", "Ceramic vs. PPF vs. wrap", "Which protection fits your car."],
   area: ["service-area", "Where our customers drive from", "Drive times from Champaign County towns."],
   reviews: ["reviews", "Reviews", `${biz.reviewCount} five-star Google reviews.`],
@@ -32,7 +32,7 @@ const core = [
     description: "Auto detailing in Champaign, IL: Express from $90, Full Detail from $225, Lux with paint correction from $325. Book online in 30 seconds.",
     h1: "Auto Detailing in <em>Champaign, IL</em>",
     lead: "Three packages, priced by vehicle size. Book in 30 seconds.",
-    hero: { photo: "hero2" },
+    hero: { photo: "vWhiteYukon" },
     service: { name: "Auto Detailing", type: "Car detailing", low: 90, high: 450 },
     blocks: [
       ["benefits", [["sparkle", "Three clear packages", "Express, Full or Lux. You see your price before you book."], ["shield", "Checked before it leaves", "Dom or Dylan inspects every car at pickup."], ["clock", "Drop off, pick up", "Leave it on the way to work. Grab it on the way home."]]],
@@ -48,7 +48,7 @@ const core = [
     description: "Ceramic coating in Champaign, IL with paint correction included. 3, 6 and 10-year coatings from $1,100. Book online or get a quote by text.",
     h1: "Ceramic Coating in <em>Champaign, IL</em>",
     lead: "Years of gloss and easy washes. Paint correction included.",
-    hero: { photo: "hero3", video: "heroDesktop", videoMobile: "heroMobile" },
+    hero: { photo: "vCorvette" },
     ctas: ["book", "quote"],
     service: { name: "Ceramic Coating", low: 1100, high: 2550 },
     blocks: [
@@ -65,7 +65,7 @@ const core = [
     description: "Paint correction in Champaign, IL: remove swirls and haze with our Lux Package, from $325 with a full detail and sealant. Book online today.",
     h1: "Paint Correction in <em>Champaign, IL</em>",
     lead: "Swirls out, depth back. From $325 with a full detail.",
-    hero: { photo: "value" },
+    hero: { photo: "vBlackYukon" },
     service: { name: "Paint Correction", type: "Automotive paint correction", low: 325, high: 550 },
     blocks: [
       ["benefits", [["sparkle", "Swirls and haze removed", "Machine polishing levels the clear coat so light reflects clean."], ["layers", "One-step or two-step", "One-step clears light swirls. Two-step cuts deeper for +$100."], ["shield", "Ready to protect", "The perfect base for <a href=\"/ceramic\">ceramic coating</a> or <a href=\"/ppf\">PPF</a>."]]],
@@ -81,7 +81,7 @@ const core = [
     description: "Paint protection film (PPF) in Champaign, IL. Essentials from $800, Track Pack and Full Body. Send a photo and get a quote by text today.",
     h1: "Paint Protection Film (PPF) in <em>Champaign, IL</em>",
     lead: "Clear film that takes the rock chips, so your paint doesn't.",
-    hero: { photo: "hero4" },
+    hero: { photo: "vMatteBmw" },
     ctas: ["quote", "call"],
     service: { name: "Paint Protection Film", type: "Paint protection film installation", low: 800, high: 5500 },
     blocks: [
@@ -98,7 +98,7 @@ const core = [
     description: "Vehicle wraps in Champaign, IL. Full color change from $2,400, partial wraps from $800. Send a photo and get a wrap quote by text today.",
     h1: "Vehicle Wraps in <em>Champaign, IL</em>",
     lead: "A whole new color, or just the accents. Fully reversible.",
-    hero: { photo: "hero5" },
+    hero: { photo: "vMatteBmw" },
     ctas: ["quote", "call"],
     service: { name: "Vehicle Wraps", type: "Vehicle vinyl wrap", low: 800, high: 3600 },
     blocks: [
@@ -111,17 +111,17 @@ const core = [
   },
   {
     path: "membership", crumb: "Membership", quote: "Membership", isNew: true,
-    title: "Car Wash Membership Champaign, IL – $299/mo | Gloss Spot",
-    description: "Car wash membership in Champaign, IL: weekly exterior wash and wax plus 4 interior cleans a month for $299/mo. Start your membership today.",
+    title: "Car Wash Membership Champaign, IL – From $149/mo",
+    description: "Car wash membership in Champaign, IL: weekly exterior details for $149/mo, or add wax and interior cleans for $299/mo. Start your plan today.",
     h1: "Car Wash Membership in <em>Champaign, IL</em>",
-    lead: "A clean car every week, on autopilot. $299 a month.",
-    hero: { photo: "bigCta" },
+    lead: "A clean car every week, on autopilot. From $149 a month.",
+    hero: { photo: "vBlackYukon" },
     ctas: ["membership", "call"],
-    service: { name: "Gloss Membership", type: "Car wash and detailing membership", low: 299, high: 299 },
+    service: { name: "Car Wash Membership", type: "Car wash and detailing membership", low: 149, high: 299 },
     blocks: [
-      ["benefits", [["calendar", "Same time every week", "We set a regular slot with you. No booking each time."], ["drop", "Wash and wax weekly", "Your exterior stays glossy and protected all month."], ["car", "4 interior cleans", "Vacuum and wipe-down every week, so the mess never builds."]]],
+      ["benefits", [["calendar", "Same time every week", "We set a regular slot with you. No booking each time."], ["drop", "Exterior every week", "$149/mo gets you 4 exterior details a month."], ["car", "Add the inside", "$299/mo adds weekly wax and 4 interior cleans."]]],
       ["beforeAfter"],
-      ["prices", "membership"],
+      ["prices", ["maintenance", "membership"], { heading: "Two weekly plans", sub: "Outside only, or inside and out." }],
       ["faq", "membership"],
       ["related", [R.packages, R.ceramic, R.exterior, R.interior]],
     ],
@@ -137,7 +137,7 @@ const secondary = [
     description: "Full service detailing in Champaign, IL: foam wash, wheels, jambs, full interior, windows and sealant. From $225. Book online in 30 seconds.",
     h1: "Full Service Detailing in <em>Champaign, IL</em>",
     lead: "Inside and out, done right. From $225.",
-    hero: { photo: "hero" },
+    hero: { photo: "vWhiteYukon" },
     service: { name: "Full Detail", type: "Full service car detailing", low: 225, high: 315 },
     blocks: [
       ["benefits", [["car", "Inside and out", "Foam wash, wheels, jambs, full vacuum, dash, windows and sealant."], ["users", "Talk to the owner", "When you pull in, you're talking to Dom."], ["shield", "Checked before pickup", "Dom or Dylan walks every car before it leaves."]]],
@@ -153,7 +153,7 @@ const secondary = [
     description: "Full-service car care in Champaign, IL: detailing, paint correction, ceramic, PPF, wraps and a weekly membership under one roof. Book today.",
     h1: "Full-Service Car Care in <em>Champaign, IL</em>",
     lead: "Detailing to wraps, under one roof. One shop, one call.",
-    hero: { photo: "bigCta" },
+    hero: { photo: "vCorvette" },
     blocks: [
       ["compare", { eyebrow: "Everything we do", heading: "Pick what your car needs", cols: ["What it does", "From"], rows: [
         ["<a href=\"/packages\">Detailing</a>", "Cleans inside and out", "$90"],
@@ -161,7 +161,7 @@ const secondary = [
         ["<a href=\"/ceramic\">Ceramic coating</a>", "Years of gloss, easy washes", "$1,100"],
         ["<a href=\"/ppf\">PPF</a>", "Stops rock chips", "$800"],
         ["<a href=\"/car-wraps\">Wraps</a>", "Changes the color", "$800"],
-        ["<a href=\"/membership\">Membership</a>", "Keeps it clean weekly", "$299/mo"],
+        ["<a href=\"/membership\">Membership</a>", "Keeps it clean weekly", "$149/mo"],
       ] }],
       ["serviceCards"],
       ["reviews", 3],
@@ -205,7 +205,7 @@ const secondary = [
     description: "Exterior detailing in Champaign, IL: foam wash, wheels, jambs, tire dressing and sealant, plus paint correction upgrades. Book online today.",
     h1: "Exterior Detailing in <em>Champaign, IL</em>",
     lead: "Foam wash, wheels, jambs and sealant. Gloss you can see.",
-    hero: { photo: "hero4" },
+    hero: { photo: "vBlackYukon" },
     service: { name: "Exterior Detailing", type: "Car exterior detailing", low: 90, high: 450 },
     blocks: [
       ["benefits", [["drop", "Hand wash, not a tunnel", "Foam pre-soak and a careful hand wash protect your paint."], ["car", "Wheels and jambs too", "Wheels, tires and door jambs get cleaned, not skipped."], ["sparkle", "Upgrade to correction", "Add one-step paint correction with the Lux Package."]]],
@@ -218,13 +218,13 @@ const secondary = [
   {
     path: "exterior", crumb: "Hand Car Wash & Wax", bookSvc: "express",
     title: "Hand Car Wash & Wax Champaign, IL – Book | The Gloss Spot",
-    description: "Hand car wash and wax in Champaign, IL. Express Detail from $90 or weekly wash and wax with our $299/mo membership. Book online in 30 seconds.",
+    description: "Hand car wash and wax in Champaign, IL. Express Detail from $90 or weekly exterior details for $149/mo. Book online in 30 seconds.",
     h1: "Hand Car Wash &amp; Wax in <em>Champaign, IL</em>",
     lead: "Clean and glossy, by hand. From $90.",
-    hero: { photo: "hero5" },
+    hero: { photo: "vWhiteYukon" },
     blocks: [
       ["benefits", [["drop", "By hand, start to finish", "Foam, hand wash and dry. No brushes slapping your paint."], ["calendar", "Once or every week", "Book an Express, or go weekly with the membership."], ["sparkle", "Wax that shows", "A slick, glossy finish that helps water run off."]]],
-      ["prices", ["express", "membership"]],
+      ["prices", ["express", "maintenance"]],
       ["related", [R.membership, R.exterior, R.ceramic, R.packages]],
     ],
   },
@@ -269,7 +269,7 @@ const secondary = [
     description: "Ceramic coating, PPF or a wrap? Compare paint protection in Champaign, IL by cost, lifespan and what each stops. Get a quote by text today.",
     h1: "Paint Protection in <em>Champaign, IL</em>",
     lead: "Ceramic, PPF or a wrap? Here's the 10-second version.",
-    hero: { photo: "value" },
+    hero: { photo: "vMatteBmw" },
     quote: "Ceramic Coating",
     ctas: ["quote", "call"],
     blocks: [
@@ -346,7 +346,7 @@ const cityPages = cities.map((c) => {
     description: `${c.name} drivers: car detailing, ceramic coating and PPF at our Champaign, IL shop, about ${c.minutes} min away. Book online or ${CALL.toLowerCase()}`,
     h1: `${c.name} Car Detailing at Our <em>Champaign, IL</em> Shop`,
     lead: `About ${c.minutes} minutes${c.route ? ` via ${c.route}` : ""}. Book in 30 seconds.`,
-    hero: { photo: ["hero", "hero2", "hero3", "hero4", "hero5"][c.minutes % 5] },
+    hero: { photo: ["vCorvette", "vWhiteYukon", "vMatteBmw", "vBlackYukon"][cities.indexOf(c) % 4] },
     blocks: [
       ["benefits", [["map", `~${c.minutes} min from ${c.name}`, c.note], [far ? "shield" : "clock", far ? "One trip, done right" : "Drop off, pick up", far ? "Ceramic, PPF and wraps are one drop-off. We'll text you when it's ready." : "Leave it on the way to work. We'll text you when it's ready."], ["users", "Talk to the owner", "When you pull in, you're talking to Dom."]]],
       ["serviceCards"],
@@ -364,7 +364,7 @@ const info = [
     description: "Meet Dom and Dylan, the brothers behind The Gloss Spot. About 7 years of detailing, now in our own Champaign, IL shop. Book online today.",
     h1: "About Our Car Detailing Shop in <em>Champaign, IL</em>",
     lead: "Two brothers. About seven years of detailing. One shop.",
-    hero: { photo: "hero3" },
+    hero: { photo: "vCorvette" },
     blocks: [
       ["story"],
       ["benefits", { heading: "How we work", items: [["users", "Owner-run", "You'll talk to Dom. Dom or Dylan checks every car."], ["clock", "About 7 years in", "From a trunk full of supplies to our own shop."], ["star", `${biz.reviewCount} Google reviews`, "All five stars, all from real customers."]] }],
@@ -401,7 +401,7 @@ const info = [
     description: "Real car detailing, ceramic coating and paint correction photos from our Champaign, IL shop. No stock photos. Book your detail online today.",
     h1: "Car Detailing Photos from <em>Champaign, IL</em>",
     lead: "Real customer cars. No stock photos, ever.",
-    hero: { photo: "g5" },
+    hero: { photo: "vCorvette" },
     blocks: [["gallery", ["hero", "hero2", "hero3", "hero4", "hero5", "value", "bigCta", "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g9"]], ["shopPhotos"]],
   },
   {
@@ -459,7 +459,7 @@ const info = [
     description: "Book car detailing in Champaign, IL in 30 seconds: pick a service, your vehicle and a time. Or call or text 217-600-2108 and talk to Dom.",
     h1: "Book Car Detailing in <em>Champaign, IL</em>",
     lead: "Pick a service, your vehicle and a time. Done.",
-    hero: { photo: "bigCta" },
+    hero: { photo: "vWhiteYukon" },
     blocks: [],
   },
   {

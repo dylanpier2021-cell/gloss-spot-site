@@ -21,7 +21,7 @@ Static marketing site for **The Gloss Spot** (Dom & Dylan Pierson,
 | `site/media.js` | Background video loops made in OpenArt from our real photos (hotlinked from OpenArt's CDN). |
 | `output/` | **The deployed site, generated.** Don't hand-edit except `review.html` / `feedback.html` (the review funnel; not generated). |
 | `REDESIGN.md` | Generated deliverables: old→new URL map, every page's title/meta/H1/copy, FAQs, booking flow, schema, open items. |
-| `api/` | Vercel functions: `ghl-free-slots`, `ghl-create-booking` (name + phone only), `ghl-quote` (quote form + photo upload), `ghl-feedback`. |
+| `api/` | Vercel functions: `ghl-free-slots`, `ghl-create-booking` (name + phone only), `ghl-quote` (quote form + photo upload), `ghl-feedback`. Every submission is assigned to Dom, tagged `website-lead`, and gets a GHL task for Dom (`api/_lib/notify-dom.js`). |
 | `generate-landing-page.js`, `run.js`, `blog-generator.js`, `sitemap-generator.js`, `daily-cron.js` | **Legacy** AI generator (old mobile-detailing site). Renamed to `npm run legacy:*`. Running them overwrites `output/` with the old design. |
 | `Clients/Aricka Dean/` | **Unrelated** — KEI Events landing pages. Not part of this site. |
 | `lead_*.py` | Yelp lead scraper. Unrelated; excluded via `.vercelignore`. |
@@ -39,7 +39,7 @@ Static marketing site for **The Gloss Spot** (Dom & Dylan Pierson,
 
 ## Environment
 
-The Vercel env needs `GHL_PIT_TOKEN` (read by everything in `api/`). The
+The Vercel env needs `GHL_PIT_TOKEN` (read by everything in `api/`). Optional `DOM_USER_ID` overrides the GHL user that website leads go to (default: Dominic Pierson, `8TiM94RrV6V3yGwDI1Kw`). GHL sub-account: "The Gloss Spot IL" (`CLJQbljlapECB2Aiq27f`). The
 legacy generator's `.env` (Anthropic key etc.) is not needed for `npm run build`.
 
 ## Known open items

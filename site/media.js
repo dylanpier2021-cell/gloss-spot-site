@@ -6,17 +6,22 @@ const V = "https://cdn.openart.ai/openart-ai/production/2026-10/create-video/cMs
 const T = "https://cdn.openart.ai/openart/thumbnail/production/2026-10/create-video/cMsgRdDVyjzN24ccys4i/";
 
 export default {
-  // Desktop hero: slow push-in on IMG_7154 (landscape shot of our work).
+  // Homepage hero: our real detailing video from the original site (Cloudinary).
+  // Plays on desktop and phones. Swap the URL to change it.
   heroDesktop: {
+    from: "Real Gloss Spot video (snaptik_7606341937959816461)",
+    mp4: "https://res.cloudinary.com/djp1yfsj5/video/upload/a_270/snaptik_7606341937959816461_hd_zo0wjl.mp4",
+  },
+  heroMobile: null,
+  // OpenArt push-in loops made from our real car photos (spare; not on the
+  // homepage). IMG_7154 landscape / IMG_7383 portrait.
+  carLoopWide: {
     from: "IMG_7154.jpg",
     mp4: V + "3455e777-26b0-4f75-9369-2a4227752c94_seed2037739309_1790850172315_686e4bde.mp4",
-    poster: T + "pixverse_mp4_media_web_ori_3455e777-26b0-4f75-9369-2a4227752c94_seed2037739309_1790850175694_42635f09.webp",
   },
-  // Mobile hero (portrait): slow push-in on IMG_7383.
-  heroMobile: {
+  carLoopTall: {
     from: "IMG_7383.jpg",
     mp4: V + "c9143183-8495-4863-bd12-0857207990c2_seed983236744_1790850364273_f50a487b.mp4",
-    poster: T + "pixverse_mp4_media_web_ori_c9143183-8495-4863-bd12-0857207990c2_seed983236744_1790850367847_a139bab7.webp",
   },
   // Story section: slow push toward our bay door (02-bay-garage-door-wide).
   shop: {
@@ -30,8 +35,10 @@ export default {
     mp4: V + "22ffe670-108d-4eae-9e89-d2309f1fa4ff_seed345066326_1790851018822_9e4a8468.mp4",
     poster: T + "pixverse_mp4_media_web_ori_22ffe670-108d-4eae-9e89-d2309f1fa4ff_seed345066326_1790851021707_2a253fcd.webp",
   },
-  // Membership banner background: slow push-in on IMG_7337.
-  memberCar: {
+  // Membership banner background: our real black Yukon clip.
+  memberCar: { from: "black-yukon.mp4 (real customer car)", mp4: "/media/black-yukon.mp4" },
+  // Spare OpenArt push-in on IMG_7337 (no longer used).
+  memberCarOpenArt: {
     from: "IMG_7337.jpg",
     mp4: V + "9b4f29d5-9109-42d6-a96f-beb5a9228004_seed694486191_1790851026298_b4389d26.mp4",
     poster: T + "pixverse_mp4_media_web_ori_9b4f29d5-9109-42d6-a96f-beb5a9228004_seed694486191_1790851028558_5f879f82.webp",

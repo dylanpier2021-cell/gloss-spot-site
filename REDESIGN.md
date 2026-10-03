@@ -211,21 +211,22 @@ New redirects added: `/members` → `/membership`
 
 ### /membership
 
-- **Title** (56): Car Wash Membership Champaign, IL – $299/mo | Gloss Spot
-- **Meta** (139): Car wash membership in Champaign, IL: weekly exterior wash and wax plus 4 interior cleans a month for $299/mo. Start your membership today.
+- **Title** (48): Car Wash Membership Champaign, IL – From $149/mo
+- **Meta** (141): Car wash membership in Champaign, IL: weekly exterior details for $149/mo, or add wax and interior cleans for $299/mo. Start your plan today.
 - **H1:** Car Wash Membership in Champaign, IL
-- **Hero line:** A clean car every week, on autopilot. $299 a month.
+- **Hero line:** A clean car every week, on autopilot. From $149 a month.
 - **Buttons:** Start Membership · Call Now
-- **Body words:** 63 (limit 300, FAQ excluded)
+- **Body words:** 61 (limit 300, FAQ excluded)
 
 - **Same time every week**: We set a regular slot with you. No booking each time.
-- **Wash and wax weekly**: Your exterior stays glossy and protected all month.
-- **4 interior cleans**: Vacuum and wipe-down every week, so the mess never builds.
-- _Price cards: membership_
+- **Exterior every week**: $149/mo gets you 4 exterior details a month.
+- **Add the inside**: $299/mo adds weekly wax and 4 interior cleans.
+- _Price cards: maintenance, membership_
 
 **FAQ** (with FAQPage schema)
 
-- **What's included in the car wash membership?** A weekly exterior wash and wax plus 4 interior maintenance cleans a month, for $299 a month.
+- **How much is a car wash membership in Champaign?** Exterior Maintenance is $149 a month for 4 exterior details, one every week. The full Gloss Membership is $299 a month and adds 4 interior cleans.
+- **What's the difference between the two plans?** Exterior Maintenance covers the outside only. The Gloss Membership adds weekly wax and an interior clean every week.
 - **How do I start a membership?** Tap Start Membership or call 217-600-2108. Dom will set up your weekly day and time.
 - **Do I have to book every visit?** No. We set a regular weekly time with you, so it just happens.
 - **Who is the membership for?** Commuters, families and anyone who wants a clean car every week without thinking about it.
@@ -268,7 +269,7 @@ New redirects added: `/members` → `/membership`
 | Ceramic coating | Years of gloss, easy washes | $1,100 |
 | PPF | Stops rock chips | $800 |
 | Wraps | Changes the color | $800 |
-| Membership | Keeps it clean weekly | $299/mo |
+| Membership | Keeps it clean weekly | $149/mo |
 
 ### /interior-detailing-champaign-il
 
@@ -331,7 +332,7 @@ New redirects added: `/members` → `/membership`
 ### /exterior
 
 - **Title** (57): Hand Car Wash & Wax Champaign, IL – Book | The Gloss Spot
-- **Meta** (142): Hand car wash and wax in Champaign, IL. Express Detail from $90 or weekly wash and wax with our $299/mo membership. Book online in 30 seconds.
+- **Meta** (130): Hand car wash and wax in Champaign, IL. Express Detail from $90 or weekly exterior details for $149/mo. Book online in 30 seconds.
 - **H1:** Hand Car Wash &amp; Wax in Champaign, IL
 - **Hero line:** Clean and glossy, by hand. From $90.
 - **Buttons:** Book Now · Call Now
@@ -339,7 +340,7 @@ New redirects added: `/members` → `/membership`
 - **By hand, start to finish**: Foam, hand wash and dry. No brushes slapping your paint.
 - **Once or every week**: Book an Express, or go weekly with the membership.
 - **Wax that shows**: A slick, glossy finish that helps water run off.
-- _Price cards: express, membership_
+- _Price cards: express, maintenance_
 
 ### /mobile-detailing-champaign-il
 
@@ -570,7 +571,7 @@ Robert Wengert
 - **Is paint correction included with ceramic coating?** Yes. Every ceramic package includes paint correction, so the coating locks in a corrected finish.
 - **Should I get PPF or ceramic coating?** PPF is a physical film that takes the hit from rock chips. Ceramic adds gloss and easy washing, and many owners do both.
 - **How much does a car wrap cost in Champaign?** Coupes and sedans are $2,400 to $2,700, SUVs and crossovers $2,900 to $3,200 and full-size trucks or large SUVs $3,300 to $3,600.
-- **What's included in the car wash membership?** A weekly exterior wash and wax plus 4 interior maintenance cleans a month, for $299 a month.
+- **How much is a car wash membership in Champaign?** Exterior Maintenance is $149 a month for 4 exterior details, one every week. The full Gloss Membership is $299 a month and adds 4 interior cleans.
 - **What payment do you take?** Cash, cards, Apple Pay and Google Pay. Payment is due at pickup.
 - **What's your cancellation policy?** Reschedule or cancel with 24 hours' notice at no charge.
 
@@ -971,7 +972,7 @@ Lux includes one-step paint correction and sealant. Two-step correction is +$100
 - Paint protection film: from $800 for a sedan
 - Vehicle wraps: from $2,400, partial wraps from $800
 **Membership**
-$299 a month covers a weekly exterior wash and wax plus 4 interior cleans. Details on the membership page.
+Exterior Maintenance is $149 a month for a weekly exterior detail. The $299 Gloss Membership adds weekly wax and 4 interior cleans. Details on the membership page.
 **Why prices vary by size**
 A 3-row SUV has more seats, more carpet and more paint. You'll always see your exact price before you book.
 
@@ -994,7 +995,7 @@ A 3-row SUV has more seats, more carpet and more paint. You'll always see your e
 **Time it with the seasons**
 In Champaign County, a Full Detail in late fall preps your car for salt. Another in spring washes winter off for good.
 **Want it handled?**
-The $299/month membership keeps your car clean every week. Or book a detail when you need one.
+A membership from $149/month keeps your car clean every week. Or book a detail when you need one.
 
 ### /blog/mobile-vs-shop
 
@@ -1233,6 +1234,20 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
               "minPrice": 800,
               "maxPrice": 3600,
               "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Exterior Maintenance (4 exterior details/month)",
+              "url": "https://www.theglossspotil.com/membership"
+            },
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 149,
+              "priceCurrency": "USD",
+              "unitCode": "MON"
             }
           },
           {
