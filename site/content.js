@@ -72,6 +72,12 @@ export const photos = {
   shopDoor: { src: OA + "01-bay-garage-door_1790847090678_c1d907c1.jpg", w: 2060, h: 2724, alt: "Garage bay at The Gloss Spot detail shop in Champaign IL" },
   shopFloor:{ src: OA + "03-main-floor_1790847101157_3e8e2d15.jpg", w: 2036, h: 2592, alt: "Main detailing floor inside The Gloss Spot shop, Champaign IL" },
   shopOffice:{ src: OA + "07-front-office_1790847120292_507ec405.jpg", w: 1948, h: 2448, alt: "Front office at The Gloss Spot, 606 N. Country Fair Dr, Champaign IL" },
+  // Real customer cars, short zoom clips (self-hosted in output/media/).
+  // `src` is the poster frame; `video` plays over it once the page loads.
+  vCorvette: { src: "/media/blue-corvette.jpg", video: "/media/blue-corvette.mp4", w: 960, h: 946, alt: "Blue C8 Corvette with fresh gloss in The Gloss Spot shop, Champaign IL" },
+  vWhiteYukon: { src: "/media/white-yukon.jpg", video: "/media/white-yukon.mp4", w: 960, h: 946, alt: "White GMC Yukon after a full detail, Champaign IL" },
+  vMatteBmw: { src: "/media/matte-bmw.jpg", video: "/media/matte-bmw.mp4", w: 960, h: 946, alt: "Matte black BMW sedan detailed by The Gloss Spot, Champaign IL" },
+  vBlackYukon: { src: "/media/black-yukon.jpg", video: "/media/black-yukon.mp4", w: 960, h: 946, alt: "Black GMC Yukon after detailing, Champaign IL" },
   // Photo of Dom & Dylan together. Paste a Cloudinary ID here when ready;
   // until then the story block shows a branded card instead.
   brothers: null,

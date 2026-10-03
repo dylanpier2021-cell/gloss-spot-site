@@ -35,8 +35,10 @@ export default {
     mp4: V + "22ffe670-108d-4eae-9e89-d2309f1fa4ff_seed345066326_1790851018822_9e4a8468.mp4",
     poster: T + "pixverse_mp4_media_web_ori_22ffe670-108d-4eae-9e89-d2309f1fa4ff_seed345066326_1790851021707_2a253fcd.webp",
   },
-  // Membership banner background: slow push-in on IMG_7337.
-  memberCar: {
+  // Membership banner background: our real black Yukon clip.
+  memberCar: { from: "black-yukon.mp4 (real customer car)", mp4: "/media/black-yukon.mp4" },
+  // Spare OpenArt push-in on IMG_7337 (no longer used).
+  memberCarOpenArt: {
     from: "IMG_7337.jpg",
     mp4: V + "9b4f29d5-9109-42d6-a96f-beb5a9228004_seed694486191_1790851026298_b4389d26.mp4",
     poster: T + "pixverse_mp4_media_web_ori_9b4f29d5-9109-42d6-a96f-beb5a9228004_seed694486191_1790851028558_5f879f82.webp",

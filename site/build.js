@@ -80,11 +80,17 @@ export function img(key, o = {}) {
 }
 
 // Background video: lazy, muted, never on save-data or reduced motion.
-export function bgVideo(key, { hero = false, mobileKey = null } = {}) {
-  const v = media[key];
+export function bgVideo(key, { hero = false, mobileKey = null, cls = "" } = {}) {
+  const v = typeof key === "string" ? media[key] : key;
   if (!v) return "";
   const m = mobileKey && media[mobileKey];
-  return `<video class="bgv${hero ? " bgv-hero" : ""}" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="${esc(v.mp4)}"${m ? ` data-src-mobile="${esc(m.mp4)}"` : ""}></video>`;
+  return `<video class="bgv${hero ? " bgv-hero" : ""}${cls ? " " + cls : ""}" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="${esc(v.mp4)}"${m ? ` data-src-mobile="${esc(m.mp4)}"` : ""}></video>`;
+}
+
+// Photo with its real clip layered on top (clip fades in when it plays).
+export function cover(key, o = {}) {
+  const p = photos[key];
+  return img(key, o) + (p && p.video ? bgVideo({ mp4: p.video }, { cls: "cover-v" }) : "");
 }
 
 // ── buttons ─────────────────────────────────────────────────────────────────
@@ -109,7 +115,9 @@ function hero(page) {
     : c === "text" ? btn.text()
     : c === "membership" ? btn.quote("Start Membership", "Membership")
     : "").join("");
-  const video = h.video ? bgVideo(h.video, { hero: true, mobileKey: h.videoMobile }) : "";
+  const hp = photos[h.photo || "hero"];
+  const video = h.video ? bgVideo(h.video, { hero: true, mobileKey: h.videoMobile })
+    : hp && hp.video ? bgVideo({ mp4: hp.video }, { hero: true }) : "";
   return `<section class="hero${page.home ? " hero-home" : ""}">
   <div class="hero-media">${img(h.photo || "hero", { ar: "free", widths: [640, 960, 1400, 1900], sizes: "100vw", eager: true, cls: "hero-img", alt: h.alt })}${video}<div class="hero-shade"></div><div class="hero-sweep" aria-hidden="true"></div></div>
   <div class="wrap hero-in">
@@ -127,12 +135,12 @@ function benefits(b) {
 
 function serviceCards() {
   const cards = [
-    { h: "Detailing", p: "Express, Full and Lux packages.", from: 90, link: "packages", photo: "g1", svc: "full" },
-    { h: "Ceramic + Correction", p: "Years of gloss and easy washes.", from: 1100, link: "ceramic", photo: "g3", svc: "ceramic" },
-    { h: "PPF / Wraps", p: "Clear armor or a whole new color.", from: 800, link: "ppf", photo: "g5", alt: "vehicle-protection" },
+    { h: "Detailing", p: "Express, Full and Lux packages.", from: 90, link: "packages", photo: "vWhiteYukon", svc: "full" },
+    { h: "Ceramic + Correction", p: "Years of gloss and easy washes.", from: 1100, link: "ceramic", photo: "vCorvette", svc: "ceramic" },
+    { h: "PPF / Wraps", p: "Clear armor or a whole new color.", from: 800, link: "ppf", photo: "vMatteBmw", alt: "vehicle-protection" },
   ];
   const html = cards.map((c) => `<a class="scard reveal" href="${href(c.link)}">
-    <div class="scard-img">${img(c.photo, { ar: "4:3", sizes: "(min-width: 900px) 33vw, 100vw" })}</div>
+    <div class="scard-img">${cover(c.photo, { ar: "4:3", sizes: "(min-width: 900px) 33vw, 100vw" })}</div>
     <div class="scard-b"><h3>${c.h}</h3><p>${c.p}</p><div class="scard-f"><span class="from">from <b>${money(c.from)}</b></span><span class="go">${icon("arrow")}</span></div></div>
   </a>`).join("");
   return sec("sec-cards", `${head("What we do", "Pick your service")}<div class="scards">${html}</div>`);
@@ -148,8 +156,8 @@ function beforeAfterBlock(heading = "Before &amp; after") {
     return sec("sec-ba", `${head("Real results", heading, "Drag the slider.")}<div class="bas">${s}</div>`);
   }
   // No before/after pairs yet → show real recent work instead.
-  const keys = ["hero2", "g2", "g4", "hero4", "g6", "value"];
-  const strip = keys.map((k) => `<li class="work reveal">${img(k, { ar: "4:5", widths: [400, 700], sizes: "(min-width: 900px) 25vw, 75vw" })}</li>`).join("");
+  const keys = ["vCorvette", "vWhiteYukon", "vMatteBmw", "vBlackYukon", "hero2", "g2", "g4", "g6"];
+  const strip = keys.map((k) => `<li class="work reveal">${cover(k, { ar: "4:5", widths: [400, 700], sizes: "(min-width: 900px) 25vw, 75vw" })}</li>`).join("");
   return sec("sec-ba", `${head("Real results", "Recent work from our shop", "Every photo is a real customer car.")}<ul class="works">${strip}</ul>`);
 }
 
@@ -488,7 +496,11 @@ function render(page, assetV) {
   const quote = page.quote && !page.blocks.some(([t]) => t === "quote") ? quoteForm(page.quote) : "";
   const booking = page.noBook ? "" : bookingWidget();
   const canonical = url(page.path);
-  const ogImg = cld(photos[page.hero?.photo || "hero"]?.cld || photos.hero.cld, 1200, "1.91:1");
+  const hp = photos[page.hero?.photo || "hero"] || photos.hero;
+  const ogImg = hp.cld ? cld(hp.cld, 1200, "1.91:1") : biz.domain + hp.src;
+  const preload = hp.cld
+    ? `<link rel="preload" as="image" href="${cld(hp.cld, 960)}" imagesrcset="${[640, 960, 1400, 1900].map((w) => `${cld(hp.cld, w)} ${w}w`).join(", ")}" imagesizes="100vw" fetchpriority="high">`
+    : `<link rel="preload" as="image" href="${hp.src}" fetchpriority="high">`;
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -511,7 +523,7 @@ function render(page, assetV) {
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="${cld(photos[page.hero?.photo || "hero"]?.cld || photos.hero.cld, 960)}" imagesrcset="${[640, 960, 1400, 1900].map((w) => `${cld(photos[page.hero?.photo || "hero"]?.cld || photos.hero.cld, w)} ${w}w`).join(", ")}" imagesizes="100vw" fetchpriority="high">
+${preload}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/assets/site.css?v=${assetV}">
 <script type="application/ld+json">${pageSchema(page)}</script>
