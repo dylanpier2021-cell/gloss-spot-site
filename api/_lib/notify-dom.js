@@ -31,3 +31,31 @@ export async function taskForDom(token, contactId, title, body) {
     return false;
   }
 }
+
+// GHL contact custom fields that say which service a website lead wants.
+//   Preferred Service  (contact.preferred_service, text)       → short label
+//   Service Requested  (contact.service_requested, long text)  → full details
+export const SERVICE_FIELDS = {
+  preferred: process.env.GHL_FIELD_PREFERRED_SERVICE || "Kd86ZdcvwGizvpRudKlM",
+  requested: process.env.GHL_FIELD_SERVICE_REQUESTED || "f8ITMzirWa3LBlwhaBF0",
+};
+// Saved in a separate call after the contact upsert, so a rejected field can
+// never block a booking or quote.
+export async function setServiceFields(token, contactId, label, details) {
+  try {
+    const r = await fetch(`${GHL_BASE}/contacts/${contactId}`, {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${token}`, Version: "2021-07-28", "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ customFields: serviceFields(label, details) }),
+    });
+    return r.ok;
+  } catch {
+    return false;
+  }
+}
+export function serviceFields(label, details) {
+  return [
+    { id: SERVICE_FIELDS.preferred, field_value: String(label || "").slice(0, 250) },
+    { id: SERVICE_FIELDS.requested, field_value: String(details || label || "") },
+  ];
+}

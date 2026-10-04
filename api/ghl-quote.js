@@ -3,7 +3,7 @@
 // GHL media library, then attaches everything as a note on the contact.
 // Photos arrive as JPEG data URLs already shrunk in the browser (~1600px).
 
-import { DOM_USER_ID, taskForDom } from "./_lib/notify-dom.js";
+import { DOM_USER_ID, taskForDom, setServiceFields } from "./_lib/notify-dom.js";
 
 const GHL_BASE = "https://services.leadconnectorhq.com";
 const LOCATION_ID = "CLJQbljlapECB2Aiq27f";
@@ -109,6 +109,9 @@ export default async function handler(req, res) {
     res.status(500).json({ error: "Contact upsert returned no ID", details: contactJson });
     return;
   }
+
+  // Tell GHL which service this is for (Preferred Service / Service Requested).
+  await setServiceFields(token, contactId, `${service || "General"} (quote)`, [`${service || "General"} – quote request`, vehicle ? `Vehicle: ${vehicle}` : null, notes ? `Notes: ${notes}` : null].filter(Boolean).join("\n"));
 
   // Step 2: photos → GHL media library.
   const list = Array.isArray(photos) ? photos.slice(0, MAX_PHOTOS) : [];
