@@ -15,6 +15,7 @@ import {
 import { pages, redirectsAdded } from "./pages.js";
 import { CSS } from "./styles.js";
 import { clientJS } from "./client.js";
+import { buildHeadlightLanding, HL } from "./landing-headlight.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = path.join(ROOT, "output");
@@ -398,7 +399,7 @@ function header(page) {
 }
 
 function footer() {
-  const svc = [["packages", "Detailing"], ["ceramic", "Ceramic Coating"], ["paint-correction", "Paint Correction"], ["ppf", "Paint Protection Film"], ["car-wraps", "Vehicle Wraps"], ["membership", "Membership"], ["interior-detailing-champaign-il", "Interior Detailing"], ["vehicle-protection", "Protection Guide"]];
+  const svc = [["packages", "Detailing"], ["ceramic", "Ceramic Coating"], ["paint-correction", "Paint Correction"], ["ppf", "Paint Protection Film"], ["car-wraps", "Vehicle Wraps"], ["membership", "Membership"], ["headlight-restoration", "Headlight Restoration $100"], ["interior-detailing-champaign-il", "Interior Detailing"], ["vehicle-protection", "Protection Guide"]];
   const info = [["about-us", "About"], ["reviews", "Reviews"], ["gallery", "Gallery"], ["faq", "FAQ"], ["cost-calculator", "Price Calculator"], ["service-area", "Service Area"], ["blog", "Blog"], ["contact", "Contact"]];
   const area = cities.slice().sort((a, b) => a.minutes - b.minutes).slice(0, 8);
   const ul = (l) => `<ul>${l.map(([p, t]) => `<li><a href="/${p}">${t}</a></li>`).join("")}</ul>`;
@@ -605,12 +606,14 @@ export function build() {
   const today = new Date().toISOString().slice(0, 10);
   const sm = pages.filter((p) => !p.noindex && !p.noSitemap).map((p) => `  <url><loc>${url(p.path)}</loc><lastmod>${today}</lastmod><priority>${p.priority ?? (p.home ? "1.0" : p.service ? "0.9" : "0.6")}</priority></url>`);
   // Keep the untouched funnel pages in the sitemap, as before.
+  sm.push(`  <url><loc>${url(HL.path)}</loc><lastmod>${today}</lastmod><priority>0.9</priority></url>`);
   ["review", "feedback"].forEach((s) => sm.push(`  <url><loc>${url(s)}</loc><lastmod>${today}</lastmod><priority>0.3</priority></url>`));
   fs.writeFileSync(path.join(OUT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sm.join("\n")}\n</urlset>\n`);
 
   // posts.json (kept for the blog generator / anything that reads it)
   fs.writeFileSync(path.join(OUT, "blog", "posts.json"), JSON.stringify(posts.map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt, publishedAt: p.date + "T10:00:00Z", url: `/blog/${p.slug}` })), null, 2) + "\n");
 
+  buildHeadlightLanding(OUT);
   writeDeliverables();
   console.log(`Built ${pages.length} pages → output/ (assets v${assetV})`);
 }
