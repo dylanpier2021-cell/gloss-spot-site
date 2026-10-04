@@ -419,9 +419,9 @@ Now every car comes to 606 N. Country Fair Dr, where we have the light, water an
 ### /headlight
 
 - **Title** (56): Headlight Restoration Champaign, IL – Quote | Gloss Spot
-- **Meta** (134): Headlight restoration in Champaign, IL. Clear up yellow, foggy headlights. Send a photo and get a quote by text, or call 217-600-2108.
+- **Meta** (129): Headlight restoration in Champaign, IL: both headlights restored to clear for $100, done today. Book online or call 217-600-2108.
 - **H1:** Headlight Restoration in Champaign, IL
-- **Hero line:** Yellow, foggy lenses, cleared up. Get a price by text.
+- **Hero line:** Both headlights, foggy to clear, $100. Done today.
 - **Buttons:** Get a Quote · Call Now
 
 - **Clearer at night**: Restored lenses let more light through.

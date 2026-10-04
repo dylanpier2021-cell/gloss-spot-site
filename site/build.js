@@ -10,11 +10,12 @@ import { fileURLToPath } from "node:url";
 import {
   biz, photos, beforeAfter, media, sizes, ceramicSizes, detailPackages,
   ceramic, ppf, wraps, membership, maintenance, reviews, story, howItWorks, areaLine,
-  faqs, cities, posts,
+  faqs, cities, posts, instagram,
 } from "./content.js";
 import { pages, redirectsAdded } from "./pages.js";
 import { CSS } from "./styles.js";
 import { clientJS } from "./client.js";
+import { buildHeadlightLanding, HL } from "./landing-headlight.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = path.join(ROOT, "output");
@@ -271,6 +272,12 @@ function galleryBlock(keys) {
   return sec("sec-gal", `${head("Gallery", "Real cars. Real work.", "Every photo is a customer car from our shop.")}<ul class="gal">${html}</ul>`);
 }
 
+// Instagram reels, embedded with Instagram's player (loaded only when scrolled near).
+function instaBlock() {
+  const items = instagram.reels.map((id) => `<li class="ig-item"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/${id}/?utm_source=ig_embed" data-instgrm-version="14"><a href="https://www.instagram.com/reel/${id}/" target="_blank" rel="noopener">Watch on Instagram</a></blockquote></li>`).join("");
+  return sec("sec-ig", `${head("On Instagram", "Watch us work", `Real reels from <a href="${instagram.url}" target="_blank" rel="noopener">@${instagram.handle}</a>.`)}<ul class="ig-grid" data-ig>${items}</ul><p class="center"><a class="btn btn-o btn-s" href="${instagram.url}" target="_blank" rel="noopener">Follow @${instagram.handle}</a></p>`, "instagram");
+}
+
 function shopPhotos() {
   const keys = ["shopDoor", "shopFloor", "shopOffice"].filter((k) => photos[k]);
   const html = keys.map((k) => `<li class="reveal">${img(k)}</li>`).join("");
@@ -392,7 +399,7 @@ function header(page) {
 }
 
 function footer() {
-  const svc = [["packages", "Detailing"], ["ceramic", "Ceramic Coating"], ["paint-correction", "Paint Correction"], ["ppf", "Paint Protection Film"], ["car-wraps", "Vehicle Wraps"], ["membership", "Membership"], ["interior-detailing-champaign-il", "Interior Detailing"], ["vehicle-protection", "Protection Guide"]];
+  const svc = [["packages", "Detailing"], ["ceramic", "Ceramic Coating"], ["paint-correction", "Paint Correction"], ["ppf", "Paint Protection Film"], ["car-wraps", "Vehicle Wraps"], ["membership", "Membership"], ["headlight-restoration", "Headlight Restoration $100"], ["interior-detailing-champaign-il", "Interior Detailing"], ["vehicle-protection", "Protection Guide"]];
   const info = [["about-us", "About"], ["reviews", "Reviews"], ["gallery", "Gallery"], ["faq", "FAQ"], ["cost-calculator", "Price Calculator"], ["service-area", "Service Area"], ["blog", "Blog"], ["contact", "Contact"]];
   const area = cities.slice().sort((a, b) => a.minutes - b.minutes).slice(0, 8);
   const ul = (l) => `<ul>${l.map(([p, t]) => `<li><a href="/${p}">${t}</a></li>`).join("")}</ul>`;
@@ -483,7 +490,7 @@ function pageSchema(page) {
 const RENDER = {
   benefits, serviceCards, beforeAfter: beforeAfterBlock, prices, faq: faqBlock, related, steps,
   reviews: reviewsBlock, membershipBanner, story: storyBlock, text: textBlock, compare: compareBlock,
-  cities: citiesBlock, gallery: galleryBlock, shopPhotos, calculator: calculatorBlock, post: postBlock,
+  cities: citiesBlock, gallery: galleryBlock, shopPhotos, insta: instaBlock, calculator: calculatorBlock, post: postBlock,
   postList, contact: contactBlock, legal: legalBlock, quote: quoteForm,
   allReviews: () => sec("sec-rev", `<ul class="rvs rvs-all">${reviewCards(reviews)}</ul><p class="center"><a class="btn btn-o btn-s" href="${biz.googleReviews}" target="_blank" rel="noopener">See every review on Google</a></p>`),
 };
@@ -599,12 +606,14 @@ export function build() {
   const today = new Date().toISOString().slice(0, 10);
   const sm = pages.filter((p) => !p.noindex && !p.noSitemap).map((p) => `  <url><loc>${url(p.path)}</loc><lastmod>${today}</lastmod><priority>${p.priority ?? (p.home ? "1.0" : p.service ? "0.9" : "0.6")}</priority></url>`);
   // Keep the untouched funnel pages in the sitemap, as before.
+  sm.push(`  <url><loc>${url(HL.path)}</loc><lastmod>${today}</lastmod><priority>0.9</priority></url>`);
   ["review", "feedback"].forEach((s) => sm.push(`  <url><loc>${url(s)}</loc><lastmod>${today}</lastmod><priority>0.3</priority></url>`));
   fs.writeFileSync(path.join(OUT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sm.join("\n")}\n</urlset>\n`);
 
   // posts.json (kept for the blog generator / anything that reads it)
   fs.writeFileSync(path.join(OUT, "blog", "posts.json"), JSON.stringify(posts.map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt, publishedAt: p.date + "T10:00:00Z", url: `/blog/${p.slug}` })), null, 2) + "\n");
 
+  buildHeadlightLanding(OUT);
   writeDeliverables();
   console.log(`Built ${pages.length} pages → output/ (assets v${assetV})`);
 }

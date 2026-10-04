@@ -22,6 +22,7 @@ const R = {
   reviews: ["reviews", "Reviews", `${biz.reviewCount} five-star Google reviews.`],
   contact: ["contact", "Contact & directions", "606 N. Country Fair Dr, Champaign, IL."],
   calc: ["cost-calculator", "Price calculator", "Your exact price in two taps."],
+  headlight: ["headlight-restoration", "Headlight restoration: $100", "Both headlights, foggy to clear. Done today."],
 };
 
 // ── Core service pages (headline, 3 benefits, before/after, price card, FAQ, book) ──
@@ -39,7 +40,7 @@ const core = [
       ["beforeAfter"],
       ["prices", "detail"],
       ["faq", "detailing"],
-      ["related", [R.ceramic, R.interior, R.membership, R.correction]],
+      ["related", [R.ceramic, R.interior, R.membership, R.headlight]],
     ],
   },
   {
@@ -289,7 +290,7 @@ const secondary = [
 const quoteOnly = [
   ["window-tint", "Window Tint", "Window Tint Champaign, IL – Get a Quote | The Gloss Spot", "Window tint in Champaign, IL for heat, UV and privacy. Send your vehicle and a photo and get a window tint quote by text. Call 217-600-2108.", "Cooler cabin, more privacy. Get a price by text.", "Window Tint",
     [["sun", "Less heat and glare", "Tint cuts heat and UV through the glass."], ["shield", "More privacy", "Keep what's in your car out of sight."], ["chat", "Quote by text", "Send your vehicle and a photo. We'll text a price."]]],
-  ["headlight", "Headlight Restoration", "Headlight Restoration Champaign, IL – Quote | Gloss Spot", "Headlight restoration in Champaign, IL. Clear up yellow, foggy headlights. Send a photo and get a quote by text, or call 217-600-2108.", "Yellow, foggy lenses, cleared up. Get a price by text.", "Headlight Restoration",
+  ["headlight", "Headlight Restoration", "Headlight Restoration Champaign, IL – Quote | Gloss Spot", "Headlight restoration in Champaign, IL: both headlights restored to clear for $100, done today. Book online or call 217-600-2108.", "Both headlights, foggy to clear, $100. Done today.", "Headlight Restoration",
     [["sun", "Clearer at night", "Restored lenses let more light through."], ["sparkle", "Looks newer", "Cloudy headlights age a car fast."], ["camera", "Photo quote", "Send a photo of your headlights for a price."]]],
   ["engine", "Engine Bay Detailing", "Engine Bay Detailing Champaign, IL – Quote | Gloss Spot", "Engine bay detailing in Champaign, IL. A clean, dressed engine bay for selling, showing or peace of mind. Get a quote by text or call today.", "A clean bay for selling, showing or peace of mind.", "Engine Bay Detail",
     [["sparkle", "Clean and dressed", "Grime off, plastics dressed."], ["car", "Great before a sale", "Buyers notice a clean engine bay."], ["chat", "Quote by text", "Tell us the vehicle and we'll text a price."]]],
@@ -304,7 +305,7 @@ const quotePages = quoteOnly.map(([path, crumb, title, description, lead, svc, b
   blocks: [
     ["benefits", bens],
     ...(path === "headlight" ? [["reviews", 1, "What a customer said"]] : []),
-    ["related", [R.packages, R.ceramic, R.contact, R.reviews]],
+    ["related", path === "headlight" ? [R.headlight, R.packages, R.ceramic, R.contact] : [R.packages, R.ceramic, R.contact, R.reviews]],
   ],
 }));
 // Put Robert's headlight review first on that page.
@@ -402,7 +403,7 @@ const info = [
     h1: "Car Detailing Photos from <em>Champaign, IL</em>",
     lead: "Real customer cars. No stock photos, ever.",
     hero: { photo: "vCorvette" },
-    blocks: [["gallery", ["hero", "hero2", "hero3", "hero4", "hero5", "value", "bigCta", "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g9"]], ["shopPhotos"]],
+    blocks: [["beforeAfter"], ["insta"], ["gallery", ["hero", "hero2", "hero3", "hero4", "hero5", "value", "bigCta", "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g9"]], ["shopPhotos"]],
   },
   {
     path: "reviews", crumb: "Reviews",

@@ -66,6 +66,19 @@ window.GS = ${JSON.stringify(data)};
     }
   }
 
+  // ── Instagram embeds: load Instagram's script only when the grid is near ──
+  var ig = $("[data-ig]");
+  if (ig) {
+    var loadIg = function () {
+      if (window.instgrm) return window.instgrm.Embeds.process();
+      var s = document.createElement("script"); s.async = true; s.src = "https://www.instagram.com/embed.js"; document.body.appendChild(s);
+    };
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { io.disconnect(); loadIg(); } }, { rootMargin: "600px" });
+      io.observe(ig);
+    } else loadIg();
+  }
+
   // ── before/after sliders ──
   $$(".ba-range").forEach(function (r) {
     r.addEventListener("input", function () { r.parentNode.style.setProperty("--pos", r.value + "%"); });
