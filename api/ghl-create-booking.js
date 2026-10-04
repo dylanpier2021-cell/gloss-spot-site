@@ -1,7 +1,7 @@
 // Vercel serverless function — upserts a contact, then creates an appointment
 // in the GHL calendar. PIT token + location ID stored as env vars.
 
-import { DOM_USER_ID, taskForDom } from "./_lib/notify-dom.js";
+import { DOM_USER_ID, taskForDom, setServiceFields } from "./_lib/notify-dom.js";
 
 const GHL_BASE = "https://services.leadconnectorhq.com";
 const LOCATION_ID = "CLJQbljlapECB2Aiq27f";
@@ -51,6 +51,10 @@ export default async function handler(req, res) {
   const lastName = body?.lastName || parts.slice(1).join(" ") || "-";
   const address = body?.address || SHOP_ADDRESS;
 
+  // Which service this booking is for, e.g. "Headlight Restoration – 1 headlight ($50)".
+  const serviceLabel = (packageName && service && packageName.startsWith(service) ? packageName
+    : [service, packageName].filter(Boolean).join(" – ")) + (price ? ` ($${price})` : "");
+
   if (!calendarId || !startISO || !durationHours || !firstName || !phone) {
     res.status(400).json({ error: "Missing required fields" });
     return;
@@ -95,11 +99,14 @@ export default async function handler(req, res) {
     return;
   }
 
+  // Tell GHL which service this is for (Preferred Service / Service Requested).
+  await setServiceFields(token, contactId, serviceLabel, [serviceLabel, vehicle ? `Vehicle: ${vehicle}${vehicleInfo ? ` (${vehicleInfo})` : ""}` : null, `Booked online for ${new Date(startISO).toLocaleString("en-US", { timeZone: "America/Chicago" })}`].filter(Boolean).join("\n"));
+
   // Step 2: create appointment.
   const startTime = startISO;
   const endTime = new Date(new Date(startISO).getTime() + Number(durationHours) * 60 * 60 * 1000).toISOString();
 
-  const title = `${service || "Detail"} — ${packageName || ""} — ${vehicle || ""}${vehicleInfo ? ` (${vehicleInfo})` : ""}${isGerman ? " · German" : ""}`.trim();
+  const title = [serviceLabel || "Detail", vehicle ? vehicle + (vehicleInfo ? ` (${vehicleInfo})` : "") : vehicleInfo, isGerman ? "German" : null].filter(Boolean).join(" — ");
 
   const addonStr = Object.entries(addons || {}).filter(([, v]) => v).map(([k]) => k).join(", ");
   const fullNotes = [
