@@ -84,7 +84,7 @@ fbq('track', 'PageView');
 <main>
 <section class="hero done"><div class="w">
   <h1 class="big">You're booked!</h1>
-  <p style="margin:0 auto 10px">Headlight restoration · both headlights · $100</p>
+  <p style="margin:0 auto 10px" id="what">Headlight restoration · both headlights · $100</p>
   <div class="when" id="when">Your time is in your confirmation text and email.</div>
   <p style="margin:0 auto 20px;max-width:34ch">Drop off at <b>606 N. Country Fair Dr, Champaign, IL</b>. Dom will take it from there.</p>
   <div class="btns" style="margin:0 auto 14px">
@@ -109,11 +109,12 @@ var GS_HL={price:100,name:"Headlight Restoration"};
 function gsStore(k,v){try{if(v===undefined)return sessionStorage.getItem(k);sessionStorage.setItem(k,v)}catch(e){return null}}
 function gsEventId(){var id=gsStore("hl_event_id");if(!id){id="hl-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,10);gsStore("hl_event_id",id)}return id}
 function gsCookie(n){var m=document.cookie.match("(^|;)\\s*"+n+"=([^;]+)");return m?decodeURIComponent(m[2]):""}
-function gsSchedule(source){
+function gsSchedule(source,value){
+  var v=+value||GS_HL.price;
   if(gsStore("hl_schedule_fired")==="1")return;
   var id=gsEventId();gsStore("hl_schedule_fired","1");
-  if(window.fbq)fbq("track","Schedule",{value:GS_HL.price,currency:"USD",content_name:GS_HL.name},{eventID:id});
-  try{fetch("/api/meta-capi",{method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,body:JSON.stringify({eventName:"Schedule",eventId:id,value:GS_HL.price,currency:"USD",contentName:GS_HL.name,url:location.href,fbp:gsCookie("_fbp"),fbc:gsCookie("_fbc"),source:source})})}catch(e){}
+  if(window.fbq)fbq("track","Schedule",{value:v,currency:"USD",content_name:GS_HL.name},{eventID:id});
+  try{fetch("/api/meta-capi",{method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,body:JSON.stringify({eventName:"Schedule",eventId:id,value:v,currency:"USD",contentName:GS_HL.name,url:location.href,fbp:gsCookie("_fbp"),fbc:gsCookie("_fbc"),source:source})})}catch(e){}
 }
 document.addEventListener("click",function(e){
   var a=e.target.closest("[data-ev]");if(!a||!window.fbq)return;
@@ -122,7 +123,9 @@ document.addEventListener("click",function(e){
 });
 
 // Fire Schedule once (shares the eventID from the landing page if this is the same visit).
-gsSchedule("thank-you");
+(function(){var q=new URLSearchParams(location.search),n=q.get("n"),v=+q.get("value")||GS_HL.price;
+  if(n==="1")document.getElementById("what").textContent="Headlight restoration · 1 headlight · $"+v;
+  gsSchedule("thank-you",v);})();
 // Show the appointment time if GHL passed it in the redirect URL.
 (function(){
   var q=new URLSearchParams(location.search),raw="";

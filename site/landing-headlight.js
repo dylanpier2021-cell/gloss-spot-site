@@ -183,11 +183,12 @@ var GS_HL={price:${HL.price},name:"Headlight Restoration"};
 function gsStore(k,v){try{if(v===undefined)return sessionStorage.getItem(k);sessionStorage.setItem(k,v)}catch(e){return null}}
 function gsEventId(){var id=gsStore("hl_event_id");if(!id){id="hl-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,10);gsStore("hl_event_id",id)}return id}
 function gsCookie(n){var m=document.cookie.match("(^|;)\\\\s*"+n+"=([^;]+)");return m?decodeURIComponent(m[2]):""}
-function gsSchedule(source){
+function gsSchedule(source,value){
+  var v=+value||GS_HL.price;
   if(gsStore("hl_schedule_fired")==="1")return;
   var id=gsEventId();gsStore("hl_schedule_fired","1");
-  if(window.fbq)fbq("track","Schedule",{value:GS_HL.price,currency:"USD",content_name:GS_HL.name},{eventID:id});
-  try{fetch("/api/meta-capi",{method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,body:JSON.stringify({eventName:"Schedule",eventId:id,value:GS_HL.price,currency:"USD",contentName:GS_HL.name,url:location.href,fbp:gsCookie("_fbp"),fbc:gsCookie("_fbc"),source:source})})}catch(e){}
+  if(window.fbq)fbq("track","Schedule",{value:v,currency:"USD",content_name:GS_HL.name},{eventID:id});
+  try{fetch("/api/meta-capi",{method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,body:JSON.stringify({eventName:"Schedule",eventId:id,value:v,currency:"USD",contentName:GS_HL.name,url:location.href,fbp:gsCookie("_fbp"),fbc:gsCookie("_fbc"),source:source})})}catch(e){}
 }
 document.addEventListener("click",function(e){
   var a=e.target.closest("[data-ev]");if(!a||!window.fbq)return;
@@ -305,7 +306,7 @@ ${top}
 <main>
 <section class="hero done"><div class="w">
   <h1 class="big">You're booked!</h1>
-  <p style="margin:0 auto 10px">Headlight restoration · both headlights · $100</p>
+  <p style="margin:0 auto 10px" id="what">Headlight restoration · both headlights · $100</p>
   <div class="when" id="when">Your time is in your confirmation text and email.</div>
   <p style="margin:0 auto 20px;max-width:34ch">Drop off at <b>${ADDR}</b>. Dom will take it from there.</p>
   <div class="btns" style="margin:0 auto 14px">
@@ -322,7 +323,9 @@ ${footer}
 <script>
 ${TRACK_JS}
 // Fire Schedule once (shares the eventID from the landing page if this is the same visit).
-gsSchedule("thank-you");
+(function(){var q=new URLSearchParams(location.search),n=q.get("n"),v=+q.get("value")||GS_HL.price;
+  if(n==="1")document.getElementById("what").textContent="Headlight restoration · 1 headlight · $"+v;
+  gsSchedule("thank-you",v);})();
 // Show the appointment time if GHL passed it in the redirect URL.
 (function(){
   var q=new URLSearchParams(location.search),raw="";
@@ -344,8 +347,119 @@ gsSchedule("thank-you");
 `;
 }
 
+// ── /book-headlights: straight-to-booking page ─────────────────────────────
+// One screen: how many headlights (price shows) → day → time → name + phone →
+// Book. Uses the site's own GHL booking API (same calendar as the main site),
+// then sends the visitor to the thank-you page, which fires Schedule.
+export const BOOK = {
+  path: "book-headlights",
+  options: [
+    { n: 2, label: "Both headlights", price: 100 },
+    { n: 1, label: "1 headlight", price: 50 },
+  ],
+  hours: 1, // appointment length used to find open times
+  calendarId: biz.ghlCalendarId,
+};
+
+function bookPage() {
+  const opts = BOOK.options.map((o, i) => `<button type="button" class="opt" data-n="${o.n}" data-price="${o.price}" aria-pressed="${i === 0}"><b>${o.label}</b><em>$${o.price}</em></button>`).join("");
+  return `${head("Book Headlight Restoration | Champaign IL | The Gloss Spot",
+    "Book headlight restoration in Champaign, IL: 1 headlight $50, both $100. Pick a time and you're booked.",
+    `${biz.domain}/${BOOK.path}`,
+    `<meta name="robots" content="noindex, follow">\n<style>
+.bk{display:grid;gap:22px;margin-top:6px}
+.bk>*{min-width:0}
+.lbl{font-weight:700;margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.lbl span{width:28px;height:28px;border-radius:50%;background:var(--cy);color:var(--ink);display:grid;place-items:center;font-size:.9rem}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt,.chip{font:inherit;color:var(--text);background:var(--card);border:1.5px solid rgba(255,255,255,.18);border-radius:14px;cursor:pointer}
+.opt{display:grid;gap:4px;justify-items:start;padding:16px;min-height:76px;text-align:left}
+.opt em{font-style:normal;font-weight:800;font-size:1.5rem;color:var(--cy)}
+.opt[aria-pressed=true],.chip[aria-pressed=true]{border-color:var(--cy);background:rgba(98,219,221,.12)}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.chip{min-height:52px;padding:0 16px;font-weight:600;flex:none}
+.day{display:grid;place-items:center;min-width:68px;min-height:62px;line-height:1.1}.day small{font-size:.72rem;opacity:.75;text-transform:uppercase;letter-spacing:.08em}
+.times{display:flex;flex-wrap:wrap;gap:8px}
+.inp{display:grid;gap:10px}
+.inp input{width:100%;min-height:54px;padding:12px 14px;border-radius:12px;border:1.5px solid rgba(255,255,255,.2);background:#0a0e10;color:var(--text);font:500 16px Inter,system-ui,sans-serif}
+.inp input:focus{outline:none;border-color:var(--cy)}
+.total{display:flex;justify-content:space-between;align-items:center;font-weight:700}.total b{font-size:1.6rem;color:var(--cy)}
+.msg{min-height:1.3em;margin:0;font-weight:600}.msg.err{color:#ff9b8a}
+.btn[disabled]{opacity:.6}
+</style>
+${pixelHead()}`)}
+<body style="padding-bottom:24px">
+${top}
+<main><section class="hero" style="padding-top:12px"><div class="w">
+  <h1 style="font-size:clamp(2.4rem,10vw,3.6rem)">Book Headlight Restoration</h1>
+  <p style="margin:0 0 10px">Foggy to clear, done today at ${ADDR}.</p>
+  <form class="bk" id="bk" novalidate>
+    <div><p class="lbl"><span>1</span>How many headlights?</p><div class="opts">${opts}</div></div>
+    <div><p class="lbl"><span>2</span>Pick a day</p><div class="days" id="days"><p class="note">Loading open times…</p></div></div>
+    <div><p class="lbl"><span>3</span>Pick a time</p><div class="times" id="times"></div></div>
+    <div class="inp"><p class="lbl" style="margin:0"><span>4</span>Your info</p>
+      <input name="name" autocomplete="name" placeholder="Name" aria-label="Name" required>
+      <input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Phone" aria-label="Phone" required></div>
+    <div class="total"><span id="sum">Both headlights</span><b id="price">$100</b></div>
+    <button class="btn btn-p" type="submit" id="go">${ic("check")}Book Now</button>
+    <p class="msg" id="msg" role="status" aria-live="polite"></p>
+  </form>
+  <p class="note">Rather call? <a href="tel:${biz.tel}" data-ev="Contact">${biz.phone}</a>. Dom does every car himself.</p>
+</div></section></main>
+<script>
+${TRACK_JS}
+(function(){
+  var CAL="${BOOK.calendarId}",HRS=${BOOK.hours},TEL="${biz.tel}",PHONE="${biz.phone}";
+  var S={n:2,price:100,day:null,slot:null,slots:{}};
+  var $=function(id){return document.getElementById(id)};
+  var tz={timeZone:"America/Chicago"};
+  function todayCT(){return new Intl.DateTimeFormat("en-CA",{timeZone:"America/Chicago",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date())}
+  function fmtT(iso){return new Date(iso).toLocaleTimeString("en-US",{timeZone:"America/Chicago",hour:"numeric",minute:"2-digit"})}
+  function wd(k){return new Date(k+"T12:00:00Z").toLocaleDateString("en-US",{weekday:"short",timeZone:"UTC"})}
+  function upd(){var o=document.querySelector(".opt[aria-pressed=true]");$("sum").textContent=o.querySelector("b").textContent+(S.slot?" · "+wd(S.day)+" "+fmtT(S.slot):"");$("price").textContent="$"+S.price;$("go").lastChild.textContent="Book Now · $"+S.price}
+  document.querySelectorAll(".opt").forEach(function(b){b.addEventListener("click",function(){
+    document.querySelectorAll(".opt").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});S.n=+b.dataset.n;S.price=+b.dataset.price;upd()})});
+  function times(){var t=$("times"),l=S.slots[S.day]||[];t.innerHTML=l.map(function(iso){return '<button type="button" class="chip" data-slot="'+iso+'" aria-pressed="'+(S.slot===iso)+'">'+fmtT(iso)+"</button>"}).join("")}
+  $("days").addEventListener("click",function(e){var b=e.target.closest("[data-day]");if(!b)return;S.day=b.dataset.day;S.slot=null;
+    document.querySelectorAll("[data-day]").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});times();upd()});
+  $("times").addEventListener("click",function(e){var b=e.target.closest("[data-slot]");if(!b)return;S.slot=b.dataset.slot;
+    document.querySelectorAll("[data-slot]").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});upd();
+    var n=document.querySelector('#bk input[name=name]');if(!n.value)n.focus({preventScroll:false})});
+  fetch("/api/ghl-free-slots",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({calendarId:CAL,dateISO:todayCT(),durationHours:HRS})})
+    .then(function(r){if(!r.ok)throw r;return r.json()}).then(function(d){
+      Object.keys(d).filter(function(k){return /^\\d{4}-\\d{2}-\\d{2}$/.test(k)&&d[k]&&d[k].slots&&d[k].slots.length}).sort().slice(0,14).forEach(function(k){S.slots[k]=d[k].slots});
+      var keys=Object.keys(S.slots);
+      if(!keys.length){$("days").innerHTML='<p class="note">No open times online right now. Call <a href="tel:'+TEL+'">'+PHONE+'</a>.</p>';return}
+      S.day=keys[0];
+      $("days").innerHTML=keys.map(function(k){return '<button type="button" class="chip day" data-day="'+k+'" aria-pressed="'+(k===S.day)+'"><small>'+wd(k)+"</small>"+(+k.slice(8))+"</button>"}).join("");
+      times();
+    }).catch(function(){$("days").innerHTML='<p class="note">Couldn\\'t load times. Call <a href="tel:'+TEL+'">'+PHONE+'</a> and we\\'ll get you in.</p>'});
+  $("bk").addEventListener("submit",function(e){
+    e.preventDefault();var f=e.target,m=$("msg"),name=f.name.value.trim(),phone=f.phone.value.trim();
+    if(!S.slot){m.className="msg err";m.textContent="Pick a day and time.";return}
+    if(!name||phone.replace(/\\D/g,"").length<10){m.className="msg err";m.textContent="Add your name and a 10-digit phone number.";(name?f.phone:f.name).focus();return}
+    if(window.fbq)fbq("track","Lead",{value:S.price,currency:"USD",content_name:GS_HL.name},{eventID:gsEventId()+"-lead"});
+    var q=new URLSearchParams(location.search),src=["utm_source","utm_medium","utm_campaign","utm_content","fbclid"].filter(function(k){return q.get(k)}).map(function(k){return k+"="+q.get(k)}).join(" ");
+    $("go").disabled=true;m.className="msg";m.textContent="Booking…";
+    fetch("/api/ghl-create-booking",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
+      calendarId:CAL,startISO:S.slot,durationHours:HRS,name:name,phone:phone,service:"Headlight Restoration",
+      packageName:(S.n===2?"Both headlights":"1 headlight"),vehicle:"",price:S.price,textMe:true,page:location.pathname,
+      notes:"Headlight restoration, "+(S.n===2?"both headlights":"1 headlight")+", $"+S.price+(src?"\\nSource: "+src:"")})})
+    .then(function(r){return r.json().then(function(j){if(!r.ok)throw j;return j})})
+    .then(function(){location.href="/headlight-restoration/booked?appointment_start_time="+encodeURIComponent(S.slot)+"&n="+S.n+"&value="+S.price})
+    .catch(function(){$("go").disabled=false;m.className="msg err";m.innerHTML='That didn\\'t go through. Call or text <a href="tel:'+TEL+'">'+PHONE+"</a> and we'll book you."});
+  });
+  upd();
+})();
+</script>
+</body>
+</html>
+`;
+}
+
 export function buildHeadlightLanding(OUT) {
   fs.mkdirSync(path.join(OUT, "headlight-restoration"), { recursive: true });
   fs.writeFileSync(path.join(OUT, `${HL.path}.html`), landing());
   fs.writeFileSync(path.join(OUT, `${HL.bookedPath}.html`), booked());
+  fs.writeFileSync(path.join(OUT, `${BOOK.path}.html`), bookPage());
 }
