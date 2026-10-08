@@ -23,6 +23,7 @@ Static marketing site for **The Gloss Spot** (Dom & Dylan Pierson,
 | `REDESIGN.md` | Generated deliverables: old→new URL map, every page's title/meta/H1/copy, FAQs, booking flow, schema, open items. |
 | `api/` | Vercel functions: `ghl-free-slots`, `ghl-create-booking` (name + phone only), `ghl-quote` (quote form + photo upload), `ghl-feedback`. Every submission is assigned to Dom, tagged `website-lead`, gets a GHL task for Dom, and has its service written to the GHL contact fields "Preferred Service" / "Service Requested" (`api/_lib/notify-dom.js`). |
 | `generate-landing-page.js`, `run.js`, `blog-generator.js`, `sitemap-generator.js`, `daily-cron.js` | **Legacy** AI generator (old mobile-detailing site). Renamed to `npm run legacy:*`. Running them overwrites `output/` with the old design. |
+| `ads/` | `make_ad.py`: cuts vertical 9:16 video ads (talking head + muted car B-roll, captions, promo text) with ffmpeg. See `ads/README.md`. Not deployed (`.vercelignore`). |
 | `Clients/Aricka Dean/` | **Unrelated** — KEI Events landing pages. Not part of this site. |
 | `lead_*.py` | Yelp lead scraper. Unrelated; excluded via `.vercelignore`. |
 

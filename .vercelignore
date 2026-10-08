@@ -7,3 +7,4 @@ lead_scheduler.py
 node_modules/
 daily-log.txt
 published-slugs.json
+ads/

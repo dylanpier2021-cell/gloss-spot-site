@@ -1,0 +1,5 @@
+# python3 -m venv .venv && .venv/bin/pip install -r ads/requirements.txt
+# Also needs ffmpeg (with libass + zimg) on PATH; espeak-ng helps align unusual words.
+numpy
+pocketsphinx
+faster-whisper  # optional: auto-transcribes when the model can download (huggingface.co)
