@@ -15,3 +15,6 @@ node_modules/
 # Cron state files
 daily-log.txt
 published-slugs.json
+
+# Python bytecode
+__pycache__/
