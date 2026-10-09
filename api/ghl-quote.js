@@ -2,8 +2,11 @@
 // membership, etc.). Upserts the contact in GHL, uploads any photos to the
 // GHL media library, then attaches everything as a note on the contact.
 // Photos arrive as JPEG data URLs already shrunk in the browser (~1600px).
+// The /paint-protection-offer ad page also posts here, with its answers in
+// `offer` (see _lib/paint-offer.js for the tags and custom fields).
 
 import { DOM_USER_ID, taskForDom, setServiceFields } from "./_lib/notify-dom.js";
+import { offerLead, setOfferFields } from "./_lib/paint-offer.js";
 
 const GHL_BASE = "https://services.leadconnectorhq.com";
 const LOCATION_ID = "CLJQbljlapECB2Aiq27f";
@@ -63,11 +66,18 @@ export default async function handler(req, res) {
     res.status(400).json({ error: "Invalid JSON body" }); return;
   }
 
-  const { name, phone, vehicle, service, textMe, notes, photos, page } = body || {};
+  const { name, phone, vehicle, textMe, photos, page, offer } = body || {};
   if (!name || !phone) {
     res.status(400).json({ error: "Missing required fields" });
     return;
   }
+  const lead = offer ? offerLead(offer, { vehicle, textMe }) : null;
+  if (offer && !lead) {
+    res.status(400).json({ error: "Invalid offer answers" });
+    return;
+  }
+  const service = lead ? lead.service : body.service;
+  const notes = lead ? lead.lines.join("\n") : body.notes;
 
   const parts = String(name).trim().split(/\s+/);
   const firstName = parts[0];
@@ -89,9 +99,9 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         locationId: LOCATION_ID,
         firstName, lastName, phone,
-        source: "Website Quote",
+        source: lead ? "Paint Offer Page" : "Website Quote",
         assignedTo: DOM_USER_ID,
-        tags: ["website-lead", "website-quote", service ? `quote-${slug(service)}` : null, textMe ? "prefers-text" : "prefers-call"].filter(Boolean),
+        tags: ["website-lead", "website-quote", service ? `quote-${slug(service)}` : null, textMe ? "prefers-text" : "prefers-call", ...(lead ? lead.tags : [])].filter(Boolean),
       }),
     });
     contactJson = await contactRes.json();
@@ -112,6 +122,7 @@ export default async function handler(req, res) {
 
   // Tell GHL which service this is for (Preferred Service / Service Requested).
   await setServiceFields(token, contactId, `${service || "General"} (quote)`, [`${service || "General"} – quote request`, vehicle ? `Vehicle: ${vehicle}` : null, notes ? `Notes: ${notes}` : null].filter(Boolean).join("\n"));
+  if (lead) await setOfferFields(token, contactId, lead.fields);
 
   // Step 2: photos → GHL media library.
   const list = Array.isArray(photos) ? photos.slice(0, MAX_PHOTOS) : [];
@@ -121,7 +132,7 @@ export default async function handler(req, res) {
 
   // Step 3: note on the contact with everything Dom needs to quote.
   const noteBody = [
-    `QUOTE REQUEST: ${service || "General"}`,
+    lead ? `PAINT OFFER LEAD (${lead.qualified ? "QUALIFIED" : "not ready"}): ${service}` : `QUOTE REQUEST: ${service || "General"}`,
     `Name: ${name}`,
     `Phone: ${phone}`,
     `Vehicle: ${vehicle || "not given"}`,
@@ -149,7 +160,10 @@ export default async function handler(req, res) {
   }
 
   // Make sure Dom sees it (task assigned to him; GHL notifies him).
-  await taskForDom(token, contactId, `New website quote: ${name} – ${service || "General"} – ${textMe ? "TEXT back" : "CALL back"} ${phone}`, noteBody);
+  const title = lead
+    ? `${lead.qualified ? "QUALIFIED" : "Not ready"} paint offer lead: ${name} – ${service} – ${lead.qualified || !textMe ? "CALL" : "TEXT quote to"} ${phone}`
+    : `New website quote: ${name} – ${service || "General"} – ${textMe ? "TEXT back" : "CALL back"} ${phone}`;
+  await taskForDom(token, contactId, title, noteBody);
 
-  res.status(200).json({ ok: true, contactId, photos: uploaded.length });
+  res.status(200).json({ ok: true, contactId, photos: uploaded.length, ...(lead ? { qualified: lead.qualified } : {}) });
 }

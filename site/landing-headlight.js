@@ -39,7 +39,8 @@ const FAQ = [
 ];
 
 // Meta Pixel standard base code + PageView. `extra` runs right after init.
-function pixelHead(extra = "") {
+// Also used by the paint offer page (site/landing-paint-offer.js).
+export function pixelHead(extra = "") {
   return `<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?

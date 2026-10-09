@@ -16,6 +16,7 @@ import { pages, redirectsAdded } from "./pages.js";
 import { CSS } from "./styles.js";
 import { clientJS } from "./client.js";
 import { buildHeadlightLanding, HL } from "./landing-headlight.js";
+import { buildPaintOffer } from "./landing-paint-offer.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = path.join(ROOT, "output");
@@ -614,6 +615,7 @@ export function build() {
   fs.writeFileSync(path.join(OUT, "blog", "posts.json"), JSON.stringify(posts.map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt, publishedAt: p.date + "T10:00:00Z", url: `/blog/${p.slug}` })), null, 2) + "\n");
 
   buildHeadlightLanding(OUT);
+  buildPaintOffer(OUT); // ad page: noindex, kept out of the sitemap
   writeDeliverables();
   console.log(`Built ${pages.length} pages → output/ (assets v${assetV})`);
 }

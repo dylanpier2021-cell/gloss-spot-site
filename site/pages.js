@@ -524,7 +524,8 @@ const legal = [
     blocks: [["legal", `<h2>What we collect</h2><p>When you book, request a quote or contact us, we collect your name, phone number and, if you share them, your email, vehicle details, photos and notes.</p>
 <h2>How we use it</h2><p>To schedule your service, send quotes, confirmations and reminders, and answer your questions. If you check "Text me," we'll text you about your quote or booking.</p>
 <h2>Who we share it with</h2><p>We store bookings and contact info in our scheduling system (GoHighLevel). We never sell your information.</p>
-<h2>Cookies and analytics</h2><p>On desktop, our chat widget may set cookies to remember your conversation. Embedded Google Maps may set Google cookies.</p>
+<h2>Text messages</h2><p>We only text you if you agree to it, about your quote, booking or service. Your mobile number and text opt-in are never sold or shared with third parties or affiliates for their marketing. We share them only with the service that sends our texts.</p>
+<h2>Cookies and analytics</h2><p>On desktop, our chat widget may set cookies to remember your conversation. Embedded Google Maps may set Google cookies. Our ad pages use the Meta Pixel to measure our Facebook and Instagram ads.</p>
 <h2>Your choices</h2><p>Reply STOP to any text to opt out. To see or delete your info, call or text ${biz.phone} or email <a href="mailto:${biz.email}">${biz.email}</a>.</p>`]],
   },
   {
@@ -538,6 +539,7 @@ const legal = [
 <h2>Vehicle condition</h2><p>We note your car's condition at drop-off. Pre-existing damage, deep scratches and heavy stains may only improve, and we'll tell you what to expect before we start.</p>
 <h2>Quotes</h2><p>Online prices are for typical condition. Heavily soiled vehicles or extra requests may change the price, and we'll confirm with you first.</p>
 <h2>Payment</h2><p>Payment is due at pickup. We take cash, cards, Apple Pay and Google Pay.</p>
+<h2>Text messages</h2><p>If you opt in, The Gloss Spot texts you about your quote, booking and service. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out or HELP for help. Carriers are not liable for delayed or undelivered messages. Agreeing to texts is never required to get a quote or book.</p>
 <h2>Questions</h2><p>Call or text ${biz.phone} or email <a href="mailto:${biz.email}">${biz.email}</a>.</p>`]],
   },
   {

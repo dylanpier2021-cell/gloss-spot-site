@@ -18,6 +18,7 @@ Static marketing site for **The Gloss Spot** (Dom & Dylan Pierson,
 | `site/pages.js` | **Every page**: URL, title, meta, H1, hero line, buttons and content blocks. |
 | `site/build.js` | Templates, JSON-LD schema, sitemap, `REDESIGN.md`. Fails the build if a title ≥60 chars, a meta ≥155, an H1 lacks "Champaign, IL", titles/metas repeat, or a core service page tops 300 body words. |
 | `site/styles.js` / `site/client.js` | Written to `output/assets/site.css` / `site.js` (one shared file, versioned by hash). |
+| `site/landing-paint-offer.js` | `/paint-protection-offer`: standalone Meta-ad lead-qualification page (paint correction + ceramic). noindex/nofollow, not in the sitemap, linked from nowhere, no links out. One question per screen; posts to `/api/ghl-quote` with an `offer` object. Answer options, tags and GHL custom-field mapping live in `api/_lib/paint-offer.js`; prices come from `content.js`. `PO.responseTime` is the thank-you placeholder. |
 | `site/media.js` | Background video loops made in OpenArt from our real photos (hotlinked from OpenArt's CDN). |
 | `output/` | **The deployed site, generated.** Don't hand-edit except `review.html` / `feedback.html` (the review funnel; not generated). |
 | `REDESIGN.md` | Generated deliverables: old→new URL map, every page's title/meta/H1/copy, FAQs, booking flow, schema, open items. |
@@ -50,3 +51,4 @@ legacy generator's `.env` (Anthropic key etc.) is not needed for `npm run build`
 - Referral offer hidden until confirmed (`biz.referralConfirmed`).
 - Videos and shop photos are hotlinked from OpenArt; move them to Cloudinary.
 - No analytics installed.
+- `/paint-protection-offer`: fill `PO.responseTime`; create its GHL custom fields (names in `api/_lib/paint-offer.js`; the API looks them up by key, so the PIT token needs the `locations/customFields.readonly` scope). Set `META_CAPI_TOKEN` to turn on server-side Lead events.
