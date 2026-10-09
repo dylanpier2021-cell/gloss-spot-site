@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 import {
   biz, photos, beforeAfter, media, sizes, ceramicSizes, detailPackages,
   ceramic, ppf, wraps, membership, maintenance, reviews, story, howItWorks, areaLine,
-  faqs, cities, posts, instagram,
+  faqs, cities, posts, instagram, spotted,
 } from "./content.js";
 import { pages, redirectsAdded } from "./pages.js";
 import { CSS } from "./styles.js";
@@ -77,7 +77,9 @@ export function img(key, o = {}) {
     const dims = o.ar === "free" ? "" : ` width="${mid}" height="${Math.round((mid * ah) / aw)}"`;
     return `<img${cls} src="${cld(p.cld, mid, o.ar === "free" ? null : o.ar || "4:3")}" srcset="${set}" sizes="${o.sizes || "(min-width: 900px) 33vw, 100vw"}" alt="${alt}"${dims} ${loading} decoding="async">`;
   }
-  return `<img${cls} src="${esc(p.src)}" alt="${alt}" width="${p.w}" height="${p.h}" ${loading} decoding="async">`;
+  const set = p.small ? ` srcset="${esc(p.small)} 600w, ${esc(p.src)} ${p.w}w" sizes="${o.sizes || "(min-width: 900px) 33vw, 100vw"}"` : "";
+  const pos = p.pos ? ` style="object-position:${p.pos}"` : "";
+  return `<img${cls} src="${esc(p.src)}"${set} alt="${alt}" width="${p.w}" height="${p.h}"${pos} ${loading} decoding="async">`;
 }
 
 // Background video: lazy, muted, never on save-data or reduced motion.
@@ -270,6 +272,12 @@ function citiesBlock() {
 function galleryBlock(keys) {
   const html = keys.map((k) => `<li class="reveal">${img(k, { ar: "1:1", widths: [360, 600, 900], sizes: "(min-width: 900px) 33vw, 50vw" })}</li>`).join("");
   return sec("sec-gal", `${head("Gallery", "Real cars. Real work.", "Every photo is a customer car from our shop.")}<ul class="gal">${html}</ul>`);
+}
+
+// Cars we filmed around the county. Not our work, so the copy never says we detailed them.
+function spottedBlock() {
+  const html = spotted.map((k) => `<li class="reveal">${img(k, { sizes: "(min-width: 900px) 33vw, 50vw" })}</li>`).join("");
+  return sec("sec-gal", `${head("Spotted in Champaign County", "Cars we've caught on camera", `Not our detail work. Just great cars we filmed around town. More on <a href="${instagram.url}" target="_blank" rel="noopener">@${instagram.handle}</a>.`)}<ul class="gal">${html}</ul>`);
 }
 
 // Instagram reels, embedded with Instagram's player (loaded only when scrolled near).
@@ -490,7 +498,7 @@ function pageSchema(page) {
 const RENDER = {
   benefits, serviceCards, beforeAfter: beforeAfterBlock, prices, faq: faqBlock, related, steps,
   reviews: reviewsBlock, membershipBanner, story: storyBlock, text: textBlock, compare: compareBlock,
-  cities: citiesBlock, gallery: galleryBlock, shopPhotos, insta: instaBlock, calculator: calculatorBlock, post: postBlock,
+  cities: citiesBlock, gallery: galleryBlock, spotted: spottedBlock, shopPhotos, insta: instaBlock, calculator: calculatorBlock, post: postBlock,
   postList, contact: contactBlock, legal: legalBlock, quote: quoteForm,
   allReviews: () => sec("sec-rev", `<ul class="rvs rvs-all">${reviewCards(reviews)}</ul><p class="center"><a class="btn btn-o btn-s" href="${biz.googleReviews}" target="_blank" rel="noopener">See every review on Google</a></p>`),
 };

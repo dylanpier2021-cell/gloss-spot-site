@@ -51,6 +51,9 @@ biz.mapEmbed = `https://maps.google.com/maps?q=${biz.mapsQuery}&z=15&output=embe
 // generic. Replace each with the real car + service, e.g.
 // "ceramic coated black F-150 Champaign IL".
 const OA = "https://cdn.openart.ai/openart-uploads/production/2026-10/create-image/cMsgRdDVyjzN24ccys4i/";
+// Self-hosted in output/media/spotted/: full size + a 600px copy for grids.
+// `pos` = CSS object-position for the square gallery crop.
+const spot = (name, w, h, alt, pos) => ({ src: `/media/spotted/${name}.jpg`, small: `/media/spotted/${name}-600.jpg`, w, h, alt, pos });
 export const photos = {
   hero:     { cld: "IMG_5948_totw8k", alt: "Freshly detailed car with a deep gloss finish at The Gloss Spot in Champaign IL" },
   hero2:    { cld: "IMG_6007_huulif", alt: "Detailed vehicle exterior with clean glossy paint, Champaign IL" },
@@ -81,7 +84,17 @@ export const photos = {
   // Photo of Dom & Dylan together. Paste a Cloudinary ID here when ready;
   // until then the story block shows a branded card instead.
   brothers: null,
+  // Cars we FILMED around the county, not cars we detailed. Never caption or
+  // alt them as our work. Plates blurred.
+  spotGreenG63: spot("green-g63", 1080, 1920, "Green Mercedes-AMG G 63 in a shop bay, spotted in Champaign County, IL"),
+  spotPanamera: spot("silver-panamera", 1080, 1920, "Silver Porsche Panamera Turbo Sport Turismo by a cornfield in Champaign County, IL"),
+  spotE53: spot("gray-amg-e-class", 1918, 1080, "New gray Mercedes-AMG E53 sedan spotted in Champaign County, IL", "25% 50%"),
+  spotE43: spot("amg-e-class-hood-up", 1080, 1920, "Gray Mercedes-AMG E43 with the hood up in a shop, Champaign County, IL"),
+  spotEkko: spot("winnebago-sprinter", 1080, 1920, "Winnebago Ekko camper on a Mercedes-Benz Sprinter chassis, spotted in Champaign County, IL"),
 };
+
+// /gallery "Spotted around Champaign County" section, newest first.
+export const spotted = ["spotGreenG63", "spotPanamera", "spotE53", "spotE43", "spotEkko"];
 
 // Instagram reels shown on /gallery with Instagram's own embed player, so
 // each keeps its real shape (vertical stays vertical, wide stays wide).
