@@ -301,7 +301,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cy);box-
 .opt:hover{border-color:rgba(92,217,219,.6)}
 .opt[aria-checked=true]{border-color:var(--cy);background:rgba(92,217,219,.1)}
 .opts-size .opt{min-height:56px}
-@media(min-width:640px){.opts{grid-template-columns:1fr 1fr}}
+@media(min-width:640px){.opts{grid-template-columns:1fr 1fr}.opts>.opt:last-child:nth-child(odd){grid-column:1/-1}}
 .tiers{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .chip{min-height:48px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line2);background:#0a0e10;color:var(--text);font:600 .95rem var(--bf);cursor:pointer}
 .chip[aria-pressed=true]{border-color:var(--cy);background:var(--cy);color:var(--cy-ink)}

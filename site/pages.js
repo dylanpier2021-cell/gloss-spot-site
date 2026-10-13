@@ -1,16 +1,18 @@
 // Every page on the site: URL, title, meta, H1, hero line, buttons, blocks.
 // Titles must stay under 60 characters and descriptions under 155; the build
 // refuses to run otherwise. Every URL from the old site is still here (1:1).
-import { biz, cities, posts, faqs, reviews } from "./content.js";
+import { biz, cities, posts, faqs, reviews, detailPackages } from "./content.js";
+
+const interior = detailPackages.find((p) => p.key === "interior");
 
 const CALL = "Call 217-600-2108.";
 export const redirectsAdded = [["/members", "/membership"]];
 
 // Related-service cards. [path, title, line]
 const R = {
-  packages: ["packages", "Detailing packages", "Express, Full and Lux. Prices by vehicle size."],
+  packages: ["packages", "Detailing packages", "Express, Interior, Full and Lux. Prices by vehicle size."],
   full: ["full-service-detailing-champaign-il", "Full Detail", "Complete interior and exterior, from $225."],
-  interior: ["interior-detailing-champaign-il", "Interior detailing", "Seats, carpet, dash and glass, reset."],
+  interior: ["interior-detailing-champaign-il", "Interior detailing", "Seats, carpet, dash and glass. From $150."],
   exterior: ["exterior-detailing-champaign-il", "Exterior detailing", "Foam wash, wheels, jambs and sealant."],
   ceramic: ["ceramic", "Ceramic coating", "Years of gloss. Paint correction included."],
   correction: ["paint-correction", "Paint correction", "Swirls out, depth back. From $325."],
@@ -30,13 +32,13 @@ const core = [
   {
     path: "packages", crumb: "Detailing",
     title: "Auto Detailing Champaign, IL – Book Now | The Gloss Spot",
-    description: "Auto detailing in Champaign, IL: Express from $90, Full Detail from $225, Lux with paint correction from $325. Book online in 30 seconds.",
+    description: "Auto detailing in Champaign, IL: Express from $90, Interior from $150, Full Detail from $225, Lux with correction from $325. Book online.",
     h1: "Auto Detailing in <em>Champaign, IL</em>",
-    lead: "Three packages, priced by vehicle size. Book in 30 seconds.",
+    lead: "Four packages, priced by vehicle size. Book in 30 seconds.",
     hero: { photo: "vWhiteYukon" },
     service: { name: "Auto Detailing", type: "Car detailing", low: 90, high: 450 },
     blocks: [
-      ["benefits", [["sparkle", "Three clear packages", "Express, Full or Lux. You see your price before you book."], ["shield", "Checked before it leaves", "Dom or Dylan inspects every car at pickup."], ["clock", "Drop off, pick up", "Leave it on the way to work. Grab it on the way home."]]],
+      ["benefits", [["sparkle", "Four clear packages", "Express, Interior, Full or Lux. You see your price before you book."], ["shield", "Checked before it leaves", "Dom or Dylan inspects every car at pickup."], ["clock", "Drop off, pick up", "Leave it on the way to work. Grab it on the way home."]]],
       ["beforeAfter"],
       ["prices", "detail"],
       ["faq", "detailing"],
@@ -170,32 +172,32 @@ const secondary = [
     ],
   },
   {
-    path: "interior-detailing-champaign-il", crumb: "Interior Detailing", bookSvc: "full",
+    path: "interior-detailing-champaign-il", crumb: "Interior Detailing", bookSvc: "interior",
     title: "Interior Detailing Champaign, IL – Book | The Gloss Spot",
-    description: "Interior detailing in Champaign, IL: seats, carpet, mats, dash, vents and glass. Pet hair and kid messes welcome. Book online or call today.",
+    description: "Interior detailing in Champaign, IL from $150: seats, carpet, mats, dash, vents and glass. Pet hair and kid messes welcome. Book online today.",
     h1: "Interior Detailing in <em>Champaign, IL</em>",
-    lead: "Seats, carpet, dash and glass, reset. From $90.",
+    lead: "Seats, carpet, dash and glass, reset. From $150.",
     hero: { photo: "g6" },
-    service: { name: "Interior Detailing", type: "Car interior detailing", low: 90, high: 315 },
+    service: { name: "Interior Detailing", type: "Car interior detailing", low: interior.prices[0], high: interior.prices[interior.prices.length - 1] },
     blocks: [
       ["benefits", [["users", "Kids, pets, work trucks", "Crumbs, dog hair and jobsite dust are everyday work for us."], ["drop", "Every surface", "Vacuum, seats and mats, dash, panels, vents and glass."], ["shield", "Checked before pickup", "Dom or Dylan looks it over before you get your keys."]]],
       ["beforeAfter"],
-      ["prices", ["express", "full"]],
-      ["faq", [["How much is interior detailing in Champaign?", "A quick interior refresh comes in the Express, from $90. The Full Detail covers the complete interior and exterior, from $225."], ["Can you remove pet hair?", "Yes. Tell us about it in your booking notes so we plan the time."], ["How long does an interior detail take?", "About an hour for an Express and about three for a Full Detail."], ["Do you clean seats and floor mats?", "Yes. Seats and mats are part of every Full Detail."]]],
+      ["prices", ["interior", "full"]],
+      ["faq", [["How much is interior detailing in Champaign?", "An Interior Detail is $150 for a coupe, $175 for a sedan, $200 for an SUV or truck and $225 for a large 3-row SUV. Want the outside too? The Full Detail starts at $225."], ["Can you remove pet hair?", "Yes. Tell us about it in your booking notes so we plan the time."], ["How long does an interior detail take?", "About two hours for an Interior Detail, a little longer for big SUVs."], ["Do you clean seats and floor mats?", "Yes. Seats and mats are part of every Interior and Full Detail."]]],
       ["related", [R.packages, R.full, R.membership, R.ceramic]],
     ],
   },
   {
-    path: "interior", crumb: "Interior Car Cleaning", bookSvc: "express",
+    path: "interior", crumb: "Interior Car Cleaning", bookSvc: "interior",
     title: "Interior Car Cleaning Champaign, IL – Book | The Gloss Spot",
-    description: "Interior car cleaning in Champaign, IL for busy families, pet owners and commuters. Express from $90, Full Detail from $225. Book online now.",
+    description: "Interior car cleaning in Champaign, IL for busy families, pet owners and commuters. Interior Detail from $150, Express from $90. Book online now.",
     h1: "Interior Car Cleaning in <em>Champaign, IL</em>",
     lead: "For the crumbs, the dog hair and the daily mess.",
     hero: { photo: "g1" },
     blocks: [
-      ["benefits", [["clock", "Express or Full", "A quick vacuum and wipe-down, or the complete interior."], ["heart", "Family-car friendly", "Car seats, snacks and sports gear: we've seen it all."], ["calendar", "Book in 30 seconds", "Pick a time online, drop off, pick up clean."]]],
+      ["benefits", [["clock", "Interior or Express", "The complete inside reset, or a quick vacuum and wipe-down."], ["heart", "Family-car friendly", "Car seats, snacks and sports gear: we've seen it all."], ["calendar", "Book in 30 seconds", "Pick a time online, drop off, pick up clean."]]],
       ["reviews", 3, "Families love a clean car"],
-      ["prices", ["express", "full"]],
+      ["prices", ["interior", "express"]],
       ["faq", [["Can you get rid of car smells?", "We clean the usual sources: carpets, seats, vents and trash spots. Tell us about the smell when you book."], ["Do I need to empty my car first?", "Just take out valuables. We handle the rest."], ["How often should I clean my car's interior?", "Every month or two with kids or pets. The <a href=\"/membership\">membership</a> covers 4 interior cleans a month."]]],
       ["related", [R.interior, R.membership, R.packages, R.reviews]],
     ],

@@ -111,6 +111,11 @@ export const detailPackages = [
     includes: ["Interior vacuum", "Dash and panel wipe-down", "Hand wash and dry", "Wheels and tires cleaned", "Windows cleaned"],
   },
   {
+    key: "interior", name: "Interior Detail", prices: [150, 175, 200, 225], hours: [1.75, 2, 2.25, 2.5],
+    short: "Inside only: seats, carpet, dash and glass.",
+    includes: ["Full vacuum: floors, mats and seats", "Dash, panels and vents wiped down", "Interior windows cleaned", "UV protectant on plastics", "Air freshener of your choice"],
+  },
+  {
     key: "full", name: "Full Detail", prices: [225, 250, 285, 315], hours: [2.5, 2.75, 3, 3.5], popular: true,
     short: "Complete interior and exterior detail.",
     includes: ["Foam pre-soak and hand wash", "Wheels, tires and door jambs", "Full interior vacuum, seats and mats", "Dash, panels and vents detailed", "Windows inside and out", "Tire dressing and quick sealant"],
@@ -257,15 +262,15 @@ export const areaLine = "Drivers come in from Urbana, Savoy, Mahomet, Rantoul an
 export const faqs = {
   home: [
     ["Where is The Gloss Spot?", "Our shop is at 606 N. Country Fair Dr, Champaign, IL. Tap Get Directions at the bottom of any page."],
-    ["How much is a car detail in Champaign?", "An Express Detail starts at $90, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book."],
+    ["How much is a car detail in Champaign?", "An Express Detail starts at $90, an Interior Detail at $150, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book."],
     ["How do I book?", "Tap Book Now, pick a service, your vehicle and a time, then add your name and phone. Prefer to talk? Call or text 217-600-2108."],
     ["Do you still do mobile detailing?", "We've moved into our own shop so every car gets good light, clean water and the right tools. Drop it off, and we'll text you when it's ready."],
     ["Who will work on my car?", "Dom and Dylan run the shop. One of us checks every car before it leaves."],
   ],
   detailing: [
     ["How much is a full detail in Champaign?", "A Full Detail is $225 for a coupe, $250 for a sedan, $285 for an SUV or truck and $315 for a large 3-row SUV."],
-    ["How long does a car detail take?", "An Express takes about an hour and a Full Detail about three. A Lux Package with paint correction takes most of the day."],
-    ["What's the difference between Express, Full and Lux?", "Express is a quick vacuum, wipe-down and exterior wash. Full is a complete interior and exterior detail, and Lux adds one-step paint correction and sealant."],
+    ["How long does a car detail take?", "An Express takes about an hour, an Interior Detail about two and a Full Detail about three. A Lux Package with paint correction takes most of the day."],
+    ["What's the difference between Express, Interior, Full and Lux?", "Express is a quick vacuum, wipe-down and exterior wash. Interior is the full inside only. Full is a complete interior and exterior detail, and Lux adds one-step paint correction and sealant."],
     ["Is mobile detailing better than a shop?", "A shop gives your car steady lighting, controlled water and no weather delays. It's the reason we moved off the driveway."],
     ["Do I need to clean out my car first?", "Just take out valuables and anything you don't want moved. We handle the rest."],
   ],
@@ -368,7 +373,7 @@ export const posts = [
     excerpt: "Every price we charge, by vehicle size. No surprises.",
     body: [
       ["h2", "Detailing packages"],
-      ["table", [["", "Coupe", "Sedan", "SUV / Truck", "3-Row SUV"], ["Express", "$90", "$100", "$120", "$145"], ["Full Detail", "$225", "$250", "$285", "$315"], ["Lux Package", "$325", "$350", "$400", "$450"]]],
+      ["table", [["", "Coupe", "Sedan", "SUV / Truck", "3-Row SUV"], ["Express", "$90", "$100", "$120", "$145"], ["Interior Detail", "$150", "$175", "$200", "$225"], ["Full Detail", "$225", "$250", "$285", "$315"], ["Lux Package", "$325", "$350", "$400", "$450"]]],
       ["p", "Lux includes one-step paint correction and sealant. Two-step correction is +$100."],
       ["h2", "Protection"],
       ["ul", ["Ceramic coating: from $1,100 (paint correction included)", "Paint protection film: from $800 for a sedan", "Vehicle wraps: from $2,400, partial wraps from $800"]],

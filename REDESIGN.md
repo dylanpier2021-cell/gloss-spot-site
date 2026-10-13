@@ -93,7 +93,7 @@ New redirects added: `/members` → `/membership`
 **FAQ** (with FAQPage schema)
 
 - **Where is The Gloss Spot?** Our shop is at 606 N. Country Fair Dr, Champaign, IL. Drivers come in from Urbana, Savoy, Mahomet, Rantoul and all over Champaign County. Tap Get Directions at the bottom of any page.
-- **How much is a car detail in Champaign?** An Express Detail starts at $90, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book.
+- **How much is a car detail in Champaign?** An Express Detail starts at $90, an Interior Detail at $150, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book.
 - **How do I book?** Tap Book Now, pick a service, your vehicle and a time, then add your name and phone. Prefer to talk? Call or text 217-600-2108.
 - **Do you still do mobile detailing?** We've moved into our own shop so every car gets good light, clean water and the right tools. Drop it off, and we'll text you when it's ready.
 - **Who will work on my car?** Dom and Dylan run the shop. One of us checks every car before it leaves.
@@ -101,13 +101,13 @@ New redirects added: `/members` → `/membership`
 ### /packages
 
 - **Title** (56): Auto Detailing Champaign, IL – Book Now | The Gloss Spot
-- **Meta** (137): Auto detailing in Champaign, IL: Express from $90, Full Detail from $225, Lux with paint correction from $325. Book online in 30 seconds.
+- **Meta** (137): Auto detailing in Champaign, IL: Express from $90, Interior from $150, Full Detail from $225, Lux with correction from $325. Book online.
 - **H1:** Auto Detailing in Champaign, IL
-- **Hero line:** Three packages, priced by vehicle size. Book in 30 seconds.
+- **Hero line:** Four packages, priced by vehicle size. Book in 30 seconds.
 - **Buttons:** Book Now · Call Now
-- **Body words:** 65 (limit 300, FAQ excluded)
+- **Body words:** 66 (limit 300, FAQ excluded)
 
-- **Three clear packages**: Express, Full or Lux. You see your price before you book.
+- **Four clear packages**: Express, Interior, Full or Lux. You see your price before you book.
 - **Checked before it leaves**: Dom or Dylan inspects every car at pickup.
 - **Drop off, pick up**: Leave it on the way to work. Grab it on the way home.
 - _Price cards: detail_
@@ -115,8 +115,8 @@ New redirects added: `/members` → `/membership`
 **FAQ** (with FAQPage schema)
 
 - **How much is a full detail in Champaign?** A Full Detail is $225 for a coupe, $250 for a sedan, $285 for an SUV or truck and $315 for a large 3-row SUV.
-- **How long does a car detail take?** An Express takes about an hour and a Full Detail about three. A Lux Package with paint correction takes most of the day.
-- **What's the difference between Express, Full and Lux?** Express is a quick vacuum, wipe-down and exterior wash. Full is a complete interior and exterior detail, and Lux adds one-step paint correction and sealant.
+- **How long does a car detail take?** An Express takes about an hour, an Interior Detail about two and a Full Detail about three. A Lux Package with paint correction takes most of the day.
+- **What's the difference between Express, Interior, Full and Lux?** Express is a quick vacuum, wipe-down and exterior wash. Interior is the full inside only. Full is a complete interior and exterior detail, and Lux adds one-step paint correction and sealant.
 - **Is mobile detailing better than a shop?** A shop gives your car steady lighting, controlled water and no weather delays. It's the reason we moved off the driveway.
 - **Do I need to clean out my car first?** Just take out valuables and anything you don't want moved. We handle the rest.
 
@@ -248,7 +248,7 @@ New redirects added: `/members` → `/membership`
 **FAQ** (with FAQPage schema)
 
 - **How much is a full detail in Champaign?** A Full Detail is $225 for a coupe, $250 for a sedan, $285 for an SUV or truck and $315 for a large 3-row SUV.
-- **How long does a car detail take?** An Express takes about an hour and a Full Detail about three. A Lux Package with paint correction takes most of the day.
+- **How long does a car detail take?** An Express takes about an hour, an Interior Detail about two and a Full Detail about three. A Lux Package with paint correction takes most of the day.
 - **What's included in a full detail?** Foam pre-soak and hand wash, wheels, tires and jambs, a full interior vacuum, dash and panels, windows inside and out, tire dressing and a quick sealant.
 - **Can I upgrade to paint correction?** Yes. The Lux Package adds one-step correction and sealant, from $325.
 
@@ -274,35 +274,35 @@ New redirects added: `/members` → `/membership`
 ### /interior-detailing-champaign-il
 
 - **Title** (56): Interior Detailing Champaign, IL – Book | The Gloss Spot
-- **Meta** (140): Interior detailing in Champaign, IL: seats, carpet, mats, dash, vents and glass. Pet hair and kid messes welcome. Book online or call today.
+- **Meta** (142): Interior detailing in Champaign, IL from $150: seats, carpet, mats, dash, vents and glass. Pet hair and kid messes welcome. Book online today.
 - **H1:** Interior Detailing in Champaign, IL
-- **Hero line:** Seats, carpet, dash and glass, reset. From $90.
+- **Hero line:** Seats, carpet, dash and glass, reset. From $150.
 - **Buttons:** Book Now · Call Now
 
 - **Kids, pets, work trucks**: Crumbs, dog hair and jobsite dust are everyday work for us.
 - **Every surface**: Vacuum, seats and mats, dash, panels, vents and glass.
 - **Checked before pickup**: Dom or Dylan looks it over before you get your keys.
-- _Price cards: express, full_
+- _Price cards: interior, full_
 
 **FAQ** (with FAQPage schema)
 
-- **How much is interior detailing in Champaign?** A quick interior refresh comes in the Express, from $90. The Full Detail covers the complete interior and exterior, from $225.
+- **How much is interior detailing in Champaign?** An Interior Detail is $150 for a coupe, $175 for a sedan, $200 for an SUV or truck and $225 for a large 3-row SUV. Want the outside too? The Full Detail starts at $225.
 - **Can you remove pet hair?** Yes. Tell us about it in your booking notes so we plan the time.
-- **How long does an interior detail take?** About an hour for an Express and about three for a Full Detail.
-- **Do you clean seats and floor mats?** Yes. Seats and mats are part of every Full Detail.
+- **How long does an interior detail take?** About two hours for an Interior Detail, a little longer for big SUVs.
+- **Do you clean seats and floor mats?** Yes. Seats and mats are part of every Interior and Full Detail.
 
 ### /interior
 
 - **Title** (59): Interior Car Cleaning Champaign, IL – Book | The Gloss Spot
-- **Meta** (141): Interior car cleaning in Champaign, IL for busy families, pet owners and commuters. Express from $90, Full Detail from $225. Book online now.
+- **Meta** (145): Interior car cleaning in Champaign, IL for busy families, pet owners and commuters. Interior Detail from $150, Express from $90. Book online now.
 - **H1:** Interior Car Cleaning in Champaign, IL
 - **Hero line:** For the crumbs, the dog hair and the daily mess.
 - **Buttons:** Book Now · Call Now
 
-- **Express or Full**: A quick vacuum and wipe-down, or the complete interior.
+- **Interior or Express**: The complete inside reset, or a quick vacuum and wipe-down.
 - **Family-car friendly**: Car seats, snacks and sports gear: we've seen it all.
 - **Book in 30 seconds**: Pick a time online, drop off, pick up clean.
-- _Price cards: express, full_
+- _Price cards: interior, express_
 
 **FAQ** (with FAQPage schema)
 
@@ -563,10 +563,10 @@ Robert Wengert
 **FAQ** (with FAQPage schema)
 
 - **Where is The Gloss Spot?** Our shop is at 606 N. Country Fair Dr, Champaign, IL. Tap Get Directions at the bottom of any page.
-- **How much is a car detail in Champaign?** An Express Detail starts at $90, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book.
+- **How much is a car detail in Champaign?** An Express Detail starts at $90, an Interior Detail at $150, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book.
 - **How do I book?** Tap Book Now, pick a service, your vehicle and a time, then add your name and phone. Prefer to talk? Call or text 217-600-2108.
 - **Who will work on my car?** Dom and Dylan run the shop. One of us checks every car before it leaves.
-- **How long does a car detail take?** An Express takes about an hour and a Full Detail about three. A Lux Package with paint correction takes most of the day.
+- **How long does a car detail take?** An Express takes about an hour, an Interior Detail about two and a Full Detail about three. A Lux Package with paint correction takes most of the day.
 - **How long does ceramic coating last?** We offer 3-year, 6-year and 10-year coatings. Regular hand washes keep it performing its best for the full term.
 - **Is paint correction included with ceramic coating?** Yes. Every ceramic package includes paint correction, so the coating locks in a corrected finish.
 - **Should I get PPF or ceramic coating?** PPF is a physical film that takes the hit from rock chips. Ceramic adds gloss and easy washing, and many owners do both.
@@ -1048,7 +1048,7 @@ Most people drop off on the way to work and pick up on the way home. We'll text 
 
 Embedded at `#book` on every page. No redirect, no pop-up. Book Now buttons scroll to it and preselect the service.
 
-1. **Service:** Express · Full · Lux · Ceramic (then pick 3/6/10-year). Link to a quote for PPF, wraps or membership.
+1. **Service:** Express · Interior · Full · Lux · Ceramic (then pick 3/6/10-year). Link to a quote for PPF, wraps or membership.
 2. **Vehicle size:** Coupe · Sedan · SUV/Truck · Large 3-Row SUV (ceramic: Minivan/Large SUV/Truck). Price shows instantly. Lux gets a +$100 two-step toggle.
 3. **Day & time:** live open slots from the GHL calendar (`/api/ghl-free-slots`), next 14 days. If slots can't load, it shows call/text.
 4. **Name + phone** (required). Optional, collapsed: email, year/make/model, notes, "Text me reminders" (on by default).
@@ -1163,6 +1163,20 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
               "@type": "PriceSpecification",
               "minPrice": 90,
               "maxPrice": 145,
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Interior Detail",
+              "url": "https://www.theglossspotil.com/interior-detailing-champaign-il"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 150,
+              "maxPrice": 225,
               "priceCurrency": "USD"
             }
           },
@@ -1302,7 +1316,7 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
           "name": "How much is a car detail in Champaign?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "An Express Detail starts at $90, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book."
+            "text": "An Express Detail starts at $90, an Interior Detail at $150, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book."
           }
         },
         {

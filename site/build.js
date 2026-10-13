@@ -136,7 +136,7 @@ function benefits(b) {
 
 function serviceCards() {
   const cards = [
-    { h: "Detailing", p: "Express, Full and Lux packages.", from: 90, link: "packages", photo: "vWhiteYukon", svc: "full" },
+    { h: "Detailing", p: "Express, Interior, Full and Lux.", from: detailPackages[0].prices[0], link: "packages", photo: "vWhiteYukon", svc: "full" },
     { h: "Ceramic + Correction", p: "Years of gloss and easy washes.", from: 1100, link: "ceramic", photo: "vCorvette", svc: "ceramic" },
     { h: "PPF / Wraps", p: "Clear armor or a whole new color.", from: 800, link: "ppf", photo: "vMatteBmw", alt: "vehicle-protection" },
   ];
@@ -174,7 +174,7 @@ function priceCard(kind, page) {
     rows(sizes, pkg.prices.map(money)) + incl(pkg.includes) + bookBtn(pkg.key, `Book ${pkg.name}`), open, pkg.popular ? "Most booked" : "");
   switch (kind) {
     case "detail": return detailPackages.map((p) => pkgCard(p, false)).join("");
-    case "express": case "full": case "lux": {
+    case "express": case "interior": case "full": case "lux": {
       const p = detailPackages.find((x) => x.key === kind);
       return pkgCard(p, true);
     }
@@ -421,15 +421,24 @@ function footer() {
 }
 
 // ── schema ──────────────────────────────────────────────────────────────────
+// Prices come straight from content.js so the schema can't drift from the site.
+const PKG_SCHEMA = {
+  express: { url: "packages" },
+  interior: { url: "interior-detailing-champaign-il" },
+  full: { url: "full-service-detailing-champaign-il" },
+  lux: { name: "Lux Package (Full Detail + Paint Correction)", url: "paint-correction" },
+};
+const allCeramic = ceramic.prices.flat();
 export const SERVICES_SCHEMA = [
-  { name: "Express Detail", low: 90, high: 145, url: "packages" },
-  { name: "Full Detail", low: 225, high: 315, url: "full-service-detailing-champaign-il" },
-  { name: "Lux Package (Full Detail + Paint Correction)", low: 325, high: 550, url: "paint-correction" },
-  { name: "Ceramic Coating", low: 1100, high: 2550, url: "ceramic" },
-  { name: "Paint Protection Film (PPF)", low: 800, high: 5500, url: "ppf" },
-  { name: "Vehicle Wraps", low: 800, high: 3600, url: "car-wraps" },
-  { name: "Exterior Maintenance (4 exterior details/month)", low: 149, high: 149, url: "membership", unit: "MON" },
-  { name: "Gloss Membership", low: 299, high: 299, url: "membership", unit: "MON" },
+  ...detailPackages.map((p) => ({
+    name: PKG_SCHEMA[p.key]?.name || p.name, url: PKG_SCHEMA[p.key]?.url || "packages",
+    low: Math.min(...p.prices), high: Math.max(...p.prices) + (p.twoStepAdd || 0),
+  })),
+  { name: "Ceramic Coating", low: Math.min(...allCeramic), high: Math.max(...allCeramic), url: "ceramic" },
+  { name: "Paint Protection Film (PPF)", low: Math.min(...ppf.packages.map((p) => p.range[0])), high: Math.max(...ppf.packages.map((p) => p.range[1])), url: "ppf" },
+  { name: "Vehicle Wraps", low: 800, high: Math.max(...wraps.rows.filter((r) => r.range).map((r) => r.range[1])), url: "car-wraps" },
+  { name: `${maintenance.name} (4 exterior details/month)`, low: maintenance.price, high: maintenance.price, url: "membership", unit: "MON" },
+  { name: "Gloss Membership", low: membership.price, high: membership.price, url: "membership", unit: "MON" },
 ];
 function businessSchema() {
   return {
@@ -653,7 +662,7 @@ function writeDeliverables() {
     L.push("");
   }
   L.push("## 3. Booking flow", "", "Embedded at `#book` on every page. No redirect, no pop-up. Book Now buttons scroll to it and preselect the service.", "");
-  L.push("1. **Service:** Express · Full · Lux · Ceramic (then pick 3/6/10-year). Link to a quote for PPF, wraps or membership.");
+  L.push(`1. **Service:** ${detailPackages.map((p) => p.name.replace(/ (Detail|Package)$/, "")).join(" · ")} · Ceramic (then pick 3/6/10-year). Link to a quote for PPF, wraps or membership.`);
   L.push("2. **Vehicle size:** Coupe · Sedan · SUV/Truck · Large 3-Row SUV (ceramic: Minivan/Large SUV/Truck). Price shows instantly. Lux gets a +$100 two-step toggle.");
   L.push("3. **Day & time:** live open slots from the GHL calendar (`/api/ghl-free-slots`), next 14 days. If slots can't load, it shows call/text.");
   L.push("4. **Name + phone** (required). Optional, collapsed: email, year/make/model, notes, \"Text me reminders\" (on by default).");
