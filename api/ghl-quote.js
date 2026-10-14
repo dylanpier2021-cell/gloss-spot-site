@@ -1,28 +1,29 @@
-// Vercel serverless function — "Get a Quote" form (ceramic, PPF, wraps,
-// membership, etc.). Upserts the contact in GHL, uploads any photos to the
-// GHL media library, then attaches everything as a note on the contact.
+// Vercel serverless function: website quote requests → GoHighLevel.
+// PPF, ceramic for oversized vehicles, custom detailing (odd size, mold),
+// wraps, memberships and the rest. Upserts the contact, uploads photos to the
+// GHL media library, adds a note, creates the opportunity, tasks Dom.
 // Photos arrive as JPEG data URLs already shrunk in the browser (~1600px).
 
-import { DOM_USER_ID, taskForDom, setServiceFields } from "./_lib/notify-dom.js";
+import { priceSelection } from "./_lib/pricing.js";
+import {
+  readJsonBody, upsertContact, createOpportunity, addNote, setServiceFields, taskForDom,
+  alertFailure, splitName, LOCATION_ID, GHL_BASE,
+} from "./_lib/ghl.js";
 
-const GHL_BASE = "https://services.leadconnectorhq.com";
-const LOCATION_ID = "CLJQbljlapECB2Aiq27f";
 const MAX_PHOTOS = 3;
-
-async function readJsonBody(req) {
-  if (req.body && typeof req.body === "object") return req.body;
-  if (typeof req.body === "string") return JSON.parse(req.body);
-  return new Promise((resolve, reject) => {
-    let data = "";
-    req.on("data", (chunk) => (data += chunk));
-    req.on("end", () => {
-      try { resolve(data ? JSON.parse(data) : {}); } catch (e) { reject(e); }
-    });
-    req.on("error", reject);
-  });
-}
-
 const slug = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+// Which pipeline + service tag a quote belongs to.
+function route(service, sel) {
+  if (/protection film|ppf/i.test(service)) return { pipeline: "detailing", tag: "ppf-quote" };
+  if (/ceramic/i.test(service) || sel?.svc === "ceramic") return { pipeline: "ceramic", tag: "ceramic" };
+  if (/headlight/i.test(service)) return { pipeline: "detailing", tag: "headlight" };
+  if (sel?.svc === "detailing") {
+    const p = priceSelection(sel);
+    return { pipeline: "detailing", tag: p.sideTag || "full-detail" };
+  }
+  return { pipeline: "detailing", tag: null };
+}
 
 // Upload one data-URL image to the GHL media library. Returns its URL or null;
 // a failed photo never blocks the lead from being saved.
@@ -48,108 +49,88 @@ async function uploadPhoto(token, dataUrl, filename) {
 }
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    res.status(405).json({ error: "Method not allowed" });
-    return;
-  }
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
   const token = process.env.GHL_PIT_TOKEN;
   if (!token) {
-    res.status(500).json({ error: "GHL_PIT_TOKEN not configured on server" });
-    return;
+    console.error("[LEAD-FALLBACK] GHL_PIT_TOKEN missing; quote not saved", JSON.stringify({ ...(req.body || {}), photos: undefined }));
+    return res.status(500).json({ error: "GHL_PIT_TOKEN not configured on server" });
   }
+  let b;
+  try { b = await readJsonBody(req); } catch { return res.status(400).json({ error: "Invalid JSON body" }); }
+  b = b || {};
 
-  let body;
-  try { body = await readJsonBody(req); } catch {
-    res.status(400).json({ error: "Invalid JSON body" }); return;
+  const name = String(b.name || "").trim();
+  const phone = String(b.phone || "").trim();
+  if (!name || phone.replace(/\D/g, "").length < 10) return res.status(400).json({ error: "Missing required fields" });
+  const email = String(b.email || "").trim();
+  const service = String(b.service || "General").trim();
+  const sel = b.selection && typeof b.selection === "object" ? b.selection : null;
+  const priced = sel ? priceSelection(sel) : null;
+  const consent = !!(b.smsConsent ?? b.textMe);
+  const { pipeline, tag } = route(service, sel);
+  const detail = [
+    priced && priced.level ? `Package: ${priced.side ? priced.side + ", " : ""}${priced.level}` : null,
+    priced && priced.sizeLabel ? `Size: ${priced.sizeLabel}` : null,
+    priced && priced.reason ? `Why a quote: ${priced.reason}` : null,
+    b.coverage ? `Coverage: ${b.coverage}` : null,
+  ].filter(Boolean);
+  const label = `${service}${b.coverage ? ` – ${b.coverage}` : ""} (quote)`;
+  const lead = { name, phone, email, service: label, vehicle: b.vehicle, coverage: b.coverage, notes: b.notes, page: b.page };
+  const failures = [];
+
+  // 1. Contact.
+  const c = await upsertContact(token, {
+    name, phone, email, source: "Website Quote",
+    tags: ["website-lead", "website-quote", `quote-${slug(service)}`, consent ? "prefers-text" : "prefers-call", tag],
+  });
+  if (!c.ok) {
+    failures.push(c.error || "contact upsert failed");
+    await alertFailure(token, { contactId: null, what: "quote request", failures, lead });
+    return res.status(200).json({ ok: true, confirmed: false, status: "received" });
   }
+  const contactId = c.id;
 
-  const { name, phone, vehicle, service, textMe, notes, photos, page } = body || {};
-  if (!name || !phone) {
-    res.status(400).json({ error: "Missing required fields" });
-    return;
-  }
-
-  const parts = String(name).trim().split(/\s+/);
-  const firstName = parts[0];
-  const lastName = parts.slice(1).join(" ") || "-";
-
-  const headers = {
-    Authorization: `Bearer ${token}`,
-    Version: "2021-04-15",
-    "Content-Type": "application/json",
-    Accept: "application/json",
-  };
-
-  // Step 1: upsert contact.
-  let contactJson;
-  try {
-    const contactRes = await fetch(`${GHL_BASE}/contacts/upsert`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({
-        locationId: LOCATION_ID,
-        firstName, lastName, phone,
-        source: "Website Quote",
-        assignedTo: DOM_USER_ID,
-        tags: ["website-lead", "website-quote", service ? `quote-${slug(service)}` : null, textMe ? "prefers-text" : "prefers-call"].filter(Boolean),
-      }),
-    });
-    contactJson = await contactRes.json();
-    if (!contactRes.ok) {
-      res.status(contactRes.status).json({ error: "Contact upsert failed", details: contactJson });
-      return;
-    }
-  } catch (e) {
-    res.status(502).json({ error: "GHL contact upsert error", details: String(e.message || e) });
-    return;
-  }
-
-  const contactId = contactJson.contact?.id || contactJson.id || contactJson.contactId;
-  if (!contactId) {
-    res.status(500).json({ error: "Contact upsert returned no ID", details: contactJson });
-    return;
-  }
-
-  // Tell GHL which service this is for (Preferred Service / Service Requested).
-  await setServiceFields(token, contactId, `${service || "General"} (quote)`, [`${service || "General"} – quote request`, vehicle ? `Vehicle: ${vehicle}` : null, notes ? `Notes: ${notes}` : null].filter(Boolean).join("\n"));
-
-  // Step 2: photos → GHL media library.
-  const list = Array.isArray(photos) ? photos.slice(0, MAX_PHOTOS) : [];
+  // 2. Service fields + photos (in parallel).
+  const list = Array.isArray(b.photos) ? b.photos.slice(0, MAX_PHOTOS) : [];
   const stamp = Date.now();
-  const urls = await Promise.all(list.map((p, i) => uploadPhoto(token, p, `quote-${slug(firstName)}-${stamp}-${i + 1}.jpg`)));
+  const [, ...urls] = await Promise.all([
+    setServiceFields(token, contactId, label, [`${service} – quote request`, ...detail, b.vehicle ? `Vehicle: ${b.vehicle}` : null, b.notes ? `Notes: ${b.notes}` : null].filter(Boolean).join("\n")),
+    ...list.map((p, i) => uploadPhoto(token, p, `quote-${slug(splitName(name).firstName)}-${stamp}-${i + 1}.jpg`)),
+  ]);
   const uploaded = urls.filter(Boolean);
 
-  // Step 3: note on the contact with everything Dom needs to quote.
+  // 3. Note with everything Dom needs to quote.
   const noteBody = [
-    `QUOTE REQUEST: ${service || "General"}`,
+    `QUOTE REQUEST: ${service}`,
+    ...detail,
     `Name: ${name}`,
     `Phone: ${phone}`,
-    `Vehicle: ${vehicle || "not given"}`,
-    `Reply by: ${textMe ? "TEXT" : "call"}`,
-    page ? `Sent from: ${page}` : null,
-    notes ? `\nNotes:\n${notes}` : null,
+    email ? `Email: ${email}` : null,
+    `Vehicle: ${b.vehicle || "not given"}`,
+    `Reply by: ${consent ? "TEXT (SMS consent given)" : "call"}`,
+    b.page ? `Sent from: ${b.page}` : null,
+    b.notes ? `\nNotes:\n${b.notes}` : null,
     uploaded.length ? `\nPhotos:\n${uploaded.join("\n")}` : null,
     list.length > uploaded.length ? `(${list.length - uploaded.length} photo(s) failed to upload; ask them to text it)` : null,
   ].filter(Boolean).join("\n");
+  const note = await addNote(token, contactId, noteBody);
+  if (!note.ok) failures.push(note.error);
 
-  try {
-    const noteRes = await fetch(`${GHL_BASE}/contacts/${contactId}/notes`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ body: noteBody }),
-    });
-    if (!noteRes.ok) {
-      const details = await noteRes.json().catch(() => ({}));
-      res.status(noteRes.status).json({ error: "Note creation failed", details, contactId });
-      return;
-    }
-  } catch (e) {
-    res.status(502).json({ error: "GHL note error", details: String(e.message || e), contactId });
-    return;
-  }
+  // 4. Opportunity: a quote is a new lead.
+  const { firstName, lastName } = splitName(name);
+  const opp = await createOpportunity(token, {
+    pipeline, stage: "lead", contactId,
+    name: `${firstName}${lastName !== "-" ? " " + lastName : ""} – ${label}`,
+    source: "Website Quote",
+  });
+  if (opp.repeatClosed) {
+    // Repeat customer whose last job is closed out: don't overwrite that sale.
+    await taskForDom(token, contactId, `Repeat customer ${name}: add this quote to their opportunity by hand`, `GHL wouldn't create a second opportunity (Allow duplicate opportunities is off) and their existing one (${opp.id}) is ${opp.status}. Turn on "Allow duplicate opportunities" in GHL settings to stop this.`);
+  } else if (!opp.ok) failures.push(opp.error);
 
-  // Make sure Dom sees it (task assigned to him; GHL notifies him).
-  await taskForDom(token, contactId, `New website quote: ${name} – ${service || "General"} – ${textMe ? "TEXT back" : "CALL back"} ${phone}`, noteBody);
+  // 5. Make sure Dom sees it.
+  await taskForDom(token, contactId, `New website quote: ${name} – ${label} – ${consent ? "TEXT back" : "CALL back"} ${phone}`, noteBody);
 
-  res.status(200).json({ ok: true, contactId, photos: uploaded.length });
+  if (failures.length) await alertFailure(token, { contactId, what: "quote request", failures, lead });
+  res.status(200).json({ ok: true, confirmed: !failures.length, status: "received", contactId, photos: uploaded.length });
 }

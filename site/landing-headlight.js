@@ -7,6 +7,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { biz } from "./content.js";
+import { bookingShell } from "./booking.js";
 
 // ── Settings you may need to change ─────────────────────────────────────────
 export const HL = {
@@ -15,10 +16,9 @@ export const HL = {
   price: 100,
   pixelId: "1386818502603317",
   name: "The Gloss Spot Auto Detailing",
-  // GHL booking widget. Currently the main "The Gloss Spot Auto Detailing"
-  // calendar. To use a dedicated headlight calendar, paste its widget URL
-  // here (GHL → Calendars → ⋯ → Share → Embed → the iframe `src`).
-  calendarSrc: "https://api.leadconnectorhq.com/widget/booking/pR5kB7NNiIu7tnoGPBI5",
+  // Booking: the site's own widget (site/booking.js), locked to headlights.
+  // It books into the main GHL calendar through /api/ghl-create-booking, which
+  // also creates the opportunity. A confirmed booking redirects to bookedPath.
   // Swap these files for real photos (same names, ~1200px wide JPGs).
   beforeAfter: [
     { before: "/images/headlights/before-1.jpg", after: "/images/headlights/after-1.jpg", alt: "Foggy yellow headlight before and clear headlight after restoration at The Gloss Spot, Champaign IL" },
@@ -99,8 +99,6 @@ section{padding:44px 0}.alt{background:var(--bg2)}
 .list .i{width:40px;height:40px;padding:9px;border-radius:10px;background:rgba(98,219,221,.12);color:var(--cy)}
 .list b{display:block;font-size:1.05rem}.list span{color:var(--muted);font-size:.95rem}
 .steps{counter-reset:s}.steps li::before{counter-increment:s;content:counter(s);flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--cy);color:var(--ink);font-weight:800}
-.cal-wrap{background:#fff;border-radius:18px;overflow:hidden;min-height:640px}
-.cal-wrap iframe{display:block;width:100%;min-height:900px;border:0}
 .note{color:var(--muted);font-size:.93rem;margin-top:12px}
 details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px}
 summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:600;min-height:56px;display:flex;align-items:center}
@@ -197,7 +195,7 @@ document.addEventListener("click",function(e){
 });
 `;
 
-function landing() {
+function landing(assetV) {
   const [ba] = HL.beforeAfter;
   const book = (label = "Book My Spot") => `<a class="btn btn-p" href="#book" data-ev="Lead">${ic("cal")}${label}</a>`;
   const call = (label = `Call ${biz.phone}`) => `<a class="btn btn-o" href="tel:${biz.tel}" data-ev="Contact">${ic("phone")}${label}</a>`;
@@ -210,7 +208,7 @@ function landing() {
   return `${head("Headlight Restoration Champaign IL | $100 | The Gloss Spot",
     "Foggy or yellow headlights? We restore both headlights to clear for $100 at our shop on Country Fair Dr in Champaign. Book online today.",
     PAGE_URL,
-    `<script type="application/ld+json">${schema()}</script>\n${pixelHead()}`)}
+    `<script type="application/ld+json">${schema()}</script>\n<link rel="stylesheet" href="/assets/book.css?v=${assetV}">\n${pixelHead()}`)}
 <body>
 ${top}
 <main>
@@ -247,12 +245,7 @@ ${top}
 
 <section class="alt" id="book"><div class="w">
   <h2>Pick a time. $100, both headlights.</h2>
-  <div class="cal-wrap">
-    <!-- GHL CALENDAR EMBED: the iframe below is built from HL.calendarSrc in
-         site/landing-headlight.js. To use a different calendar, change that
-         URL and run npm run build. UTM params are appended by script below. -->
-    <iframe id="${HL.calendarSrc.split("/").pop()}_hl" data-hl-cal title="Book headlight restoration" data-src="${HL.calendarSrc}" scrolling="no" style="width:100%;border:none;overflow:hidden"></iframe>
-  </div>
+  ${bookingShell({ lock: "headlight", heading: false, stack: true })}
   <p class="note">Rather call? <a href="tel:${biz.tel}" data-ev="Contact">${biz.phone}</a>. Dom does every car himself.</p>
 </div></section>
 
@@ -263,32 +256,19 @@ ${top}
 </main>
 ${footer}
 <div class="sbar">${book("Book")}${call("Call")}</div>
+<script src="/assets/book.js?v=${assetV}" defer></script>
 <script>
 ${TRACK_JS}
 // Before/after sliders
 document.querySelectorAll(".ba input").forEach(function(r){r.addEventListener("input",function(){r.parentNode.style.setProperty("--pos",r.value+"%")})});
-// Calendar iframe: pass UTMs / click IDs through so bookings keep their source.
-(function(){
-  var f=document.querySelector("[data-hl-cal]");if(!f)return;
-  var src=new URL(f.dataset.src),q=new URLSearchParams(location.search);
-  ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","fbclid","gclid"].forEach(function(k){if(q.get(k))src.searchParams.set(k,q.get(k))});
-  if(!q.get("utm_source"))src.searchParams.set("utm_source","website");
-  if(!q.get("utm_campaign"))src.searchParams.set("utm_campaign","headlight-restoration");
-  // Remember UTMs for the thank-you page.
-  gsStore("hl_utm",src.search);
-  var load=function(){if(f.src)return;f.src=src.toString();
-    // GHL's helper: auto-height + lets the booking redirect open the full page.
-    var s=document.createElement("script");s.src="https://link.msgsndr.com/js/form_embed.js";s.async=true;document.body.appendChild(s)};
-  if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();load()}},{rootMargin:"800px"});io.observe(f)}else load();
-  document.querySelectorAll('a[href="#book"]').forEach(function(a){a.addEventListener("click",load)});
-})();
-// GHL iframe messages: resize, and fire Schedule if it reports a finished booking.
-window.addEventListener("message",function(e){
-  if(!/leadconnectorhq\\.com|msgsndr\\.com|gohighlevel\\.com/.test(e.origin||""))return;
-  var d=e.data,s="";try{s=typeof d==="string"?d:JSON.stringify(d)}catch(x){}
-  var f=document.querySelector("[data-hl-cal]");
-  if(Array.isArray(d)&&d[0]==="highlevel.setHeight"&&d[1]&&d[1].height&&f)f.style.minHeight=Math.max(640,+d[1].height)+"px";
-  if(/booking[-_ ]?(complete|success|confirmed|booked)|appointment[-_ ]?(booked|created|scheduled)|msgsndr-booking-complete/i.test(s))gsSchedule("iframe");
+// Booking widget events: Lead when they submit, then the thank-you page
+// (which fires Schedule once) when the booking is confirmed.
+document.addEventListener("gsb:submit",function(e){
+  if(window.fbq)fbq("track","Lead",{value:GS_HL.price,currency:"USD",content_name:GS_HL.name},{eventID:gsEventId()+"-lead"});
+});
+document.addEventListener("gsb:done",function(e){
+  var d=e.detail||{};
+  if(d.status==="booked")location.href="/${HL.bookedPath}?appointment_start_time="+encodeURIComponent(d.startISO||"")+"&value="+(d.price||GS_HL.price);
 });
 </script>
 </body>
@@ -457,9 +437,9 @@ ${TRACK_JS}
 `;
 }
 
-export function buildHeadlightLanding(OUT) {
+export function buildHeadlightLanding(OUT, assetV) {
   fs.mkdirSync(path.join(OUT, "headlight-restoration"), { recursive: true });
-  fs.writeFileSync(path.join(OUT, `${HL.path}.html`), landing());
+  fs.writeFileSync(path.join(OUT, `${HL.path}.html`), landing(assetV));
   fs.writeFileSync(path.join(OUT, `${HL.bookedPath}.html`), booked());
   fs.writeFileSync(path.join(OUT, `${BOOK.path}.html`), bookPage());
 }

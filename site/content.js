@@ -21,7 +21,7 @@ export const biz = {
     { label: "Mon–Sat", days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "08:00", closes: "20:00", text: "8am – 8pm" },
     { label: "Sunday", days: ["Sunday"], opens: "13:00", closes: "20:00", text: "1pm – 8pm" },
   ],
-  priceRange: "$90 – $5,500",
+  priceRange: "$85 – $5,500",
   reviewCount: "90+",
   googleReviews: "https://share.google/Wr0NTsR0CmFTlYRtk",
   sameAs: [
@@ -101,45 +101,24 @@ export const beforeAfter = [];
 export { default as media } from "./media.js";
 
 // ── Prices ──────────────────────────────────────────────────────────────────
-export const sizes = ["Coupe", "Sedan", "SUV / Truck", "Large 3-Row SUV"];
-export const ceramicSizes = ["Coupe", "Sedan", "SUV / Truck", "Minivan / Large SUV / Truck"];
+// Detailing, ceramic and headlight prices live in api/_lib/pricing.js (the
+// booking API reprices every booking from the same file). Re-exported here in
+// the shape the page templates use.
+import { DETAIL_SIZES, CERAMIC_SIZES, DETAILING, CERAMIC, HEADLIGHT, FROM } from "../api/_lib/pricing.js";
+export { DETAILING, CERAMIC, HEADLIGHT, FROM };
+export const sizes = DETAIL_SIZES;
+export const ceramicSizes = CERAMIC_SIZES;
 
+// Price cards, in the order they show on /packages.
 export const detailPackages = [
-  {
-    key: "express", name: "Express Detail", prices: [90, 100, 120, 145], hours: [1, 1, 1.25, 1.5],
-    short: "Quick vacuum, wipe-down and exterior wash.",
-    includes: ["Interior vacuum", "Dash and panel wipe-down", "Hand wash and dry", "Wheels and tires cleaned", "Windows cleaned"],
-  },
-  {
-    key: "interior", name: "Interior Detail", prices: [150, 175, 200, 225], hours: [1.75, 2, 2.25, 2.5],
-    short: "Inside only: seats, carpet, dash and glass.",
-    includes: ["Full vacuum: floors, mats and seats", "Dash, panels and vents wiped down", "Interior windows cleaned", "UV protectant on plastics", "Air freshener of your choice"],
-  },
-  {
-    key: "full", name: "Full Detail", prices: [225, 250, 285, 315], hours: [2.5, 2.75, 3, 3.5], popular: true,
-    short: "Complete interior and exterior detail.",
-    includes: ["Foam pre-soak and hand wash", "Wheels, tires and door jambs", "Full interior vacuum, seats and mats", "Dash, panels and vents detailed", "Windows inside and out", "Tire dressing and quick sealant"],
-  },
-  {
-    key: "lux", name: "Lux Package", prices: [325, 350, 400, 450], hours: [5, 5.5, 6, 6.5],
-    short: "Full detail + one-step paint correction and sealant.",
-    includes: ["Everything in the Full Detail", "One-step machine paint correction", "Paint sealant for lasting gloss", "Two-step correction: +$100"],
-    twoStepAdd: 100,
-  },
+  { key: "interior", ...DETAILING.interior, short: "Inside only: seats, carpet, mats, dash and glass." },
+  { key: "exterior", ...DETAILING.exterior, short: "Outside only: hand wash, wheels, tires and glass." },
+  { key: "express", ...DETAILING.levels.express, short: "Inside & out, light clean. Maintenance level." },
+  { key: "full", ...DETAILING.levels.full, short: "Inside & out, deep clean.", popular: true },
+  { key: "lux", ...DETAILING.levels.lux, short: "Full detail + 1-step paint correction + sealant." },
 ];
 
-export const ceramic = {
-  tiers: ["3-Year", "6-Year", "10-Year"],
-  // rows follow ceramicSizes; columns follow tiers
-  prices: [
-    [1100, 1450, 1800],
-    [1350, 1700, 2050],
-    [1600, 1950, 2300],
-    [1850, 2200, 2550],
-  ],
-  hours: 8,
-  includes: ["Paint correction included with every package", "Decon wash and panel prep", "Ceramic coating on all painted surfaces", "Hydrophobic, slick, easy-wash finish"],
-};
+export const ceramic = { ...CERAMIC };
 
 export const ppf = {
   note: "Sedan baseline. Larger vehicles are quoted.",
@@ -262,29 +241,29 @@ export const areaLine = "Drivers come in from Urbana, Savoy, Mahomet, Rantoul an
 export const faqs = {
   home: [
     ["Where is The Gloss Spot?", "Our shop is at 606 N. Country Fair Dr, Champaign, IL. Tap Get Directions at the bottom of any page."],
-    ["How much is a car detail in Champaign?", "An Express Detail starts at $90, an Interior Detail at $150, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book."],
+    ["How much is a car detail in Champaign?", "Exterior Only starts at $85, an Express (inside and out) at $90, Interior Only at $165, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book."],
     ["How do I book?", "Tap Book Now, pick a service, your vehicle and a time, then add your name and phone. Prefer to talk? Call or text 217-600-2108."],
     ["Do you still do mobile detailing?", "We've moved into our own shop so every car gets good light, clean water and the right tools. Drop it off, and we'll text you when it's ready."],
     ["Who will work on my car?", "Dom and Dylan run the shop. One of us checks every car before it leaves."],
   ],
   detailing: [
-    ["How much is a full detail in Champaign?", "A Full Detail is $225 for a coupe, $250 for a sedan, $285 for an SUV or truck and $315 for a large 3-row SUV."],
-    ["How long does a car detail take?", "An Express takes about an hour, an Interior Detail about two and a Full Detail about three. A Lux Package with paint correction takes most of the day."],
-    ["What's the difference between Express, Interior, Full and Lux?", "Express is a quick vacuum, wipe-down and exterior wash. Interior is the full inside only. Full is a complete interior and exterior detail, and Lux adds one-step paint correction and sealant."],
+    ["How much is a full detail in Champaign?", "A Full Detail is $225 for a coupe, $250 for a sedan or small truck, $285 for an SUV or regular truck, $315 for a large SUV or truck and $375 for a minivan."],
+    ["How long does a car detail take?", "Exterior Only and Express take about an hour, Interior Only about two and a Full Detail about three. A Lux Package with paint correction takes most of the day."],
+    ["Can I book just the inside or just the outside?", "Yes. Pick Interior Only or Exterior Only when you book. For both, choose Express (a light clean), Full Detail (a deep clean) or Lux (Full Detail plus one-step paint correction and sealant)."],
     ["Is mobile detailing better than a shop?", "A shop gives your car steady lighting, controlled water and no weather delays. It's the reason we moved off the driveway."],
     ["Do I need to clean out my car first?", "Just take out valuables and anything you don't want moved. We handle the rest."],
   ],
   ceramic: [
     ["How long does ceramic coating last?", "We offer 3-year, 6-year and 10-year coatings. Regular hand washes keep it performing its best for the full term."],
-    ["How much is ceramic coating in Champaign?", "A 3-year coating starts at $1,100 for a coupe, $1,350 for a sedan, $1,600 for an SUV or truck and $1,850 for a minivan or large SUV."],
+    ["How much is ceramic coating in Champaign?", "A 3-year coating with 1-step correction is $1,100 for a coupe, $1,350 for a sedan or small truck, $1,600 for a small SUV or medium truck and $1,850 for a large SUV, truck or minivan. Book online and see your exact price first."],
     ["Is paint correction included with ceramic coating?", "Yes. Every ceramic package includes paint correction, so the coating locks in a corrected finish."],
     ["Is ceramic coating better than wax?", "Wax lasts weeks. Ceramic bonds to your paint and lasts years, with easier washes the whole time."],
-    ["How long will you need my car?", "Coating takes prep, correction and cure time, so plan to leave it with us. You'll get an exact pickup time when you book."],
+    ["How long will you need my car?", "The whole day. Drop it off in the morning and we keep it for correction, coating and cure. We'll text you when it's ready."],
     ["When can I wash my car after ceramic coating?", "We'll give you the cure time at pickup. After that, a pH-neutral hand wash keeps it slick."],
   ],
   correction: [
     ["What is paint correction?", "Machine polishing that removes swirls, light scratches and haze from your clear coat. It brings back depth and gloss that washing can't."],
-    ["How much is paint correction in Champaign?", "One-step correction comes in our Lux Package, $325 to $450 by vehicle size, with a full detail and sealant. Two-step correction is +$100."],
+    ["How much is paint correction in Champaign?", "One-step correction comes in our Lux Package, $325 to $510 by vehicle size, with a full detail and sealant. Two-step correction is +$100."],
     ["What's the difference between one-step and two-step correction?", "One-step is a single polish that clears light swirls and haze. Two-step adds a heavier cut first for deeper defects."],
     ["Can paint correction remove all scratches?", "It removes defects that sit in the clear coat. Dom will look at your paint and tell you what to expect before starting."],
     ["Should I ceramic coat after paint correction?", "It's the ideal time, and every ceramic package already includes correction."],
@@ -367,16 +346,16 @@ export const posts = [
     slug: "detailing-cost",
     title: "How Much Does Car Detailing Cost in Champaign?",
     metaTitle: "Car Detailing Cost in Champaign, IL (2026) | The Gloss Spot",
-    description: "Real 2026 car detailing prices in Champaign, IL, from a $90 Express to ceramic coating, PPF and wraps. Book online or call 217-600-2108.",
+    description: "Real 2026 car detailing prices in Champaign, IL, from an $85 exterior detail to ceramic coating, PPF and wraps. Book online or call 217-600-2108.",
     h1: "Car Detailing Cost in Champaign, IL",
     date: "2026-10-01",
     excerpt: "Every price we charge, by vehicle size. No surprises.",
     body: [
       ["h2", "Detailing packages"],
-      ["table", [["", "Coupe", "Sedan", "SUV / Truck", "3-Row SUV"], ["Express", "$90", "$100", "$120", "$145"], ["Interior Detail", "$150", "$175", "$200", "$225"], ["Full Detail", "$225", "$250", "$285", "$315"], ["Lux Package", "$325", "$350", "$400", "$450"]]],
+      ["table", [["", ...DETAIL_SIZES], ...[["Exterior Only", DETAILING.exterior], ["Interior Only", DETAILING.interior], ["Express (in & out)", DETAILING.levels.express], ["Full Detail", DETAILING.levels.full], ["Lux Package", DETAILING.levels.lux]].map(([n, p]) => [n, ...p.prices.map((v) => "$" + v)])]],
       ["p", "Lux includes one-step paint correction and sealant. Two-step correction is +$100."],
       ["h2", "Protection"],
-      ["ul", ["Ceramic coating: from $1,100 (paint correction included)", "Paint protection film: from $800 for a sedan", "Vehicle wraps: from $2,400, partial wraps from $800"]],
+      ["ul", ["Ceramic coating: from $1,100 (paint correction included)", "Paint protection film: from $800 for a sedan", "Vehicle wraps: from $2,400, partial wraps from $800", "Headlight restoration: $100 for both headlights"]],
       ["h2", "Membership"],
       ["p", "Exterior Maintenance is $149 a month for a weekly exterior detail. The $299 Gloss Membership adds weekly wax and 4 interior cleans. Details on the <a href=\"/membership\">membership page</a>."],
       ["h2", "Why prices vary by size"],

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node site/build.js",
+    "test": "node --test test/api.test.mjs",
     "ghl": "node ghl-setup.js",
     "ping": "node indexnow-ping.js",
     "legacy:deploy": "node run.js",

@@ -1,112 +1,71 @@
-// Vercel serverless function — fetches available calendar slots from GoHighLevel.
-// Called from the booking page client. PIT token is read from env (server-only).
+// Vercel serverless function: open booking times from the GHL calendar.
+// Called from the booking widget. PIT token is read from env (server-only).
+//
+// GHL hands back 30-minute slot STARTS. A job only fits at a start time when
+// every 30-minute slot it covers is open and it ends by close (8pm). Ceramic
+// (`wholeDay`) is a morning drop-off with the rest of the day blocked.
 
-const GHL_BASE = "https://services.leadconnectorhq.com";
+import { readJsonBody, MAIN_CALENDAR_ID, GHL_BASE } from "./_lib/ghl.js";
+import { CLOSE_HOUR, CERAMIC } from "./_lib/pricing.js";
 
-async function readJsonBody(req) {
-  if (req.body && typeof req.body === "object") return req.body;
-  if (typeof req.body === "string") return JSON.parse(req.body);
-  return new Promise((resolve, reject) => {
-    let data = "";
-    req.on("data", (chunk) => (data += chunk));
-    req.on("end", () => {
-      try { resolve(data ? JSON.parse(data) : {}); } catch (e) { reject(e); }
-    });
-    req.on("error", reject);
-  });
+const SLOT_MIN = 30;
+const BUFFER_MIN = 15; // wrap-up time before close
+
+// Minutes after midnight and weekday (0 = Sun) in America/Chicago.
+function chicagoParts(iso) {
+  const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Chicago", hour: "numeric", minute: "numeric", hour12: false, weekday: "short" }).formatToParts(new Date(iso));
+  const get = (t) => parts.find((p) => p.type === t).value;
+  return { min: (parseInt(get("hour"), 10) % 24) * 60 + parseInt(get("minute"), 10), wd: ({ Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 })[get("weekday")] };
 }
 
-// Returns the local hour (0-23.99) for a given ISO timestamp in America/Chicago.
-function chicagoHourOf(iso) {
-  const d = new Date(iso);
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/Chicago",
-    hour: "numeric", minute: "numeric", hour12: false,
-  }).formatToParts(d);
-  const h = parseInt(parts.find((p) => p.type === "hour").value, 10);
-  const m = parseInt(parts.find((p) => p.type === "minute").value, 10);
-  return h + m / 60;
-}
-function chicagoDayOf(iso) {
-  const d = new Date(iso);
-  const wd = new Intl.DateTimeFormat("en-US", { timeZone: "America/Chicago", weekday: "short" }).format(d);
-  return ({ Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 })[wd];
+// Keep only start times where the whole job fits.
+export function fitSlots(slots, { durationHours = 0.5, wholeDay = false } = {}) {
+  const items = slots.map((iso) => ({ iso, ...chicagoParts(iso) }));
+  const open = new Set(items.map((s) => s.min));
+  const close = CLOSE_HOUR * 60;
+  const [lh, lm] = CERAMIC.latestDropOff.split(":").map(Number);
+  return items.filter((s) => {
+    let end;
+    if (wholeDay) {
+      if (s.wd === 0 || s.min > lh * 60 + lm) return false; // Sunday opens at 1pm: no whole-day jobs
+      end = close;
+    } else {
+      end = s.min + Math.max(SLOT_MIN, Math.round(Number(durationHours) * 60));
+      if (end + BUFFER_MIN > close) return false;
+    }
+    for (let t = s.min; t < end; t += SLOT_MIN) if (!open.has(t)) return false;
+    return true;
+  }).map((s) => s.iso);
 }
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    res.status(405).json({ error: "Method not allowed" });
-    return;
-  }
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
   const token = process.env.GHL_PIT_TOKEN;
-  if (!token) {
-    res.status(500).json({ error: "GHL_PIT_TOKEN not configured on server" });
-    return;
-  }
+  if (!token) return res.status(500).json({ error: "GHL_PIT_TOKEN not configured on server" });
   let body;
-  try { body = await readJsonBody(req); } catch (e) {
-    res.status(400).json({ error: "Invalid JSON body" }); return;
-  }
-  const { calendarId, dateISO, durationHours = 2 } = body || {};
-  if (!calendarId || !dateISO) {
-    res.status(400).json({ error: "calendarId and dateISO required" });
-    return;
-  }
+  try { body = await readJsonBody(req); } catch { return res.status(400).json({ error: "Invalid JSON body" }); }
+  const { dateISO, durationHours = 2, wholeDay = false } = body || {};
+  if (!dateISO || !/^\d{4}-\d{2}-\d{2}$/.test(dateISO)) return res.status(400).json({ error: "dateISO required" });
 
-  // 14-day window starting from the picked date — GHL calendars often have a
-  // minimum advance buffer, so a single-day query frequently returns nothing.
-  // The wrapper returns all days; the frontend decides which to show.
+  // 14-day window from the picked date (GHL often has a minimum advance buffer).
   const start = new Date(`${dateISO}T00:00:00Z`).getTime();
   const end = start + 14 * 24 * 60 * 60 * 1000 - 1;
+  // Always the main booking calendar, whatever the browser sends.
+  const url = `${GHL_BASE}/calendars/${MAIN_CALENDAR_ID}/free-slots?startDate=${start}&endDate=${end}&timezone=America/Chicago`;
 
-  const url = `${GHL_BASE}/calendars/${encodeURIComponent(calendarId)}/free-slots?startDate=${start}&endDate=${end}&timezone=America/Chicago`;
-
-  let r;
+  let r, data;
   try {
-    r = await fetch(url, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Version: "2021-04-15",
-        Accept: "application/json",
-      },
-    });
+    r = await fetch(url, { headers: { Authorization: `Bearer ${token}`, Version: "2021-04-15", Accept: "application/json" } });
+    data = await r.json().catch(() => ({}));
   } catch (e) {
-    res.status(502).json({ error: "GHL fetch failed", details: String(e.message || e) });
-    return;
+    return res.status(502).json({ error: "GHL fetch failed", details: String(e.message || e) });
   }
-  let data;
-  try { data = await r.json(); } catch { data = {}; }
+  if (!r.ok) return res.status(r.status).json({ error: "GHL returned error", details: data });
 
-  if (!r.ok) {
-    res.status(r.status).json({ error: "GHL returned error", details: data });
-    return;
+  const out = {};
+  for (const [key, val] of Object.entries(data)) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(key)) continue;
+    out[key] = { slots: fitSlots((val && val.slots) || [], { durationHours, wholeDay: !!wholeDay }) };
   }
-
-  // Filter only against the close-of-day (8pm) — anything starting too late
-  // for the requested duration to finish before close gets dropped. GHL's
-  // Availability tab handles open-of-day; we don't re-check that here. The
-  // 30-min slot interval comes from GHL, but each slot is a START time, so a
-  // 6-hour job starting at 5pm would end at 11pm and shouldn't be offered.
-  const dur = Math.max(0.5, Number(durationHours) || 0.5);
-  const closeHr = 20;            // 8pm hard close
-  const buffer = 0.25;           // +15 min wrap-up
-
-  const filtered = {};
-  Object.entries(data).forEach(([key, val]) => {
-    if (key === "traceId" || !/^\d{4}-\d{2}-\d{2}$/.test(key)) {
-      filtered[key] = val;
-      return;
-    }
-    const slots = (val && val.slots) || [];
-    const kept = slots.filter((iso) => {
-      try {
-        const startHr = chicagoHourOf(iso);
-        return startHr + dur + buffer <= closeHr;
-      } catch { return false; }
-    });
-    filtered[key] = { slots: kept };
-  });
-
-  res.status(200).json(filtered);
+  res.status(200).json(out);
 }

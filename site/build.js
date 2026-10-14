@@ -10,8 +10,9 @@ import { fileURLToPath } from "node:url";
 import {
   biz, photos, beforeAfter, media, sizes, ceramicSizes, detailPackages,
   ceramic, ppf, wraps, membership, maintenance, reviews, story, howItWorks, areaLine,
-  faqs, cities, posts, instagram,
+  faqs, cities, posts, instagram, HEADLIGHT, FROM,
 } from "./content.js";
+import { bookingShell, calcShell, bookJS, BOOK_CSS, SMS_CONSENT } from "./booking.js";
 import { pages, redirectsAdded } from "./pages.js";
 import { CSS } from "./styles.js";
 import { clientJS } from "./client.js";
@@ -95,8 +96,10 @@ export function cover(key, o = {}) {
 }
 
 // ── buttons ─────────────────────────────────────────────────────────────────
+const BOOK_PAGE = "/book-an-appointment-1696";
+const bookHref = (page) => (page && page.noBook ? BOOK_PAGE : "#book");
 export const btn = {
-  book: (label = "Book Now", svc = "") => `<a class="btn btn-p" href="#book"${svc ? ` data-book="${svc}"` : ""}>${icon("calendar")}<span>${label}</span></a>`,
+  book: (label = "Book Now", svc = "", page = null) => `<a class="btn btn-p" href="${bookHref(page)}"${svc ? ` data-book="${svc}"` : ""}>${icon("calendar")}<span>${label}</span></a>`,
   call: (label = "Call Now") => `<a class="btn btn-o" href="tel:${biz.tel}" data-track="call">${icon("phone")}<span>${label}</span></a>`,
   text: (label = "Text Us") => `<a class="btn btn-o" href="sms:${biz.tel}" data-track="text">${icon("chat")}<span>${label}</span></a>`,
   quote: (label = "Get a Quote", svc = "") => `<a class="btn btn-p" href="#quote"${svc ? ` data-quote="${esc(svc)}"` : ""}>${icon("camera")}<span>${label}</span></a>`,
@@ -110,11 +113,12 @@ const head = (eyebrow, h2, sub = "") => `<header class="sh reveal">${eyebrow ? `
 function hero(page) {
   const h = page.hero || {};
   const ctas = (page.ctas || ["book", "call"]).map((c) =>
-    c === "book" ? btn.book("Book Now", page.bookSvc || "")
+    c === "book" ? btn.book(page.bookLabel || "Book Now", page.bookSvc || "", page)
     : c === "quote" ? btn.quote("Get a Quote", page.quote || "")
     : c === "call" ? btn.call()
     : c === "text" ? btn.text()
     : c === "membership" ? btn.quote("Start Membership", "Membership")
+    : c === "waitlist" ? `<a class="btn btn-p" href="sms:${biz.tel}?&body=${encodeURIComponent("Hi! Please add me to the window tint waitlist.")}" data-track="text">${icon("chat")}<span>Join the Waitlist</span></a>`
     : "").join("");
   const hp = photos[h.photo || "hero"];
   const video = h.video ? bgVideo(h.video, { hero: true, mobileKey: h.videoMobile })
@@ -136,8 +140,8 @@ function benefits(b) {
 
 function serviceCards() {
   const cards = [
-    { h: "Detailing", p: "Express, Interior, Full and Lux.", from: detailPackages[0].prices[0], link: "packages", photo: "vWhiteYukon", svc: "full" },
-    { h: "Ceramic + Correction", p: "Years of gloss and easy washes.", from: 1100, link: "ceramic", photo: "vCorvette", svc: "ceramic" },
+    { h: "Detailing", p: "Interior, exterior or both.", from: FROM.detailing, link: "packages", photo: "vWhiteYukon", svc: "full" },
+    { h: "Ceramic + Correction", p: "Years of gloss. Instant online quote.", from: FROM.ceramic, link: "ceramic", photo: "vCorvette", svc: "ceramic" },
     { h: "PPF / Wraps", p: "Clear armor or a whole new color.", from: 800, link: "ppf", photo: "vMatteBmw", alt: "vehicle-protection" },
   ];
   const html = cards.map((c) => `<a class="scard reveal" href="${href(c.link)}">
@@ -174,20 +178,25 @@ function priceCard(kind, page) {
     rows(sizes, pkg.prices.map(money)) + incl(pkg.includes) + bookBtn(pkg.key, `Book ${pkg.name}`), open, pkg.popular ? "Most booked" : "");
   switch (kind) {
     case "detail": return detailPackages.map((p) => pkgCard(p, false)).join("");
-    case "express": case "interior": case "full": case "lux": {
+    case "express": case "interior": case "exterior": case "full": case "lux": {
       const p = detailPackages.find((x) => x.key === kind);
       return pkgCard(p, true);
     }
     case "ceramic": {
-      const tbl = `<table class="pt pt-grid"><thead><tr><th></th>${ceramic.tiers.map((t) => `<th scope="col">${t}</th>`).join("")}</tr></thead><tbody>${ceramicSizes.map((s, i) => `<tr><th scope="row">${s}</th>${ceramic.prices[i].map((v) => `<td>${money(v)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
-      return card("Ceramic Coating", "Paint correction included with every package.", money(ceramic.prices[0][0]),
-        tbl + incl(ceramic.includes) + `<div class="pc-ctas">${bookBtn("ceramic", "Book Ceramic")}${quoteBtn("Ceramic Coating", "btn-o")}</div>`, true);
+      const tbl = `<table class="pt pt-grid"><thead><tr><th></th>${ceramic.tiers.map((t) => `<th scope="col">${t}</th>`).join("")}</tr></thead><tbody>${ceramicSizes.map((s, i) => `<tr><th scope="row">${s}</th>${ceramic.prices[i].map((v) => `<td>${money(v)}</td>`).join("")}</tr>`).join("")}<tr><th scope="row">Oversized (dually, long-bed HD, full-size van)</th><td colspan="3">Custom quote</td></tr></tbody></table>`;
+      const extras = [["2-step correction", `+${money(ceramic.correction[2].add)}`], ["Black paint", `+${money(ceramic.colors.black.add)}`], ["White paint", `+${money(ceramic.colors.white.add)}`], [`German make (${ceramic.germanMakes})`, `+${money(ceramic.germanAdd)}`], ["Deposit to book", `${Math.round(ceramic.depositRate * 100)}%, balance at pickup`]];
+      return card("Ceramic Coating", "1-step paint correction included with every package.", money(ceramic.prices[0][0]),
+        tbl + `<table class="pt pt-extra"><tbody>${extras.map(([a, b]) => `<tr><th scope="row">${a}</th><td>${b}</td></tr>`).join("")}</tbody></table>` + incl(ceramic.includes) +
+        `<p class="pc-note">Final price is confirmed when we inspect your paint in person.</p><div class="pc-ctas">${bookBtn("ceramic", "Get My Price")}</div>`, true);
     }
     case "correction": {
       const lux = detailPackages.find((x) => x.key === "lux");
       return card("Paint Correction (Lux Package)", "Full detail + one-step correction and sealant.", money(lux.prices[0]),
         rows(sizes, lux.prices.map(money)) + `<p class="pc-note">Two-step correction: <b>+${money(lux.twoStepAdd)}</b>. Want it locked in for years? <a href="/ceramic">Ceramic coating</a> includes correction.</p>` + bookBtn("lux", "Book Paint Correction"), true);
     }
+    case "headlight":
+      return card(HEADLIGHT.name, "Both headlights, foggy to clear. Done today.", money(HEADLIGHT.price),
+        `<p class="pc-note">One flat price for every vehicle. Sanded, polished clear and UV sealed. About an hour.</p>` + bookBtn("headlight", "Book Headlights"), true);
     case "ppf":
       return card("Paint Protection Film", ppf.note, money(ppf.packages[0].range[0]),
         rows(ppf.packages.map((p) => p.name), ppf.packages.map((p) => range(p.range))) + `<p class="pc-note">${ppf.note}</p>` + quoteBtn("Paint Protection Film"), true);
@@ -285,16 +294,7 @@ function shopPhotos() {
 }
 
 function calculatorBlock() {
-  const svcOpts = detailPackages.map((p) => `<option value="${p.key}">${p.name}</option>`).join("") +
-    ceramic.tiers.map((t, i) => `<option value="ceramic:${i}">Ceramic Coating, ${t}</option>`).join("");
-  return sec("sec-calc", `<div class="calc reveal" data-calc>
-    <label>Service<select data-calc-svc>${svcOpts}</select></label>
-    <label>Vehicle<select data-calc-size>${sizes.map((s, i) => `<option value="${i}">${s}</option>`).join("")}</select></label>
-    <label class="chk" data-calc-twostep hidden><input type="checkbox"> Two-step correction (+$100)</label>
-    <div class="calc-out"><small>Your price</small><b data-calc-price>—</b></div>
-    <a class="btn btn-p" href="#book" data-calc-book>${icon("calendar")}<span>Book this</span></a>
-    <p class="muted small">PPF, wraps and membership: <a href="/ppf">PPF</a> · <a href="/car-wraps">Wraps</a> · <a href="/membership">Membership</a></p>
-  </div>`, "calc");
+  return sec("sec-calc", `<div class="reveal">${calcShell()}</div>`, "calc");
 }
 
 function postBody(p) {
@@ -324,58 +324,38 @@ function contactBlock() {
   </div>`, "visit");
 }
 
+function tintOff() {
+  return sec("sec-tint", `<div class="tint-off reveal"><p class="eyebrow">Window tint</p><h2>Currently unavailable</h2><p class="muted">We've paused window tint for now. Check back soon, or text us and we'll let you know when it's back.</p><p><a class="btn btn-p" href="sms:${biz.tel}?&body=${encodeURIComponent("Hi! Please add me to the window tint waitlist.")}">${icon("chat")}<span>Text us to join the waitlist</span></a></p></div>`);
+}
+
 function legalBlock(html) { return sec("sec-text", `<div class="txt legal">${html}</div>`); }
 
 // ── quote form + booking widget ─────────────────────────────────────────────
-function quoteForm(defaultSvc) {
-  const opts = ["Ceramic Coating", "Paint Protection Film", "Vehicle Wrap", "Exterior Maintenance", "Membership", "Window Tint", "Headlight Restoration", "Engine Bay Detail", "Motorcycle Detail", "Fleet / Business", "Something else"];
-  return sec("sec-quote", `${head("Get a quote", "Get a price by text", "Send a photo. We'll text you back.")}
+export const PPF_COVERAGE = ["Front bumper", "Partial front", "Full front", "Full car", "Not sure"];
+// lock = the page's own service: no service menu, just that quote.
+function quoteForm(defaultSvc, { lock = false } = {}) {
+  const opts = ["Ceramic Coating", "Paint Protection Film", "Vehicle Wrap", "Exterior Maintenance", "Membership", "Engine Bay Detail", "Motorcycle Detail", "Fleet / Business", "Something else"];
+  const ppfLock = lock && defaultSvc === "Paint Protection Film";
+  const [h2, sub] = ppfLock ? ["Get your PPF quote", "Tell us your car and how much you want covered. We'll text you a price."] : ["Get a price by text", "Send a photo. We'll text you back."];
+  return sec("sec-quote", `${head("Get a quote", h2, sub)}
   <form class="qf reveal" data-quote-form novalidate>
-    <label>Service<select name="service">${opts.map((o) => `<option${o === defaultSvc ? " selected" : ""}>${o}</option>`).join("")}</select></label>
+    ${lock ? `<input type="hidden" name="service" value="${esc(defaultSvc)}">` : `<label>Service<select name="service">${opts.map((o) => `<option${o === defaultSvc ? " selected" : ""}>${o}</option>`).join("")}</select></label>`}
+    <label>Vehicle<input name="vehicle" placeholder="Year, make, model" required></label>
+    <label data-coverage${defaultSvc === "Paint Protection Film" ? "" : " hidden"}>Coverage<select name="coverage">${PPF_COVERAGE.map((o) => `<option>${o}</option>`).join("")}</select></label>
+    <label class="file">${icon("camera")}<span data-file-label>Add photos (optional)</span><input name="photos" type="file" accept="image/*" multiple></label>
     <label>Name<input name="name" autocomplete="name" required></label>
     <label>Phone<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required></label>
-    <label>Vehicle<input name="vehicle" placeholder="Year, make, model" required></label>
-    <label class="file">${icon("camera")}<span data-file-label>Add photos (optional)</span><input name="photos" type="file" accept="image/*" multiple></label>
-    <label class="chk"><input type="checkbox" name="textMe" checked> Text me the quote</label>
+    <label>Email <small>(optional)</small><input name="email" type="email" autocomplete="email"></label>
     <label>Anything else? <small>(optional)</small><textarea name="notes" rows="2"></textarea></label>
+    <label class="chk chk-consent"><input type="checkbox" name="textMe"> <span>Text me the quote. ${SMS_CONSENT} See our <a href="/privacy-policy">Privacy Policy</a>.</span></label>
     <button class="btn btn-p" type="submit">${icon("chat")}<span>Send for a Quote</span></button>
     <p class="form-msg" role="status" aria-live="polite"></p>
   </form>`, "quote");
 }
 
-function bookingWidget() {
+function bookingWidget(page) {
   return `<section class="sec sec-book" id="book"><div class="wrap">
-  ${head("Book online", "Book in 30 seconds", "Pick a service, your vehicle and a time. That's it.")}
-  <form class="bk reveal" data-booking novalidate>
-    <div class="bk-step is-open" data-step="1"><button type="button" class="bk-h" data-goto="1"><span class="bk-n">1</span><span class="bk-t">Service</span><span class="bk-s" data-sum="1"></span></button>
-      <div class="bk-b">
-        <div class="opts" role="radiogroup" aria-label="Service">
-          ${detailPackages.map((p) => `<button type="button" class="opt" data-svc="${p.key}" role="radio" aria-checked="false"><b>${p.name}</b><small>${p.short}</small><em>from ${money(p.prices[0])}</em></button>`).join("")}
-          <button type="button" class="opt" data-svc="ceramic" role="radio" aria-checked="false"><b>Ceramic Coating</b><small>Paint correction included.</small><em>from ${money(ceramic.prices[0][0])}</em></button>
-        </div>
-        <div class="tiers" data-tiers hidden><span class="muted small">Coating length:</span>${ceramic.tiers.map((t, i) => `<button type="button" class="chip" data-tier="${i}">${t}</button>`).join("")}</div>
-        <p class="muted small">PPF, wraps or membership? <a href="/ppf#quote">Get a quote</a> or call <a href="tel:${biz.tel}">${biz.phone}</a>.</p>
-      </div></div>
-    <div class="bk-step" data-step="2"><button type="button" class="bk-h" data-goto="2"><span class="bk-n">2</span><span class="bk-t">Vehicle size</span><span class="bk-s" data-sum="2"></span></button>
-      <div class="bk-b"><div class="opts opts-size" role="radiogroup" aria-label="Vehicle size" data-sizes></div>
-        <label class="chk" data-twostep hidden><input type="checkbox"> Upgrade to two-step correction (+$100)</label>
-        <div class="bk-price" data-price hidden></div></div></div>
-    <div class="bk-step" data-step="3"><button type="button" class="bk-h" data-goto="3"><span class="bk-n">3</span><span class="bk-t">Day &amp; time</span><span class="bk-s" data-sum="3"></span></button>
-      <div class="bk-b"><div class="days" data-days></div><div class="times" data-times></div><p class="muted small" data-slot-msg></p></div></div>
-    <div class="bk-step" data-step="4"><button type="button" class="bk-h" data-goto="4"><span class="bk-n">4</span><span class="bk-t">Your info</span><span class="bk-s" data-sum="4"></span></button>
-      <div class="bk-b">
-        <label>Name<input name="name" autocomplete="name" required></label>
-        <label>Phone<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required></label>
-        <details class="more"><summary>Add details (optional)</summary>
-          <label>Email<input name="email" type="email" autocomplete="email"></label>
-          <label>Vehicle<input name="vehicleInfo" placeholder="Year, make, model"></label>
-          <label>Notes<textarea name="notes" rows="2" placeholder="Pet hair, stains, anything we should know"></textarea></label>
-          <label class="chk"><input type="checkbox" name="textMe" checked> Text me reminders</label>
-        </details>
-        <div class="bk-sum" data-summary></div>
-        <button class="btn btn-p btn-w" type="submit">${icon("check")}<span>Confirm Booking</span></button>
-        <p class="form-msg" role="status" aria-live="polite"></p></div></div>
-  </form>
+  ${bookingShell(page.book || {})}
   <p class="center muted small">Rather talk? <a href="tel:${biz.tel}">Call</a> or <a href="sms:${biz.tel}">text</a> ${biz.phone}.</p>
 </div></section>`;
 }
@@ -390,7 +370,7 @@ function header(page) {
 <header class="hdr" data-hdr><div class="wrap hdr-in">
   <a class="logo" href="/" aria-label="${esc(biz.name)} home"><img src="${biz.logo}" alt="${esc(biz.name)} logo" width="150" height="60"></a>
   <nav class="nav" aria-label="Main">${links}</nav>
-  <div class="hdr-ctas"><a class="btn btn-o btn-s" href="tel:${biz.tel}" data-track="call">${icon("phone")}<span>${biz.phone}</span></a><a class="btn btn-p btn-s" href="#book">${icon("calendar")}<span>Book Now</span></a></div>
+  <div class="hdr-ctas"><a class="btn btn-o btn-s" href="tel:${biz.tel}" data-track="call">${icon("phone")}<span>${biz.phone}</span></a><a class="btn btn-p btn-s" href="${bookHref(page)}">${icon("calendar")}<span>Book Now</span></a></div>
   <button class="menu-b" type="button" aria-label="Open menu" aria-expanded="false" data-menu>${icon("menu")}</button>
 </div>
 <div class="drawer" data-drawer hidden><nav aria-label="Mobile">${links}<a href="/about-us">About</a><a href="/gallery">Gallery</a><a href="/faq">FAQ</a></nav>
@@ -398,7 +378,7 @@ function header(page) {
 </header>`;
 }
 
-function footer() {
+function footer(page) {
   const svc = [["packages", "Detailing"], ["ceramic", "Ceramic Coating"], ["paint-correction", "Paint Correction"], ["ppf", "Paint Protection Film"], ["car-wraps", "Vehicle Wraps"], ["membership", "Membership"], ["headlight-restoration", "Headlight Restoration $100"], ["interior-detailing-champaign-il", "Interior Detailing"], ["vehicle-protection", "Protection Guide"]];
   const info = [["about-us", "About"], ["reviews", "Reviews"], ["gallery", "Gallery"], ["faq", "FAQ"], ["cost-calculator", "Price Calculator"], ["service-area", "Service Area"], ["blog", "Blog"], ["contact", "Contact"]];
   const area = cities.slice().sort((a, b) => a.minutes - b.minutes).slice(0, 8);
@@ -417,7 +397,7 @@ function footer() {
   <div class="ftr-links"><div><h4>Services</h4>${ul(svc)}</div><div><h4>The Gloss Spot</h4>${ul(info)}</div><div><h4>Nearby</h4>${ul(area.map((c) => [c.slug, c.name]))}</div></div>
   <div class="ftr-b"><p>© ${new Date().getFullYear()} ${esc(biz.name)} · ${esc(biz.address)} · ${biz.phone}</p><p><a href="/privacy-policy">Privacy</a> · <a href="/terms-and-conditions">Terms</a> · ${biz.sameAs.slice(0, 2).map((s) => `<a href="${s}" target="_blank" rel="noopener">${s.includes("facebook") ? "Facebook" : "Instagram"}</a>`).join(" · ")}</p></div>
 </div></footer>
-<div class="sbar" aria-label="Quick actions"><a class="btn btn-o" href="tel:${biz.tel}" data-track="call">${icon("phone")}<span>Call Now</span></a><a class="btn btn-p" href="#book">${icon("calendar")}<span>Book Now</span></a></div>`;
+<div class="sbar" aria-label="Quick actions"><a class="btn btn-o" href="tel:${biz.tel}" data-track="call">${icon("phone")}<span>Call Now</span></a><a class="btn btn-p" href="${bookHref(page)}">${icon("calendar")}<span>Book Now</span></a></div>`;
 }
 
 // ── schema ──────────────────────────────────────────────────────────────────
@@ -425,6 +405,7 @@ function footer() {
 const PKG_SCHEMA = {
   express: { url: "packages" },
   interior: { url: "interior-detailing-champaign-il" },
+  exterior: { url: "exterior-detailing-champaign-il" },
   full: { url: "full-service-detailing-champaign-il" },
   lux: { name: "Lux Package (Full Detail + Paint Correction)", url: "paint-correction" },
 };
@@ -437,6 +418,7 @@ export const SERVICES_SCHEMA = [
   { name: "Ceramic Coating", low: Math.min(...allCeramic), high: Math.max(...allCeramic), url: "ceramic" },
   { name: "Paint Protection Film (PPF)", low: Math.min(...ppf.packages.map((p) => p.range[0])), high: Math.max(...ppf.packages.map((p) => p.range[1])), url: "ppf" },
   { name: "Vehicle Wraps", low: 800, high: Math.max(...wraps.rows.filter((r) => r.range).map((r) => r.range[1])), url: "car-wraps" },
+  { name: HEADLIGHT.name, low: HEADLIGHT.price, high: HEADLIGHT.price, url: "headlight-restoration" },
   { name: `${maintenance.name} (4 exterior details/month)`, low: maintenance.price, high: maintenance.price, url: "membership", unit: "MON" },
   { name: "Gloss Membership", low: membership.price, high: membership.price, url: "membership", unit: "MON" },
 ];
@@ -500,7 +482,7 @@ const RENDER = {
   benefits, serviceCards, beforeAfter: beforeAfterBlock, prices, faq: faqBlock, related, steps,
   reviews: reviewsBlock, membershipBanner, story: storyBlock, text: textBlock, compare: compareBlock,
   cities: citiesBlock, gallery: galleryBlock, shopPhotos, insta: instaBlock, calculator: calculatorBlock, post: postBlock,
-  postList, contact: contactBlock, legal: legalBlock, quote: quoteForm,
+  postList, contact: contactBlock, legal: legalBlock, quote: quoteForm, tintOff,
   allReviews: () => sec("sec-rev", `<ul class="rvs rvs-all">${reviewCards(reviews)}</ul><p class="center"><a class="btn btn-o btn-s" href="${biz.googleReviews}" target="_blank" rel="noopener">See every review on Google</a></p>`),
 };
 
@@ -509,8 +491,9 @@ function render(page, assetV) {
     if (!RENDER[type]) throw new Error(`Unknown block "${type}" on ${page.path || "home"}`);
     return RENDER[type](arg, opt);
   }).join("\n");
-  const quote = page.quote && !page.blocks.some(([t]) => t === "quote") ? quoteForm(page.quote) : "";
-  const booking = page.noBook ? "" : bookingWidget();
+  const quote = page.quote && !page.blocks.some(([t]) => t === "quote") ? quoteForm(page.quote, { lock: !!page.quoteLock }) : "";
+  const booking = page.noBook ? "" : bookingWidget(page);
+  const needsBook = !page.noBook || page.blocks.some(([t]) => t === "calculator");
   const canonical = url(page.path);
   const hp = photos[page.hero?.photo || "hero"] || photos.hero;
   const ogImg = hp.cld ? cld(hp.cld, 1200, "1.91:1") : biz.domain + hp.src;
@@ -552,8 +535,9 @@ ${blocks}
 ${quote}
 ${booking}
 </main>
-${footer()}
+${footer(page)}
 <script src="/assets/site.js?v=${assetV}" defer></script>
+${needsBook ? `<script src="/assets/book.js?v=${assetV}" defer></script>` : ""}
 </body>
 </html>
 `;
@@ -595,16 +579,16 @@ export function build() {
   fs.mkdirSync(path.join(OUT, "assets"), { recursive: true });
   fs.mkdirSync(path.join(OUT, "blog"), { recursive: true });
 
-  const data = {
-    calendarId: biz.ghlCalendarId, phone: biz.phone, tel: biz.tel, chatWidgetId: biz.ghlChatWidgetId,
-    sizes, ceramicSizes,
-    packages: detailPackages.map(({ key, name, prices, hours, twoStepAdd }) => ({ key, name, prices, hours, twoStepAdd })),
-    ceramic: { tiers: ceramic.tiers, prices: ceramic.prices, hours: ceramic.hours },
-  };
+  const data = { phone: biz.phone, tel: biz.tel, chatWidgetId: biz.ghlChatWidgetId };
   const js = clientJS(data);
-  const assetV = crypto.createHash("sha1").update(CSS + js).digest("hex").slice(0, 8);
-  fs.writeFileSync(path.join(OUT, "assets", "site.css"), CSS);
+  const bjs = bookJS(biz);
+  const css = CSS + BOOK_CSS;
+  const assetV = crypto.createHash("sha1").update(css + js + bjs).digest("hex").slice(0, 8);
+  fs.writeFileSync(path.join(OUT, "assets", "site.css"), css);
   fs.writeFileSync(path.join(OUT, "assets", "site.js"), js);
+  // The booking widget, also used on the standalone headlight landing page.
+  fs.writeFileSync(path.join(OUT, "assets", "book.js"), bjs);
+  fs.writeFileSync(path.join(OUT, "assets", "book.css"), BOOK_CSS);
 
   for (const p of pages) {
     const file = p.file || (p.path ? `${p.path}.html` : "index.html");
@@ -622,7 +606,7 @@ export function build() {
   // posts.json (kept for the blog generator / anything that reads it)
   fs.writeFileSync(path.join(OUT, "blog", "posts.json"), JSON.stringify(posts.map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt, publishedAt: p.date + "T10:00:00Z", url: `/blog/${p.slug}` })), null, 2) + "\n");
 
-  buildHeadlightLanding(OUT);
+  buildHeadlightLanding(OUT, assetV);
   writeDeliverables();
   console.log(`Built ${pages.length} pages → output/ (assets v${assetV})`);
 }
@@ -648,7 +632,7 @@ function writeDeliverables() {
     L.push(`- **Meta** (${p.description.length}): ${p.description}`);
     L.push(`- **H1:** ${strip((p.kicker ? p.kicker + " · " : "") + p.h1)}`);
     L.push(`- **Hero line:** ${strip(p.lead)}`);
-    L.push(`- **Buttons:** ${(p.ctas || ["book", "call"]).map((c) => ({ book: "Book Now", call: "Call Now", quote: "Get a Quote", text: "Text Us", membership: "Start Membership" })[c]).join(" · ")}`);
+    L.push(`- **Buttons:** ${(p.ctas || ["book", "call"]).map((c) => ({ book: p.bookLabel || "Book Now", call: "Call Now", quote: "Get a Quote", text: "Text Us", membership: "Start Membership", waitlist: "Join the Waitlist" })[c]).join(" · ")}`);
     if (p.service && p.maxWords) L.push(`- **Body words:** ${wordCount(p)} (limit ${p.maxWords}, FAQ excluded)`);
     L.push("");
     for (const [t, a] of p.blocks) {
@@ -661,13 +645,14 @@ function writeDeliverables() {
     if (p.faqList) { L.push("", "**FAQ** (with FAQPage schema)", ""); p.faqList.forEach(([q, a]) => L.push(`- **${q}** ${a}`)); }
     L.push("");
   }
-  L.push("## 3. Booking flow", "", "Embedded at `#book` on every page. No redirect, no pop-up. Book Now buttons scroll to it and preselect the service.", "");
-  L.push(`1. **Service:** ${detailPackages.map((p) => p.name.replace(/ (Detail|Package)$/, "")).join(" · ")} · Ceramic (then pick 3/6/10-year). Link to a quote for PPF, wraps or membership.`);
-  L.push("2. **Vehicle size:** Coupe · Sedan · SUV/Truck · Large 3-Row SUV (ceramic: Minivan/Large SUV/Truck). Price shows instantly. Lux gets a +$100 two-step toggle.");
-  L.push("3. **Day & time:** live open slots from the GHL calendar (`/api/ghl-free-slots`), next 14 days. If slots can't load, it shows call/text.");
-  L.push("4. **Name + phone** (required). Optional, collapsed: email, year/make/model, notes, \"Text me reminders\" (on by default).");
-  L.push("", "Submit → `/api/ghl-create-booking`: upserts the GHL contact (tags `website-booking`, service, `prefers-text`) and books the appointment.", "");
-  L.push("**Quote form** (`#quote` on Ceramic, PPF, Wraps, Membership and quote-only pages): service, name, phone, vehicle, up to 3 photos (compressed in the browser), \"Text me the quote\" (on by default), optional notes → `/api/ghl-quote` (GHL contact + note with photo links).", "");
+  L.push("## 3. Booking flow", "", "Guided, one question per screen, with Back and a running summary (service, options, vehicle, price). Embedded at `#book` on every page except PPF, wraps and window tint. Service pages open it locked to their own service; the homepage and general pages start at Step 1.", "");
+  L.push("1. **Service:** Car Detailing (book) · Ceramic Coating (instant quote, 20% deposit) · Headlight Restoration (book) · PPF (quote form only) · Window Tint (currently unavailable, text-to-waitlist link).");
+  L.push("2. **Options:** Detailing: Interior Only / Exterior Only / Inside & Out, then Express / Full / Lux for Inside & Out. Ceramic: coating length, correction level, paint color and German make, with a short explainer.");
+  L.push(`3. **Vehicle:** ${sizes.join(" · ")} · Something else (custom quote). Ceramic: ${ceramicSizes.join(" · ")} · Oversized (custom quote). Add-ons (pet hair, heavy stains: confirmed at drop-off; mold: custom quote). Price updates live.`);
+  L.push("4. **Day & time:** live open slots from the main GHL calendar (`/api/ghl-free-slots`). Only start times where the whole job fits. Ceramic: morning drop-off, whole day blocked.");
+  L.push("5. **Your info:** name, phone (required), email, year/make/model, notes, SMS consent (not pre-checked). Ceramic shows deposit due today and balance at pickup.");
+  L.push("", "Prices: `api/_lib/pricing.js` (the browser and the booking API use the same function). Submit → `/api/ghl-create-booking`: contact (tags `website-lead`, `website-booking`, service, `prefers-text`, service tag), appointment, opportunity (Car Detailing → New Booking; Ceramic coating → New Lead Coating), note + task for Dom. Ceramic is held as *pending deposit*. Any failed step → customer sees \"Got it! We'll text you to confirm\", Dom gets a note + task, and the submission is logged and sent to `LEAD_ALERT_WEBHOOK`.", "");
+  L.push("**Quote form** (`#quote` on PPF, wraps, membership and quote-only pages; PPF also inside the booking flow): vehicle, PPF coverage, up to 3 photos, name, phone, email, notes, SMS consent → `/api/ghl-quote` (contact, note with photo links, opportunity in New Lead / New Lead Coating, task for Dom).", "");
   L.push("## 4. Schema", "", "Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/AutomotiveBusiness subtype) with NAP, hours, price range, founders, area served and an `OfferCatalog` of every service with prices; plus `WebPage`, `BreadcrumbList`, `Service` (service pages), `FAQPage` (pages with FAQs) and `BlogPosting` (posts). Homepage example:", "");
   const home = pages.find((p) => p.home);
   L.push("```json", JSON.stringify(JSON.parse(pageSchema(home)), null, 2), "```", "");

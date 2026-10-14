@@ -93,7 +93,7 @@ New redirects added: `/members` → `/membership`
 **FAQ** (with FAQPage schema)
 
 - **Where is The Gloss Spot?** Our shop is at 606 N. Country Fair Dr, Champaign, IL. Drivers come in from Urbana, Savoy, Mahomet, Rantoul and all over Champaign County. Tap Get Directions at the bottom of any page.
-- **How much is a car detail in Champaign?** An Express Detail starts at $90, an Interior Detail at $150, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book.
+- **How much is a car detail in Champaign?** Exterior Only starts at $85, an Express (inside and out) at $90, Interior Only at $165, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book.
 - **How do I book?** Tap Book Now, pick a service, your vehicle and a time, then add your name and phone. Prefer to talk? Call or text 217-600-2108.
 - **Do you still do mobile detailing?** We've moved into our own shop so every car gets good light, clean water and the right tools. Drop it off, and we'll text you when it's ready.
 - **Who will work on my car?** Dom and Dylan run the shop. One of us checks every car before it leaves.
@@ -101,32 +101,32 @@ New redirects added: `/members` → `/membership`
 ### /packages
 
 - **Title** (56): Auto Detailing Champaign, IL – Book Now | The Gloss Spot
-- **Meta** (137): Auto detailing in Champaign, IL: Express from $90, Interior from $150, Full Detail from $225, Lux with correction from $325. Book online.
+- **Meta** (144): Auto detailing in Champaign, IL: exterior from $85, interior from $165, full inside and out from $225, Lux from $325. Book online in 30 seconds.
 - **H1:** Auto Detailing in Champaign, IL
-- **Hero line:** Four packages, priced by vehicle size. Book in 30 seconds.
+- **Hero line:** Inside, outside or both. Priced by vehicle size. Book in 30 seconds.
 - **Buttons:** Book Now · Call Now
-- **Body words:** 66 (limit 300, FAQ excluded)
+- **Body words:** 73 (limit 300, FAQ excluded)
 
-- **Four clear packages**: Express, Interior, Full or Lux. You see your price before you book.
+- **Pick exactly what you need**: Interior, exterior or both: Express, Full or Lux. You see your price before you book.
 - **Checked before it leaves**: Dom or Dylan inspects every car at pickup.
 - **Drop off, pick up**: Leave it on the way to work. Grab it on the way home.
 - _Price cards: detail_
 
 **FAQ** (with FAQPage schema)
 
-- **How much is a full detail in Champaign?** A Full Detail is $225 for a coupe, $250 for a sedan, $285 for an SUV or truck and $315 for a large 3-row SUV.
-- **How long does a car detail take?** An Express takes about an hour, an Interior Detail about two and a Full Detail about three. A Lux Package with paint correction takes most of the day.
-- **What's the difference between Express, Interior, Full and Lux?** Express is a quick vacuum, wipe-down and exterior wash. Interior is the full inside only. Full is a complete interior and exterior detail, and Lux adds one-step paint correction and sealant.
+- **How much is a full detail in Champaign?** A Full Detail is $225 for a coupe, $250 for a sedan or small truck, $285 for an SUV or regular truck, $315 for a large SUV or truck and $375 for a minivan.
+- **How long does a car detail take?** Exterior Only and Express take about an hour, Interior Only about two and a Full Detail about three. A Lux Package with paint correction takes most of the day.
+- **Can I book just the inside or just the outside?** Yes. Pick Interior Only or Exterior Only when you book. For both, choose Express (a light clean), Full Detail (a deep clean) or Lux (Full Detail plus one-step paint correction and sealant).
 - **Is mobile detailing better than a shop?** A shop gives your car steady lighting, controlled water and no weather delays. It's the reason we moved off the driveway.
 - **Do I need to clean out my car first?** Just take out valuables and anything you don't want moved. We handle the rest.
 
 ### /ceramic
 
 - **Title** (57): Ceramic Coating Champaign, IL – Book Now | The Gloss Spot
-- **Meta** (139): Ceramic coating in Champaign, IL with paint correction included. 3, 6 and 10-year coatings from $1,100. Book online or get a quote by text.
+- **Meta** (141): Ceramic coating in Champaign, IL with paint correction included. 3, 6 and 10-year coatings from $1,100. See your exact price online and book.
 - **H1:** Ceramic Coating in Champaign, IL
 - **Hero line:** Years of gloss and easy washes. Paint correction included.
-- **Buttons:** Book Now · Get a Quote
+- **Buttons:** Get My Price · Call Now
 - **Body words:** 65 (limit 300, FAQ excluded)
 
 - **Water beads right off**: Rain and road grime rinse away with less scrubbing.
@@ -137,10 +137,10 @@ New redirects added: `/members` → `/membership`
 **FAQ** (with FAQPage schema)
 
 - **How long does ceramic coating last?** We offer 3-year, 6-year and 10-year coatings. Regular hand washes keep it performing its best for the full term.
-- **How much is ceramic coating in Champaign?** A 3-year coating starts at $1,100 for a coupe, $1,350 for a sedan, $1,600 for an SUV or truck and $1,850 for a minivan or large SUV.
+- **How much is ceramic coating in Champaign?** A 3-year coating with 1-step correction is $1,100 for a coupe, $1,350 for a sedan or small truck, $1,600 for a small SUV or medium truck and $1,850 for a large SUV, truck or minivan. Book online and see your exact price first.
 - **Is paint correction included with ceramic coating?** Yes. Every ceramic package includes paint correction, so the coating locks in a corrected finish.
 - **Is ceramic coating better than wax?** Wax lasts weeks. Ceramic bonds to your paint and lasts years, with easier washes the whole time.
-- **How long will you need my car?** Coating takes prep, correction and cure time, so plan to leave it with us. You'll get an exact pickup time when you book.
+- **How long will you need my car?** The whole day. Drop it off in the morning and we keep it for correction, coating and cure. We'll text you when it's ready.
 - **When can I wash my car after ceramic coating?** We'll give you the cure time at pickup. After that, a pH-neutral hand wash keeps it slick.
 
 ### /paint-correction
@@ -160,7 +160,7 @@ New redirects added: `/members` → `/membership`
 **FAQ** (with FAQPage schema)
 
 - **What is paint correction?** Machine polishing that removes swirls, light scratches and haze from your clear coat. It brings back depth and gloss that washing can't.
-- **How much is paint correction in Champaign?** One-step correction comes in our Lux Package, $325 to $450 by vehicle size, with a full detail and sealant. Two-step correction is +$100.
+- **How much is paint correction in Champaign?** One-step correction comes in our Lux Package, $325 to $510 by vehicle size, with a full detail and sealant. Two-step correction is +$100.
 - **What's the difference between one-step and two-step correction?** One-step is a single polish that clears light swirls and haze. Two-step adds a heavier cut first for deeper defects.
 - **Can paint correction remove all scratches?** It removes defects that sit in the clear coat. Dom will look at your paint and tell you what to expect before starting.
 - **Should I ceramic coat after paint correction?** It's the ideal time, and every ceramic package already includes correction.
@@ -247,8 +247,8 @@ New redirects added: `/members` → `/membership`
 
 **FAQ** (with FAQPage schema)
 
-- **How much is a full detail in Champaign?** A Full Detail is $225 for a coupe, $250 for a sedan, $285 for an SUV or truck and $315 for a large 3-row SUV.
-- **How long does a car detail take?** An Express takes about an hour, an Interior Detail about two and a Full Detail about three. A Lux Package with paint correction takes most of the day.
+- **How much is a full detail in Champaign?** A Full Detail is $225 for a coupe, $250 for a sedan or small truck, $285 for an SUV or regular truck, $315 for a large SUV or truck and $375 for a minivan.
+- **How long does a car detail take?** Exterior Only and Express take about an hour, Interior Only about two and a Full Detail about three. A Lux Package with paint correction takes most of the day.
 - **What's included in a full detail?** Foam pre-soak and hand wash, wheels, tires and jambs, a full interior vacuum, dash and panels, windows inside and out, tire dressing and a quick sealant.
 - **Can I upgrade to paint correction?** Yes. The Lux Package adds one-step correction and sealant, from $325.
 
@@ -264,19 +264,20 @@ New redirects added: `/members` → `/membership`
 
 | | What it does | From |
 |---|---|---|
-| Detailing | Cleans inside and out | $90 |
+| Detailing | Inside, outside or both | $85 |
 | Paint correction | Removes swirls and haze | $325 |
 | Ceramic coating | Years of gloss, easy washes | $1,100 |
 | PPF | Stops rock chips | $800 |
 | Wraps | Changes the color | $800 |
+| Headlights | Foggy to clear, both sides | $100 |
 | Membership | Keeps it clean weekly | $149/mo |
 
 ### /interior-detailing-champaign-il
 
 - **Title** (56): Interior Detailing Champaign, IL – Book | The Gloss Spot
-- **Meta** (142): Interior detailing in Champaign, IL from $150: seats, carpet, mats, dash, vents and glass. Pet hair and kid messes welcome. Book online today.
+- **Meta** (142): Interior detailing in Champaign, IL from $165: seats, carpet, mats, dash, vents and glass. Pet hair and kid messes welcome. Book online today.
 - **H1:** Interior Detailing in Champaign, IL
-- **Hero line:** Seats, carpet, dash and glass, reset. From $150.
+- **Hero line:** Seats, carpet, dash and glass, reset. From $165.
 - **Buttons:** Book Now · Call Now
 
 - **Kids, pets, work trucks**: Crumbs, dog hair and jobsite dust are everyday work for us.
@@ -286,15 +287,15 @@ New redirects added: `/members` → `/membership`
 
 **FAQ** (with FAQPage schema)
 
-- **How much is interior detailing in Champaign?** An Interior Detail is $150 for a coupe, $175 for a sedan, $200 for an SUV or truck and $225 for a large 3-row SUV. Want the outside too? The Full Detail starts at $225.
-- **Can you remove pet hair?** Yes. Tell us about it in your booking notes so we plan the time.
+- **How much is interior detailing in Champaign?** Interior Only is $165 for a coupe, $185 for a sedan or small truck, $210 for an SUV or regular truck, $235 for a large SUV or truck and $275 for a minivan. Want the outside too? A Full Detail starts at $225.
+- **Can you remove pet hair?** Yes. Tick the pet hair add-on when you book. It's +$50 to $150 depending on how much there is, confirmed at drop-off.
 - **How long does an interior detail take?** About two hours for an Interior Detail, a little longer for big SUVs.
 - **Do you clean seats and floor mats?** Yes. Seats and mats are part of every Interior and Full Detail.
 
 ### /interior
 
 - **Title** (59): Interior Car Cleaning Champaign, IL – Book | The Gloss Spot
-- **Meta** (145): Interior car cleaning in Champaign, IL for busy families, pet owners and commuters. Interior Detail from $150, Express from $90. Book online now.
+- **Meta** (143): Interior car cleaning in Champaign, IL for busy families, pet owners and commuters. Interior Only from $165, Express from $90. Book online now.
 - **H1:** Interior Car Cleaning in Champaign, IL
 - **Hero line:** For the crumbs, the dog hair and the daily mess.
 - **Buttons:** Book Now · Call Now
@@ -315,32 +316,32 @@ New redirects added: `/members` → `/membership`
 - **Title** (56): Exterior Detailing Champaign, IL – Book | The Gloss Spot
 - **Meta** (140): Exterior detailing in Champaign, IL: foam wash, wheels, jambs, tire dressing and sealant, plus paint correction upgrades. Book online today.
 - **H1:** Exterior Detailing in Champaign, IL
-- **Hero line:** Foam wash, wheels, jambs and sealant. Gloss you can see.
+- **Hero line:** Hand wash, wheels and glass. From $85.
 - **Buttons:** Book Now · Call Now
 
 - **Hand wash, not a tunnel**: Foam pre-soak and a careful hand wash protect your paint.
 - **Wheels and jambs too**: Wheels, tires and door jambs get cleaned, not skipped.
-- **Upgrade to correction**: Add one-step paint correction with the Lux Package.
-- _Price cards: express, lux_
+- **Upgrade to correction**: Go Inside & Out with the Lux Package for one-step paint correction.
+- _Price cards: exterior, lux_
 
 **FAQ** (with FAQPage schema)
 
-- **How much is exterior detailing in Champaign?** An exterior wash comes with the Express, from $90. The Full Detail adds sealant and the full interior, from $225.
+- **How much is exterior detailing in Champaign?** Exterior Only is $85 for a coupe, $95 for a sedan or small truck, $105 for an SUV or regular truck, $115 for a large SUV or truck and $125 for a minivan.
 - **Will a hand wash scratch my paint?** We use a foam pre-soak and careful hand wash to lift grit before we touch the paint.
 - **How do I keep the shine longer?** A sealant lasts months. <a href="/ceramic">Ceramic coating</a> lasts years.
 
 ### /exterior
 
 - **Title** (57): Hand Car Wash & Wax Champaign, IL – Book | The Gloss Spot
-- **Meta** (130): Hand car wash and wax in Champaign, IL. Express Detail from $90 or weekly exterior details for $149/mo. Book online in 30 seconds.
+- **Meta** (123): Hand car wash in Champaign, IL. Exterior Detail from $85 or weekly exterior details for $149/mo. Book online in 30 seconds.
 - **H1:** Hand Car Wash &amp; Wax in Champaign, IL
-- **Hero line:** Clean and glossy, by hand. From $90.
+- **Hero line:** Clean and glossy, by hand. From $85.
 - **Buttons:** Book Now · Call Now
 
 - **By hand, start to finish**: Foam, hand wash and dry. No brushes slapping your paint.
-- **Once or every week**: Book an Express, or go weekly with the membership.
+- **Once or every week**: Book an Exterior Detail, or go weekly with the membership.
 - **Wax that shows**: A slick, glossy finish that helps water run off.
-- _Price cards: express, maintenance_
+- _Price cards: exterior, maintenance_
 
 ### /mobile-detailing-champaign-il
 
@@ -406,33 +407,31 @@ Now every car comes to 606 N. Country Fair Dr, where we have the light, water an
 
 ### /window-tint
 
-- **Title** (56): Window Tint Champaign, IL – Get a Quote | The Gloss Spot
-- **Meta** (140): Window tint in Champaign, IL for heat, UV and privacy. Send your vehicle and a photo and get a window tint quote by text. Call 217-600-2108.
+- **Title** (53): Window Tint Champaign, IL – Waitlist | The Gloss Spot
+- **Meta** (137): Window tint at The Gloss Spot in Champaign, IL is currently unavailable. Text 217-600-2108 to join the waitlist, or book a detail online.
 - **H1:** Window Tint in Champaign, IL
-- **Hero line:** Cooler cabin, more privacy. Get a price by text.
-- **Buttons:** Get a Quote · Call Now
+- **Hero line:** Currently unavailable. Check back soon.
+- **Buttons:** Join the Waitlist · Call Now
 
-- **Less heat and glare**: Tint cuts heat and UV through the glass.
-- **More privacy**: Keep what's in your car out of sight.
-- **Quote by text**: Send your vehicle and a photo. We'll text a price.
 
 ### /headlight
 
-- **Title** (56): Headlight Restoration Champaign, IL – Quote | Gloss Spot
+- **Title** (55): Headlight Restoration Champaign, IL – $100 | Gloss Spot
 - **Meta** (129): Headlight restoration in Champaign, IL: both headlights restored to clear for $100, done today. Book online or call 217-600-2108.
 - **H1:** Headlight Restoration in Champaign, IL
 - **Hero line:** Both headlights, foggy to clear, $100. Done today.
-- **Buttons:** Get a Quote · Call Now
+- **Buttons:** Book Now · Call Now
 
 - **Clearer at night**: Restored lenses let more light through.
 - **Looks newer**: Cloudy headlights age a car fast.
-- **Photo quote**: Send a photo of your headlights for a price.
+- **Book online**: $100 for both headlights. Pick a time below.
 **“Gloss Spot cleared them right up.”**
 
 “I own a twelve year old Toyota Avalon. The headlight covers had become blurry and yellowish. Gloss Spot cleared them right up. Outstanding service.”
 
 Robert Wengert
 
+- _Price cards: headlight_
 
 ### /engine
 
@@ -563,17 +562,17 @@ Robert Wengert
 **FAQ** (with FAQPage schema)
 
 - **Where is The Gloss Spot?** Our shop is at 606 N. Country Fair Dr, Champaign, IL. Tap Get Directions at the bottom of any page.
-- **How much is a car detail in Champaign?** An Express Detail starts at $90, an Interior Detail at $150, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book.
+- **How much is a car detail in Champaign?** Exterior Only starts at $85, an Express (inside and out) at $90, Interior Only at $165, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book.
 - **How do I book?** Tap Book Now, pick a service, your vehicle and a time, then add your name and phone. Prefer to talk? Call or text 217-600-2108.
 - **Who will work on my car?** Dom and Dylan run the shop. One of us checks every car before it leaves.
-- **How long does a car detail take?** An Express takes about an hour, an Interior Detail about two and a Full Detail about three. A Lux Package with paint correction takes most of the day.
+- **How long does a car detail take?** Exterior Only and Express take about an hour, Interior Only about two and a Full Detail about three. A Lux Package with paint correction takes most of the day.
 - **How long does ceramic coating last?** We offer 3-year, 6-year and 10-year coatings. Regular hand washes keep it performing its best for the full term.
 - **Is paint correction included with ceramic coating?** Yes. Every ceramic package includes paint correction, so the coating locks in a corrected finish.
 - **Should I get PPF or ceramic coating?** PPF is a physical film that takes the hit from rock chips. Ceramic adds gloss and easy washing, and many owners do both.
 - **How much does a car wrap cost in Champaign?** Coupes and sedans are $2,400 to $2,700, SUVs and crossovers $2,900 to $3,200 and full-size trucks or large SUVs $3,300 to $3,600.
 - **How much is a car wash membership in Champaign?** Exterior Maintenance is $149 a month for 4 exterior details, one every week. The full Gloss Membership is $299 a month and adds 4 interior cleans.
 - **What payment do you take?** Cash, cards, Apple Pay and Google Pay. Payment is due at pickup.
-- **What's your cancellation policy?** Reschedule or cancel with 24 hours' notice at no charge.
+- **What's your cancellation policy?** Please give us at least 48 hours' notice if you need to cancel or reschedule.
 
 ### /gallery
 
@@ -959,7 +958,7 @@ Central Illinois winters mean road salt and brine. A coated car rinses clean fas
 ### /blog/detailing-cost
 
 - **Title** (59): Car Detailing Cost in Champaign, IL (2026) | The Gloss Spot
-- **Meta** (136): Real 2026 car detailing prices in Champaign, IL, from a $90 Express to ceramic coating, PPF and wraps. Book online or call 217-600-2108.
+- **Meta** (145): Real 2026 car detailing prices in Champaign, IL, from an $85 exterior detail to ceramic coating, PPF and wraps. Book online or call 217-600-2108.
 - **H1:** Car Detailing Cost in Champaign, IL
 - **Hero line:** Every price we charge, by vehicle size. No surprises.
 - **Buttons:** Book Now · Call Now
@@ -971,6 +970,7 @@ Lux includes one-step paint correction and sealant. Two-step correction is +$100
 - Ceramic coating: from $1,100 (paint correction included)
 - Paint protection film: from $800 for a sedan
 - Vehicle wraps: from $2,400, partial wraps from $800
+- Headlight restoration: $100 for both headlights
 **Membership**
 Exterior Maintenance is $149 a month for a weekly exterior detail. The $299 Gloss Membership adds weekly wax and 4 interior cleans. Details on the membership page.
 **Why prices vary by size**
@@ -1046,16 +1046,17 @@ Most people drop off on the way to work and pick up on the way home. We'll text 
 
 ## 3. Booking flow
 
-Embedded at `#book` on every page. No redirect, no pop-up. Book Now buttons scroll to it and preselect the service.
+Guided, one question per screen, with Back and a running summary (service, options, vehicle, price). Embedded at `#book` on every page except PPF, wraps and window tint. Service pages open it locked to their own service; the homepage and general pages start at Step 1.
 
-1. **Service:** Express · Interior · Full · Lux · Ceramic (then pick 3/6/10-year). Link to a quote for PPF, wraps or membership.
-2. **Vehicle size:** Coupe · Sedan · SUV/Truck · Large 3-Row SUV (ceramic: Minivan/Large SUV/Truck). Price shows instantly. Lux gets a +$100 two-step toggle.
-3. **Day & time:** live open slots from the GHL calendar (`/api/ghl-free-slots`), next 14 days. If slots can't load, it shows call/text.
-4. **Name + phone** (required). Optional, collapsed: email, year/make/model, notes, "Text me reminders" (on by default).
+1. **Service:** Car Detailing (book) · Ceramic Coating (instant quote, 20% deposit) · Headlight Restoration (book) · PPF (quote form only) · Window Tint (currently unavailable, text-to-waitlist link).
+2. **Options:** Detailing: Interior Only / Exterior Only / Inside & Out, then Express / Full / Lux for Inside & Out. Ceramic: coating length, correction level, paint color and German make, with a short explainer.
+3. **Vehicle:** Coupe · Sedan / small truck · SUV / regular truck · Large SUV / large truck · Minivan · Something else (custom quote). Ceramic: Coupe · Sedan / small truck · Small SUV / medium truck · Large SUV / truck / minivan · Oversized (custom quote). Add-ons (pet hair, heavy stains: confirmed at drop-off; mold: custom quote). Price updates live.
+4. **Day & time:** live open slots from the main GHL calendar (`/api/ghl-free-slots`). Only start times where the whole job fits. Ceramic: morning drop-off, whole day blocked.
+5. **Your info:** name, phone (required), email, year/make/model, notes, SMS consent (not pre-checked). Ceramic shows deposit due today and balance at pickup.
 
-Submit → `/api/ghl-create-booking`: upserts the GHL contact (tags `website-booking`, service, `prefers-text`) and books the appointment.
+Prices: `api/_lib/pricing.js` (the browser and the booking API use the same function). Submit → `/api/ghl-create-booking`: contact (tags `website-lead`, `website-booking`, service, `prefers-text`, service tag), appointment, opportunity (Car Detailing → New Booking; Ceramic coating → New Lead Coating), note + task for Dom. Ceramic is held as *pending deposit*. Any failed step → customer sees "Got it! We'll text you to confirm", Dom gets a note + task, and the submission is logged and sent to `LEAD_ALERT_WEBHOOK`.
 
-**Quote form** (`#quote` on Ceramic, PPF, Wraps, Membership and quote-only pages): service, name, phone, vehicle, up to 3 photos (compressed in the browser), "Text me the quote" (on by default), optional notes → `/api/ghl-quote` (GHL contact + note with photo links).
+**Quote form** (`#quote` on PPF, wraps, membership and quote-only pages; PPF also inside the booking flow): vehicle, PPF coverage, up to 3 photos, name, phone, email, notes, SMS consent → `/api/ghl-quote` (contact, note with photo links, opportunity in New Lead / New Lead Coating, task for Dom).
 
 ## 4. Schema
 
@@ -1074,7 +1075,7 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
       "email": "theglossspotil@gmail.com",
       "image": "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1200/IMG_5948_totw8k",
       "logo": "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_400/Gloss_Spot_5_ranrsj.png",
-      "priceRange": "$90 – $5,500",
+      "priceRange": "$85 – $5,500",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "606 N. Country Fair Dr",
@@ -1156,13 +1157,13 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Express Detail",
-              "url": "https://www.theglossspotil.com/packages"
+              "name": "Interior Detail",
+              "url": "https://www.theglossspotil.com/interior-detailing-champaign-il"
             },
             "priceSpecification": {
               "@type": "PriceSpecification",
-              "minPrice": 90,
-              "maxPrice": 145,
+              "minPrice": 165,
+              "maxPrice": 275,
               "priceCurrency": "USD"
             }
           },
@@ -1170,13 +1171,27 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Interior Detail",
-              "url": "https://www.theglossspotil.com/interior-detailing-champaign-il"
+              "name": "Exterior Detail",
+              "url": "https://www.theglossspotil.com/exterior-detailing-champaign-il"
             },
             "priceSpecification": {
               "@type": "PriceSpecification",
-              "minPrice": 150,
-              "maxPrice": 225,
+              "minPrice": 85,
+              "maxPrice": 125,
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Express Detail",
+              "url": "https://www.theglossspotil.com/packages"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 90,
+              "maxPrice": 160,
               "priceCurrency": "USD"
             }
           },
@@ -1190,7 +1205,7 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
             "priceSpecification": {
               "@type": "PriceSpecification",
               "minPrice": 225,
-              "maxPrice": 315,
+              "maxPrice": 375,
               "priceCurrency": "USD"
             }
           },
@@ -1204,7 +1219,7 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
             "priceSpecification": {
               "@type": "PriceSpecification",
               "minPrice": 325,
-              "maxPrice": 550,
+              "maxPrice": 610,
               "priceCurrency": "USD"
             }
           },
@@ -1247,6 +1262,20 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
               "@type": "PriceSpecification",
               "minPrice": 800,
               "maxPrice": 3600,
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Headlight Restoration",
+              "url": "https://www.theglossspotil.com/headlight-restoration"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 100,
+              "maxPrice": 100,
               "priceCurrency": "USD"
             }
           },
@@ -1316,7 +1345,7 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
           "name": "How much is a car detail in Champaign?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "An Express Detail starts at $90, an Interior Detail at $150, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book."
+            "text": "Exterior Only starts at $85, an Express (inside and out) at $90, Interior Only at $165, a Full Detail at $225 and the Lux Package at $325. Your price depends on vehicle size and shows instantly when you book."
           }
         },
         {

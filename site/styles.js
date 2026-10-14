@@ -263,11 +263,6 @@ ul,ol{margin:0;padding:0;list-style:none}
 @media(min-width:700px){.ig-grid{columns:2}}
 @media(min-width:1050px){.ig-grid{columns:3}}
 
-/* calculator */
-.calc{display:grid;gap:14px;max-width:560px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px}
-.calc-out{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:14px}
-.calc-out small{color:var(--muted)}.calc-out b{font:400 3rem/1 var(--hf);color:var(--cy)}
-
 /* forms */
 label{display:grid;gap:6px;font-weight:600;font-size:.93rem}
 label small{color:var(--dim);font-weight:400}
@@ -282,42 +277,13 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cy);box-
 .form-msg{margin:0;min-height:1.4em;font-weight:600}
 .form-msg.ok{color:var(--cy)}.form-msg.err{color:#ff9b8a}
 .qf{display:grid;gap:14px;max-width:560px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.chk-consent{align-items:flex-start;font-size:.8rem;line-height:1.45;color:var(--muted);font-weight:400}
+.chk-consent input{margin-top:2px;flex:none}
+.tint-off{max-width:620px;background:var(--card);border:1.5px dashed var(--line2);border-radius:var(--r);padding:26px 22px;text-align:center}
+.tint-off h2{margin-bottom:10px}
 
-/* booking widget */
-.bk{max-width:720px;display:grid;gap:12px}
-.bk-step{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:border-color .3s}
-.bk-step.is-open{border-color:rgba(92,217,219,.5)}
-.bk-h{width:100%;display:flex;align-items:center;gap:14px;padding:16px 18px;min-height:64px;background:none;border:0;color:var(--text);font:600 1.05rem var(--bf);text-align:left;cursor:pointer}
-.bk-step:not(.is-done):not(.is-open) .bk-h{cursor:default;opacity:.55}
-.bk-n{width:34px;height:34px;flex:none;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line2);font-size:.95rem}
-.is-open .bk-n{background:var(--cy);border-color:var(--cy);color:var(--cy-ink)}
-.is-done .bk-n{background:rgba(92,217,219,.15);border-color:var(--cy);color:var(--cy)}
-.bk-s{margin-left:auto;color:var(--cy);font-weight:600;font-size:.93rem;text-align:right}
-.bk-b{display:none;padding:0 18px 20px;gap:14px}
-.is-open .bk-b{display:grid}
-.opts{display:grid;gap:10px}
-.opt{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;text-align:left;width:100%;min-height:64px;padding:14px 16px;border-radius:14px;border:1.5px solid var(--line2);background:#0a0e10;color:var(--text);font:inherit;cursor:pointer;transition:border-color .2s,background .2s}
-.opt b{font-weight:600}.opt small{grid-column:1;color:var(--muted);font-size:.88rem}.opt em{grid-row:1/span 2;grid-column:2;font-style:normal;font-weight:700;color:var(--cy)}
-.opt:hover{border-color:rgba(92,217,219,.6)}
-.opt[aria-checked=true]{border-color:var(--cy);background:rgba(92,217,219,.1)}
-.opts-size .opt{min-height:56px}
-@media(min-width:640px){.opts{grid-template-columns:1fr 1fr}.opts>.opt:last-child:nth-child(odd){grid-column:1/-1}}
-.tiers{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.chip{min-height:48px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line2);background:#0a0e10;color:var(--text);font:600 .95rem var(--bf);cursor:pointer}
-.chip[aria-pressed=true]{border-color:var(--cy);background:var(--cy);color:var(--cy-ink)}
-.chip:disabled{opacity:.35;cursor:not-allowed}
-.days,.times{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
-.times{flex-wrap:wrap;overflow:visible}
-.day{flex:none;min-width:72px;min-height:64px;display:grid;place-items:center;gap:0;line-height:1.1;border-radius:14px}
-.day small{font-weight:500;color:inherit;opacity:.75;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
-.bk-price{display:flex;justify-content:space-between;align-items:baseline;padding:14px 16px;border-radius:14px;background:rgba(92,217,219,.08);border:1px solid rgba(92,217,219,.3)}
-.bk-price b{font:400 2.4rem/1 var(--hf);color:var(--cy)}
-.bk-sum{color:var(--muted);font-size:.93rem;background:#0a0e10;border-radius:12px;padding:12px 14px}
-.bk-sum b{color:var(--text)}
-.more summary{cursor:pointer;color:var(--cy);font-weight:600;min-height:44px;display:flex;align-items:center}
-.more[open]{display:grid;gap:12px}
-.bk-done{text-align:center;padding:28px 20px;background:var(--card);border:1px solid var(--cy);border-radius:var(--r)}
-.bk-done h3{font:400 2.4rem/1 var(--hf);color:var(--cy);margin-bottom:10px}
+/* booking widget: see site/booking.js (BOOK_CSS) */
+.sec-book .gsb{margin-top:8px}
 
 /* contact + footer */
 .contact{display:grid;gap:28px}

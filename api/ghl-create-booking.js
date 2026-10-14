@@ -1,161 +1,165 @@
-// Vercel serverless function — upserts a contact, then creates an appointment
-// in the GHL calendar. PIT token + location ID stored as env vars.
+// Vercel serverless function: one website booking → GoHighLevel.
+//   1. upsert the contact (deduped by phone), tags + service custom fields
+//   2. create the appointment on the main calendar
+//   3. create the opportunity in the right pipeline
+//   4. note + task for Dom; ceramic: hold for the 20% deposit
+// Prices are recomputed here from api/_lib/pricing.js; the browser's numbers
+// are only trusted for old clients that don't send a `selection`.
+// If any GHL step fails the customer still gets "Got it! We'll text you to
+// confirm" and the whole submission goes to alertFailure (no lead is lost).
 
-import { DOM_USER_ID, taskForDom, setServiceFields } from "./_lib/notify-dom.js";
+import { priceSelection, CLOSE_HOUR } from "./_lib/pricing.js";
+import {
+  readJsonBody, ghl, upsertContact, createAppointment, createOpportunity, addNote,
+  setServiceFields, taskForDom, alertFailure, splitName, money,
+  LOCATION_ID, SHOP_ADDRESS, DOM_USER_ID,
+} from "./_lib/ghl.js";
 
-const GHL_BASE = "https://services.leadconnectorhq.com";
-const LOCATION_ID = "CLJQbljlapECB2Aiq27f";
-const SHOP_ADDRESS = "606 N. Country Fair Dr, Champaign, IL";
+// Wall-clock time in Chicago on the same day as `iso`, as an ISO string.
+function chicagoSameDayAt(iso, hour) {
+  const d = new Date(iso);
+  const ymd = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Chicago", year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
+  for (const off of ["-05:00", "-06:00"]) {
+    const t = new Date(`${ymd}T${String(hour).padStart(2, "0")}:00:00${off}`);
+    const h = +new Intl.DateTimeFormat("en-US", { timeZone: "America/Chicago", hour: "numeric", hour12: false }).format(t);
+    if (h % 24 === hour) return t.toISOString();
+  }
+  return new Date(d.getTime() + 8 * 3600e3).toISOString();
+}
 
-async function readJsonBody(req) {
-  if (req.body && typeof req.body === "object") return req.body;
-  if (typeof req.body === "string") return JSON.parse(req.body);
-  return new Promise((resolve, reject) => {
-    let data = "";
-    req.on("data", (chunk) => (data += chunk));
-    req.on("end", () => {
-      try { resolve(data ? JSON.parse(data) : {}); } catch (e) { reject(e); }
-    });
-    req.on("error", reject);
-  });
+// Old clients (/book-headlights, cached pages) send service/packageName/price.
+function legacyPick(b) {
+  const svc = /headlight/i.test(b.service || "") ? "headlight" : /ceramic/i.test(b.service || "") ? "ceramic" : "detailing";
+  const price = Number(b.price) || 0;
+  return {
+    svc, service: b.service || "Car Detailing", level: b.packageName || "", sizeLabel: b.vehicle || "",
+    price, total: price, hours: Number(b.durationHours) || 2, legacy: true,
+    sideTag: svc === "headlight" ? "headlight" : svc === "ceramic" ? "ceramic" : /interior/i.test(b.packageName || "") ? "interior" : /exterior/i.test(b.packageName || "") ? "exterior" : "full-detail",
+    lines: [], notes: [],
+  };
 }
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    res.status(405).json({ error: "Method not allowed" });
-    return;
-  }
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
   const token = process.env.GHL_PIT_TOKEN;
   if (!token) {
-    res.status(500).json({ error: "GHL_PIT_TOKEN not configured on server" });
-    return;
+    console.error("[LEAD-FALLBACK] GHL_PIT_TOKEN missing; booking not saved", JSON.stringify(req.body || {}));
+    return res.status(500).json({ error: "GHL_PIT_TOKEN not configured on server" });
+  }
+  let b;
+  try { b = await readJsonBody(req); } catch { return res.status(400).json({ error: "Invalid JSON body" }); }
+  b = b || {};
+
+  const name = String(b.name || [b.firstName, b.lastName].filter(Boolean).join(" ")).trim();
+  const phone = String(b.phone || "").trim();
+  const email = String(b.email || "").trim();
+  const startISO = b.startISO;
+  if (!name || phone.replace(/\D/g, "").length < 10 || !startISO || isNaN(new Date(startISO))) {
+    return res.status(400).json({ error: "Missing required fields" });
   }
 
-  let body;
-  try { body = await readJsonBody(req); } catch {
-    res.status(400).json({ error: "Invalid JSON body" }); return;
-  }
+  const p = b.selection ? priceSelection(b.selection) : legacyPick(b);
+  if (p.error) return res.status(400).json({ error: p.error });
+  if (p.quote) return res.status(400).json({ error: "This one needs a custom quote", quote: true });
 
-  const {
-    calendarId, startISO, durationHours,
-    name, email, phone,
-    service, packageName, vehicle, vehicleInfo,
-    notes, price, isGerman, addons, textMe, page,
-  } = body || {};
+  const consent = !!(b.smsConsent ?? b.textMe);
+  const ceramic = p.svc === "ceramic" && !p.legacy;
+  const endISO = p.wholeDay ? chicagoSameDayAt(startISO, CLOSE_HOUR) : new Date(new Date(startISO).getTime() + Number(p.hours) * 3600e3).toISOString();
+  const when = new Date(startISO).toLocaleString("en-US", { timeZone: "America/Chicago", weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+  const vehicleInfo = String(b.vehicleInfo || "").trim();
+  const priceTag = p.price ? ` (${money(p.price)})` : "";
+  const serviceLabel = (p.level && !p.level.startsWith(p.service) ? `${p.service} – ${p.level}` : p.level || p.service) + priceTag;
+  const vehicle = p.sizeLabel ? p.sizeLabel + (vehicleInfo ? ` (${vehicleInfo})` : "") : vehicleInfo;
+  // <Service> – <Level> ($price) — <Vehicle size>
+  const title = [serviceLabel, vehicle].filter(Boolean).join(" — ") + (ceramic ? " · PENDING DEPOSIT" : "");
 
-  // The site's booking form only requires name + phone. `firstName`/`lastName`
-  // and `address` are still accepted for older clients; the address defaults
-  // to the shop now that every job is a drop-off.
-  const parts = String(name || "").trim().split(/\s+/).filter(Boolean);
-  const firstName = body?.firstName || parts[0] || "";
-  const lastName = body?.lastName || parts.slice(1).join(" ") || "-";
-  const address = body?.address || SHOP_ADDRESS;
-
-  // Which service this booking is for, e.g. "Headlight Restoration – 1 headlight ($50)".
-  const serviceLabel = (packageName && service && packageName.startsWith(service) ? packageName
-    : [service, packageName].filter(Boolean).join(" – ")) + (price ? ` ($${price})` : "");
-
-  if (!calendarId || !startISO || !durationHours || !firstName || !phone) {
-    res.status(400).json({ error: "Missing required fields" });
-    return;
-  }
-
-  const headers = {
-    Authorization: `Bearer ${token}`,
-    Version: "2021-04-15",
-    "Content-Type": "application/json",
-    Accept: "application/json",
-  };
-
-  // Step 1: upsert contact.
-  let contactJson;
-  try {
-    const contactRes = await fetch(`${GHL_BASE}/contacts/upsert`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({
-        locationId: LOCATION_ID,
-        firstName, lastName, phone,
-        ...(email ? { email } : {}),
-        ...(body?.address ? { address1: body.address } : {}),
-        source: "Website Booking",
-        assignedTo: DOM_USER_ID,
-        tags: ["website-lead", "website-booking", service, textMe ? "prefers-text" : null].filter(Boolean),
-      }),
-    });
-    contactJson = await contactRes.json();
-    if (!contactRes.ok) {
-      res.status(contactRes.status).json({ error: "Contact upsert failed", details: contactJson });
-      return;
-    }
-  } catch (e) {
-    res.status(502).json({ error: "GHL contact upsert error", details: String(e.message || e) });
-    return;
-  }
-
-  const contactId = contactJson.contact?.id || contactJson.id || contactJson.contactId;
-  if (!contactId) {
-    res.status(500).json({ error: "Contact upsert returned no ID", details: contactJson });
-    return;
-  }
-
-  // Tell GHL which service this is for (Preferred Service / Service Requested).
-  await setServiceFields(token, contactId, serviceLabel, [serviceLabel, vehicle ? `Vehicle: ${vehicle}${vehicleInfo ? ` (${vehicleInfo})` : ""}` : null, `Booked online for ${new Date(startISO).toLocaleString("en-US", { timeZone: "America/Chicago" })}`].filter(Boolean).join("\n"));
-
-  // Step 2: create appointment.
-  const startTime = startISO;
-  const endTime = new Date(new Date(startISO).getTime() + Number(durationHours) * 60 * 60 * 1000).toISOString();
-
-  const title = [serviceLabel || "Detail", vehicle ? vehicle + (vehicleInfo ? ` (${vehicleInfo})` : "") : vehicleInfo, isGerman ? "German" : null].filter(Boolean).join(" — ");
-
-  const addonStr = Object.entries(addons || {}).filter(([, v]) => v).map(([k]) => k).join(", ");
-  const fullNotes = [
-    `Service: ${service || ""}`,
-    `Package: ${packageName || ""}`,
-    `Vehicle: ${vehicle || ""}${vehicleInfo ? ` — ${vehicleInfo}` : ""}`,
-    isGerman ? "German vehicle upcharge applied (+$100)" : null,
-    addonStr ? `Add-ons: ${addonStr}` : null,
-    `Estimated total: $${price || 0}`,
-    `Drop-off: ${address}`,
-    textMe ? "Prefers text messages" : null,
-    page ? `Booked from: ${page}` : null,
-    notes ? `\nNotes from customer:\n${notes}` : null,
+  const summary = [
+    `Service: ${p.service}`,
+    p.side ? `Type: ${p.side}` : null,
+    `Package: ${p.level || "-"}`,
+    `Vehicle: ${vehicle || "-"}`,
+    ...(p.lines || []).map(([l, v]) => `  ${l}: ${money(v)}`),
+    p.price ? `${ceramic ? "Total" : "Price"}: ${money(p.price)}` : null,
+    ceramic ? `Deposit (20%): ${money(p.deposit)} – PENDING. Balance at pickup: ${money(p.balance)}` : null,
+    ...(p.notes || []),
+    `When: ${when}${p.wholeDay ? " drop-off (whole day)" : ""}`,
+    `Drop-off: ${SHOP_ADDRESS}`,
+    `SMS consent: ${consent ? "yes" : "no"}`,
+    b.page ? `Booked from: ${b.page}` : null,
+    b.utm ? `Source: ${b.utm}` : null,
+    b.notes ? `\nNotes from customer:\n${b.notes}` : null,
   ].filter(Boolean).join("\n");
+  const lead = { name, phone, email, service: serviceLabel, vehicle, when, startISO, price: p.price, page: b.page, notes: b.notes };
+  const failures = [];
 
-  let apptJson;
-  try {
-    const apptRes = await fetch(`${GHL_BASE}/calendars/events/appointments`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({
-        calendarId,
-        locationId: LOCATION_ID,
-        contactId,
-        startTime,
-        endTime,
-        title,
-        appointmentStatus: "confirmed",
-        address,
-        notes: fullNotes,
-      }),
-    });
-    apptJson = await apptRes.json();
-    if (!apptRes.ok) {
-      res.status(apptRes.status).json({ error: "Appointment creation failed", details: apptJson, contactId });
-      return;
+  // 1. Contact.
+  const tags = ["website-lead", "website-booking", p.service, consent ? "prefers-text" : null, p.sideTag, ceramic ? "deposit-pending" : null];
+  const c = await upsertContact(token, { name, phone, email, source: "Website Booking", tags });
+  if (!c.ok) {
+    failures.push(c.error || "contact upsert failed");
+    await alertFailure(token, { contactId: null, what: "booking", failures, lead });
+    return res.status(200).json({ ok: true, confirmed: false, status: "received" });
+  }
+  const contactId = c.id;
+
+  // 2. Appointment + service fields (in parallel).
+  const [appt] = await Promise.all([
+    createAppointment(token, { startISO, endISO, contactId, title, notes: summary, status: ceramic ? "new" : "confirmed" }),
+    setServiceFields(token, contactId, serviceLabel, [serviceLabel, vehicle ? `Vehicle: ${vehicle}` : null, `Booked online for ${when}`, ceramic ? `Deposit ${money(p.deposit)} pending` : null].filter(Boolean).join("\n")),
+  ]);
+  if (!appt.ok) failures.push(appt.error);
+
+  // 3. Opportunity. Not on the calendar → it's still a lead, not a booking.
+  const { firstName, lastName } = splitName(name);
+  const opp = await createOpportunity(token, {
+    pipeline: p.svc === "ceramic" ? "ceramic" : "detailing",
+    stage: appt.ok ? "booking" : "lead",
+    contactId,
+    name: `${firstName}${lastName !== "-" ? " " + lastName : ""} – ${serviceLabel}`,
+    value: p.price,
+    source: "Website Booking",
+  });
+  if (opp.repeatClosed) {
+    // Repeat customer whose last job is closed out: don't overwrite that sale.
+    await taskForDom(token, contactId, `Repeat customer ${name}: add this booking to their opportunity by hand`, `GHL wouldn't create a second opportunity (Allow duplicate opportunities is off) and their existing one (${opp.id}) is ${opp.status}. Turn on "Allow duplicate opportunities" in GHL settings to stop this.`);
+  } else if (!opp.ok) failures.push(opp.error);
+
+  // 4. Ceramic deposit: 20% due now; booking counts once it's paid.
+  let payUrl = null;
+  if (ceramic) {
+    if (process.env.GHL_DEPOSIT_INVOICES === "1") {
+      const today = new Date().toISOString().slice(0, 10);
+      const inv = await ghl(token, "POST", "/invoices/text2pay", {
+        altId: LOCATION_ID, altType: "location", name: `Ceramic deposit – ${name}`, title: "DEPOSIT", currency: "USD",
+        items: [{ name: "Ceramic coating deposit (20%)", description: `${serviceLabel}, ${vehicle}. Balance of ${money(p.balance)} due at pickup.`, currency: "USD", amount: p.deposit, qty: 1, type: "one_time" }],
+        contactDetails: { id: contactId, name, phoneNo: phone, email: email || "" },
+        issueDate: today, dueDate: today,
+        sentTo: { email: email ? [email] : [], phoneNo: [phone] },
+        liveMode: true, action: "send", userId: DOM_USER_ID,
+        termsNotes: `<p>20% deposit to hold your ceramic coating appointment on ${when} at ${SHOP_ADDRESS}. Final price is confirmed when we inspect your paint in person.</p>`,
+      });
+      if (inv.ok) payUrl = inv.data.invoiceUrl || null;
+      else failures.push(inv.error);
     }
-  } catch (e) {
-    res.status(502).json({ error: "GHL appointment error", details: String(e.message || e) });
-    return;
+    if (!payUrl) {
+      await taskForDom(token, contactId, `Send ${money(p.deposit)} ceramic deposit link to ${name} ${phone} (booking pending deposit)`, summary);
+    }
   }
 
-  // Make sure Dom sees it (task assigned to him; GHL notifies him).
-  const when = new Date(startTime).toLocaleString("en-US", { timeZone: "America/Chicago", weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
-  await taskForDom(token, contactId, `New website booking: ${firstName} ${lastName === "-" ? "" : lastName} – ${packageName || service || "Detail"} – ${when}`.replace(/\s+/g, " "), fullNotes);
+  // 5. Note with the full booking + consent record, and the usual task for Dom.
+  const extra = await Promise.all([
+    addNote(token, contactId, `WEBSITE BOOKING\n${summary}`),
+    taskForDom(token, contactId, `New website booking: ${name} – ${serviceLabel} – ${when}`, summary),
+  ]);
+  if (!extra[0].ok) failures.push(extra[0].error);
 
-  res.status(200).json({
-    ok: true,
-    contactId,
-    appointmentId: apptJson.id || apptJson.event?.id || null,
-  });
+  if (failures.length) {
+    await alertFailure(token, { contactId, what: "booking", failures, lead });
+    return res.status(200).json({ ok: true, confirmed: false, status: "received", contactId });
+  }
+  if (ceramic) {
+    return res.status(200).json({ ok: true, confirmed: false, status: "pending-deposit", contactId, appointmentId: appt.id, deposit: p.deposit, balance: p.balance, total: p.price, payUrl });
+  }
+  return res.status(200).json({ ok: true, confirmed: true, status: "booked", contactId, appointmentId: appt.id, opportunityId: opp.id || null, price: p.price });
 }
+
