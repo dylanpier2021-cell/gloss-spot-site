@@ -518,7 +518,7 @@ function render(page, assetV) {
 <link rel="canonical" href="${canonical}">
 <meta name="robots" content="${page.noindex ? "noindex, follow" : "index, follow, max-image-preview:large"}">
 <meta name="theme-color" content="#060809">
-<meta property="og:type" content="${page.post ? "article" : "website"}">
+${page.home ? `<meta name="google-site-verification" content="FJnkFFuhN-LisEac9tY-nula-4WErbQ5mnSW2bFn6so" />\n` : ""}<meta property="og:type" content="${page.post ? "article" : "website"}">
 <meta property="og:site_name" content="${esc(biz.name)}">
 <meta property="og:title" content="${esc(page.title)}">
 <meta property="og:description" content="${esc(page.description)}">
