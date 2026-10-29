@@ -152,6 +152,7 @@ function schema() {
       "@type": "AutoDetailing", // ⊂ AutomotiveBusiness ⊂ LocalBusiness
       "@id": `${biz.domain}/#business`,
       name: HL.name,
+      alternateName: biz.name,
       url: `${biz.domain}/`,
       telephone: biz.tel,
       image: biz.logo,

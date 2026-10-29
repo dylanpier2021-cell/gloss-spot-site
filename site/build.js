@@ -431,22 +431,40 @@ export const SERVICES_SCHEMA = [
   { name: "Exterior Maintenance (4 exterior details/month)", low: 149, high: 149, url: "membership", unit: "MON" },
   { name: "Gloss Membership", low: 299, high: 299, url: "membership", unit: "MON" },
 ];
+const BIZ_ID = `${biz.domain}/#business`;
+const SITE_ID = `${biz.domain}/#website`;
+const FOUNDERS = [["dom", "Dominic Pierson"], ["dylan", "Dylan Pierson"]];
+const AREA = [
+  { "@type": "City", name: "Champaign, IL" },
+  ...cities.map((c) => ({ "@type": "City", name: `${c.name}, IL` })),
+  { "@type": "AdministrativeArea", name: "Champaign County, IL" },
+];
 function businessSchema() {
   return {
     "@type": "AutoDetailing", // schema.org: AutoDetailing ⊂ AutomotiveBusiness ⊂ LocalBusiness
-    "@id": `${biz.domain}/#business`,
+    "@id": BIZ_ID,
     name: biz.name,
+    alternateName: "The Gloss Spot Auto Detailing",
     url: `${biz.domain}/`,
     telephone: biz.tel,
     email: biz.email,
     image: cld(photos.hero.cld, 1200),
-    logo: biz.logo,
+    logo: { "@type": "ImageObject", "@id": `${biz.domain}/#logo`, url: biz.logo, caption: biz.name },
     priceRange: biz.priceRange,
+    currenciesAccepted: "USD",
     address: { "@type": "PostalAddress", streetAddress: biz.street, addressLocality: biz.city, addressRegion: biz.state, postalCode: biz.zip, addressCountry: "US" },
+    ...(biz.geo ? { geo: { "@type": "GeoCoordinates", latitude: biz.geo.lat, longitude: biz.geo.lng } } : {}),
+    hasMap: `https://www.google.com/maps/search/?api=1&query=${biz.mapsQuery}`,
     openingHoursSpecification: biz.hours.map((h) => ({ "@type": "OpeningHoursSpecification", dayOfWeek: h.days, opens: h.opens, closes: h.closes })),
-    founder: [{ "@type": "Person", name: "Dominic Pierson" }, { "@type": "Person", name: "Dylan Pierson" }],
-    areaServed: ["Champaign", "Urbana", "Savoy", "Mahomet", "Rantoul", "Champaign County"].map((n) => ({ "@type": n === "Champaign County" ? "AdministrativeArea" : "City", name: `${n}, IL` })),
+    founder: FOUNDERS.map(([k, name]) => ({ "@type": "Person", "@id": `${biz.domain}/#${k}`, name })),
+    areaServed: AREA,
+    knowsAbout: ["Car detailing", "Interior detailing", "Paint correction", "Ceramic coating", "Paint protection film", "Vehicle wraps", "Headlight restoration"],
     sameAs: biz.sameAs,
+    potentialAction: {
+      "@type": "ReserveAction",
+      target: { "@type": "EntryPoint", urlTemplate: url("book-an-appointment-1696"), actionPlatform: ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"] },
+      result: { "@type": "Reservation", name: "Detailing appointment" },
+    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Detailing and protection services",
@@ -460,29 +478,57 @@ function businessSchema() {
     },
   };
 }
+const PAGE_TYPE = { "about-us": "AboutPage", contact: "ContactPage", faq: "FAQPage", gallery: "CollectionPage", blog: "CollectionPage" };
 function pageSchema(page) {
   const graph = [businessSchema()];
   const pageUrl = url(page.path);
-  graph.push({ "@type": "WebPage", "@id": pageUrl + "#webpage", url: pageUrl, name: page.title, description: page.description, isPartOf: { "@id": `${biz.domain}/#website` }, about: { "@id": `${biz.domain}/#business` } });
-  if (page.home) graph.push({ "@type": "WebSite", "@id": `${biz.domain}/#website`, url: `${biz.domain}/`, name: biz.name });
-  if (page.service) {
-    const s = page.service;
+  const pageId = pageUrl + "#webpage";
+  const hp = photos[(page.hero && page.hero.photo) || "hero"];
+  const pageImg = hp && (hp.cld ? cld(hp.cld, 1200) : hp.src && (hp.src.startsWith("/") ? biz.domain + hp.src : hp.src));
+  const faqHere = page.faqList && page.faqList.length;
+  const pageType = PAGE_TYPE[page.path] || "WebPage";
+  graph.push({
+    "@type": faqHere && pageType !== "FAQPage" ? [pageType, "FAQPage"] : pageType,
+    "@id": pageId, url: pageUrl, name: page.title, description: page.description, inLanguage: "en-US",
+    isPartOf: { "@id": SITE_ID }, about: { "@id": BIZ_ID },
+    ...(pageImg ? { primaryImageOfPage: { "@type": "ImageObject", url: pageImg } } : {}),
+    ...(!page.home ? { breadcrumb: { "@id": pageUrl + "#breadcrumb" } } : {}),
+    ...(faqHere ? { mainEntity: page.faqList.map(([q, a]) => ({ "@type": "Question", name: strip(q), acceptedAnswer: { "@type": "Answer", text: strip(a) } })) } : {}),
+  });
+  graph.push({ "@type": "WebSite", "@id": SITE_ID, url: `${biz.domain}/`, name: biz.name, inLanguage: "en-US", publisher: { "@id": BIZ_ID } });
+  if (page.home || page.path === "about-us") {
+    for (const [k, name] of FOUNDERS) graph.push({ "@type": "Person", "@id": `${biz.domain}/#${k}`, name, jobTitle: "Co-owner", worksFor: { "@id": BIZ_ID } });
+  }
+  const city = cities.find((c) => c.slug === page.path);
+  if (page.service || city) {
+    const s = page.service || { name: `Car Detailing near ${city.name}, IL`, type: "Car detailing" };
     graph.push({
-      "@type": "Service", name: s.name, serviceType: s.type || s.name, url: pageUrl,
-      provider: { "@id": `${biz.domain}/#business` },
-      areaServed: { "@type": "City", name: "Champaign, IL" },
-      ...(s.low ? { offers: { "@type": "AggregateOffer", lowPrice: s.low, highPrice: s.high, priceCurrency: "USD" } } : {}),
+      "@type": "Service", "@id": pageUrl + "#service", name: s.name, serviceType: s.type || s.name, url: pageUrl,
+      description: page.description,
+      provider: { "@id": BIZ_ID },
+      areaServed: city ? { "@type": "City", name: `${city.name}, IL` } : AREA,
+      ...(pageImg ? { image: pageImg } : {}),
+      ...(s.low ? { offers: { "@type": "AggregateOffer", lowPrice: s.low, highPrice: s.high, priceCurrency: "USD", availability: "https://schema.org/InStock" } } : {}),
     });
   }
-  const fq = page.faqList;
-  if (fq && fq.length) graph.push({ "@type": "FAQPage", mainEntity: fq.map(([q, a]) => ({ "@type": "Question", name: strip(q), acceptedAnswer: { "@type": "Answer", text: strip(a) } })) });
   if (!page.home) {
     const crumbs = [{ name: "Home", item: `${biz.domain}/` }];
     if (page.path.startsWith("blog/")) crumbs.push({ name: "Blog", item: url("blog") });
     crumbs.push({ name: page.crumb || strip(page.h1), item: pageUrl });
-    graph.push({ "@type": "BreadcrumbList", itemListElement: crumbs.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name, item: c.item })) });
+    graph.push({ "@type": "BreadcrumbList", "@id": pageUrl + "#breadcrumb", itemListElement: crumbs.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name, item: c.item })) });
   }
-  if (page.post) graph.push({ "@type": "BlogPosting", headline: page.post.title, datePublished: page.post.date, dateModified: page.post.date, author: { "@type": "Organization", name: biz.name }, publisher: { "@id": `${biz.domain}/#business` }, mainEntityOfPage: pageUrl, image: cld(photos.hero.cld, 1200) });
+  if (page.path === "blog") {
+    graph.push({
+      "@type": "Blog", "@id": url("blog") + "#blog", name: `${biz.name} Car Care Blog`, url: url("blog"), publisher: { "@id": BIZ_ID }, inLanguage: "en-US",
+      blogPost: posts.map((p) => ({ "@type": "BlogPosting", "@id": url(`blog/${p.slug}`) + "#article", headline: p.title, url: url(`blog/${p.slug}`), datePublished: p.date })),
+    });
+  }
+  if (page.post) graph.push({
+    "@type": "BlogPosting", "@id": pageUrl + "#article", headline: page.post.title, description: page.post.description,
+    datePublished: page.post.date, dateModified: page.post.updated || page.post.date, inLanguage: "en-US",
+    author: { "@type": "Organization", "@id": BIZ_ID, name: biz.name }, publisher: { "@id": BIZ_ID },
+    isPartOf: { "@id": url("blog") + "#blog" }, mainEntityOfPage: { "@id": pageId }, image: pageImg || cld(photos.hero.cld, 1200),
+  });
   return JSON.stringify({ "@context": "https://schema.org", "@graph": graph });
 }
 

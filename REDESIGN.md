@@ -1069,12 +1069,19 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
       "@type": "AutoDetailing",
       "@id": "https://www.theglossspotil.com/#business",
       "name": "The Gloss Spot",
+      "alternateName": "The Gloss Spot Auto Detailing",
       "url": "https://www.theglossspotil.com/",
       "telephone": "+12176002108",
       "email": "theglossspotil@gmail.com",
       "image": "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1200/IMG_5948_totw8k",
-      "logo": "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_400/Gloss_Spot_5_ranrsj.png",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://www.theglossspotil.com/#logo",
+        "url": "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_400/Gloss_Spot_5_ranrsj.png",
+        "caption": "The Gloss Spot"
+      },
       "priceRange": "$90 – $5,500",
+      "currenciesAccepted": "USD",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "606 N. Country Fair Dr",
@@ -1083,6 +1090,7 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
         "postalCode": "61821",
         "addressCountry": "US"
       },
+      "hasMap": "https://www.google.com/maps/search/?api=1&query=The%20Gloss%20Spot%2C%20606%20N.%20Country%20Fair%20Dr%2C%20Champaign%2C%20IL%2061821",
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
@@ -1109,10 +1117,12 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
       "founder": [
         {
           "@type": "Person",
+          "@id": "https://www.theglossspotil.com/#dom",
           "name": "Dominic Pierson"
         },
         {
           "@type": "Person",
+          "@id": "https://www.theglossspotil.com/#dylan",
           "name": "Dylan Pierson"
         }
       ],
@@ -1138,9 +1148,90 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
           "name": "Rantoul, IL"
         },
         {
+          "@type": "City",
+          "name": "St. Joseph, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Tolono, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Philo, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Sidney, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Ogden, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Fisher, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Thomasboro, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Monticello, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Danville, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Decatur, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Bloomington, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Normal, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Mattoon, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Kankakee, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Springfield, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Peoria, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Charleston, IL"
+        },
+        {
+          "@type": "City",
+          "name": "Effingham, IL"
+        },
+        {
           "@type": "AdministrativeArea",
           "name": "Champaign County, IL"
         }
+      ],
+      "knowsAbout": [
+        "Car detailing",
+        "Interior detailing",
+        "Paint correction",
+        "Ceramic coating",
+        "Paint protection film",
+        "Vehicle wraps",
+        "Headlight restoration"
       ],
       "sameAs": [
         "https://www.facebook.com/theglossspot",
@@ -1148,6 +1239,21 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
         "https://share.google/Wr0NTsR0CmFTlYRtk",
         "https://www.yelp.com/biz/the-gloss-spot-auto-detailing-champaign-3"
       ],
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.theglossspotil.com/book-an-appointment-1696",
+          "actionPlatform": [
+            "https://schema.org/DesktopWebPlatform",
+            "https://schema.org/MobileWebPlatform"
+          ]
+        },
+        "result": {
+          "@type": "Reservation",
+          "name": "Detailing appointment"
+        }
+      },
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Detailing and protection services",
@@ -1268,26 +1374,25 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
       }
     },
     {
-      "@type": "WebPage",
+      "@type": [
+        "WebPage",
+        "FAQPage"
+      ],
       "@id": "https://www.theglossspotil.com/#webpage",
       "url": "https://www.theglossspotil.com/",
       "name": "Car Detailing Champaign, IL – Book Now | The Gloss Spot",
       "description": "Car detailing in Champaign, IL by brothers Dom and Dylan. Detailing, ceramic coating, PPF and wraps. Book online in 30 seconds or call today.",
+      "inLanguage": "en-US",
       "isPartOf": {
         "@id": "https://www.theglossspotil.com/#website"
       },
       "about": {
         "@id": "https://www.theglossspotil.com/#business"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.theglossspotil.com/#website",
-      "url": "https://www.theglossspotil.com/",
-      "name": "The Gloss Spot"
-    },
-    {
-      "@type": "FAQPage",
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/djp1yfsj5/image/upload/f_auto,q_auto,w_1200/IMG_5948_totw8k"
+      },
       "mainEntity": [
         {
           "@type": "Question",
@@ -1330,6 +1435,34 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
           }
         }
       ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.theglossspotil.com/#website",
+      "url": "https://www.theglossspotil.com/",
+      "name": "The Gloss Spot",
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": "https://www.theglossspotil.com/#business"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.theglossspotil.com/#dom",
+      "name": "Dominic Pierson",
+      "jobTitle": "Co-owner",
+      "worksFor": {
+        "@id": "https://www.theglossspotil.com/#business"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.theglossspotil.com/#dylan",
+      "name": "Dylan Pierson",
+      "jobTitle": "Co-owner",
+      "worksFor": {
+        "@id": "https://www.theglossspotil.com/#business"
+      }
     }
   ]
 }
