@@ -21,6 +21,9 @@ export const biz = {
     { label: "Mon–Sat", days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "08:00", closes: "20:00", text: "8am – 8pm" },
     { label: "Sunday", days: ["Sunday"], opens: "13:00", closes: "20:00", text: "1pm – 8pm" },
   ],
+  // Shop coordinates for schema "geo". Copy them from the Google Business
+  // Profile pin, e.g. { lat: 40.1, lng: -88.2 }. Left out of the schema until set.
+  geo: null,
   priceRange: "$90 – $5,500",
   reviewCount: "90+",
   googleReviews: "https://share.google/Wr0NTsR0CmFTlYRtk",
