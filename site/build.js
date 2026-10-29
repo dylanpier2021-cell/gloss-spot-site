@@ -122,7 +122,7 @@ function hero(page) {
   return `<section class="hero${page.home ? " hero-home" : ""}">
   <div class="hero-media">${img(h.photo || "hero", { ar: "free", widths: [640, 960, 1400, 1900], sizes: "100vw", eager: true, cls: "hero-img", alt: h.alt })}${video}<div class="hero-shade"></div><div class="hero-sweep" aria-hidden="true"></div></div>
   <div class="wrap hero-in">
-    <h1>${page.kicker ? `<span class="kicker">${page.kicker}</span>` : ""}<span class="h1-main">${page.h1}</span></h1>
+    ${page.kicker && page.kickerOutsideH1 ? `<p class="kicker">${page.kicker}</p>\n    ` : ""}<h1>${page.kicker && !page.kickerOutsideH1 ? `<span class="kicker">${page.kicker}</span>` : ""}<span class="h1-main">${page.h1}</span></h1>
     <p class="lead">${page.lead}</p>
     <div class="ctas">${ctas}</div>
   </div>
@@ -637,7 +637,7 @@ function writeDeliverables() {
     L.push(`### /${p.path}`, "");
     L.push(`- **Title** (${p.title.length}): ${p.title}`);
     L.push(`- **Meta** (${p.description.length}): ${p.description}`);
-    L.push(`- **H1:** ${strip((p.kicker ? p.kicker + " · " : "") + p.h1)}`);
+    L.push(`- **H1:** ${strip((p.kicker && !p.kickerOutsideH1 ? p.kicker + " · " : "") + p.h1)}`);
     L.push(`- **Hero line:** ${strip(p.lead)}`);
     L.push(`- **Buttons:** ${(p.ctas || ["book", "call"]).map((c) => ({ book: "Book Now", call: "Call Now", quote: "Get a Quote", text: "Text Us", membership: "Start Membership" })[c]).join(" · ")}`);
     if (p.service && p.maxWords) L.push(`- **Body words:** ${wordCount(p)} (limit ${p.maxWords}, FAQ excluded)`);

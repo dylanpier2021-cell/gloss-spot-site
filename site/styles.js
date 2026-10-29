@@ -86,7 +86,8 @@ ul,ol{margin:0;padding:0;list-style:none}
 .lead{font-size:clamp(1.05rem,3.6vw,1.3rem);color:#dfe7ea;max-width:34ch;margin-bottom:26px}
 .hero .ctas{max-width:460px}
 .hero .reveal-h{opacity:0;transform:translateY(18px);animation:up .8s cubic-bezier(.2,.7,.2,1) forwards}
-.hero h1,.hero .lead,.hero .ctas{animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+.hero-in>.kicker{margin-bottom:14px}
+.hero-in>.kicker,.hero h1,.hero .lead,.hero .ctas{animation:up .8s cubic-bezier(.2,.7,.2,1) both}
 .hero .lead{animation-delay:.12s}.hero .ctas{animation-delay:.24s}
 @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 
