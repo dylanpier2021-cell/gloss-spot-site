@@ -4,18 +4,18 @@
 import { biz, cities, posts, faqs, reviews } from "./content.js";
 
 const CALL = "Call 217-600-2108.";
-export const redirectsAdded = [["/members", "/membership"]];
+export const redirectsAdded = [["/members", "/membership"], ["/packages", "/packages-champaign-county"], ["/ceramic", "/ceramic-coating-champaign-county"], ["/paint-correction", "/paint-correction-champaign-county"], ["/ppf", "/ppf-champaign-county"], ["/car-wraps", "/car-wraps-champaign-county"]];
 
 // Related-service cards. [path, title, line]
 const R = {
-  packages: ["packages", "Detailing packages", "Express, Full and Lux. Prices by vehicle size."],
+  packages: ["packages-champaign-county", "Detailing packages", "Express, Full and Lux. Prices by vehicle size."],
   full: ["full-service-detailing-champaign-il", "Full Detail", "Complete interior and exterior, from $225."],
   interior: ["interior-detailing-champaign-il", "Interior detailing", "Seats, carpet, dash and glass, reset."],
   exterior: ["exterior-detailing-champaign-il", "Exterior detailing", "Foam wash, wheels, jambs and sealant."],
-  ceramic: ["ceramic", "Ceramic coating", "Years of gloss. Paint correction included."],
-  correction: ["paint-correction", "Paint correction", "Swirls out, depth back. From $325."],
-  ppf: ["ppf", "Paint protection film", "Clear film that takes the rock chips."],
-  wraps: ["car-wraps", "Vehicle wraps", "A new color, fully reversible. From $2,400."],
+  ceramic: ["ceramic-coating-champaign-county", "Ceramic coating", "Years of gloss. Paint correction included."],
+  correction: ["paint-correction-champaign-county", "Paint correction", "Swirls out, depth back. From $325."],
+  ppf: ["ppf-champaign-county", "Paint protection film", "Clear film that takes the rock chips."],
+  wraps: ["car-wraps-champaign-county", "Vehicle wraps", "A new color, fully reversible. From $2,400."],
   membership: ["membership", "Weekly plans", "Exterior $149/mo, or full membership $299/mo."],
   protection: ["vehicle-protection", "Ceramic vs. PPF vs. wrap", "Which protection fits your car."],
   area: ["service-area", "Where our customers drive from", "Drive times from Champaign County towns."],
@@ -28,7 +28,7 @@ const R = {
 // ── Core service pages (headline, 3 benefits, before/after, price card, FAQ, book) ──
 const core = [
   {
-    path: "packages", crumb: "Detailing",
+    path: "packages-champaign-county", oldPath: "packages", crumb: "Detailing",
     title: "Auto Detailing Champaign, IL – Book Now | The Gloss Spot",
     description: "Auto detailing in Champaign, IL: Express from $90, Full Detail from $225, Lux with paint correction from $325. Book online in 30 seconds.",
     h1: "Auto Detailing in <em>Champaign, IL</em>",
@@ -44,7 +44,7 @@ const core = [
     ],
   },
   {
-    path: "ceramic", crumb: "Ceramic Coating", quote: "Ceramic Coating", bookSvc: "ceramic",
+    path: "ceramic-coating-champaign-county", oldPath: "ceramic", crumb: "Ceramic Coating", quote: "Ceramic Coating", bookSvc: "ceramic",
     title: "Ceramic Coating Champaign, IL – Book Now | The Gloss Spot",
     description: "Ceramic coating in Champaign, IL with paint correction included. 3, 6 and 10-year coatings from $1,100. Book online or get a quote by text.",
     h1: "Ceramic Coating in <em>Champaign, IL</em>",
@@ -61,7 +61,7 @@ const core = [
     ],
   },
   {
-    path: "paint-correction", crumb: "Paint Correction", bookSvc: "lux",
+    path: "paint-correction-champaign-county", oldPath: "paint-correction", crumb: "Paint Correction", bookSvc: "lux",
     title: "Paint Correction Champaign, IL – Book Now | The Gloss Spot",
     description: "Paint correction in Champaign, IL: remove swirls and haze with our Lux Package, from $325 with a full detail and sealant. Book online today.",
     h1: "Paint Correction in <em>Champaign, IL</em>",
@@ -69,7 +69,7 @@ const core = [
     hero: { photo: "vBlackYukon" },
     service: { name: "Paint Correction", type: "Automotive paint correction", low: 325, high: 550 },
     blocks: [
-      ["benefits", [["sparkle", "Swirls and haze removed", "Machine polishing levels the clear coat so light reflects clean."], ["layers", "One-step or two-step", "One-step clears light swirls. Two-step cuts deeper for +$100."], ["shield", "Ready to protect", "The perfect base for <a href=\"/ceramic\">ceramic coating</a> or <a href=\"/ppf\">PPF</a>."]]],
+      ["benefits", [["sparkle", "Swirls and haze removed", "Machine polishing levels the clear coat so light reflects clean."], ["layers", "One-step or two-step", "One-step clears light swirls. Two-step cuts deeper for +$100."], ["shield", "Ready to protect", "The perfect base for <a href=\"/ceramic-coating-champaign-county\">ceramic coating</a> or <a href=\"/ppf-champaign-county\">PPF</a>."]]],
       ["beforeAfter"],
       ["prices", "correction"],
       ["faq", "correction"],
@@ -77,7 +77,7 @@ const core = [
     ],
   },
   {
-    path: "ppf", crumb: "Paint Protection Film", quote: "Paint Protection Film",
+    path: "ppf-champaign-county", oldPath: "ppf", crumb: "Paint Protection Film", quote: "Paint Protection Film",
     title: "PPF Champaign, IL – Paint Protection Film | The Gloss Spot",
     description: "Paint protection film (PPF) in Champaign, IL. Essentials from $800, Track Pack and Full Body. Send a photo and get a quote by text today.",
     h1: "Paint Protection Film (PPF) in <em>Champaign, IL</em>",
@@ -86,7 +86,7 @@ const core = [
     ctas: ["quote", "call"],
     service: { name: "Paint Protection Film", type: "Paint protection film installation", low: 800, high: 5500 },
     blocks: [
-      ["benefits", [["shield", "Stops rock chips", "A tough clear layer over the panels that take the most hits."], ["sun", "Keeps paint like new", "Protects against bug and bird etching and light scratches."], ["layers", "Pairs with ceramic", "Film up front, <a href=\"/ceramic\">ceramic coating</a> everywhere for gloss."]]],
+      ["benefits", [["shield", "Stops rock chips", "A tough clear layer over the panels that take the most hits."], ["sun", "Keeps paint like new", "Protects against bug and bird etching and light scratches."], ["layers", "Pairs with ceramic", "Film up front, <a href=\"/ceramic-coating-champaign-county\">ceramic coating</a> everywhere for gloss."]]],
       ["beforeAfter"],
       ["prices", "ppf"],
       ["faq", "ppf"],
@@ -94,7 +94,7 @@ const core = [
     ],
   },
   {
-    path: "car-wraps", crumb: "Vehicle Wraps", quote: "Vehicle Wrap",
+    path: "car-wraps-champaign-county", oldPath: "car-wraps", crumb: "Vehicle Wraps", quote: "Vehicle Wrap",
     title: "Vehicle Wraps Champaign, IL – Get a Quote | The Gloss Spot",
     description: "Vehicle wraps in Champaign, IL. Full color change from $2,400, partial wraps from $800. Send a photo and get a wrap quote by text today.",
     h1: "Vehicle Wraps in <em>Champaign, IL</em>",
@@ -157,11 +157,11 @@ const secondary = [
     hero: { photo: "vCorvette" },
     blocks: [
       ["compare", { eyebrow: "Everything we do", heading: "Pick what your car needs", cols: ["What it does", "From"], rows: [
-        ["<a href=\"/packages\">Detailing</a>", "Cleans inside and out", "$90"],
-        ["<a href=\"/paint-correction\">Paint correction</a>", "Removes swirls and haze", "$325"],
-        ["<a href=\"/ceramic\">Ceramic coating</a>", "Years of gloss, easy washes", "$1,100"],
-        ["<a href=\"/ppf\">PPF</a>", "Stops rock chips", "$800"],
-        ["<a href=\"/car-wraps\">Wraps</a>", "Changes the color", "$800"],
+        ["<a href=\"/packages-champaign-county\">Detailing</a>", "Cleans inside and out", "$90"],
+        ["<a href=\"/paint-correction-champaign-county\">Paint correction</a>", "Removes swirls and haze", "$325"],
+        ["<a href=\"/ceramic-coating-champaign-county\">Ceramic coating</a>", "Years of gloss, easy washes", "$1,100"],
+        ["<a href=\"/ppf-champaign-county\">PPF</a>", "Stops rock chips", "$800"],
+        ["<a href=\"/car-wraps-champaign-county\">Wraps</a>", "Changes the color", "$800"],
         ["<a href=\"/membership\">Membership</a>", "Keeps it clean weekly", "$149/mo"],
       ] }],
       ["serviceCards"],
@@ -212,7 +212,7 @@ const secondary = [
       ["benefits", [["drop", "Hand wash, not a tunnel", "Foam pre-soak and a careful hand wash protect your paint."], ["car", "Wheels and jambs too", "Wheels, tires and door jambs get cleaned, not skipped."], ["sparkle", "Upgrade to correction", "Add one-step paint correction with the Lux Package."]]],
       ["beforeAfter"],
       ["prices", ["express", "lux"]],
-      ["faq", [["How much is exterior detailing in Champaign?", "An exterior wash comes with the Express, from $90. The Full Detail adds sealant and the full interior, from $225."], ["Will a hand wash scratch my paint?", "We use a foam pre-soak and careful hand wash to lift grit before we touch the paint."], ["How do I keep the shine longer?", "A sealant lasts months. <a href=\"/ceramic\">Ceramic coating</a> lasts years."]]],
+      ["faq", [["How much is exterior detailing in Champaign?", "An exterior wash comes with the Express, from $90. The Full Detail adds sealant and the full interior, from $225."], ["Will a hand wash scratch my paint?", "We use a foam pre-soak and careful hand wash to lift grit before we touch the paint."], ["How do I keep the shine longer?", "A sealant lasts months. <a href=\"/ceramic-coating-champaign-county\">Ceramic coating</a> lasts years."]]],
       ["related", [R.correction, R.ceramic, R.packages, R.ppf]],
     ],
   },
@@ -279,7 +279,7 @@ const secondary = [
         ["Stops rock chips", "No", "Yes", "Some"],
         ["Lasts", "3, 6 or 10 years", "Years", "Years"],
         ["From", "$1,100", "$800", "$2,400 (partials $800)"],
-        ["Learn more", "<a href=\"/ceramic\">Ceramic</a>", "<a href=\"/ppf\">PPF</a>", "<a href=\"/car-wraps\">Wraps</a>"],
+        ["Learn more", "<a href=\"/ceramic-coating-champaign-county\">Ceramic</a>", "<a href=\"/ppf-champaign-county\">PPF</a>", "<a href=\"/car-wraps-champaign-county\">Wraps</a>"],
       ] }],
       ["related", [R.ceramic, R.ppf, R.wraps, R.correction]],
     ],

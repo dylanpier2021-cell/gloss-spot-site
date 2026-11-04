@@ -15,7 +15,7 @@
     { "source": "/champaign", "destination": "/", "permanent": true },
     { "source": "/Champaign", "destination": "/", "permanent": true },
     { "source": "/about", "destination": "/about-us", "permanent": true },
-    { "source": "/services", "destination": "/packages", "permanent": true },
+    { "source": "/services", "destination": "/packages-champaign-county", "permanent": true },
     { "source": "/areas", "destination": "/service-area", "permanent": true },
     { "source": "/area", "destination": "/service-area", "permanent": true },
     { "source": "/calculator", "destination": "/cost-calculator", "permanent": true },
@@ -25,9 +25,14 @@
     { "source": "/why-us", "destination": "/why-choose-us", "permanent": true },
     { "source": "/process", "destination": "/our-process", "permanent": true },
     { "source": "/tint", "destination": "/window-tint", "permanent": true },
-    { "source": "/coating", "destination": "/ceramic", "permanent": true },
-    { "source": "/correction", "destination": "/paint-correction", "permanent": true },
-    { "source": "/members", "destination": "/membership", "permanent": true }
+    { "source": "/coating", "destination": "/ceramic-coating-champaign-county", "permanent": true },
+    { "source": "/correction", "destination": "/paint-correction-champaign-county", "permanent": true },
+    { "source": "/members", "destination": "/membership", "permanent": true },
+    { "source": "/packages", "destination": "/packages-champaign-county", "permanent": true },
+    { "source": "/ceramic", "destination": "/ceramic-coating-champaign-county", "permanent": true },
+    { "source": "/paint-correction", "destination": "/paint-correction-champaign-county", "permanent": true },
+    { "source": "/ppf", "destination": "/ppf-champaign-county", "permanent": true },
+    { "source": "/car-wraps", "destination": "/car-wraps-champaign-county", "permanent": true }
   ],
   "headers": [
     {

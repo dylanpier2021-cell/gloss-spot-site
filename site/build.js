@@ -136,9 +136,9 @@ function benefits(b) {
 
 function serviceCards() {
   const cards = [
-    { h: "Detailing", p: "Express, Full and Lux packages.", from: 90, link: "packages", photo: "vWhiteYukon", svc: "full" },
-    { h: "Ceramic + Correction", p: "Years of gloss and easy washes.", from: 1100, link: "ceramic", photo: "vCorvette", svc: "ceramic" },
-    { h: "PPF / Wraps", p: "Clear armor or a whole new color.", from: 800, link: "ppf", photo: "vMatteBmw", alt: "vehicle-protection" },
+    { h: "Detailing", p: "Express, Full and Lux packages.", from: 90, link: "packages-champaign-county", photo: "vWhiteYukon", svc: "full" },
+    { h: "Ceramic + Correction", p: "Years of gloss and easy washes.", from: 1100, link: "ceramic-coating-champaign-county", photo: "vCorvette", svc: "ceramic" },
+    { h: "PPF / Wraps", p: "Clear armor or a whole new color.", from: 800, link: "ppf-champaign-county", photo: "vMatteBmw", alt: "vehicle-protection" },
   ];
   const html = cards.map((c) => `<a class="scard reveal" href="${href(c.link)}">
     <div class="scard-img">${cover(c.photo, { ar: "4:3", sizes: "(min-width: 900px) 33vw, 100vw" })}</div>
@@ -186,7 +186,7 @@ function priceCard(kind, page) {
     case "correction": {
       const lux = detailPackages.find((x) => x.key === "lux");
       return card("Paint Correction (Lux Package)", "Full detail + one-step correction and sealant.", money(lux.prices[0]),
-        rows(sizes, lux.prices.map(money)) + `<p class="pc-note">Two-step correction: <b>+${money(lux.twoStepAdd)}</b>. Want it locked in for years? <a href="/ceramic">Ceramic coating</a> includes correction.</p>` + bookBtn("lux", "Book Paint Correction"), true);
+        rows(sizes, lux.prices.map(money)) + `<p class="pc-note">Two-step correction: <b>+${money(lux.twoStepAdd)}</b>. Want it locked in for years? <a href="/ceramic-coating-champaign-county">Ceramic coating</a> includes correction.</p>` + bookBtn("lux", "Book Paint Correction"), true);
     }
     case "ppf":
       return card("Paint Protection Film", ppf.note, money(ppf.packages[0].range[0]),
@@ -293,7 +293,7 @@ function calculatorBlock() {
     <label class="chk" data-calc-twostep hidden><input type="checkbox"> Two-step correction (+$100)</label>
     <div class="calc-out"><small>Your price</small><b data-calc-price>—</b></div>
     <a class="btn btn-p" href="#book" data-calc-book>${icon("calendar")}<span>Book this</span></a>
-    <p class="muted small">PPF, wraps and membership: <a href="/ppf">PPF</a> · <a href="/car-wraps">Wraps</a> · <a href="/membership">Membership</a></p>
+    <p class="muted small">PPF, wraps and membership: <a href="/ppf-champaign-county">PPF</a> · <a href="/car-wraps-champaign-county">Wraps</a> · <a href="/membership">Membership</a></p>
   </div>`, "calc");
 }
 
@@ -354,7 +354,7 @@ function bookingWidget() {
           <button type="button" class="opt" data-svc="ceramic" role="radio" aria-checked="false"><b>Ceramic Coating</b><small>Paint correction included.</small><em>from ${money(ceramic.prices[0][0])}</em></button>
         </div>
         <div class="tiers" data-tiers hidden><span class="muted small">Coating length:</span>${ceramic.tiers.map((t, i) => `<button type="button" class="chip" data-tier="${i}">${t}</button>`).join("")}</div>
-        <p class="muted small">PPF, wraps or membership? <a href="/ppf#quote">Get a quote</a> or call <a href="tel:${biz.tel}">${biz.phone}</a>.</p>
+        <p class="muted small">PPF, wraps or membership? <a href="/ppf-champaign-county#quote">Get a quote</a> or call <a href="tel:${biz.tel}">${biz.phone}</a>.</p>
       </div></div>
     <div class="bk-step" data-step="2"><button type="button" class="bk-h" data-goto="2"><span class="bk-n">2</span><span class="bk-t">Vehicle size</span><span class="bk-s" data-sum="2"></span></button>
       <div class="bk-b"><div class="opts opts-size" role="radiogroup" aria-label="Vehicle size" data-sizes></div>
@@ -382,7 +382,7 @@ function bookingWidget() {
 
 // ── shell ───────────────────────────────────────────────────────────────────
 const NAV = [
-  ["packages", "Detailing"], ["ceramic", "Ceramic"], ["paint-correction", "Correction"], ["ppf", "PPF"], ["car-wraps", "Wraps"], ["membership", "Membership"], ["reviews", "Reviews"], ["contact", "Contact"],
+  ["packages-champaign-county", "Detailing"], ["ceramic-coating-champaign-county", "Ceramic"], ["paint-correction-champaign-county", "Correction"], ["ppf-champaign-county", "PPF"], ["car-wraps-champaign-county", "Wraps"], ["membership", "Membership"], ["reviews", "Reviews"], ["contact", "Contact"],
 ];
 function header(page) {
   const links = NAV.map(([p, t]) => `<a href="/${p}"${page.path === p ? ' aria-current="page"' : ""}>${t}</a>`).join("");
@@ -399,7 +399,7 @@ function header(page) {
 }
 
 function footer() {
-  const svc = [["packages", "Detailing"], ["ceramic", "Ceramic Coating"], ["paint-correction", "Paint Correction"], ["ppf", "Paint Protection Film"], ["car-wraps", "Vehicle Wraps"], ["membership", "Membership"], ["headlight-restoration", "Headlight Restoration $100"], ["interior-detailing-champaign-il", "Interior Detailing"], ["vehicle-protection", "Protection Guide"]];
+  const svc = [["packages-champaign-county", "Detailing"], ["ceramic-coating-champaign-county", "Ceramic Coating"], ["paint-correction-champaign-county", "Paint Correction"], ["ppf-champaign-county", "Paint Protection Film"], ["car-wraps-champaign-county", "Vehicle Wraps"], ["membership", "Membership"], ["headlight-restoration", "Headlight Restoration $100"], ["interior-detailing-champaign-il", "Interior Detailing"], ["vehicle-protection", "Protection Guide"]];
   const info = [["about-us", "About"], ["reviews", "Reviews"], ["gallery", "Gallery"], ["faq", "FAQ"], ["cost-calculator", "Price Calculator"], ["service-area", "Service Area"], ["blog", "Blog"], ["contact", "Contact"]];
   const area = cities.slice().sort((a, b) => a.minutes - b.minutes).slice(0, 8);
   const ul = (l) => `<ul>${l.map(([p, t]) => `<li><a href="/${p}">${t}</a></li>`).join("")}</ul>`;
@@ -422,12 +422,12 @@ function footer() {
 
 // ── schema ──────────────────────────────────────────────────────────────────
 export const SERVICES_SCHEMA = [
-  { name: "Express Detail", low: 90, high: 145, url: "packages" },
+  { name: "Express Detail", low: 90, high: 145, url: "packages-champaign-county" },
   { name: "Full Detail", low: 225, high: 315, url: "full-service-detailing-champaign-il" },
-  { name: "Lux Package (Full Detail + Paint Correction)", low: 325, high: 550, url: "paint-correction" },
-  { name: "Ceramic Coating", low: 1100, high: 2550, url: "ceramic" },
-  { name: "Paint Protection Film (PPF)", low: 800, high: 5500, url: "ppf" },
-  { name: "Vehicle Wraps", low: 800, high: 3600, url: "car-wraps" },
+  { name: "Lux Package (Full Detail + Paint Correction)", low: 325, high: 550, url: "paint-correction-champaign-county" },
+  { name: "Ceramic Coating", low: 1100, high: 2550, url: "ceramic-coating-champaign-county" },
+  { name: "Paint Protection Film (PPF)", low: 800, high: 5500, url: "ppf-champaign-county" },
+  { name: "Vehicle Wraps", low: 800, high: 3600, url: "car-wraps-champaign-county" },
   { name: "Exterior Maintenance (4 exterior details/month)", low: 149, high: 149, url: "membership", unit: "MON" },
   { name: "Gloss Membership", low: 299, high: 299, url: "membership", unit: "MON" },
 ];
@@ -670,11 +670,11 @@ function writeDeliverables() {
   L.push("# The Gloss Spot: Website Redesign Deliverables", "");
   L.push("_Generated by `npm run build` from `site/content.js` + `site/pages.js`. Edit those files, not this one._", "");
   L.push("## 1. Sitemap: old URL → new URL", "");
-  L.push("Every existing URL keeps its page (1:1). Nothing moved, so no new 301s are needed for old pages. All existing redirects in `vercel.json` are unchanged.", "");
+  L.push("Every existing URL keeps its page. Pages that moved to a new URL 301 from the old one (see `vercel.json` and the list below).", "");
   L.push("| Old URL | New URL | Page |", "|---|---|---|");
   for (const p of pages) {
     const u = "/" + p.path;
-    L.push(`| ${p.isNew ? "_(new page)_" : u} | ${u} | ${strip(p.crumb || p.h1)} |`);
+    L.push(`| ${p.isNew ? "_(new page)_" : p.oldPath ? "/" + p.oldPath : u} | ${u} | ${strip(p.crumb || p.h1)} |`);
   }
   ["review", "feedback"].forEach((s) => L.push(`| /${s} | /${s} | Review funnel (unchanged) |`));
   if (redirectsAdded.length) L.push("", "New redirects added: " + redirectsAdded.map(([a, b]) => `\`${a}\` → \`${b}\``).join(", "));
