@@ -356,7 +356,7 @@ export const posts = [
       ["h2", "Ceramic: good for"],
       ["ul", ["Cars you plan to keep 3+ years", "Dark paint that shows swirls", "Owners who want easy, fast washes"]],
       ["h2", "What it costs here"],
-      ["p", "Our ceramic coating starts at $1,100 for a coupe with a 3-year coating, and paint correction is included in every package. See every size and tier on the <a href=\"/ceramic\">ceramic coating page</a>."],
+      ["p", "Our ceramic coating starts at $1,100 for a coupe with a 3-year coating, and paint correction is included in every package. See every size and tier on the <a href=\"/ceramic-coating-champaign-county\">ceramic coating page</a>."],
       ["h2", "The salt-belt factor"],
       ["p", "Central Illinois winters mean road salt and brine. A coated car rinses clean faster, so the salt spends less time on your paint."],
     ],
@@ -397,7 +397,7 @@ export const posts = [
       ["h2", "Time it with the seasons"],
       ["p", "In Champaign County, a Full Detail in late fall preps your car for salt. Another in spring washes winter off for good."],
       ["h2", "Want it handled?"],
-      ["p", "A <a href=\"/membership\">membership from $149/month</a> keeps your car clean every week. Or <a href=\"/packages\">book a detail</a> when you need one."],
+      ["p", "A <a href=\"/membership\">membership from $149/month</a> keeps your car clean every week. Or <a href=\"/packages-champaign-county\">book a detail</a> when you need one."],
     ],
   },
   {
