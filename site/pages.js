@@ -477,7 +477,7 @@ const info = [
 // ── Home ──
 const home = {
   path: "", home: true, crumb: "Home",
-  title: "Car Detailing Champaign, IL – Book Now | The Gloss Spot",
+  title: "Mobile Car Detailing - Champaign County, IL",
   description: "Car detailing in Champaign, IL by brothers Dom and Dylan. Detailing, ceramic coating, PPF and wraps. Book online in 30 seconds or call today.",
   kicker: "Car Detailing · Champaign, IL",
   kickerOutsideH1: true,

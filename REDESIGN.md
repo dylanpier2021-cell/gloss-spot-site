@@ -83,7 +83,7 @@ New redirects added: `/members` → `/membership`, `/packages` → `/packages-ch
 
 ### /
 
-- **Title** (55): Car Detailing Champaign, IL – Book Now | The Gloss Spot
+- **Title** (43): Mobile Car Detailing - Champaign County, IL
 - **Meta** (141): Car detailing in Champaign, IL by brothers Dom and Dylan. Detailing, ceramic coating, PPF and wraps. Book online in 30 seconds or call today.
 - **H1:** Premium Car Detailing Service – Champaign County
 - **Hero line:** Book in 30 seconds, or call and talk to Dom.
@@ -1380,7 +1380,7 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
       ],
       "@id": "https://www.theglossspotil.com/#webpage",
       "url": "https://www.theglossspotil.com/",
-      "name": "Car Detailing Champaign, IL – Book Now | The Gloss Spot",
+      "name": "Mobile Car Detailing - Champaign County, IL",
       "description": "Car detailing in Champaign, IL by brothers Dom and Dylan. Detailing, ceramic coating, PPF and wraps. Book online in 30 seconds or call today.",
       "inLanguage": "en-US",
       "isPartOf": {
