@@ -398,7 +398,7 @@ function header(page) {
 </header>`;
 }
 
-function footer() {
+function footer(page = {}) {
   const svc = [["packages-champaign-county", "Detailing"], ["ceramic-coating-champaign-county", "Ceramic Coating"], ["paint-correction-champaign-county", "Paint Correction"], ["ppf-champaign-county", "Paint Protection Film"], ["car-wraps-champaign-county", "Vehicle Wraps"], ["membership", "Membership"], ["headlight-restoration", "Headlight Restoration $100"], ["interior-detailing-champaign-il", "Interior Detailing"], ["vehicle-protection", "Protection Guide"]];
   const info = [["about-us", "About"], ["reviews", "Reviews"], ["gallery", "Gallery"], ["faq", "FAQ"], ["cost-calculator", "Price Calculator"], ["service-area", "Service Area"], ["blog", "Blog"], ["contact", "Contact"]];
   const area = cities.slice().sort((a, b) => a.minutes - b.minutes).slice(0, 8);
@@ -415,7 +415,7 @@ function footer() {
     <div class="ftr-map"><iframe title="Map to ${esc(biz.name)}" src="${biz.mapEmbed}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
   </div>
   <div class="ftr-links"><div><h4>Services</h4>${ul(svc)}</div><div><h4>The Gloss Spot</h4>${ul(info)}</div><div><h4>Nearby</h4>${ul(area.map((c) => [c.slug, c.name]))}</div></div>
-  <div class="ftr-b"><p>© ${new Date().getFullYear()} ${esc(biz.name)} · ${esc(biz.address)} · ${biz.phone}</p><p><a href="/privacy-policy">Privacy</a> · <a href="/terms-and-conditions">Terms</a> · ${biz.sameAs.slice(0, 2).map((s) => `<a href="${s}" target="_blank" rel="noopener">${s.includes("facebook") ? "Facebook" : "Instagram"}</a>`).join(" · ")}</p></div>
+  <div class="ftr-b"><p>© ${new Date().getFullYear()} ${esc(biz.name)} · ${esc(biz.address)} · ${biz.phone}</p><p><a href="/privacy-policy">Privacy</a> · <a href="/terms-and-conditions">Terms</a> · ${biz.sameAs.slice(0, 2).map((s) => `<a href="${s}" target="_blank" rel="noopener">${s.includes("facebook") ? "Facebook" : "Instagram"}</a>`).join(" · ")}</p>${page.home ? `<p class="ftr-badge"><a href="https://nicklaunches.com/products/mobile-car-detailing-in-champaign/" target="_blank" rel="noopener"><img src="https://nicklaunches.com/badges/featured-dark.png" alt="Mobile Car Detailing in Champaign on Nick Launches" width="244" height="56" loading="lazy"></a></p>` : ""}</div>
 </div></footer>
 <div class="sbar" aria-label="Quick actions"><a class="btn btn-o" href="tel:${biz.tel}" data-track="call">${icon("phone")}<span>Call Now</span></a><a class="btn btn-p" href="#book">${icon("calendar")}<span>Book Now</span></a></div>`;
 }
@@ -589,7 +589,7 @@ ${blocks}
 ${quote}
 ${booking}
 </main>
-${footer()}
+${footer(page)}
 <script src="/assets/site.js?v=${assetV}" defer></script>
 </body>
 </html>
