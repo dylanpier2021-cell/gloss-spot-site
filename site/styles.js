@@ -337,6 +337,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cy);box-
 .ftr-links h4{font:600 .78rem/1 var(--bf);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
 .ftr-links li a{display:inline-flex;align-items:center;min-height:36px;color:var(--muted)}
 .ftr-links li a:hover{color:var(--cy)}
+.ftr-badge{flex-basis:100%;margin-top:8px}.ftr-badge img{display:block;max-width:100%;height:auto}
 .ftr-b{border-top:1px solid var(--line);padding-top:20px;color:var(--dim);font-size:.85rem}
 .ftr-b a{color:var(--muted)}
 @media(min-width:900px){.ftr-top{grid-template-columns:1fr 1.3fr}.ftr-links{grid-template-columns:repeat(3,1fr)}}
