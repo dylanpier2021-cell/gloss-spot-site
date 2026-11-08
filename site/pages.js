@@ -478,7 +478,7 @@ const info = [
 const home = {
   path: "", home: true, crumb: "Home",
   title: "Mobile Car Detailing - Champaign County, IL",
-  description: "Car detailing in Champaign, IL by brothers Dom and Dylan. Detailing, ceramic coating, PPF and wraps. Book online in 30 seconds or call today.",
+  description: "Top-rated auto detailing in Champaign County, IL. Details from $90, plus ceramic coating, PPF and wraps. Book online in 30 seconds or call 217-600-2108.",
   kicker: "Car Detailing · Champaign, IL",
   kickerOutsideH1: true,
   h1: "Premium Car Detailing Service – Champaign County",

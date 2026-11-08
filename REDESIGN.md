@@ -84,7 +84,7 @@ New redirects added: `/members` → `/membership`, `/packages` → `/packages-ch
 ### /
 
 - **Title** (43): Mobile Car Detailing - Champaign County, IL
-- **Meta** (141): Car detailing in Champaign, IL by brothers Dom and Dylan. Detailing, ceramic coating, PPF and wraps. Book online in 30 seconds or call today.
+- **Meta** (152): Top-rated auto detailing in Champaign County, IL. Details from $90, plus ceramic coating, PPF and wraps. Book online in 30 seconds or call 217-600-2108.
 - **H1:** Premium Car Detailing Service – Champaign County
 - **Hero line:** Book in 30 seconds, or call and talk to Dom.
 - **Buttons:** Book Now · Call Now
@@ -1381,7 +1381,7 @@ Every page carries one JSON-LD `@graph`: `AutoDetailing` (a LocalBusiness/Automo
       "@id": "https://www.theglossspotil.com/#webpage",
       "url": "https://www.theglossspotil.com/",
       "name": "Mobile Car Detailing - Champaign County, IL",
-      "description": "Car detailing in Champaign, IL by brothers Dom and Dylan. Detailing, ceramic coating, PPF and wraps. Book online in 30 seconds or call today.",
+      "description": "Top-rated auto detailing in Champaign County, IL. Details from $90, plus ceramic coating, PPF and wraps. Book online in 30 seconds or call 217-600-2108.",
       "inLanguage": "en-US",
       "isPartOf": {
         "@id": "https://www.theglossspotil.com/#website"
