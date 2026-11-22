@@ -501,9 +501,8 @@ const blogIndex = {
   path: "blog", file: "blog/index.html", crumb: "Blog",
   title: "Gloss Spot Blog",
   description: "Car detailing and mobile detailing tips from The Gloss Spot in Champaign County, IL: care guides, real prices and paint protection advice.",
-  kicker: "Car Care Blog · Champaign, IL",
-  kickerOutsideH1: true,
-  h1: "The Gloss Spot Blog",
+  noCityH1: true, // brand-only H1, asked for by the owners
+  h1: `<span class="nw">The Gloss Spot</span> Blog`,
   lead: "Short answers from the guys doing the work.",
   hero: { photo: "g8" },
   blocks: [["postList"]],

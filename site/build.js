@@ -613,7 +613,7 @@ export function build() {
     const id = p.path || "/";
     if (p.title.length >= 60) errors.push(`${id}: title ${p.title.length} chars (max 59): ${p.title}`);
     if (p.description.length >= 155) errors.push(`${id}: description ${p.description.length} chars (max 154)`);
-    if (!/Champaign, IL/.test(strip(p.h1) + " " + strip(p.kicker || ""))) errors.push(`${id}: H1 missing "Champaign, IL"`);
+    if (!p.noCityH1 && !/Champaign, IL/.test(strip(p.h1) + " " + strip(p.kicker || ""))) errors.push(`${id}: H1 missing "Champaign, IL"`);
     if (seenTitles.has(p.title)) errors.push(`${id}: duplicate title with ${seenTitles.get(p.title)}`);
     if (seenDesc.has(p.description)) errors.push(`${id}: duplicate description with ${seenDesc.get(p.description)}`);
     seenTitles.set(p.title, id);
