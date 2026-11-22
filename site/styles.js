@@ -55,7 +55,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 .drawer nav a{display:flex;align-items:center;min-height:48px;padding:0 12px;border-radius:10px;color:var(--text);font-weight:500}
 .drawer nav a:hover,.drawer nav a[aria-current]{background:var(--card);text-decoration:none;color:var(--cy)}
 .drawer-ctas{display:flex;gap:10px;margin-top:12px}.drawer-ctas .btn{flex:1;--h:48px}
-@media(min-width:1020px){
+@media(min-width:1240px){
   .nav{display:flex;gap:2px;margin-left:12px}
   .nav a{color:var(--muted);font-size:.93rem;font-weight:500;padding:10px 10px;border-radius:8px}
   .nav a:hover,.nav a[aria-current]{color:var(--text);text-decoration:none}
@@ -345,7 +345,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cy);box-
 /* sticky mobile action bar */
 .sbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(6,8,9,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line)}
 .sbar .btn{--h:54px;padding:0 10px}
-@media(min-width:1020px){.sbar{display:none}body{padding-bottom:0}}
+@media(min-width:1240px){.sbar{display:none}body{padding-bottom:0}}
 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}

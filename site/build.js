@@ -382,7 +382,7 @@ function bookingWidget() {
 
 // ── shell ───────────────────────────────────────────────────────────────────
 const NAV = [
-  ["packages-champaign-county", "Detailing"], ["ceramic-coating-champaign-county", "Ceramic"], ["paint-correction-champaign-county", "Correction"], ["ppf-champaign-county", "PPF"], ["car-wraps-champaign-county", "Wraps"], ["membership", "Membership"], ["reviews", "Reviews"], ["contact", "Contact"],
+  ["packages-champaign-county", "Detailing"], ["ceramic-coating-champaign-county", "Ceramic"], ["paint-correction-champaign-county", "Correction"], ["ppf-champaign-county", "PPF"], ["car-wraps-champaign-county", "Wraps"], ["membership", "Membership"], ["reviews", "Reviews"], ["blog", "Blog"], ["contact", "Contact"],
 ];
 function header(page) {
   const links = NAV.map(([p, t]) => `<a href="/${p}"${page.path === p ? ' aria-current="page"' : ""}>${t}</a>`).join("");
