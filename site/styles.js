@@ -83,6 +83,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 .h1-main{font:400 clamp(3.1rem,13vw,7.4rem)/.9 var(--hf);letter-spacing:.005em;text-wrap:balance;max-width:14ch}
 .inner .h1-main{font-size:clamp(2.8rem,10vw,5.6rem);max-width:16ch}
 .h1-main em{font-style:normal;color:var(--cy)}
+.nw{white-space:nowrap}
 .lead{font-size:clamp(1.05rem,3.6vw,1.3rem);color:#dfe7ea;max-width:34ch;margin-bottom:26px}
 .hero .ctas{max-width:460px}
 .hero .reveal-h{opacity:0;transform:translateY(18px);animation:up .8s cubic-bezier(.2,.7,.2,1) forwards}
