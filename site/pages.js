@@ -4,7 +4,7 @@
 import { biz, cities, posts, faqs, reviews } from "./content.js";
 
 const CALL = "Call 217-600-2108.";
-export const redirectsAdded = [["/members", "/membership"], ["/packages", "/packages-champaign-county"], ["/ceramic", "/ceramic-coating-champaign-county"], ["/paint-correction", "/paint-correction-champaign-county"], ["/ppf", "/ppf-champaign-county"], ["/car-wraps", "/car-wraps-champaign-county"]];
+export const redirectsAdded = [["/members", "/membership"], ["/packages", "/packages-champaign-county"], ["/ceramic", "/ceramic-coating-champaign-county"], ["/paint-correction", "/paint-correction-champaign-county"], ["/ppf", "/ppf-champaign-county"], ["/car-wraps", "/car-wraps-champaign-county"], ["/blog/ceramic-vs-wax", "/blog"], ["/blog/detailing-cost", "/blog"], ["/blog/how-often", "/blog"], ["/blog/mobile-vs-shop", "/blog"]];
 
 // Related-service cards. [path, title, line]
 const R = {
@@ -499,9 +499,11 @@ const home = {
 // ── Blog ──
 const blogIndex = {
   path: "blog", file: "blog/index.html", crumb: "Blog",
-  title: "Car Care Blog – Champaign, IL | The Gloss Spot",
-  description: "Short, honest car care guides from a Champaign, IL detail shop: costs, ceramic vs. wax, how often to detail. Book your detail online today.",
-  h1: "Car Care Blog from <em>Champaign, IL</em>",
+  title: "Gloss Spot Blog",
+  description: "Car detailing and mobile detailing tips from The Gloss Spot in Champaign County, IL: care guides, real prices and paint protection advice.",
+  kicker: "Car Care Blog · Champaign, IL",
+  kickerOutsideH1: true,
+  h1: "The Gloss Spot Blog",
   lead: "Short answers from the guys doing the work.",
   hero: { photo: "g8" },
   blocks: [["postList"]],

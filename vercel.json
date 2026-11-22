@@ -32,7 +32,11 @@
     { "source": "/ceramic", "destination": "/ceramic-coating-champaign-county", "permanent": true },
     { "source": "/paint-correction", "destination": "/paint-correction-champaign-county", "permanent": true },
     { "source": "/ppf", "destination": "/ppf-champaign-county", "permanent": true },
-    { "source": "/car-wraps", "destination": "/car-wraps-champaign-county", "permanent": true }
+    { "source": "/car-wraps", "destination": "/car-wraps-champaign-county", "permanent": true },
+    { "source": "/blog/ceramic-vs-wax", "destination": "/blog", "permanent": true },
+    { "source": "/blog/detailing-cost", "destination": "/blog", "permanent": true },
+    { "source": "/blog/how-often", "destination": "/blog", "permanent": true },
+    { "source": "/blog/mobile-vs-shop", "destination": "/blog", "permanent": true }
   ],
   "headers": [
     {
