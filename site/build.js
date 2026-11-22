@@ -311,7 +311,7 @@ function postBlock(p) {
 }
 function postList() {
   const html = posts.map((p) => `<a class="rel reveal" href="/blog/${p.slug}"><div><h3>${p.title}</h3><p>${p.excerpt}</p></div>${icon("arrow")}</a>`).join("");
-  return sec("sec-rel", `<div class="rels">${html}</div>`);
+  return sec("sec-rel", html ? `<div class="rels">${html}</div>` : `<p class="muted">New posts are on the way. Questions in the meantime? <a href="/contact">Ask Dom</a>.</p>`);
 }
 
 function contactBlock() {
@@ -520,7 +520,7 @@ function pageSchema(page) {
   if (page.path === "blog") {
     graph.push({
       "@type": "Blog", "@id": url("blog") + "#blog", name: `${biz.name} Car Care Blog`, url: url("blog"), publisher: { "@id": BIZ_ID }, inLanguage: "en-US",
-      blogPost: posts.map((p) => ({ "@type": "BlogPosting", "@id": url(`blog/${p.slug}`) + "#article", headline: p.title, url: url(`blog/${p.slug}`), datePublished: p.date })),
+      ...(posts.length ? { blogPost: posts.map((p) => ({ "@type": "BlogPosting", "@id": url(`blog/${p.slug}`) + "#article", headline: p.title, url: url(`blog/${p.slug}`), datePublished: p.date })) } : {}),
     });
   }
   if (page.post) graph.push({

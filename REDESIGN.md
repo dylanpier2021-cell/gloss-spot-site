@@ -67,17 +67,13 @@ Every existing URL keeps its page. Pages that moved to a new URL 301 from the ol
 | /charleston | /charleston | Charleston car detailing |
 | /effingham | /effingham | Effingham car detailing |
 | /blog | /blog | Blog |
-| /blog/ceramic-vs-wax | /blog/ceramic-vs-wax | Ceramic Coating vs. Wax: Which Is Worth It? |
-| /blog/detailing-cost | /blog/detailing-cost | How Much Does Car Detailing Cost in Champaign? |
-| /blog/how-often | /blog/how-often | How Often Should You Detail Your Car? |
-| /blog/mobile-vs-shop | /blog/mobile-vs-shop | Mobile Detailing vs. Shop Detailing: Why We Moved |
 | /privacy-policy | /privacy-policy | Privacy Policy |
 | /terms-and-conditions | /terms-and-conditions | Terms |
 | /404 | /404 | Not found |
 | /review | /review | Review funnel (unchanged) |
 | /feedback | /feedback | Review funnel (unchanged) |
 
-New redirects added: `/members` → `/membership`, `/packages` → `/packages-champaign-county`, `/ceramic` → `/ceramic-coating-champaign-county`, `/paint-correction` → `/paint-correction-champaign-county`, `/ppf` → `/ppf-champaign-county`, `/car-wraps` → `/car-wraps-champaign-county`
+New redirects added: `/members` → `/membership`, `/packages` → `/packages-champaign-county`, `/ceramic` → `/ceramic-coating-champaign-county`, `/paint-correction` → `/paint-correction-champaign-county`, `/ppf` → `/ppf-champaign-county`, `/car-wraps` → `/car-wraps-champaign-county`, `/blog/ceramic-vs-wax` → `/blog`, `/blog/detailing-cost` → `/blog`, `/blog/how-often` → `/blog`, `/blog/mobile-vs-shop` → `/blog`
 
 ## 2. Page copy (title, meta description, H1, then body)
 
@@ -926,96 +922,12 @@ Robert Wengert
 
 ### /blog
 
-- **Title** (46): Car Care Blog – Champaign, IL | The Gloss Spot
-- **Meta** (139): Short, honest car care guides from a Champaign, IL detail shop: costs, ceramic vs. wax, how often to detail. Book your detail online today.
-- **H1:** Car Care Blog from Champaign, IL
+- **Title** (15): Gloss Spot Blog
+- **Meta** (138): Car detailing and mobile detailing tips from The Gloss Spot in Champaign County, IL: care guides, real prices and paint protection advice.
+- **H1:** The Gloss Spot Blog
 - **Hero line:** Short answers from the guys doing the work.
 - **Buttons:** Book Now · Call Now
 
-
-### /blog/ceramic-vs-wax
-
-- **Title** (55): Ceramic Coating vs Wax – Champaign, IL | The Gloss Spot
-- **Meta** (137): Ceramic coating vs. wax, explained in two minutes by a Champaign, IL detail shop. Real prices, real lifespans. Book or call 217-600-2108.
-- **H1:** Ceramic Coating vs. Wax in Champaign, IL
-- **Hero line:** Wax lasts weeks. Ceramic lasts years. Here's how to pick.
-- **Buttons:** Book Now · Call Now
-
-**The short answer**
-Wax is a thin layer that sits on your paint and wears off in weeks. Ceramic coating bonds to your paint and lasts years.
-**Wax: good for**
-- A quick shine before a weekend
-- Older cars you're selling soon
-- Tight budgets: our Full Detail includes a quick sealant
-**Ceramic: good for**
-- Cars you plan to keep 3+ years
-- Dark paint that shows swirls
-- Owners who want easy, fast washes
-**What it costs here**
-Our ceramic coating starts at $1,100 for a coupe with a 3-year coating, and paint correction is included in every package. See every size and tier on the ceramic coating page.
-**The salt-belt factor**
-Central Illinois winters mean road salt and brine. A coated car rinses clean faster, so the salt spends less time on your paint.
-
-### /blog/detailing-cost
-
-- **Title** (59): Car Detailing Cost in Champaign, IL (2026) | The Gloss Spot
-- **Meta** (136): Real 2026 car detailing prices in Champaign, IL, from a $90 Express to ceramic coating, PPF and wraps. Book online or call 217-600-2108.
-- **H1:** Car Detailing Cost in Champaign, IL
-- **Hero line:** Every price we charge, by vehicle size. No surprises.
-- **Buttons:** Book Now · Call Now
-
-**Detailing packages**
-_(price table)_
-Lux includes one-step paint correction and sealant. Two-step correction is +$100.
-**Protection**
-- Ceramic coating: from $1,100 (paint correction included)
-- Paint protection film: from $800 for a sedan
-- Vehicle wraps: from $2,400, partial wraps from $800
-**Membership**
-Exterior Maintenance is $149 a month for a weekly exterior detail. The $299 Gloss Membership adds weekly wax and 4 interior cleans. Details on the membership page.
-**Why prices vary by size**
-A 3-row SUV has more seats, more carpet and more paint. You'll always see your exact price before you book.
-
-### /blog/how-often
-
-- **Title** (54): How Often to Detail a Car – Champaign, IL | Gloss Spot
-- **Meta** (134): How often to detail your car in Champaign, IL, based on how you drive and Illinois winters. Book a detail online or call 217-600-2108.
-- **H1:** How Often to Detail Your Car in Champaign, IL
-- **Hero line:** A simple schedule based on how you actually use your car.
-- **Buttons:** Book Now · Call Now
-
-**A simple rule**
-- Full Detail: 2 to 4 times a year
-- Express Detail: every month or two
-- Ceramic coating: once, then maintenance washes
-**Detail more often if**
-- You have kids, pets or a work truck
-- You park outside or under trees
-- You drive a lot of highway miles
-**Time it with the seasons**
-In Champaign County, a Full Detail in late fall preps your car for salt. Another in spring washes winter off for good.
-**Want it handled?**
-A membership from $149/month keeps your car clean every week. Or book a detail when you need one.
-
-### /blog/mobile-vs-shop
-
-- **Title** (57): Mobile Detailing vs Shop – Champaign, IL | The Gloss Spot
-- **Meta** (131): Why we moved from mobile detailing to our own Champaign, IL shop, and what it means for your car. Book online or call 217-600-2108.
-- **H1:** Mobile Detailing vs. a Shop in Champaign, IL
-- **Hero line:** We spent years in driveways. Here's why we moved into a shop.
-- **Buttons:** Book Now · Call Now
-
-**Where we started**
-Dom detailed out of his car for years, in driveways and parking lots all over Champaign County. It built the business, and the regulars.
-**What a shop adds**
-- Steady lighting to see every swirl
-- Controlled water and power
-- No rain-outs or wind blowing dust onto wet paint
-- Room for paint correction, ceramic, PPF and wraps
-**What stays the same**
-You still talk to Dom. Every car still gets checked by Dom or Dylan before it leaves.
-**Is drop-off a hassle?**
-Most people drop off on the way to work and pick up on the way home. We'll text you when it's ready. See how it works.
 
 ### /privacy-policy
 
